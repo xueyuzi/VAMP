@@ -1,0 +1,29 @@
+
+<div style="height:100%;width:100%;display:flex;    flex-direction: column;">
+
+    <div style="display:flex">
+        <input style="flex:1" nbInput type="text" [(ngModel)]="panelData.title">
+        <nb-actions size="small">
+          <nb-action icon="nb-search" title="查看报表"></nb-action>
+          <nb-action icon="nb-power-circled" title="选择可视化"
+          [nbPopover]="templateRef"
+          nbPopoverPlacement="bottom"
+          ></nb-action>
+          <nb-action icon="nb-person" title="可视化设置" 
+          ></nb-action>
+        </nb-actions>
+    </div>
+    <div style="flex:1">
+        <ng-template #chart></ng-template>
+    </div>
+</div>
+
+
+<ng-template #templateRef>
+  <div style="padding:10px 20px;display: flex;max-width: 345px;flex-wrap: wrap;max-height: 500px;overflow: scroll;">
+    <div class="chart-item" (click)="changeChart('pie')">饼图</div>
+    <div class="chart-item" (click)="changeChart('bar')">直方图</div>
+    <div class="chart-item" (click)="changeChart('line')">折线图</div>
+    <div class="chart-item" (click)="changeChart('radar')">雷达图</div>
+  </div>
+  </ng-template>

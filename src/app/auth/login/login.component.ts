@@ -16,7 +16,7 @@ export class LoginComponent {
   login() {
     this.service.authenticate('account', this.user).subscribe((result: NbAuthResult) => {
       let res = result.getResponse().body;
-      if (res.code === 0) {F
+      if (res.code === 0) {
         setTimeout(() => {
           return this.router.navigateByUrl('/custom/crf');
         }, 0);
