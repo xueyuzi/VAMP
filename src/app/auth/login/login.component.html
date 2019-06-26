@@ -1,0 +1,33 @@
+<h1 id="title" class="title">Login</h1>
+
+
+<form (ngSubmit)="login()" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-username" >Username:</label>
+    <input nbInput fullWidth name="account" placeholder="Username" id="input-username" >
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-password" >Password:</label>
+    <input nbInput fullWidth  name="pwd" placeholder="Password" id="input-password" >
+  </div>
+  <p style="font-size:18px;color:red;">{{errors}}</p>
+
+  <button nbButton fullWidth status="success">
+    Log In
+  </button>
+</form>
+
+<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  or enter with:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link" [routerLink]="socialLink.link" [attr.target]="socialLink.target"
+        [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+      <a *ngIf="socialLink.url" [attr.href]="socialLink.url" [attr.target]="socialLink.target"
+        [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+    </ng-container>
+  </div>
+</section>
+

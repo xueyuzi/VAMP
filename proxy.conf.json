@@ -1,0 +1,9 @@
+{
+    "/user":{
+        "target":"http://106.14.64.195:9580",
+        "changeOrigin":true
+    },
+    "/survey":{
+
+    }
+}
