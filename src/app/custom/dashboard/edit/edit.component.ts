@@ -19,37 +19,37 @@ export class EditComponent {
         x: 0,
         y: 0,
         height: 4,
-        width: 5
+        width: 4
       },
       panelData: { type: "bar", chartData: {}, title: "" }
     },
     {
       customId: "2",
       option: {
-        x: 5,
+        x: 4,
         y: 0,
         height: 4,
-        width: 5
+        width: 4
       },
       panelData: { type: "pie", chartData: {}, title: "" }
     },
     {
       customId: "3",
       option: {
-        x: 0,
-        y: 4,
+        x: 8,
+        y: 0,
         height: 4,
-        width: 5
+        width: 4
       },
       panelData: { type: "line", chartData: {}, title: "" }
     },
     {
       customId: "4",
       option: {
-        x: 5,
+        x: 0,
         y: 4,
         height: 8,
-        width: 5
+        width: 8
       },
       panelData: { type: "radar", chartData: {}, title: "" }
     }

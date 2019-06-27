@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'DashBoard',
     icon: 'nb-home',
-    link: '/custom/dashboard',
+    link: '/custom/dashboard/edit',
     home: true,
   },
 ];
