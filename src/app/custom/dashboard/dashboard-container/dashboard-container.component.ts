@@ -5,6 +5,7 @@ import { BarComponent } from "../charts/bar.component";
 import { LineComponent } from "../charts/line.component";
 import { NbPopoverDirective } from '@nebular/theme';
 import { RadarComponent } from '../charts/radar.component';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'ngx-dashboard-container',
@@ -12,14 +13,18 @@ import { RadarComponent } from '../charts/radar.component';
   styleUrls: ['./dashboard-container.component.scss']
 })
 export class DashboardContainerComponent implements OnInit {
-  @Input() panelData: DashboardContainerModel = new DashboardContainerModel();
+  @Input() item: any;
   @ViewChild('chart', { read: ViewContainerRef }) chart;
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,private dashboardService:DashboardService) { }
   ngOnInit() {
-    this.loadChart(this.panelData.type);
+    this.loadChart(this.item.panelData.type);
+  }
+
+  delContainer(){
+    this.dashboardService.delContainer(this.item);
   }
   changeChart(name) {
     this.loadChart(name);
@@ -47,5 +52,4 @@ export class DashboardContainerComponent implements OnInit {
     this.chart.clear();
     this.chart.createComponent(componentFactory);
   }
-
 }

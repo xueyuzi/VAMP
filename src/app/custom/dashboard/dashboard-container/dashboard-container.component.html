@@ -1,16 +1,19 @@
 
 <div style="height:100%;width:100%;display:flex;    flex-direction: column;">
 
-    <div style="display:flex">
-        <input style="flex:1" nbInput type="text" [(ngModel)]="panelData.title">
-        <nb-actions size="small">
-          <nb-action icon="nb-search" title="查看报表"></nb-action>
-          <nb-action icon="nb-power-circled" title="选择可视化"
+    <div style="display:flex;flex-wrap:wrap">
+        <input style="flex:1" nbInput type="text" [(ngModel)]="item.panelData.title">
+        <nb-actions size="medium" style="flex:1;">
+          <nb-action icon="nb-grid-b" title="查看报表"></nb-action>
+          <nb-action icon="nb-grid-b-outline" title="选择可视化"
           [nbPopover]="templateRef"
           nbPopoverPlacement="bottom"
           ></nb-action>
-          <nb-action icon="nb-person" title="可视化设置" 
-          ></nb-action>
+          <nb-action icon="nb-edit" title="设置" 
+          >
+          </nb-action>
+          <nb-action icon="nb-close" (click)="delContainer()" title="删除">
+          </nb-action>
         </nb-actions>
     </div>
     <div style="flex:1">

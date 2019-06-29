@@ -15,6 +15,7 @@ import {PieComponent} from "./charts/pie.component";
 import { BarComponent } from './charts/bar.component';
 import { LineComponent } from './charts/line.component';
 import { RadarComponent } from './charts/radar.component';
+import {DashboardService} from "./dashboard.service";
 @NgModule({
   declarations: [DashboardComponent, EditComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent],
   imports: [
@@ -28,6 +29,7 @@ import { RadarComponent } from './charts/radar.component';
     
     NgxEchartsModule
   ],
-  entryComponents:[DashboardContainerComponent,PieComponent,BarComponent, LineComponent, RadarComponent]
+  entryComponents:[DashboardContainerComponent,PieComponent,BarComponent, LineComponent, RadarComponent],
+  providers:[DashboardService]
 })
 export class DashboardModule { }
