@@ -7,11 +7,11 @@ import { of, Observable, BehaviorSubject } from 'rxjs';
 })
 export class DashboardService {
   // TODO:定义containers的数据格式
-  private containers: Array<any>;
-  containersSource: BehaviorSubject<Array<any>>;
+  private containers: any;
+  containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
   constructor() {
-    this.containers = [
-      {
+    this.containers = {
+      1: {
 
         customId: "1",
         option: {
@@ -20,9 +20,9 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "bar", chartData: {}, title: "" }
+        panelData: { type: "bar", chartData: {}, chartStyle: {}, title: "" }
       },
-      {
+      2: {
         customId: "2",
         option: {
           x: 4,
@@ -30,9 +30,9 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "pie", chartData: {}, title: "" }
+        panelData: { type: "pie", chartData: {}, chartStyle: {}, title: "" }
       },
-      {
+      3: {
         customId: "3",
         option: {
           x: 8,
@@ -40,9 +40,9 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "line", chartData: {}, title: "" }
+        panelData: { type: "line", chartData: {}, chartStyle: {}, title: "" }
       },
-      {
+      4: {
         customId: "4",
         option: {
           x: 0,
@@ -50,10 +50,10 @@ export class DashboardService {
           height: 8,
           width: 8
         },
-        panelData: { type: "radar", chartData: {}, title: "" }
+        panelData: { type: "radar", chartData: {}, chartStyle: {}, title: "" }
       }
-    ];
-    this.containersSource = new BehaviorSubject<Array<any>>(this.containers);
+    }
+    this.containersSource.next(this.containers);
   }
 
 
@@ -70,8 +70,14 @@ export class DashboardService {
     })
     this.containersSource.next(this.containers);
   }
-  delContainer = (item) => {
-    this.containers = this.containers.filter(v => v !== item)
+  delContainer = (key) => {
+    delete this.containers[key];
     this.containersSource.next(this.containers);
   }
+
+  updateContainer(i: number, container: any) {
+    this.containers[i] = container;
+    this.containersSource.next(this.containers);
+  }
+
 }

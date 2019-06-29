@@ -16,8 +16,12 @@ import { BarComponent } from './charts/bar.component';
 import { LineComponent } from './charts/line.component';
 import { RadarComponent } from './charts/radar.component';
 import {DashboardService} from "./dashboard.service";
+import {ThemeModule} from "../../@theme/theme.module";
+import { ChartsStyleSettingComponent } from './charts-setting/charts-style-setting/charts-style-setting.component';
+import { ChartsSettingComponent } from './charts-setting/charts-setting.component';
+import {ColorPickerModule} from 'primeng/colorpicker';
 @NgModule({
-  declarations: [DashboardComponent, EditComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent],
+  declarations: [DashboardComponent, EditComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsStyleSettingComponent, ChartsSettingComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -26,8 +30,9 @@ import {DashboardService} from "./dashboard.service";
     NbInputModule,
     NbActionsModule,
     NbPopoverModule,
-    
-    NgxEchartsModule
+    ThemeModule,
+    NgxEchartsModule,
+    ColorPickerModule
   ],
   entryComponents:[DashboardContainerComponent,PieComponent,BarComponent, LineComponent, RadarComponent],
   providers:[DashboardService]

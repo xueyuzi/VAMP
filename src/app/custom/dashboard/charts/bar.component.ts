@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartsSettingService } from '../charts-setting/charts-setting.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-bar',
@@ -6,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
   options = {
     color: ['#3398DB'],
     tooltip: {
@@ -14,12 +17,6 @@ export class BarComponent implements OnInit {
       axisPointer: {            // 坐标轴指示器，坐标轴触发有效
         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
       }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
     },
     xAxis: [
       {
