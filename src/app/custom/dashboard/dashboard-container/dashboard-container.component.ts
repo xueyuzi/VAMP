@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
 import { DashboardContainerModel } from "../../../model/dashboard-container.model";
 import { PieComponent } from "../charts/pie.component";
 import { BarComponent } from "../charts/bar.component";
@@ -6,7 +6,7 @@ import { LineComponent } from "../charts/line.component";
 import { NbPopoverDirective } from '@nebular/theme';
 import { RadarComponent } from '../charts/radar.component';
 import { DashboardService } from '../dashboard.service';
-import { ChartsSettingService } from '../charts-setting/charts-setting.service';
+import { BaseChartComponent } from '../charts/base.charts.component';
 
 @Component({
   selector: 'ngx-dashboard-container',
@@ -15,28 +15,39 @@ import { ChartsSettingService } from '../charts-setting/charts-setting.service';
 })
 export class DashboardContainerComponent implements OnInit {
   @Input() item: any;
-  @Input() key: string;
   @ViewChild('chart', { read: ViewContainerRef }) chart;
   @ViewChild(NbPopoverDirective) popover: NbPopoverDirective;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private dashboardService: DashboardService,
-    private settingService: ChartsSettingService,
   ) { }
+
+  componentRef;
   ngOnInit() {
     this.loadChart(this.item.panelData.type);
+    let that = this;
+    this.dashboardService.containersSource.subscribe(containers=>{
+      let index = containers.findIndex(v=>v.customId === that.item.customId);
+      if(containers[index] === undefined){
+        return;
+      }
+      let setting = containers[index].panelData.chartStyle
+      if(setting){
+        (<BaseChartComponent>that.componentRef.instance).updateOptions(setting)
+      }
+    })
   }
 
   delContainer() {
-    this.dashboardService.delContainer(this.key);
+    this.dashboardService.delContainer(this.item);
   }
   changeChart(name) {
     this.loadChart(name);
     this.item.panelData.type = name;
     this.popover.hide();
   }
-  loadChart(name) {
+  loadChart(name: string) {
     switch (name) {
       case 'pie':
         this.loadComponent(PieComponent);
@@ -56,9 +67,12 @@ export class DashboardContainerComponent implements OnInit {
   loadComponent(component) {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     this.chart.clear();
-    this.chart.createComponent(componentFactory);
+    this.componentRef = this.chart.createComponent(componentFactory);
+    console.log(<BaseChartComponent>this.componentRef.instance);
+
   }
 
-  changeSetting(setting) {
+  openSetting() {
+    this.dashboardService.settingKey = this.item.customId;
   }
 }

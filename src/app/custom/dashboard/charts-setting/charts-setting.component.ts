@@ -1,5 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'selenium-webdriver';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ngx-charts-setting',
@@ -10,6 +9,7 @@ import { EventEmitter } from 'selenium-webdriver';
       <ngx-charts-style-setting></ngx-charts-style-setting>
     </nb-tab>
     <nb-tab tabTitle="数据设置">
+    <button>hello</button>
     </nb-tab>
   </nb-tabset>
 </div>
@@ -17,8 +17,10 @@ import { EventEmitter } from 'selenium-webdriver';
 })
 export class ChartsSettingComponent implements OnInit {
   constructor() { }
-
+  
   ngOnInit() {
   }
+
+  
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartsSettingService } from '../charts-setting.service';
+import { DashboardService } from '../../dashboard.service';
 
 @Component({
   selector: 'ngx-charts-style-setting',
@@ -8,16 +8,27 @@ import { ChartsSettingService } from '../charts-setting.service';
 })
 export class ChartsStyleSettingComponent implements OnInit {
 
-  constructor(private settingService:ChartsSettingService) { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
     // 读取配置
-    this.form = {}
+    let that = this;
+    this.dashboardService.containersSource.subscribe(containers => {
+      let settingKey = that.dashboardService.settingKey;
+      let index = containers.findIndex(v=>v.customId === settingKey);
+      if(containers[index] === undefined){
+        return;
+      }
+      let setting = containers[index].panelData.chartStyle
+      if (setting) {
+        this.form = setting;
+      }
+    })
   }
-  form:any;
+  form: any;
 
-  save(){
-    this.settingService.styleSetting.next(this.form)
+  save() {
+    this.dashboardService.updateChartStyle(this.form)
   }
 
 }

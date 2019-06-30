@@ -12,6 +12,7 @@
           <nb-action icon="nb-edit" title="设置" 
           [nbPopover]="setting"
           nbPopoverPlacement="bottom"
+          (click)="openSetting()"
           >
           </nb-action>
           <nb-action icon="nb-close" (click)="delContainer()" title="删除">
@@ -35,5 +36,5 @@
 
 
 <ng-template #setting>
-<ngx-charts-setting (save)="saveSetting"></ngx-charts-setting>
+<ngx-charts-setting></ngx-charts-setting>
 </ng-template>

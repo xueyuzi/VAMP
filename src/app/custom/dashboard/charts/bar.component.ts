@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartsSettingService } from '../charts-setting/charts-setting.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
+import { BaseChartComponent } from './base.charts.component';
 @Component({
   selector: 'ngx-bar',
   template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
 })
-export class BarComponent implements OnInit {
-
-  constructor() { 
+export class BarComponent implements OnInit, BaseChartComponent {
+  updateOptions(options){
+    this.options = Object.assign({},this.options,options);
+    if(options.special!==null){
+      
+    }
+    console.log(this.options);
   }
   options = {
     color: ['#3398DB'],

@@ -1,15 +1,25 @@
 <!-- common setting -->
 <div class="setting-container">
   <div class="setting-row">
-    <div class="setting-item">
+    <!-- <div class="setting-item">
       <label>字体:</label>
-      <input nbInput type="text" [(ngModel)]="form['font-style']">
+      <input nbInput type="text" fieldSize="small" [(ngModel)]="form['font-style']">
+    </div> -->
+    <div class="setting-item">
+      <label>是否显示图例:</label>
+      <nb-checkbox [(ngModel)]="form['legend']['show']"></nb-checkbox>
     </div>
 
     <div class="setting-item">
       <label>颜色:</label>
-      <p-colorPicker [(ngModel)]="form['font-color']"></p-colorPicker>
+      <p-colorPicker [(ngModel)]="form['color']"></p-colorPicker>
     </div>
   </div>
+  <!-- <div class="setting-row">
+    <div class="setting-item">
+      <label>是否显示图例:</label>
+      <nb-checkbox [(ngModel)]="form['legend']['show']"></nb-checkbox>
+    </div>
+  </div> -->
 </div>
 <button nbButton fullWidth (click)="save()">保存</button>
