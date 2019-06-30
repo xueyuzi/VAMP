@@ -1,22 +1,19 @@
 .setting-container {
-    min-height: 300px;
-    min-width: 700px;
-    padding: 20px;
+    max-width: 600px;
+    min-width: 450px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
 
-    .setting-row {
-        margin: 10px 0;
-
+    .setting-item {
+        margin: 10px;
+        width: 45%;
         display: flex;
+        align-items: center;
+    }
 
-        .setting-item {
-            width: 50%;
-            display: flex;
-            align-items: center;
-        }
-
-        label {
-            padding-right: 20px;
-            margin:0px;
-        }
+    label {
+        padding-right: 10px;
+        margin: 0px;
     }
 }

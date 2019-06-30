@@ -19,13 +19,15 @@ export class ChartsStyleSettingComponent implements OnInit {
       if(containers[index] === undefined){
         return;
       }
-      let setting = containers[index].panelData.chartStyle
+      this.panelData = containers[index].panelData;
+      let setting = this.panelData.chartStyle
       if (setting) {
         this.form = setting;
       }
     })
   }
   form: any;
+  panelData:any;
 
   save() {
     this.dashboardService.updateChartStyle(this.form)

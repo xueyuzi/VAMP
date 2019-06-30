@@ -9,7 +9,7 @@ export class DashboardService {
   // TODO:定义containers的数据格式
   private containers: any;
   containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  settingKey:string;
+  settingKey: string;
   constructor() {
     this.containers = [
       {
@@ -21,9 +21,14 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "bar", chartData: {}, chartStyle: {
-          legend:{show:false}
-        }, title: "" }
+        panelData: {
+          type: "bar", chartData: {}, chartStyle: {
+            legend: { show: false }, special: {
+              jumpUrl: []
+            }
+
+          }, title: ""
+        }
       },
       {
         customId: "2",
@@ -33,9 +38,14 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "pie", chartData: {}, chartStyle: {
-          legend:{show:false}
-        }, title: "" }
+        panelData: {
+          type: "pie", chartData: {}, chartStyle: {
+            legend: { show: false },
+            special: {
+              jumpUrl: []
+            }
+          }, title: ""
+        }
       },
       {
         customId: "3",
@@ -45,9 +55,13 @@ export class DashboardService {
           height: 4,
           width: 4
         },
-        panelData: { type: "line", chartData: {}, chartStyle: {
-          legend:{show:false}
-        }, title: "" }
+        panelData: {
+          type: "line", chartData: {}, chartStyle: {
+            legend: { show: false }, special: {
+              jumpUrl: []
+            }
+          }, title: ""
+        }
       },
       {
         customId: "4",
@@ -57,9 +71,13 @@ export class DashboardService {
           height: 8,
           width: 8
         },
-        panelData: { type: "radar", chartData: {}, chartStyle: {
-          legend:{show:false}
-        }, title: "" }
+        panelData: {
+          type: "radar", chartData: {}, chartStyle: {
+            legend: { show: false }, special: {
+              jumpUrl: []
+            }
+          }, title: ""
+        }
       }
     ]
     this.containersSource.next(this.containers);
@@ -80,7 +98,7 @@ export class DashboardService {
     this.containersSource.next(this.containers);
   }
   delContainer = (item) => {
-    this.containers = this.containers.filter(v=>v!==item)
+    this.containers = this.containers.filter(v => v !== item)
     this.containersSource.next(this.containers);
   }
 
@@ -89,8 +107,8 @@ export class DashboardService {
     this.containersSource.next(this.containers);
   }
 
-  updateChartStyle(setting){
-    let index = this.containers.findIndex(v=>v.customId === this.settingKey);
+  updateChartStyle(setting) {
+    let index = this.containers.findIndex(v => v.customId === this.settingKey);
     this.containers[index].panelData.chartStyle = setting;
     this.containersSource.next(this.containers);
   }

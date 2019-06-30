@@ -8,9 +8,7 @@ import { BaseChartComponent } from './base.charts.component';
 export class BarComponent implements OnInit, BaseChartComponent {
   updateOptions(options){
     this.options = Object.assign({},this.options,options);
-    if(options.special!==null){
-      
-    }
+    
     console.log(this.options);
   }
   options = {

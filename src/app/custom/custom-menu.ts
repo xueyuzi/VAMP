@@ -7,4 +7,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/custom/dashboard/edit',
     home: true,
   },
+  {
+    title: 'Data',
+    icon: 'nb-home',
+    link: '/custom/grid',
+    home: true,
+  },
 ];
