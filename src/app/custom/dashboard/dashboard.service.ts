@@ -10,78 +10,146 @@ export class DashboardService {
   private containers: any;
   containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
   settingKey: string;
-  constructor() {
-    this.containers = [
-      {
+  constructor() {}
 
-        customId: "1",
-        option: {
-          x: 0,
-          y: 0,
-          height: 4,
-          width: 4
-        },
-        panelData: {
-          type: "bar", chartData: {}, chartStyle: {
-            legend: { show: false }, special: {
-              jumpUrl: []
-            }
+  data1 = [
+    {
 
-          }, title: ""
-        }
+      customId: "1",
+      option: {
+        x: 0,
+        y: 0,
+        height: 4,
+        width: 4
       },
-      {
-        customId: "2",
-        option: {
-          x: 4,
-          y: 0,
-          height: 4,
-          width: 4
-        },
-        panelData: {
-          type: "pie", chartData: {}, chartStyle: {
-            legend: { show: false },
-            special: {
-              jumpUrl: []
-            }
-          }, title: ""
-        }
-      },
-      {
-        customId: "3",
-        option: {
-          x: 8,
-          y: 0,
-          height: 4,
-          width: 4
-        },
-        panelData: {
-          type: "line", chartData: {}, chartStyle: {
-            legend: { show: false }, special: {
-              jumpUrl: []
-            }
-          }, title: ""
-        }
-      },
-      {
-        customId: "4",
-        option: {
-          x: 0,
-          y: 4,
-          height: 8,
-          width: 8
-        },
-        panelData: {
-          type: "radar", chartData: {}, chartStyle: {
-            legend: { show: false }, special: {
-              jumpUrl: []
-            }
-          }, title: ""
-        }
+      panelData: {
+        type: "bar", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+
+        }, title: ""
       }
-    ]
-    this.containersSource.next(this.containers);
-  }
+    },
+    {
+      customId: "2",
+      option: {
+        x: 4,
+        y: 0,
+        height: 4,
+        width: 4
+      },
+      panelData: {
+        type: "pie", chartData: {}, chartStyle: {
+          legend: { show: false },
+          special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    },
+    {
+      customId: "3",
+      option: {
+        x: 8,
+        y: 0,
+        height: 4,
+        width: 4
+      },
+      panelData: {
+        type: "line", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    },
+    {
+      customId: "4",
+      option: {
+        x: 0,
+        y: 4,
+        height: 8,
+        width: 8
+      },
+      panelData: {
+        type: "radar", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    }
+  ];
+  data2 = [
+    {
+
+      customId: "1",
+      option: {
+        x: 0,
+        y: 0,
+        height: 4,
+        width: 6
+      },
+      panelData: {
+        type: "pie", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+
+        }, title: ""
+      }
+    },
+    {
+      customId: "2",
+      option: {
+        x: 6,
+        y: 0,
+        height: 4,
+        width: 6
+      },
+      panelData: {
+        type: "pie", chartData: {}, chartStyle: {
+          legend: { show: false },
+          special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    },
+    {
+      customId: "3",
+      option: {
+        x: 0,
+        y: 4,
+        height: 4,
+        width: 4
+      },
+      panelData: {
+        type: "line", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    },
+    {
+      customId: "4",
+      option: {
+        x: 4,
+        y: 4,
+        height: 8,
+        width: 8
+      },
+      panelData: {
+        type: "radar", chartData: {}, chartStyle: {
+          legend: { show: false }, special: {
+            jumpUrl: []
+          }
+        }, title: ""
+      }
+    }
+  ]
 
 
   addContainer = () => {
@@ -110,6 +178,12 @@ export class DashboardService {
   updateChartStyle(setting) {
     let index = this.containers.findIndex(v => v.customId === this.settingKey);
     this.containers[index].panelData.chartStyle = setting;
+    this.containersSource.next(this.containers);
+  }
+
+
+  getContainers(id) {
+    this.containers = this['data'+id];
     this.containersSource.next(this.containers);
   }
 }

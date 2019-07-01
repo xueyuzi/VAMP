@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { EditComponent } from './edit/edit.component';
 import { DashboardContainerComponent } from './dashboard-container/dashboard-container.component';
 
 import {GridStackModule} from "ngx-grid-stack";
@@ -21,7 +20,7 @@ import { ChartsStyleSettingComponent } from './charts-setting/charts-style-setti
 import { ChartsSettingComponent } from './charts-setting/charts-setting.component';
 import {ColorPickerModule} from 'primeng/colorpicker';
 @NgModule({
-  declarations: [DashboardComponent, EditComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsStyleSettingComponent, ChartsSettingComponent],
+  declarations: [DashboardComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsStyleSettingComponent, ChartsSettingComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

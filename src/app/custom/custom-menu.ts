@@ -4,7 +4,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'DashBoard',
     icon: 'nb-home',
-    link: '/custom/dashboard/edit',
+    link: '/custom/dashboard/1',
+    home: true,
+  },
+  {
+    title: 'DashBoard2',
+    icon: 'nb-home',
+    link: '/custom/dashboard/2',
     home: true,
   },
   {
@@ -13,4 +19,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/custom/grid',
     home: true,
   },
+  
 ];
