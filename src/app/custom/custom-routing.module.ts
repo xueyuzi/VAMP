@@ -6,8 +6,8 @@ const routes: Routes = [
   {
     path: "", component: CustomComponent,
     children: [
-      {path:"dashboard",loadChildren:"app/custom/dashboard/dashboard.module#DashboardModule"},
-      {path:"grid",loadChildren:"app/custom/grid/grid.module#GridModule"},
+      {path:"dashboard",loadChildren:()=>import("./dashboard/dashboard.module").then(v=>v.DashboardModule)},
+      {path:"grid",loadChildren: ()=>import("./grid/grid.module").then(v=>v.GridModule)},
     ]
   },
 ];

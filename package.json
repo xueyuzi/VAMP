@@ -62,6 +62,7 @@
     "ckeditor": "4.7.3",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
+    "dat.gui": "^0.7.6",
     "echarts": "^4.2.1",
     "eva-icons": "^1.1.0",
     "gridstack": "^0.4.0",

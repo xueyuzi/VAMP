@@ -13,7 +13,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { LogoutComponent } from './auth/logout/logout.component';
 
 const routes: Routes = [
-  { path: 'custom', loadChildren: 'app/custom/custom.module#CustomModule',},
+  { path: 'custom', loadChildren: ()=> import("./custom/custom.module").then((v)=>v.CustomModule),},
   {
     path: 'auth',
     component: NbAuthComponent,

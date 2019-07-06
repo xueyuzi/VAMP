@@ -27,16 +27,6 @@ export class DashboardContainerComponent implements OnInit {
   ngOnInit() {
     this.loadChart(this.item.panelData.type);
     let that = this;
-    this.dashboardService.containersSource.subscribe(containers=>{
-      let index = containers.findIndex(v=>v.customId === that.item.customId);
-      if(containers[index] === undefined){
-        return;
-      }
-      let setting = containers[index].panelData.chartStyle
-      if(setting){
-        (<BaseChartComponent>that.componentRef.instance).updateOptions(setting)
-      }
-    })
   }
 
   delContainer() {
