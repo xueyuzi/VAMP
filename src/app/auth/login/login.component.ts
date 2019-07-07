@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {  NbAuthService, NbAuthResult } from '@nebular/auth';
+import { Component, OnInit } from '@angular/core';
+import { NbLoginComponent, NbAuthService, NbAuthResult } from '@nebular/auth';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -8,19 +8,22 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  user: any = {};
+  user: any = {
+    rememberMe: false
+  };
+  codeSrc:string = "https://58.246.174.74:38186/captcha/captchaImage?type=math";
   errors: string[];
   constructor(private service: NbAuthService, private router: Router, private authService: AuthService) {
 
   }
+  changeCode(){
+    this.codeSrc += "&"+Math.random()
+  }
   login() {
-    this.service.authenticate('account', this.user).subscribe((result: NbAuthResult) => {
-      let res = result.getResponse().body;
-      if (res.code === 0) {
-        setTimeout(() => {
-          return this.router.navigateByUrl('/custom/crf');
-        }, 0);
-        this.authService.login('token');
+    console.log("submit")
+    this.authService.login(this.user).subscribe(res => {
+      if (res.code == 0) {
+        this.router.navigateByUrl("/custom/crf");
       } else {
         this.errors = res.msg;
       }

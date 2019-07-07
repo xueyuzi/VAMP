@@ -1,3 +1,24 @@
-.grid-stack{
+.grid-stack {
     margin-top: 30px;
+}
+
+.charts-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+
+    .charts-item {
+        margin: 10px;
+        padding: 10px;
+        cursor: pointer;
+        filter: grayscale(100%);
+        img {
+            width: 200px;
+        }
+    }
+    .charts-item:hover{
+        filter: grayscale(0%);
+        border:2px solid blueviolet
+    }
 }

@@ -13,11 +13,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { LogoutComponent } from './auth/logout/logout.component';
 
 const routes: Routes = [
-  { path: 'custom', loadChildren: ()=> import("./custom/custom.module").then((v)=>v.CustomModule),},
+  { path: 'custom', 
+  loadChildren: () => import("./custom/custom.module").then((v) => v.CustomModule), 
+  canActivate:[AuthGuard]
+},
   {
     path: 'auth',
     component: NbAuthComponent,
-    loadChildren: 'app/auth/auth.module#AuthModule'
+    loadChildren: ()=>import ("./auth/auth.module").then(v=>v.AuthModule)
   },
   { path: '', redirectTo: 'custom', pathMatch: 'full' },
   { path: '**', redirectTo: 'custom' },

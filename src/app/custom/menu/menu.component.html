@@ -1,0 +1,26 @@
+<button nbButton (click)="showAddMenu()" style="margin-bottom:10px">新增</button>
+
+<p-orderList [value]="menus" dragdrop="true" controlsPosition="right" >
+    <ng-template let-menu pTemplate="item">
+        <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{menu.label}}</div>
+        </div>
+    </ng-template>
+</p-orderList>
+
+
+<p-dialog header="新建用户" [(visible)]="isAdd">
+  <div class="setting-container" style="width: 600px">
+    <div class="setting-item">
+      <label>菜单名:</label>
+      <input type="text" nbInput [(ngModel)]="menu.label" fullWidth>
+    </div>
+    <div class="setting-item">
+        <label>路径:</label>
+        <input type="text" nbInput [(ngModel)]="menu.data" fullWidth>
+      </div>
+  </div>
+
+
+  <button nbButton fullWidth (click)="addMenus()">保存</button>
+</p-dialog>

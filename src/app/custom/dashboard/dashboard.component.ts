@@ -6,13 +6,7 @@ import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-dashboard',
-  template: `
-  <ngx-grid-stack class="grid-stack" [options]="options">
-      <ngx-grid-stack-item [option]="item.option" class="grid-stack-item" *ngFor="let item of containers "
-          id="widget-{{item.key}}">
-          <ngx-dashboard-container [item]="item"></ngx-dashboard-container>
-      </ngx-grid-stack-item>
-  </ngx-grid-stack>`,
+  templateUrl:"./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnInit {
@@ -21,16 +15,31 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute) { }
   options: GridStackOptions = new GridStackOptions();
   containers: Array<any> = [];
+  charts:Array<any> = [];
+  isEdit:boolean;
+  isNew:boolean;
   ngOnInit() {
     this.dashboardService.containersSource.subscribe(containers => this.containers = containers);
     this.route.paramMap.subscribe((params: ParamMap) => {
       let id = params.get("id");
       this.dashboardService.getContainers(id);
     });
-
+    this.dashboardService.isEdit.subscribe(
+      flag=>this.isEdit=flag
+    )
   }
   addContainer = () => {
     this.dashboardService.addContainer();
   }
 
+  switchEdit(){
+    this.dashboardService.switchEdit(!this.isEdit);
+  }
+
+  showNew(){
+    this.isNew = true;
+    this.dashboardService.getCharts().subscribe(
+      charts=>this.charts = charts
+    )
+  }
 }

@@ -1,9 +1,14 @@
 {
-    "/user":{
-        "target":"http://106.14.64.195:9580",
-        "changeOrigin":true
+    "/login":{
+        "target":"https://58.246.174.74:38186",
+        "changeOrigin":true,
+        "logLevel": "debug",
+        "secure":false
     },
-    "/survey":{
-
+    "/system":{
+        "target":"https://58.246.174.74:38186",
+        "changeOrigin":true,
+        "logLevel": "debug",
+        "secure":false
     }
 }

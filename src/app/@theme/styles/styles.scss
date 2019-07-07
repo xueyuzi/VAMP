@@ -23,7 +23,9 @@
 
   // loading progress bar
   @include ngx-pace-theme();
-};
+}
+
+;
 
 
 .center {
@@ -36,7 +38,7 @@
 }
 
 ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
-  font-size:14px !important;
+  font-size: 14px !important;
 }
 
 .grid-stack-item-content {
@@ -46,5 +48,39 @@ ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
 }
 
 select {
-  color:black !important;
+  color: black !important;
+}
+
+.nb-theme-default ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
+  font-size: 12px !important;
+}
+
+
+
+
+
+
+.setting-container {
+  max-width: 600px;
+  min-width: 450px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .setting-item {
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  label {
+    width: 30%;
+    padding-right: 10px;
+    margin: 0px;
+  }
+}
+
+.ui-tree{
+  width:100%!important;
 }

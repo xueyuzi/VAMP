@@ -19,6 +19,8 @@ import {ThemeModule} from "../../@theme/theme.module";
 import { ChartsStyleSettingComponent } from './charts-setting/charts-style-setting/charts-style-setting.component';
 import { ChartsSettingComponent } from './charts-setting/charts-setting.component';
 import {ColorPickerModule} from 'primeng/colorpicker';
+import {DialogModule} from 'primeng/dialog';
+
 @NgModule({
   declarations: [DashboardComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsStyleSettingComponent, ChartsSettingComponent],
   imports: [
@@ -31,7 +33,8 @@ import {ColorPickerModule} from 'primeng/colorpicker';
     NbPopoverModule,
     ThemeModule,
     NgxEchartsModule,
-    ColorPickerModule
+    ColorPickerModule,
+    DialogModule
   ],
   entryComponents:[DashboardContainerComponent,PieComponent,BarComponent, LineComponent, RadarComponent],
   providers:[DashboardService]

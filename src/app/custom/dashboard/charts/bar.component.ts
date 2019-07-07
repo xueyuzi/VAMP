@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewContainerRef, ViewChild, E
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseChartComponent } from './base.charts.component';
 import * as dat from 'dat.gui';
+import { DashboardService } from '../dashboard.service';
 @Component({
   selector: 'ngx-bar',
   template: `
@@ -118,6 +119,7 @@ export class BarComponent implements OnInit, BaseChartComponent {
       }
     ]
   };
+  constructor(private dashboardService:DashboardService){}
 
   gui: any;
   ngOnInit() {
@@ -128,6 +130,10 @@ export class BarComponent implements OnInit, BaseChartComponent {
       'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
     ]
     const gui = new dat.GUI({ autoPlace: false });
+    this.dashboardService.isEdit.subscribe(
+      bool=>bool?gui.show():gui.hide()
+    )
+    gui.hide();
     var f1 = gui.addFolder('label设置');
     var f2 = gui.addFolder("全局设置");
     var xAxis = gui.addFolder("x轴");

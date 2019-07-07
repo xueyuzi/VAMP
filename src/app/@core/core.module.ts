@@ -110,7 +110,7 @@ export const NB_CORE_PROVIDERS = [
         baseEndpoint: '',
         login: {
           // ...
-          endpoint: '/user/login',
+          endpoint: '/login',
         },
       }),
     ],

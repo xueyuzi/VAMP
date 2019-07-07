@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DashboardContainerModel } from '../../model/dashboard-container.model';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of, Observable, BehaviorSubject, Subject } from 'rxjs';
+import { ApiService } from '../../api.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,9 @@ export class DashboardService {
   private containers: any;
   containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
   settingKey: string;
-  constructor() {}
+  constructor(
+    private api:ApiService
+  ) {}
 
   data1 = [
     {
@@ -150,7 +154,7 @@ export class DashboardService {
       }
     }
   ]
-
+  isEdit:Subject<boolean> = new Subject();
 
   addContainer = () => {
     this.containers.push({
@@ -165,6 +169,8 @@ export class DashboardService {
     })
     this.containersSource.next(this.containers);
   }
+
+
   delContainer = (item) => {
     this.containers = this.containers.filter(v => v !== item)
     this.containersSource.next(this.containers);
@@ -185,5 +191,13 @@ export class DashboardService {
   getContainers(id) {
     this.containers = this['data'+id];
     this.containersSource.next(this.containers);
+  }
+
+  switchEdit(flag:boolean){
+    this.isEdit.next(flag)
+  }
+
+  getCharts():Observable<any>{
+    return this.api.get("assets/mock/charts.json")
   }
 }

@@ -14,10 +14,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Data',
+    title: '用户管理',
     icon: 'nb-home',
-    link: '/custom/grid',
+    link: '/custom/user',
     home: true,
   },
+  {
+    title:"页面管理",
+    icon:"nb-home",
+    link:"/custom/menus",
+
+  }
   
 ];
