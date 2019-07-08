@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private api:ApiService) { }
   getList(condition:any={}){
-    return this.api.get("assets/mock/userList.json",condition).pipe(
+    return this.api.post("/system/user/list",condition).pipe(
       map(v=>v.rows)
     );
   }

@@ -10,5 +10,11 @@
         "changeOrigin":true,
         "logLevel": "debug",
         "secure":false
+    },
+    "/captcha":{
+        "target":"https://58.246.174.74:38186",
+        "changeOrigin":true,
+        "logLevel": "debug",
+        "secure":false
     }
 }

@@ -11,13 +11,13 @@ export class LoginComponent {
   user: any = {
     rememberMe: false
   };
-  codeSrc:string = "https://58.246.174.74:38186/captcha/captchaImage?type=math";
+  codeSrc:string = "/captcha/captchaImage?type=math&s=";
   errors: string[];
   constructor(private service: NbAuthService, private router: Router, private authService: AuthService) {
 
   }
   changeCode(){
-    this.codeSrc += "&"+Math.random()
+    this.codeSrc +=Math.random()
   }
   login() {
     console.log("submit")

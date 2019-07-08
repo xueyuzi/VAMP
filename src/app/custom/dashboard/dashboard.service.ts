@@ -13,8 +13,8 @@ export class DashboardService {
   containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
   settingKey: string;
   constructor(
-    private api:ApiService
-  ) {}
+    private api: ApiService
+  ) { }
 
   data1 = [
     {
@@ -154,21 +154,8 @@ export class DashboardService {
       }
     }
   ]
-  isEdit:Subject<boolean> = new Subject();
+  isEdit: Subject<boolean> = new Subject();
 
-  addContainer = () => {
-    this.containers.push({
-      customId: "5",
-      option: {
-        x: 5,
-        y: 0,
-        height: 4,
-        width: 4
-      },
-      panelData: new DashboardContainerModel()
-    })
-    this.containersSource.next(this.containers);
-  }
 
 
   delContainer = (item) => {
@@ -189,15 +176,22 @@ export class DashboardService {
 
 
   getContainers(id) {
-    this.containers = this['data'+id];
-    this.containersSource.next(this.containers);
+    return this.api.get("/elasticsearch/dashboard/" + id).pipe(
+      tap(res => {
+        this.containers = this['data' + id];
+        this.containersSource.next(this.containers)
+      })
+    )
+  }
+  saveContainers(id){
+    return this.api.post("/elasticsearch/dashboard/"+id,this.containers)
   }
 
-  switchEdit(flag:boolean){
+  switchEdit(flag: boolean) {
     this.isEdit.next(flag)
   }
 
-  getCharts():Observable<any>{
+  getCharts(): Observable<any> {
     return this.api.get("assets/mock/charts.json")
   }
 }

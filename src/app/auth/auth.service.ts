@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private api: ApiService) { }
 
   isAuthenticated(): boolean {
-    var token: string = localStorage.getItem("token")
+    var token: string = localStorage.getItem("user")
     if (token != null) {
       return true;
     }
@@ -23,7 +23,7 @@ export class AuthService {
     formData.append("validateCode", user.validateCode);
     formData.append("rememberMe", user.rememberMe);
     return this.api.post("/login", formData).pipe(
-      tap((res) => res.code == 0 && localStorage.setItem("token", "token"))
+      tap((res) => res.code == 0 && localStorage.setItem("user", user.username))
     );
   }
 

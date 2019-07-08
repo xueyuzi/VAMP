@@ -1,9 +1,9 @@
 [{
         "label": "Dashboard1",
-        "data": "custom/dashboard/1"
+        "data": "/#/custom/dashboard/1"
     },
     {
         "label": "Dashboard2",
-        "data": "custom/dashboard/2"
+        "data": "/#/custom/dashboard/2"
     }
 ]

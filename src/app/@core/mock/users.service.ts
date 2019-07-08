@@ -40,7 +40,8 @@ export class UserService extends UserData {
   ];
 
   getUsers(): Observable<any> {
-    return observableOf(this.users);
+    let user = localStorage.getItem("user")
+    return observableOf(user);
   }
 
   getContacts(): Observable<Contacts[]> {

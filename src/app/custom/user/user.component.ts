@@ -54,7 +54,6 @@ export class UserComponent implements OnInit, AfterViewInit {
     this.userList = this.userCondition.pipe(
       switchMap(condition => this.userService.getList(condition)),
     )
-
   }
   ngAfterViewInit() {
     this.userCondition.next({});
@@ -71,11 +70,12 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   saveUser() {
+
     if (this.type === "edit") {
-      this.userService.save(this.user).subscribe(res => { });
+      this.userService.save(this.user).subscribe(res => { this.isEdit=false});
     }
-    if (this.type === "new") {
-      this.userService.add(this.user).subscribe(res => { });
+    if (this.type === "add") {
+      this.userService.add(this.user).subscribe(res => { this.isEdit=false});
 
     }
   }
