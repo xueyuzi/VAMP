@@ -16,13 +16,12 @@ import { LineComponent } from './charts/line.component';
 import { RadarComponent } from './charts/radar.component';
 import {DashboardService} from "./dashboard.service";
 import {ThemeModule} from "../../@theme/theme.module";
-import { ChartsStyleSettingComponent } from './charts-setting/charts-style-setting/charts-style-setting.component';
 import { ChartsSettingComponent } from './charts-setting/charts-setting.component';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
-  declarations: [DashboardComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsStyleSettingComponent, ChartsSettingComponent],
+  declarations: [DashboardComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsSettingComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

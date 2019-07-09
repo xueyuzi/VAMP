@@ -1,18 +1,24 @@
 {
     "/login":{
-        "target":"https://58.246.174.74:38186",
+        "target":"http://58.246.174.74:17080",
         "changeOrigin":true,
         "logLevel": "debug",
         "secure":false
     },
     "/system":{
-        "target":"https://58.246.174.74:38186",
+        "target":"http://58.246.174.74:17080",
         "changeOrigin":true,
         "logLevel": "debug",
         "secure":false
     },
     "/captcha":{
-        "target":"https://58.246.174.74:38186",
+        "target":"http://58.246.174.74:17080",
+        "changeOrigin":true,
+        "logLevel": "debug",
+        "secure":false
+    },
+    "/elasticsearch":{
+        "target":"http://58.246.174.74:17080",
         "changeOrigin":true,
         "logLevel": "debug",
         "secure":false

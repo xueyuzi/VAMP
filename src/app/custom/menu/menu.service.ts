@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { TreeNode } from 'primeng/components/common/treenode';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,26 @@ import { Subject } from 'rxjs';
 export class MenuService {
 
 
-  constructor(private api: ApiService) { }
-  getMenus() {
-    return this.api.get("/elasticsearch/menu")
+  constructor(private api: ApiService) {
+    this.initMenus().subscribe()
+  }
+
+  menus:Array<any>;
+  menusSource= new BehaviorSubject<Array<any>>([]);
+  setMenus(menus:Array<any>){
+    this.menus = menus;
+    this.menusSource.next(menus);
+  }
+  initMenus() {
+    return this.api.get("/elasticsearch/menu").pipe(
+      tap(menus=>this.setMenus(menus))
+    )
   }
 
 
   addMenu(id,menu){
+    this.menus.push(menu);
+    this.menusSource.next(this.menus);
     return this.api.post("/elasticsearch/dashboard",{
       dashboard_id:id,
       label:menu.label,
@@ -24,7 +37,7 @@ export class MenuService {
     })
   }
 
-  saveMenus(menus:Array<any>) {
-    return this.api.post("/elasticsearch/menu", menus)
+  saveMenus() {
+    return this.api.post("/elasticsearch/menu", this.menus)
   }
 }

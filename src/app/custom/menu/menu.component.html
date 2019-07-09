@@ -1,25 +1,35 @@
-<button nbButton (click)="showAddMenu()" style="margin:10px">新增</button>
-<button nbButton (click)="saveMenus()" style="margin:10px">保存</button>
-
-<div style="padding:10px">
-    <p-orderList [value]="menus" dragdrop="true" controlsPosition="right">
-        <ng-template let-menu pTemplate="item">
-          <div class="ui-helper-clearfix">
-            <div style="font-size:14px;margin:15px 5px 0 0">{{menu.label}}</div>
-          </div>
-        </ng-template>
-      </p-orderList>
-</div>
-
+<nb-card>
+  <nb-card-header>
+    菜单列表
+  </nb-card-header>
+  <nb-card-body>
+    <button nbButton (click)="showAddMenu()" style="margin:10px">新建</button>
+    <button nbButton (click)="saveMenus()" style="margin:10px">保存</button>
+    <ng2-smart-table [source]="menus" [settings]="settings" (userRowSelect)="showEdit($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
 
 <p-dialog header="新建Dashboard" [(visible)]="isAdd">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>菜单名:</label>
-      <input type="text" nbInput [(ngModel)]="menu.label" fullWidth>
+      <input type="text" nbInput [(ngModel)]="menu.title" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label style="    display: flex;
+      align-items: center;">icon:<i [class]="menu.icon" style="font-size: 70px"></i></label>
+      <div style="flex: 1;
+      height: 280px;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 30px;">
+      
+        <i [class]="icon" style="border: 1px solid" *ngFor="let icon of menuIcons" (click)="setIcon(icon)"></i>
+      </div>
     </div>
   </div>
 
-
-  <button nbButton fullWidth (click)="addMenus()">保存</button>
+  <button nbButton fullWidth (click)="addMenus()">添加</button>
 </p-dialog>

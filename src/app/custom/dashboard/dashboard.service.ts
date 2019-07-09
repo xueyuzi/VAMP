@@ -9,8 +9,8 @@ import { tap } from 'rxjs/operators';
 })
 export class DashboardService {
   // TODO:定义containers的数据格式
-  private containers: any;
-  containersSource: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  private containers: Array<any>;
+  containersSource: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
   settingKey: string;
   constructor(
     private api: ApiService
@@ -178,7 +178,7 @@ export class DashboardService {
   getContainers(id) {
     return this.api.get("/elasticsearch/dashboard/" + id).pipe(
       tap(res => {
-        this.containers = this['data' + id];
+        this.containers = res
         this.containersSource.next(this.containers)
       })
     )

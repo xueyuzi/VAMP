@@ -1,9 +1,1 @@
-[{
-        "label": "Dashboard1",
-        "data": "/#/custom/dashboard/1"
-    },
-    {
-        "label": "Dashboard2",
-        "data": "/#/custom/dashboard/2"
-    }
-]
+[{"title":"DashBoard","icon":"nb-home","link":"/custom/dashboard/1"},{"title":"DashBoard2","icon":"nb-home","link":"/custom/dashboard/2"},{"title":"用户管理","icon":"nb-home","link":"/custom/user"},{"title":"页面管理","icon":"nb-home","link":"/custom/menus"}]

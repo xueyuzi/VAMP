@@ -1,9 +1,8 @@
 <button nbButton (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
 <button nbButton (click)="saveContainers()" *ngIf="isEdit" style="margin:10px;">保存</button>
 <button nbButton (click)="switchEdit()" *ngIf="isEdit" style="margin:10px;">取消</button>
-
 <button nbButton (click)="showNew()" style="margin:10px;">新增</button>
-<ngx-grid-stack class="grid-stack" [options]="options">
+<ngx-grid-stack class="grid-stack" [options]="options" *ngIf="containers.length > 0">
     <ngx-grid-stack-item [option]="item.option" class="grid-stack-item" *ngFor="let item of containers "
         id="widget-{{item.key}}">
         <ngx-dashboard-container [item]="item"></ngx-dashboard-container>
@@ -17,7 +16,5 @@
         <div class="charts-item" *ngFor="let chart of charts">
             <img [src]="chart.img" [alt]="chart.src">
         </div>
-
-
     </div>
 </p-dialog>

@@ -20,11 +20,12 @@ export class DashboardComponent implements OnInit {
   isEdit: boolean;
   isNew: boolean;
   ngOnInit() {
-    let that = this
-    this.dashboardService.containersSource.subscribe(containers => this.containers = containers);
+    this.dashboardService.containersSource.subscribe(containers => {
+      this.containers = containers
+    });
     this.route.paramMap.subscribe((params: ParamMap) => {
-      that.id = params.get("id");
-      that.dashboardService.getContainers(that.id).subscribe();
+      this.id = params.get("id");
+      this.dashboardService.getContainers(this.id).subscribe();
     });
     this.dashboardService.isEdit.subscribe(
       flag => this.isEdit = flag
