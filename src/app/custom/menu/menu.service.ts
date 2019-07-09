@@ -17,7 +17,7 @@ export class MenuService {
   menus:Array<any>;
   menusSource= new BehaviorSubject<Array<any>>([]);
   setMenus(menus:Array<any>){
-    this.menus = menus;
+    this.menus = Object.assign([],menus);
     this.menusSource.next(menus);
   }
   initMenus() {
@@ -35,6 +35,10 @@ export class MenuService {
       label:menu.label,
       data:menu.data
     })
+  }
+  delMenu(v){
+    this.menus = this.menus.filter(menu=>menu!==v);
+    this.menusSource.next(this.menus);
   }
 
   saveMenus() {

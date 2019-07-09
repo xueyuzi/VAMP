@@ -48,7 +48,6 @@ export class MenuComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
-      delete: false,
 
     }
   }
@@ -65,7 +64,11 @@ export class MenuComponent implements OnInit {
     this.isAdd = true;
   }
   showEdit(event) {
+    this.isAdd = true;
     this.menu = event.data;
+  }
+  delMenu(event){
+    this.menuService.delMenu(event.data)
   }
   addMenus() {
     this.menu.link = "/custom/dashboard/" + (this.menus.length + 1)
