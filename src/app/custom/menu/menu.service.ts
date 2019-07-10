@@ -32,8 +32,6 @@ export class MenuService {
     this.menusSource.next(this.menus);
     return this.api.post("/elasticsearch/dashboard",{
       dashboard_id:id,
-      label:menu.label,
-      data:menu.data
     })
   }
   delMenu(v){

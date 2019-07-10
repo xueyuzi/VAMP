@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { GridStackOptions } from 'ngx-grid-stack';
 import { DashboardService } from './dashboard.service';
 import { Route, ActivatedRoute, ParamMap } from '@angular/router';
@@ -12,7 +12,9 @@ import { switchMap } from 'rxjs/operators';
 export class DashboardComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private zone: NgZone
+  ) { }
   id: string;
   options: GridStackOptions = new GridStackOptions();
   containers: Array<any> = [];
@@ -21,7 +23,8 @@ export class DashboardComponent implements OnInit {
   isNew: boolean;
   ngOnInit() {
     this.dashboardService.containersSource.subscribe(containers => {
-      this.containers = containers
+      this.containers = []
+      setTimeout(() => { this.containers = containers })
     });
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get("id");
@@ -44,6 +47,6 @@ export class DashboardComponent implements OnInit {
   }
 
   saveContainers() {
-    this.dashboardService.saveContainers(this.id).subscribe()
+    this.dashboardService.saveContainers(this.id).subscribe(res => this.switchEdit())
   }
 }

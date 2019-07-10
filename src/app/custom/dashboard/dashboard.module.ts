@@ -19,6 +19,7 @@ import {ThemeModule} from "../../@theme/theme.module";
 import { ChartsSettingComponent } from './charts-setting/charts-setting.component';
 import {ColorPickerModule} from 'primeng/colorpicker';
 import {DialogModule} from 'primeng/dialog';
+import { ChartsService } from './charts/charts.service';
 
 @NgModule({
   declarations: [DashboardComponent,DashboardContainerComponent,PieComponent, BarComponent, LineComponent, RadarComponent, ChartsSettingComponent],
@@ -36,6 +37,6 @@ import {DialogModule} from 'primeng/dialog';
     DialogModule
   ],
   entryComponents:[DashboardContainerComponent,PieComponent,BarComponent, LineComponent, RadarComponent],
-  providers:[DashboardService]
+  providers:[DashboardService,ChartsService]
 })
 export class DashboardModule { }

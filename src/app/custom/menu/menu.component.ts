@@ -48,7 +48,9 @@ export class MenuComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
-
+    },
+    delete:{
+      confirmDelete:true
     }
   }
   ngOnInit() {
@@ -72,8 +74,7 @@ export class MenuComponent implements OnInit {
   }
   addMenus() {
     this.menu.link = "/custom/dashboard/" + (this.menus.length + 1)
-    this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe(res => { })
-    this.isAdd = false
+    this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe(res => {this.isAdd = false })
   }
 
   saveMenus() {

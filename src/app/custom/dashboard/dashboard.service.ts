@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DashboardContainerModel } from '../../model/dashboard-container.model';
 import { of, Observable, BehaviorSubject, Subject } from 'rxjs';
 import { ApiService } from '../../api.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -192,6 +192,25 @@ export class DashboardService {
   }
 
   getCharts(): Observable<any> {
-    return this.api.get("assets/mock/charts.json")
+    // return this.api.get("assets/mock/charts.json")
+    return this.api.get("/elasticsearch/charttemplate")
+    .pipe(
+      tap(res=>console.log(res)),
+      map(res=>{
+        let category_a = [],category_b=[];
+        res.forEach(
+          chart=>{
+            !category_a.includes(chart.category_a) && category_a.push(chart.category_a);
+            !category_b.includes(chart.category_b) && category_b.push(chart.category_b);
+          }
+        )
+        return {
+          category_a:category_a,
+          category_b:category_b,
+          data:res
+        }
+      }),
+      tap(res=>console.log(res)),
+    )
   }
 }
