@@ -11,17 +11,25 @@ export class PieComponent implements OnInit, BaseChartComponent {
         this.options = Object.assign({}, this.options, options);
         console.log(this.options);
         // 钻去配置
-        if (options.special !== null) {
-            options.special.jumpUrl.forEach((v,i)=>{
-                this.options.series[0].data[i].url = v;
-            })
-        }
     }
     constructor() { }
     options = {
+        dataset:{
+            source:[
+                {ip:"192.168.10.71",count:"171"},
+                {ip:"192.168.10.203",count:"168"},
+                {ip:"192.168.30.31",count:"31"},
+                {ip:"192.168.13.229",count:"13"},
+            ]
+        },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: v=>{
+                console.log(v);
+                let data = v.data
+                let percent = v.percent
+                return `ip:${data.ip}<br/>value:${data.count}<br/>percent:${percent}%`
+            }
         },
         series: [
             {
@@ -29,12 +37,6 @@ export class PieComponent implements OnInit, BaseChartComponent {
                 type: 'pie',
                 radius: '55%',
                 center: ['50%', '60%'],
-                data: [
-                    { value: 335, name: '磁盘', url:""},
-                    { value: 310, name: 'CPU' ,url:""},
-                    { value: 234, name: '内存' ,url:""},
-                    { value: 135, name: '日志' ,url:""},
-                ],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,

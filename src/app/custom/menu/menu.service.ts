@@ -40,6 +40,7 @@ export class MenuService {
   }
 
   saveMenus() {
+    this.menusSource.next(this.menus);
     return this.api.post("/elasticsearch/menu", this.menus)
   }
 }

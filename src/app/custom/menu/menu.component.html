@@ -4,7 +4,6 @@
   </nb-card-header>
   <nb-card-body>
     <button nbButton (click)="showAddMenu()" style="margin:10px">新建</button>
-    <button nbButton (click)="saveMenus()" style="margin:10px">保存</button>
     <ng2-smart-table [source]="menus" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delMenu($event)">
     </ng2-smart-table>
   </nb-card-body>
@@ -31,5 +30,5 @@
     </div>
   </div>
 
-  <button nbButton fullWidth (click)="addMenus()">添加</button>
+  <button nbButton fullWidth (click)="isEdit?saveMenus():addMenus()">保存</button>
 </p-dialog>

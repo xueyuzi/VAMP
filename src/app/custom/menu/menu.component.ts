@@ -34,6 +34,7 @@ export class MenuComponent implements OnInit {
     'nb-e-commerce', 'nb-danger', 'nb-checkmark-circle', 'nb-help']
   userCondition = new Subject<any>();
   isAdd: boolean;
+  isEdit: boolean
   settings = {
     columns: {
       title: {
@@ -49,8 +50,8 @@ export class MenuComponent implements OnInit {
       add: false,
       edit: false,
     },
-    delete:{
-      confirmDelete:true
+    delete: {
+      confirmDelete: true
     }
   }
   ngOnInit() {
@@ -59,26 +60,33 @@ export class MenuComponent implements OnInit {
       menus => { this.menus = Object.assign([], menus) }
     )
   }
-  setIcon(icon:string){
+  setIcon(icon: string) {
     this.menu.icon = icon;
   }
   showAddMenu() {
+    this.menu = {};
     this.isAdd = true;
   }
   showEdit(event) {
     this.isAdd = true;
+    this.isEdit = true;
     this.menu = event.data;
   }
-  delMenu(event){
+  delMenu(event) {
     this.menuService.delMenu(event.data)
+    this.saveMenus();
   }
   addMenus() {
     this.menu.link = "/custom/dashboard/" + (this.menus.length + 1)
-    this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe(res => {this.isAdd = false })
+    this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe()
+    this.saveMenus();
   }
 
   saveMenus() {
-    this.menuService.saveMenus().subscribe(res => { })
+
+    this.menuService.saveMenus().subscribe(res => {
+      this.isAdd = false; this.isEdit = false;
+    })
   }
 
 }

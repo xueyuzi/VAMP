@@ -30,6 +30,8 @@ export class ChartsService {
 
     return gui;
   }
+
+  
   _initConfig() {
     this.config = {
       color: "#FF0000",

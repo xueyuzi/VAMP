@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, OnChanges, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseChartComponent } from './base.charts.component';
 import { DashboardService } from '../dashboard.service';
@@ -10,15 +10,33 @@ import { ChartsService } from './charts.service';
   <div #chartConfig (mousedown)="$event.stopPropagation();"  style="position: absolute;top: 80px;right: 0px;"></div>
   `
 })
-export class BarComponent implements OnInit, BaseChartComponent {
+export class BarComponent implements OnInit,AfterContentInit, BaseChartComponent {
   @ViewChild("chartConfig") chartConfig: ElementRef;
+  ngAfterContentInit(){
+    console.log("ngafter")
+    this.dashboardService.isEdit.subscribe(
+      bool => {
+        console.log("gui show", bool)
+        if (bool) {
+          this.gui.show()
+        } else {
+          this.gui.hide()
+        }
+      }
+    )
+    const barStyle = this.gui.addFolder("直方图设置");
 
+    barStyle.add(this.config, "barWidth", 0, 100).onChange(v => {
+      this.options.series[0].barWidth = v;
+      this.options = Object.assign({}, this.options);
+    });
+  }
   config: any = {
-    barWidth:20,
-    barCategoryGap:20,
+    barWidth: 20,
+    barCategoryGap: 20,
   };
   rotationSpeed: any;
-  options:any = {
+  options: any = {
     color: ["red"],
     tooltip: {
       trigger: 'axis',
@@ -26,19 +44,19 @@ export class BarComponent implements OnInit, BaseChartComponent {
         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
       }
     },
-    legend:{
-      show:false,
-      textStyle:{}
+    legend: {
+      show: false,
+      textStyle: {}
     },
-    dataset:{
-      source:[
-        ['Mon',300,],
-        ['Tur',52,],
-        ['Wed',200,],
-        ['Thu',334,],
-        ['Fri',390,],
-        ['Sat',330,],
-        ['Sun',220,],
+    dataset: {
+      source: [
+        ['Mon', 300,],
+        ['Tur', 52,],
+        ['Wed', 200,],
+        ['Thu', 334,],
+        ['Fri', 390,],
+        ['Sat', 330,],
+        ['Sun', 220,],
       ]
     },
     xAxis:
@@ -86,24 +104,12 @@ export class BarComponent implements OnInit, BaseChartComponent {
       }
     ]
   };
-  constructor(private dashboardService:DashboardService,
-    private chartsService:ChartsService){}
+  constructor(private dashboardService: DashboardService,
+    private chartsService: ChartsService) { }
 
   gui: any;
   ngOnInit() {
-
-    const gui = this.chartsService.generateCommonGUI(this.options);
-    this.dashboardService.isEdit.subscribe(
-      bool=>bool?gui.show():gui.hide()
-    )
-    gui.hide();
-    const barStyle = gui.addFolder("直方图设置");
-
-    barStyle.add(this.config,"barWidth",0,100).onChange(v => {
-      this.options.series[0].barWidth = v;
-      this.options = Object.assign({}, this.options);
-    });
-
-    this.chartConfig.nativeElement.appendChild(gui.domElement);
+    this.gui = this.chartsService.generateCommonGUI(this.options);
+    this.chartConfig.nativeElement.appendChild(this.gui.domElement);
   }
 }

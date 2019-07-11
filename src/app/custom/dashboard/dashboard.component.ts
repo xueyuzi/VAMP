@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, AfterViewInit } from '@angular/core';
 import { GridStackOptions } from 'ngx-grid-stack';
 import { DashboardService } from './dashboard.service';
 import { Route, ActivatedRoute, ParamMap } from '@angular/router';
@@ -16,12 +16,13 @@ export class DashboardComponent implements OnInit {
     private zone: NgZone
   ) { }
   id: string;
-  options: GridStackOptions = new GridStackOptions();
+  options: GridStackOptions;
   containers: Array<any> = [];
   charts: Array<any> = [];
   isEdit: boolean;
   isNew: boolean;
   ngOnInit() {
+    this.options = new GridStackOptions();
     this.dashboardService.containersSource.subscribe(containers => {
       this.containers = []
       setTimeout(() => { this.containers = containers })
@@ -36,7 +37,12 @@ export class DashboardComponent implements OnInit {
   }
 
   switchEdit() {
-    this.dashboardService.switchEdit(!this.isEdit);
+    this.isEdit = !this.isEdit;
+    this.dashboardService.switchEdit(this.isEdit);
+  }
+  cancel() {
+    this.switchEdit();
+    this.dashboardService.getContainers(this.id).subscribe();
   }
 
   showNew() {
@@ -46,7 +52,13 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  saveContainers() {
-    this.dashboardService.saveContainers(this.id).subscribe(res => this.switchEdit())
+  addContainer(chartId: number) {
+    this.dashboardService.addContainer(chartId).subscribe(res => {
+      this.isNew = false;
+    });
+  }
+
+  saveDashboard() {
+    this.dashboardService.saveDashboard(this.id).subscribe(res => this.switchEdit())
   }
 }
