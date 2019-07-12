@@ -1,0 +1,38 @@
+<div class="dashboard-header">
+    <div class="dashboard-title">
+        <h1>{{title}}</h1>
+    </div>
+    <div>
+        <button nbButton  size="small" (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
+        <button nbButton size="small" status="danger" (click)="cancel()" *ngIf="isEdit" style="margin:10px;">取消</button>
+
+        <button nbButton size="small" (click)="saveDashboard()" *ngIf="isEdit" style="margin:10px;">保存</button>
+        <button nbButton size="small" (click)="showNew()" *ngIf="isEdit" style="margin:10px;">新增</button>
+    </div>
+</div>
+<ngx-grid-stack class="grid-stack" [options]="options" *ngIf="containers.length > 0">
+    <ngx-grid-stack-item [option]="item.option" class="grid-stack-item" *ngFor="let item of containers "
+        id="widget-{{item.key}}">
+        <ngx-dashboard-container [item]="item" (mousedown)="isEdit||$event.stopPropagation();">
+        </ngx-dashboard-container>
+    </ngx-grid-stack-item>
+</ngx-grid-stack>
+
+
+
+<p-dialog header="新建图表" [(visible)]="isNew">
+    <div class="charts-container">
+        <div style="width:20%;align-items: center;
+        display: flex;">
+            <h5 *ngFor="let category_a of charts.category_a">
+                {{category_a}}
+            </h5>
+        </div>
+        <div style="display:flex;flex:1;    flex-wrap: wrap;">
+            <div *ngFor="let chart of charts.data" class="charts-item" (click)="addContainer(chart.id)">
+                <img style="width:200px;height:150px" [src]="chart.chart_img" alt="">
+                {{chart.chart_name}}
+            </div>
+        </div>
+    </div>
+</p-dialog>

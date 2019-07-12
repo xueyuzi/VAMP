@@ -11,7 +11,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     var token: string = localStorage.getItem("user")
-    if (token != null) {
+    if (token !== null) {
       return true;
     }
     return false;
@@ -28,6 +28,7 @@ export class AuthService {
   }
 
   logout() {
+    document.cookie = '0';
     localStorage.setItem("user", null);
   }
 }

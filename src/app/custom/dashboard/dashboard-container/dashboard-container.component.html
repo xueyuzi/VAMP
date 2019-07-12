@@ -3,7 +3,7 @@
 
     <div style="display:flex;flex-wrap:wrap">
         <input style="flex:1" nbInput type="text" [(ngModel)]="item.panelData.title">
-        <nb-actions size="medium" style="flex:1;" *ngIf="isEdit">
+        <nb-actions size="medium" style="flex:1;" *ngIf="isEdit|async">
           <nb-action icon="nb-grid-b" title="查看报表"></nb-action>
           <nb-action icon="nb-grid-b-outline" title="选择可视化"
           [nbPopover]="chartList"

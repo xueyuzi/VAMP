@@ -9,7 +9,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
     </nb-tab>
   </nb-tabset>
 </div>
-  `
+`
 })
 export class ChartsSettingComponent implements OnInit {
   constructor() { }

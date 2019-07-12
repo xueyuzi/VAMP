@@ -4,19 +4,20 @@
 <form (ngSubmit)="login()" aria-labelledby="title">
 
   <div class="form-control-group">
-    <label class="label" for="input-username" >用户名:</label>
-    <input nbInput fullWidth [(ngModel)]="user.username" name="username" placeholder="用户名" id="input-username" >
+    <input nbInput fullWidth fieldSize="large" [(ngModel)]="user.username" name="username" placeholder="用户名" id="input-username">
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-password" >密码:</label>
-    <input type="password" nbInput fullWidth [(ngModel)]="user.password" name="password" placeholder="密码" id="input-password" >
+    <input type="password" nbInput fullWidth fieldSize="large" [(ngModel)]="user.password" name="password" placeholder="密码"
+      id="input-password">
   </div>
-  <div class="form-control-group">
-    <label class="label" for="input-password" >验证码:</label>
+  <div class="form-control-group" style="display:flex">
+
+
+    <input nbInput fullWidth [(ngModel)]="user.validateCode" name="validateCode" placeholder="验证码"
+      id="input-validateCode">
     <img [src]="codeSrc" (click)="changeCode()" alt="">
 
-    <input nbInput fullWidth [(ngModel)]="user.validateCode" name="validateCode" placeholder="验证码" id="input-validateCode" >
   </div>
   <p style="font-size:18px;color:red;">{{errors}}</p>
 

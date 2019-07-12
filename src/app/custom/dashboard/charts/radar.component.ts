@@ -5,12 +5,12 @@ import { BaseChartComponent } from './base.charts.component';
   selector: 'ngx-radar',
   template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
 })
-export class RadarComponent implements OnInit, BaseChartComponent {
+export class RadarComponent extends BaseChartComponent implements OnInit {
   updateOptions(options) {
     this.options = Object.assign({}, this.options, options);
     console.log(this.options);
   }
-  constructor() { }
+  constructor() { super(); }
   options = {
     tooltip: {},
     radar: {

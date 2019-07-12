@@ -13,7 +13,7 @@ export class DashboardService {
   containersSource: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
   isEdit: BehaviorSubject<boolean> = new BehaviorSubject(false);
   settingKey: string;
-
+  id: number;
   constructor(
     private api: ApiService
   ) { }
@@ -36,7 +36,8 @@ export class DashboardService {
     this.containersSource.next(this.containers);
   }
 
-  getContainers(id) {
+  getContainers(id: number) {
+    this.id = id;
     return this.api.get("/elasticsearch/dashboard/" + id).pipe(
       map(res => Object.keys(res).length == 0 ? [] : res),
       tap(res => {
@@ -46,10 +47,14 @@ export class DashboardService {
     )
   }
 
-  saveDashboard(id) {
-    return this.api.post("/elasticsearch/dashboard/" + id, this.containers)
+  getChartData(chartId:string){
+    return this.api.get("/elasticsearch/getChart/" + chartId);
   }
 
+  saveDashboard(id: number, value = null) {
+    let containers = value === null ? this.containers : value;
+    return this.api.post("/elasticsearch/dashboard/" + id, containers)
+  }
 
   updateChartStyle(setting) {
     let index = this.containers.findIndex(v => v.customId === this.settingKey);

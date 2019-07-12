@@ -7,7 +7,7 @@ import { NbPopoverDirective } from '@nebular/theme';
 import { RadarComponent } from '../charts/radar.component';
 import { DashboardService } from '../dashboard.service';
 import { BaseChartComponent } from '../charts/base.charts.component';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'ngx-dashboard-container',
@@ -25,13 +25,10 @@ export class DashboardContainerComponent implements OnInit {
   ) { }
 
   componentRef;
-  isEdit: boolean = false;
+  isEdit: BehaviorSubject<boolean>;
   ngOnInit() {
     this.loadChart(this.item.panelData.type);
-    this.dashboardService.isEdit.subscribe(
-      bool => this.isEdit = bool
-     );
-
+    this.isEdit = this.dashboardService.isEdit;
   }
 
   delContainer() {
@@ -63,8 +60,10 @@ export class DashboardContainerComponent implements OnInit {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     this.chart.clear();
     this.componentRef = this.chart.createComponent(componentFactory);
-    console.log(<BaseChartComponent>this.componentRef.instance);
-
+    this.dashboardService.getChartData(this.item.customId).subscribe(res => {
+      // (<BaseChartComponent>this.componentRef.instance).setData(res);
+    });
+    (<BaseChartComponent>this.componentRef.instance).setData(this.item.panelData.chartData);
   }
 
   openSetting() {

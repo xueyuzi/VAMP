@@ -37,9 +37,11 @@
   margin-bottom: 14px;
 }
 
-ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
+ng2-smart-table .ng2-smart-actions a.ng2-smart-action,
+.nb-theme-corporate ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
   font-size: 14px !important;
 }
+
 
 .grid-stack-item-content {
   padding: 10px;
@@ -72,10 +74,12 @@ select {
     width: 100%;
     display: flex;
     align-items: center;
-    input{
-      flex:1
+
+    input {
+      flex: 1
     }
   }
+
   label {
     width: 30%;
     padding-right: 10px;
@@ -83,11 +87,29 @@ select {
   }
 }
 
-.ui-tree{
-  width:100%!important;
+.ui-tree {
+  width: 100% !important;
 }
 
 
-.ui-orderlist-list{
-  height:70vh!important;
+.ui-orderlist-list {
+  height: 70vh !important;
+}
+
+
+.dashboard-header {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body .ui-selectbutton .ui-button.ui-state-active {
+  background-color: #8783f7 !important;
+  border-color: #8783f7 !important
+}
+
+
+.grid-stack[_ngcontent-c15] {
+  margin: 0px !important;
 }

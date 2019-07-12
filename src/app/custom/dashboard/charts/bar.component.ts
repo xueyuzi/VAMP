@@ -10,32 +10,13 @@ import { ChartsService } from './charts.service';
   <div #chartConfig (mousedown)="$event.stopPropagation();"  style="position: absolute;top: 80px;right: 0px;"></div>
   `
 })
-export class BarComponent implements OnInit,AfterContentInit, BaseChartComponent {
+export class BarComponent extends BaseChartComponent implements OnInit {
   @ViewChild("chartConfig") chartConfig: ElementRef;
-  ngAfterContentInit(){
-    console.log("ngafter")
-    this.dashboardService.isEdit.subscribe(
-      bool => {
-        console.log("gui show", bool)
-        if (bool) {
-          this.gui.show()
-        } else {
-          this.gui.hide()
-        }
-      }
-    )
-    const barStyle = this.gui.addFolder("直方图设置");
 
-    barStyle.add(this.config, "barWidth", 0, 100).onChange(v => {
-      this.options.series[0].barWidth = v;
-      this.options = Object.assign({}, this.options);
-    });
-  }
   config: any = {
     barWidth: 20,
     barCategoryGap: 20,
   };
-  rotationSpeed: any;
   options: any = {
     color: ["red"],
     tooltip: {
@@ -47,17 +28,6 @@ export class BarComponent implements OnInit,AfterContentInit, BaseChartComponent
     legend: {
       show: false,
       textStyle: {}
-    },
-    dataset: {
-      source: [
-        ['Mon', 300,],
-        ['Tur', 52,],
-        ['Wed', 200,],
-        ['Thu', 334,],
-        ['Fri', 390,],
-        ['Sat', 330,],
-        ['Sun', 220,],
-      ]
     },
     xAxis:
     {
@@ -89,7 +59,6 @@ export class BarComponent implements OnInit,AfterContentInit, BaseChartComponent
     ,
     series: [
       {
-        name: '直接访问',
         type: 'bar',
         barWidth: '60%',
         label: {
@@ -104,12 +73,26 @@ export class BarComponent implements OnInit,AfterContentInit, BaseChartComponent
       }
     ]
   };
-  constructor(private dashboardService: DashboardService,
-    private chartsService: ChartsService) { }
-
   gui: any;
+  constructor(
+    private dashboardService: DashboardService,
+    private chartsService: ChartsService
+  ) {
+    super();
+   }
+
   ngOnInit() {
     this.gui = this.chartsService.generateCommonGUI(this.options);
     this.chartConfig.nativeElement.appendChild(this.gui.domElement);
+
+    this.dashboardService.isEdit.subscribe(
+      bool => bool ? this.gui.show() : this.gui.hide()
+    )
+    const barStyle = this.gui.addFolder("直方图设置");
+
+    barStyle.add(this.config, "barWidth", 0, 100).onChange(v => {
+      this.options.series[0].barWidth = v;
+      this.options = Object.assign({}, this.options);
+    });
   }
 }

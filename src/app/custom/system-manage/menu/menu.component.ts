@@ -77,7 +77,7 @@ export class MenuComponent implements OnInit {
     this.saveMenus();
   }
   addMenus() {
-    this.menu.link = "/custom/dashboard/" + (this.menus.length + 1)
+    this.menu.link = "/custom/dashboard/view/" + (this.menus.length + 1)
     this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe()
     this.saveMenus();
   }

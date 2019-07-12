@@ -6,13 +6,13 @@ import { BaseChartComponent } from './base.charts.component';
     selector: 'ngx-pie',
     template: `<div (chartClick)="onChartClick($event)" echarts [options]="options" style="height:100%;width:100%"></div>`
 })
-export class PieComponent implements OnInit, BaseChartComponent {
+export class PieComponent extends BaseChartComponent implements OnInit {
     updateOptions(options) {
         this.options = Object.assign({}, this.options, options);
         console.log(this.options);
         // 钻去配置
     }
-    constructor() { }
+    constructor() { super(); }
     options = {
         dataset:{
             source:[
@@ -25,7 +25,6 @@ export class PieComponent implements OnInit, BaseChartComponent {
         tooltip: {
             trigger: 'item',
             formatter: v=>{
-                console.log(v);
                 let data = v.data
                 let percent = v.percent
                 return `ip:${data.ip}<br/>value:${data.count}<br/>percent:${percent}%`
