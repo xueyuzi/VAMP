@@ -17,6 +17,7 @@ export class ChartsService {
   generateCommonGUI(options: any) {
     this.options = options;
     const gui = new dat.GUI({ autoPlace: false });
+    gui.close();
     const label = gui.addFolder('label设置');
     const global = gui.addFolder("全局设置");
     const xAxis = gui.addFolder("x轴");

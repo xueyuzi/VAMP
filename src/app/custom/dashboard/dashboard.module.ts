@@ -1,5 +1,4 @@
 import { NgxEchartsModule } from 'ngx-echarts';
-import { PieChart } from './../../@core/data/earning';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,13 +15,15 @@ import { LineComponent } from './charts/line.component';
 import { RadarComponent } from './charts/radar.component';
 import { DashboardService } from "./dashboard.service";
 import { ThemeModule } from "../../@theme/theme.module";
-import { ChartsSettingComponent } from './setting/charts-setting.component';
+import { ChartsSettingComponent } from './dashboard-container/setting/charts-setting.component';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DialogModule } from 'primeng/dialog';
 import { ChartsService } from './charts/charts.service';
-import { DashboardEditorComponent } from "./setting/dashboard-editor.component";
+import { DashboardEditorComponent } from "./dashboard-container/setting/dashboard-editor.component";
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
-import {SelectButtonModule} from 'primeng/selectbutton';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { DataManageModule } from "../data-manage/data-manage.module";
+import { ChartListComponent } from './charts/chart-list/chart-list.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -33,7 +34,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     RadarComponent,
     ChartsSettingComponent,
     DashboardViewComponent,
-    DashboardEditorComponent],
+    DashboardEditorComponent,
+    ChartListComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
@@ -46,9 +48,11 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     NgxEchartsModule,
     ColorPickerModule,
     DialogModule,
-    SelectButtonModule
+    SelectButtonModule,
+    DataManageModule
   ],
   entryComponents: [DashboardContainerComponent, PieComponent, BarComponent, LineComponent, RadarComponent],
-  providers: [DashboardService, ChartsService]
-})
+  providers: [DashboardService, ChartsService],
+  exports:[ChartListComponent]
+}) 
 export class DashboardModule { }

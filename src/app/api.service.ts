@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 
@@ -20,17 +20,19 @@ export class ApiService {
 
   get(url: string, param: any = {}): Observable<any> {
     return this.http.get(url).pipe(
-      tap(res => this.handleError(url, res))
+      tap(res => this.handleError(url, res)),
+      catchError(err => this.handleError("",err)),
     )
   }
 
-  handleError(url: string, res: any) {
-    console.log(url + " : ", res);
-    if (res.code == "1") {
-      this.toastrService.danger(res.msg);
+  handleError(url: string, err: any = {}) {
+    console.log(url + " : ", err);
+    if (err.code == "1" || err.status === 404) {
+      this.toastrService.danger(err.msg);
       setTimeout(() => {
         this.router.navigateByUrl("/auth/login");
       }, 1000);
     }
+    return err;
   }
 }

@@ -21,18 +21,5 @@
 
 
 <p-dialog header="新建图表" [(visible)]="isNew">
-    <div class="charts-container">
-        <div style="width:20%;align-items: center;
-        display: flex;">
-            <h5 *ngFor="let category_a of charts.category_a">
-                {{category_a}}
-            </h5>
-        </div>
-        <div style="display:flex;flex:1;    flex-wrap: wrap;">
-            <div *ngFor="let chart of charts.data" class="charts-item" (click)="addContainer(chart.id)">
-                <img style="width:200px;height:150px" [src]="chart.chart_img" alt="">
-                {{chart.chart_name}}
-            </div>
-        </div>
-    </div>
+    <ngx-defined-chartlist></ngx-defined-chartlist>
 </p-dialog>

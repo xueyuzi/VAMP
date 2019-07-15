@@ -1,0 +1,44 @@
+<ngx-defined-chartlist (onSelectChart)="editDefinedChart($event)" (onAddChart)="addDefinedChart()">
+</ngx-defined-chartlist>
+
+<p-dialog header="新建预设图表" [(visible)]="isEdit">
+    <div class="setting-container" style="min-width: 600px">
+        <div class="setting-item">
+            <label>默认索引:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.default_index">
+        </div>
+        <div class="setting-item">
+            <label>所属分类:</label>
+            <nb-select [(selected)]="defaultChart.category_a" placeholder="category_a" style="min-width:200px"
+                size="small">
+                <nb-option [value]="category" *ngFor="let category of category_a_items">{{category}}</nb-option>
+            </nb-select>
+        </div>
+        <div class="setting-item">
+            <label>图表名称:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.chart_name">
+        </div>
+        <div class="setting-item">
+            <label>排序号码:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.sortid">
+        </div>
+        <div class="setting-item">
+            <label>图片上传:</label>
+            <p-fileUpload name="chartimg" (onSend)="setChartImg($event)" (onError)="setChartImg($event)"
+                (onUpload)="setChartImg($event)" [auto]="true" url="/elasticsearch/updateChartImg"></p-fileUpload>
+            <!-- <input type="text" nbInput [(ngModel)]="defaultChart.chart_img"> -->
+        </div>
+        <div class="setting-item">
+            <label>默认图表类型:</label>
+            <nb-action icon="nb-grid-b-outline" title="选择可视化" [nbPopover]="chartList" nbPopoverPlacement="bottom">
+            </nb-action>
+            <ng-template #chartList>
+                <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
+            </ng-template>
+        </div>
+        <div class="setting-item">
+            <label>预定义语句:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.default_chart_type">
+        </div>
+    </div>
+</p-dialog>

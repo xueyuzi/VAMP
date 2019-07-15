@@ -2,6 +2,10 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DialogModule } from 'primeng/dialog';
+import {MenuModule} from 'primeng/menu';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import {
   NbActionsModule,
@@ -78,6 +82,7 @@ const NB_MODULES = [
   NbTabsetModule,
   NbRouteTabsetModule,
   NbMenuModule,
+  MenuModule,
   NbUserModule,
   NbActionsModule,
   NbSearchModule,
@@ -106,6 +111,9 @@ const NB_MODULES = [
   NbChatModule,
   NbTooltipModule,
   NbCalendarKitModule,
+  Ng2SmartTableModule,
+  DialogModule,
+  FileUploadModule
 ];
 
 const COMPONENTS = [

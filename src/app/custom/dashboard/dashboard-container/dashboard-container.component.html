@@ -2,7 +2,8 @@
 <div style="height:100%;width:100%;display:flex;    flex-direction: column;">
 
     <div style="display:flex;flex-wrap:wrap">
-        <input style="flex:1" nbInput type="text" [(ngModel)]="item.panelData.title">
+        <div *ngIf="!(isEdit|async)">{{item.panelData.title}}</div>
+        <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title">
         <nb-actions size="medium" style="flex:1;" *ngIf="isEdit|async">
           <nb-action icon="nb-grid-b" title="查看报表"></nb-action>
           <nb-action icon="nb-grid-b-outline" title="选择可视化"
@@ -26,13 +27,8 @@
 
 
 <ng-template #chartList>
-  <div style="padding:10px 20px;display: flex;max-width: 345px;flex-wrap: wrap;max-height: 500px;overflow: scroll;">
-    <div class="chart-item" (click)="changeChart('pie')">饼图</div>
-    <div class="chart-item" (click)="changeChart('bar')">直方图</div>
-    <div class="chart-item" (click)="changeChart('line')">折线图</div>
-    <div class="chart-item" (click)="changeChart('radar')">雷达图</div>
-  </div>
-  </ng-template>
+    <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
+</ng-template>
 
 
 <ng-template #setting>

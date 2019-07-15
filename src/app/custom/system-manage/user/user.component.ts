@@ -5,8 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit, AfterViewInit {
 

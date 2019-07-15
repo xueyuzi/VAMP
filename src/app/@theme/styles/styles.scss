@@ -45,8 +45,11 @@ ng2-smart-table .ng2-smart-actions a.ng2-smart-action,
 
 .grid-stack-item-content {
   padding: 10px;
-  border: solid lightcyan;
+  background-color: white;
   text-align: center;
+  border-radius: .25rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, .1);
+  color: #1a2138;
 }
 
 select {
@@ -57,7 +60,9 @@ select {
   font-size: 12px !important;
 }
 
-
+ul {
+  padding: 0px !important;
+}
 
 
 
@@ -112,4 +117,43 @@ body .ui-selectbutton .ui-button.ui-state-active {
 
 .grid-stack[_ngcontent-c15] {
   margin: 0px !important;
+}
+
+
+
+
+.charts-container {
+  min-width: 901px;
+  display: flex;
+  .charts-items {
+    margin: 10px 20px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+
+    .charts-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      padding: 10px;
+      height: 170px;
+      width: 220px;
+      cursor: pointer;
+      filter: grayscale(100%);
+
+      img {
+        width: 200px;
+        height: 150px;
+        background-size: cover;
+      }
+    }
+
+    .charts-item:hover {
+      filter: grayscale(0%);
+      color:black;
+    }
+  }
+
 }

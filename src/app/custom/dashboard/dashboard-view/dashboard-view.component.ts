@@ -19,7 +19,6 @@ export class DashboardViewComponent implements OnInit {
   id: number;
   options: GridStackOptions;
   containers: Array<any> = [];
-  charts: Array<any> = [];
   isEdit: boolean;
   isNew: boolean;
   isEditor: string;
@@ -54,9 +53,6 @@ export class DashboardViewComponent implements OnInit {
 
   showNew() {
     this.isNew = true;
-    this.dashboardService.getCharts().subscribe(
-      charts => this.charts = charts
-    )
   }
 
   addContainer(chartId: number) {

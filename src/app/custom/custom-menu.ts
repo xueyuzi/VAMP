@@ -7,14 +7,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: []
   },
   {
-    title:"数据管理",
-    icon:"nb-gear",
-    children:[
+    title: "数据管理",
+    icon: "nb-gear",
+    children: [
       {
-        title:"预定义图表管理",
+        title: "预定义图表管理",
+        icon:"nb-gear",
+        link:"/custom/data/defined-chart"
       },
       {
-        title:"数据源管理",
+        title: "数据源管理",
       }
     ]
   },
@@ -25,19 +27,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: '用户管理',
         icon: 'nb-gear',
-        link: '/custom/user',
-      },
-      {
-        title: '权限管理',
-      },
-      {
-        title: '部门管理',
+        link: '/custom/system/user',
       },
       {
         title: "Dashboard管理",
         icon: "nb-gear",
-        link: "/custom/menus",
-      }
+        link: "/custom/system/menu",
+      },
+      {
+        title: '角色管理',
+        icon: "nb-gear",
+        link: "/custom/system/role"
+      },
+      {
+        title: '日志管理',
+      },
+      {
+        title: '登录管理',
+      },
+
     ]
   }
 

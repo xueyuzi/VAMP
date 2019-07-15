@@ -3,29 +3,24 @@ import { CommonModule } from '@angular/common';
 import { CustomRoutingModule } from './custom-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { CustomComponent } from './custom.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-import {TableModule} from 'primeng/table';
-import {DialogModule} from 'primeng/dialog';
-import {TreeModule} from 'primeng/tree';
-import {OrderListModule} from 'primeng/orderlist';
-import { DashboardService } from './dashboard/dashboard.service';
-import { UserComponent } from './system-manage/user/user.component';
-import { MenuComponent } from './system-manage/menu/menu.component';
-import { UserService } from '../@core/mock/users.service';
-import { MenuService } from './system-manage/menu/menu.service';
 
+import { TableModule } from 'primeng/table';
+import { TreeModule } from 'primeng/tree';
+import { OrderListModule } from 'primeng/orderlist';
+import { DashboardService } from './dashboard/dashboard.service';
+import { UserService } from '../@core/mock/users.service';
+import { DataManageModule } from "./data-manage/data-manage.module";
 @NgModule({
-  declarations: [CustomComponent, UserComponent, MenuComponent],
+  declarations: [CustomComponent],
   imports: [
     CommonModule,
     CustomRoutingModule,
     ThemeModule,
-    Ng2SmartTableModule,
     TableModule,
-    DialogModule,
     TreeModule,
-    OrderListModule
+    OrderListModule,
+    DataManageModule
   ],
-  providers:[UserService,MenuService,DashboardService]
+  providers: [UserService, DashboardService]
 })
 export class CustomModule { }
