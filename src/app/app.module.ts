@@ -14,8 +14,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {EmptyComponent} from "./empty.component";
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent,EmptyComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

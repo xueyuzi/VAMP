@@ -1,21 +1,17 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-
+import chartListData from "../chartListData";
 @Component({
   selector: 'ngx-chart-list',
   templateUrl: './chart-list.component.html',
   styleUrls: ['./chart-list.component.scss']
 })
 export class ChartListComponent implements OnInit {
-  list = [
-    { label: "饼图", key: "pie" },
-    { label: "直方图", key: "bar" },
-    { label: "折线图", key: "line" },
-    { label: "雷达图", key: "radar" },
-  ]
+  list: Array<any> = [];
   constructor() { }
   @Input() selected: string;
   @Output() onSelectChart = new EventEmitter();
   ngOnInit() {
+    this.list = Object.keys(chartListData).map(key => chartListData[key])
   }
   onSelect(key) {
     this.onSelectChart.emit(key);

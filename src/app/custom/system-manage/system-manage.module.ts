@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { RoleComponent } from './role/role.component';
 import { UserComponent } from './user/user.component';
-import { MenuService } from './menu/menu.service';
 import {ThemeModule} from "../../@theme/theme.module";
 
 import {SystemManageRoutingModule} from "./system-manage-routing-module"
@@ -14,7 +13,6 @@ import {SystemManageRoutingModule} from "./system-manage-routing-module"
     UserComponent
   ],
   providers:[
-    MenuService
   ],
   imports: [
     CommonModule,

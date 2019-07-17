@@ -1,14 +1,34 @@
-.chart-item{
-    width: 100px;
-    height: 100px;
+.chart-item {
+    margin: 5px;
+    padding: 5px;
     display: flex;
+    font-size: 1.2rem;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    flex-direction: column-reverse;
+    border: 2px solid rgba(0, 0, 100, 0);
+    filter: grayscale(100%);
+
+    .img {
+        width: 150px;
+        height: 100px;
+        background-size: cover;
+    }
 }
-.chart-item:hover{
-    background-color: rgba(0,0,200,0.3)
+
+.chart-item:hover,
+.active {
+    filter: grayscale(0%);
+    border: 2px solid rgba(0, 0, 100, 0.2);
 }
-.active{
-    background-color: rgba(0,0,200,0.3)
+
+.charts-container {
+    padding: 10px 20px;
+    display: flex;
+    max-width: 50vw;
+    max-height: 350px;
+    flex-wrap: wrap;
+    overflow: auto;
+    justify-content: space-between;
 }

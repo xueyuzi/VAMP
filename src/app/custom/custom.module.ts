@@ -7,10 +7,7 @@ import { CustomComponent } from './custom.component';
 import { TableModule } from 'primeng/table';
 import { TreeModule } from 'primeng/tree';
 import { OrderListModule } from 'primeng/orderlist';
-import { DashboardService } from './dashboard/dashboard.service';
-import { UserService } from '../@core/mock/users.service';
 import { DataManageModule } from "./data-manage/data-manage.module";
-import { MenuService } from './system-manage/menu/menu.service';
 
 @NgModule({
   declarations: [CustomComponent],
@@ -23,6 +20,6 @@ import { MenuService } from './system-manage/menu/menu.service';
     OrderListModule,
     DataManageModule
   ],
-  providers: [UserService, DashboardService,MenuService]
+  providers: []
 })
 export class CustomModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
-import { DashboardContainerModel } from "../../../model/dashboard-container.model";
 import { PieComponent } from "../charts/pie.component";
 import { BarComponent } from "../charts/bar.component";
 import { LineComponent } from "../charts/line.component";
@@ -7,8 +6,8 @@ import { NbPopoverDirective } from '@nebular/theme';
 import { RadarComponent } from '../charts/radar.component';
 import { DashboardService } from '../dashboard.service';
 import { BaseChartComponent } from '../charts/base.charts.component';
-import { Subject, BehaviorSubject } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
+import chartListData from "../charts/chartListData";
 @Component({
   selector: 'ngx-dashboard-container',
   templateUrl: './dashboard-container.component.html',
@@ -40,20 +39,7 @@ export class DashboardContainerComponent implements OnInit {
     this.popover.hide();
   }
   loadChart(name: string) {
-    switch (name) {
-      case 'pie':
-        this.loadComponent(PieComponent);
-        break;
-      case 'line':
-        this.loadComponent(LineComponent);
-        break;
-      case 'bar':
-        this.loadComponent(BarComponent);
-        break;
-      case 'radar':
-        this.loadComponent(RadarComponent);
-        break;
-    }
+    this.loadComponent(chartListData[name].component);
   }
 
   loadComponent(component) {

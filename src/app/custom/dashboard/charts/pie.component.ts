@@ -7,11 +7,6 @@ import { BaseChartComponent } from './base.charts.component';
     template: `<div (chartClick)="onChartClick($event)" echarts [options]="options" style="height:100%;width:100%"></div>`
 })
 export class PieComponent extends BaseChartComponent implements OnInit {
-    updateOptions(options) {
-        this.options = Object.assign({}, this.options, options);
-        console.log(this.options);
-        // 钻去配置
-    }
     constructor() { super(); }
     options = {
         series: [
