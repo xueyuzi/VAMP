@@ -25,6 +25,7 @@ export class DashboardContainerComponent implements OnInit {
 
   componentRef;
   isEdit: BehaviorSubject<boolean>;
+  title:string;
   ngOnInit() {
     this.loadChart(this.item.panelData.type);
     this.isEdit = this.dashboardService.isEdit;
@@ -49,7 +50,7 @@ export class DashboardContainerComponent implements OnInit {
     this.dashboardService.getChartData(this.item.customId).subscribe(res => {
       // (<BaseChartComponent>this.componentRef.instance).setData(res);
       (<BaseChartComponent>this.componentRef.instance).setData(res);
-
+      this.title = res.title;
     });
   }
 

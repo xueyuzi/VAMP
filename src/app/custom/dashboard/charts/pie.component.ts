@@ -23,7 +23,10 @@ export class PieComponent extends BaseChartComponent implements OnInit {
                     }
                 }
             }
-        ]
+        ],
+        tooltip: {
+            trigger: 'item',
+        },
     };
     onChartClick(param){
         let url = '/#/custom'+param.data.url;

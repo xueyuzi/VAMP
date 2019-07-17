@@ -2,7 +2,7 @@
 <div style="height:100%;width:100%;display:flex;    flex-direction: column;">
 
     <div style="display:flex;flex-wrap:wrap">
-        <div *ngIf="!(isEdit|async)">{{item.panelData.title}}</div>
+        <div *ngIf="!(isEdit|async)">{{title}}</div>
         <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title">
         <nb-actions size="medium" style="flex:1;" *ngIf="isEdit|async">
           <nb-action icon="nb-grid-b" title="查看报表"></nb-action>

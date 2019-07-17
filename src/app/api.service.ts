@@ -21,7 +21,7 @@ export class ApiService {
   get(url: string, param: any = {}): Observable<any> {
     return this.http.get(url).pipe(
       tap(res => this.handleError(url, res)),
-      catchError(err => this.handleError("",err)),
+      catchError(err => this.handleError("", err)),
     )
   }
 

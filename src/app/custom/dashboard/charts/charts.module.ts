@@ -12,6 +12,7 @@ import { FunnelComponent } from './funnel.component';
 import { GaugeComponent } from "./gauge.component";
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartListComponent } from './chart-list/chart-list.component';
+import { PieCustomComponent } from './pie-custom.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -24,7 +25,8 @@ import { ChartListComponent } from './chart-list/chart-list.component';
     LineMultipleComponent,
     RadarComponent,
     FunnelComponent,
-    GaugeComponent
+    GaugeComponent,
+    PieCustomComponent
   ],
   entryComponents: [
     PieComponent,
@@ -36,7 +38,8 @@ import { ChartListComponent } from './chart-list/chart-list.component';
     LineMultipleComponent,
     RadarComponent,
     FunnelComponent,
-    GaugeComponent],
+    GaugeComponent,
+    PieCustomComponent],
   exports: [ChartListComponent],
   imports: [
     CommonModule,
