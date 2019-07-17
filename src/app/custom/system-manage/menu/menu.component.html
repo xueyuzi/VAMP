@@ -4,7 +4,13 @@
   </nb-card-header>
   <nb-card-body>
     <button nbButton (click)="showAddMenu()" style="margin:10px">新建</button>
-    <ng2-smart-table [source]="menus" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delMenu($event)">
+    <nb-select [(selected)]="key" style="float: right;width:200px">
+      <nb-option value="dashboard">Dashboard</nb-option>
+      <nb-option value="situation">安全态势</nb-option>
+      <nb-option value="devops">安全运维</nb-option>
+    </nb-select>
+    <ng2-smart-table [source]="(menus|async)[key]" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delMenu($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
@@ -24,7 +30,7 @@
       display: flex;
       flex-wrap: wrap;
       font-size: 30px;">
-      
+
         <i [class]="icon" style="border: 1px solid" *ngFor="let icon of menuIcons" (click)="setIcon(icon)"></i>
       </div>
     </div>

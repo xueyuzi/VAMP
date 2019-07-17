@@ -7,13 +7,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: []
   },
   {
+    title: "安全态势",
+    icon: "nb-home",
+  },
+  {
+    title: "安全运维",
+    icon: "nb-home",
+  },
+  {
     title: "数据管理",
     icon: "nb-gear",
     children: [
       {
         title: "预定义图表管理",
-        icon:"nb-gear",
-        link:"/custom/data/defined-chart"
+        icon: "nb-gear",
+        link: "/custom/data/defined-chart"
       },
       {
         title: "数据源管理",
@@ -45,7 +53,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: '登录管理',
       },
-
+      {
+        title: "探头管理",
+      },
+      {
+        title: "配置管理"
+      }
     ]
   }
 

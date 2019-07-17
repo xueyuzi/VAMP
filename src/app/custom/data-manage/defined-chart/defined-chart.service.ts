@@ -12,23 +12,22 @@ export class DefinedChartService {
   getCharts(): Observable<any> {
     return this.api.get("/elasticsearch/charttemplate")
       .pipe(
-        tap(res => console.log(res)),
-        map(res => {
-          let category_a = [], category_b = [];
-          res.forEach(
-            chart => {
-              !category_a.includes(chart.category_a) && category_a.push(chart.category_a);
-              !category_b.includes(chart.category_b) && category_b.push(chart.category_b);
-            }
-          )
-          return {
-            category_a: category_a,
-            category_b: category_b,
-            data: res
-          }
-        }),
-        tap(res => console.log(res)),
+        tap(res => console.log(res))
       )
+  }
+
+  addCharts(data): Observable<any> {
+    return this.api.post("/elasticsearch/addChartTemplate", data);
+  }
+  saveCharts(id, data): Observable<any> {
+    return this.api.post("/elasticsearch/charttemplate/" + id, data);
+  }
+
+  getChart(id): Observable<any> {
+    return this.api.get("/elasticsearch/chartTemplate/" + id);
+  }
+  delChart(id): Observable<any> {
+    return this.api.post("/elasticsearch/delChartTemplate/" + id);
   }
 
 }

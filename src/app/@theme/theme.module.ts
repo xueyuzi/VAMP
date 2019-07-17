@@ -4,8 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DialogModule } from 'primeng/dialog';
-import {MenuModule} from 'primeng/menu';
-import {FileUploadModule} from 'primeng/fileupload';
+import { MenuModule } from 'primeng/menu';
+import { FileUploadModule } from 'primeng/fileupload';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 import {
   NbActionsModule,
@@ -113,7 +116,10 @@ const NB_MODULES = [
   NbCalendarKitModule,
   Ng2SmartTableModule,
   DialogModule,
-  FileUploadModule
+  FileUploadModule,
+  SelectButtonModule,
+  ColorPickerModule,
+  ConfirmDialogModule
 ];
 
 const COMPONENTS = [
@@ -151,7 +157,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'corporate',
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,

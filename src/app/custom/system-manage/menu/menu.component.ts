@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
   constructor(private menuService: MenuService) { }
   menu: any;
 
-  menus;
+  menus: Observable<any>;
   menuIcons = ['nb-alert', 'nb-angle-double-left', 'nb-angle-double-right',
     'nb-arrow-down', 'nb-arrow-dropdown', 'nb-arrow-dropleft',
     'nb-arrow-dropright', 'nb-arrow-dropup', 'nb-arrow-left', 'nb-arrow-retweet', 'nb-arrow-right',
@@ -34,7 +34,8 @@ export class MenuComponent implements OnInit {
     'nb-e-commerce', 'nb-danger', 'nb-checkmark-circle', 'nb-help']
   userCondition = new Subject<any>();
   isAdd: boolean;
-  isEdit: boolean
+  isEdit: boolean;
+  key: string = "dashboard";
   settings = {
     columns: {
       title: {
@@ -56,9 +57,7 @@ export class MenuComponent implements OnInit {
   }
   ngOnInit() {
     this.menu = {};
-    this.menuService.menusSource.subscribe(
-      menus => { this.menus = Object.assign([], menus) }
-    )
+    this.menus = this.menuService.menusSource
   }
   setIcon(icon: string) {
     this.menu.icon = icon;
@@ -73,12 +72,13 @@ export class MenuComponent implements OnInit {
     this.menu = event.data;
   }
   delMenu(event) {
-    this.menuService.delMenu(event.data)
+    this.menuService.delMenu(event.data, this.key)
     this.saveMenus();
   }
   addMenus() {
-    this.menu.link = "/custom/dashboard/view/" + (this.menus.length + 1)
-    this.menuService.addMenu(this.menus.length + 1, this.menu).subscribe()
+    let id = Math.ceil(Math.random() * 100000)
+    this.menu.link = "/custom/dashboard/view/" + id
+    this.menuService.addMenu(id, this.menu, this.key).subscribe()
     this.saveMenus();
   }
 

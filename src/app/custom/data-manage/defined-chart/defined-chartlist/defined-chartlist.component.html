@@ -1,21 +1,23 @@
-<div class="charts-container">
+<div class="charts-container" [ngClass]="{'isEdit':isEdit}">
   <ul class="my-menu">
     <li>
       <h4>category_a</h4>
     </li>
-    <li class="my-menu-li" (click)="selectedA(item)" [ngClass]="{'active':category_a === item}" *ngFor="let item of category_a_items">{{item}}</li>
+    <li class="my-menu-li" (click)="selectedA(item)" [ngClass]="{'active':category_a === item}"
+      *ngFor="let item of category_a_items">{{item}}</li>
   </ul>
   <div class="charts-items">
-    <div *ngFor="let chart of charts.data" (click)="onSelectChart.emit(chart)">
+    <div *ngFor="let chart of charts" (click)="onSelectChart.emit(chart)">
       <div *ngIf="chart.category_a === category_a" class="charts-item">
-          <img [style.backgroundImage]="'url('+chart.chart_img+')'" alt="">
-          <div style="margin-top: 10px">{{chart.chart_name}}</div>
+        <i class="nb-trash" (click)="onDelete.emit(chart);$event.stopPropagation();"></i>
+        <img [style.backgroundImage]="'url('+chart.chart_img+')'" alt="">
+        <div style="margin-top: 10px">{{chart.chart_name}}</div>
       </div>
     </div>
     <div (click)="onAddChart.emit()">
-        <div class="charts-item">
-            <i style="font-size: 150px;" class="nb-plus-circled"></i>
-        </div>
+      <div class="charts-item">
+        <i style="font-size: 150px;" class="nb-plus-circled"></i>
       </div>
+    </div>
   </div>
 </div>

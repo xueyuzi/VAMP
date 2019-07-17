@@ -14,22 +14,6 @@ export class PieComponent extends BaseChartComponent implements OnInit {
     }
     constructor() { super(); }
     options = {
-        dataset:{
-            source:[
-                {ip:"192.168.10.71",count:"171"},
-                {ip:"192.168.10.203",count:"168"},
-                {ip:"192.168.30.31",count:"31"},
-                {ip:"192.168.13.229",count:"13"},
-            ]
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: v=>{
-                let data = v.data
-                let percent = v.percent
-                return `ip:${data.ip}<br/>value:${data.count}<br/>percent:${percent}%`
-            }
-        },
         series: [
             {
                 name: '访问来源',

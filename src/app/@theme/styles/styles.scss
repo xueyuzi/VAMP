@@ -121,39 +121,3 @@ body .ui-selectbutton .ui-button.ui-state-active {
 
 
 
-
-.charts-container {
-  min-width: 901px;
-  display: flex;
-  .charts-items {
-    margin: 10px 20px;
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-
-    .charts-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 10px;
-      padding: 10px;
-      height: 170px;
-      width: 220px;
-      cursor: pointer;
-      filter: grayscale(100%);
-
-      img {
-        width: 200px;
-        height: 150px;
-        background-size: cover;
-      }
-    }
-
-    .charts-item:hover {
-      filter: grayscale(0%);
-      color:black;
-    }
-  }
-
-}

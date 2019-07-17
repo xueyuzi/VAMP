@@ -14,33 +14,39 @@ export class MenuService {
     this.initMenus().subscribe()
   }
 
-  menus:Array<any>;
-  menusSource= new BehaviorSubject<Array<any>>([]);
-  setMenus(menus:Array<any>){
-    this.menus = Object.assign([],menus);
+  menus: Object;
+  menusSource = new BehaviorSubject<Object>([]);
+  setMenus(menus: Object) {
+    this.menus = Object.assign({}, menus);
     this.menusSource.next(menus);
   }
   initMenus() {
     return this.api.get("/elasticsearch/menu").pipe(
-      tap(menus=>this.setMenus(menus))
+      tap(menus => this.setMenus(menus))
     )
   }
 
 
-  addMenu(id,menu){
-    this.menus.push(menu);
-    this.menusSource.next(this.menus);
-    return this.api.post("/elasticsearch/dashboard",{
-      dashboard_id:id,
+  addMenu(id, menu, key) {
+    if (this.menus[key] == undefined) {
+      this.menus[key] = []
+    }
+    this.menus[key].push(menu);
+    this.setMenus(this.menus)
+    return this.api.post("/elasticsearch/dashboard", {
+      dashboard_id: id,
     })
   }
-  delMenu(v){
-    this.menus = this.menus.filter(menu=>menu!==v);
+  delMenu(v, key) {
+    this.menus[key] = this.menus[key].filter(menu => menu !== v);
+    this.setMenus(this.menus);
     this.menusSource.next(this.menus);
   }
 
   saveMenus() {
-    this.menusSource.next(this.menus);
-    return this.api.post("/elasticsearch/menu", this.menus)
+
+    return this.api.post("/elasticsearch/menu", this.menus).pipe(
+      tap(v => this.setMenus(this.menus))
+    )
   }
 }

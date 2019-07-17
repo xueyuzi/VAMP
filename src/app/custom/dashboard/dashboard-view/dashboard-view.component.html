@@ -3,7 +3,7 @@
         <h1>{{title}}</h1>
     </div>
     <div>
-        <button nbButton  size="small" (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
+        <button nbButton size="small" (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
         <button nbButton size="small" status="danger" (click)="cancel()" *ngIf="isEdit" style="margin:10px;">取消</button>
 
         <button nbButton size="small" (click)="saveDashboard()" *ngIf="isEdit" style="margin:10px;">保存</button>
@@ -21,5 +21,7 @@
 
 
 <p-dialog header="新建图表" [(visible)]="isNew">
-    <ngx-defined-chartlist></ngx-defined-chartlist>
+    <div style="max-width: 901px;max-height:500px;">
+        <ngx-defined-chartlist [charts]="charts" (onSelectChart)="addContainer($event.id)"></ngx-defined-chartlist>
+    </div>
 </p-dialog>

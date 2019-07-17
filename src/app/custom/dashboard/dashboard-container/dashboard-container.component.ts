@@ -62,8 +62,9 @@ export class DashboardContainerComponent implements OnInit {
     this.componentRef = this.chart.createComponent(componentFactory);
     this.dashboardService.getChartData(this.item.customId).subscribe(res => {
       // (<BaseChartComponent>this.componentRef.instance).setData(res);
+      (<BaseChartComponent>this.componentRef.instance).setData(res);
+
     });
-    (<BaseChartComponent>this.componentRef.instance).setData(this.item.panelData.chartData);
   }
 
   openSetting() {

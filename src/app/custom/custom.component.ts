@@ -13,11 +13,16 @@ import { MenuService } from './system-manage/menu/menu.service';
 })
 export class CustomComponent implements OnInit {
   constructor(private menuService: MenuService) { }
-  menus:NbMenuItem[] = MENU_ITEMS;
+  menus: NbMenuItem[] = MENU_ITEMS;
   ngOnInit() {
+    console.log(this.menuService.menusSource);
     this.menuService.menusSource.subscribe(
-      menus=>{
-        this.menus[0].children = menus;
+      menus => {
+        
+        this.menus[0].children = menus['dashboard'];
+        this.menus[1].children = menus['situation'];
+        this.menus[2].children = menus['devops'];
+        console.log("custom menu",this.menus);
       }
     )
   }
