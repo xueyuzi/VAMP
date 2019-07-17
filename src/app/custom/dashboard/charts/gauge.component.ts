@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseChartComponent } from './base.charts.component';
+import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-gauge',
-    template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
+    templateUrl: "base-charts.component.html",
 })
 export class GaugeComponent extends BaseChartComponent implements OnInit {
     constructor() {

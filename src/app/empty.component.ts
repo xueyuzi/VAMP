@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseChartComponent } from './custom/dashboard/charts/base.charts.component';
+import { BaseChartComponent } from './custom/dashboard/charts/base-charts.component';
 
 @Component({
   selector: 'ngx-empty',

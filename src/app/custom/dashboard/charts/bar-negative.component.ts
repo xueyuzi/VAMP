@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseChartComponent } from './base.charts.component';
+import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-bar-negative',

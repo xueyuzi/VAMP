@@ -1,4 +1,4 @@
-import { BaseChartComponent } from "./base.charts.component";
+import { BaseChartComponent } from "./base-charts.component";
 import { OnInit, Component } from '@angular/core';
 
 @Component({
@@ -10,6 +10,6 @@ import { OnInit, Component } from '@angular/core';
 class TextComponent extends BaseChartComponent implements OnInit {
     constructor() { super(); }
     ngOnInit() {
-        
+
     }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { BaseChartComponent } from './base.charts.component';
+import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-pie',
-    template: `<div (chartClick)="onChartClick($event)" echarts [options]="options" style="height:100%;width:100%"></div>`
+    templateUrl: "base-charts.component.html",
 })
 export class PieComponent extends BaseChartComponent implements OnInit {
     constructor() { super(); }

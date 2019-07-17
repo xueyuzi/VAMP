@@ -5,7 +5,7 @@ import { LineComponent } from "../charts/line.component";
 import { NbPopoverDirective } from '@nebular/theme';
 import { RadarComponent } from '../charts/radar.component';
 import { DashboardService } from '../dashboard.service';
-import { BaseChartComponent } from '../charts/base.charts.component';
+import { BaseChartComponent } from '../charts/base-charts.component';
 import { BehaviorSubject } from 'rxjs';
 import chartListData from "../charts/chartListData";
 @Component({

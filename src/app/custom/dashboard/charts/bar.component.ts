@@ -1,16 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, OnChanges, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { BaseChartComponent } from './base.charts.component';
+import { BaseChartComponent } from './base-charts.component';
 import { DashboardService } from '../dashboard.service';
 import { ChartsService } from './charts.service';
 @Component({
   selector: 'ngx-bar',
-  template: `
-  <div echarts  [options]="options" style="height:100%;width:100%"></div>
-  <div #chartConfig (mousedown)="$event.stopPropagation();"  style="position: absolute;top: 80px;right: 0px;"></div>
-  `
+  templateUrl:"base-charts.component.html"
 })
-export class BarComponent extends BaseChartComponent implements OnInit, AfterContentChecked, AfterViewInit {
+export class BarComponent extends BaseChartComponent implements OnInit, AfterViewInit {
   @ViewChild("chartConfig") chartConfig: ElementRef;
 
   config: any = {
@@ -18,7 +15,6 @@ export class BarComponent extends BaseChartComponent implements OnInit, AfterCon
     barCategoryGap: 20,
   };
   options: any = {
-    color: ["red"],
     tooltip: {
       trigger: 'axis',
       axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -98,8 +94,5 @@ export class BarComponent extends BaseChartComponent implements OnInit, AfterCon
     this.dashboardService.isEdit.subscribe(
       bool => bool ? this.gui.show() : this.gui.hide()
     )
-  }
-  ngAfterContentChecked() {
-    console.log(this.options);
   }
 }

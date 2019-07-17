@@ -1,6 +1,7 @@
 import { Output, EventEmitter } from '@angular/core';
-
+import "./theme/walden.js";
 export class BaseChartComponent {
+    theme: string = "walden";
     options: any;
     setData(data: any) {
         console.log("setData", data)
