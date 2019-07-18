@@ -1,14 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { DefinedChartService } from '../defined-chart.service';
-import { NbMenuItem } from '@nebular/theme';
-import { MenuItem } from 'primeng/components/common/menuitem';
+import { ChartTemplateService } from '../chart-template.service';
 import { CATEGORY_A } from "../../categorya.mock";
 @Component({
-  selector: 'ngx-defined-chartlist',
-  templateUrl: './defined-chartlist.component.html',
-  styleUrls: ["./defined-chartlist.component.scss"]
+  selector: 'ngx-chart-template-list',
+  templateUrl: './chart-template-list.component.html',
+  styleUrls: ["./chart-template-list.component.scss"]
 })
-export class DefinedChartlistComponent implements OnInit {
+export class ChartTemplateListComponent implements OnInit {
   @Output() onSelectChart = new EventEmitter<any>();
   @Output() onAddChart = new EventEmitter<any>();
   @Output() onDelete = new EventEmitter();
@@ -17,11 +15,14 @@ export class DefinedChartlistComponent implements OnInit {
   category_a_items: any = CATEGORY_A;
   category_a: string = "FireWall-ASA";
   constructor(
-    private definedChartService: DefinedChartService
+    private chartTemplateService: ChartTemplateService
   ) { }
 
   ngOnInit() {
-
+    this.chartTemplateService.getTemplateCateGoryList().subscribe(res=>{
+      this.category_a_items = res;
+      this.category_a = res[0]
+    });
   }
   selectedA(category_a) {
     this.category_a = category_a

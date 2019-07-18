@@ -3,7 +3,7 @@ import { DashboardService } from '../dashboard.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GridStackOptions } from 'ngx-grid-stack';
 import { MenuService } from '../../system-manage/menu/menu.service';
-import { DefinedChartService } from '../../data-manage/defined-chart/defined-chart.service';
+import { ChartTemplateService } from '../../data-manage/chart-template/chart-template.service';
 
 @Component({
   selector: 'ngx-dashboard-view',
@@ -15,7 +15,7 @@ export class DashboardViewComponent implements OnInit {
   constructor(private dashboardService: DashboardService,
     private menuService: MenuService,
     private route: ActivatedRoute,
-    private definedChartService: DefinedChartService
+    private chartTemplateService: ChartTemplateService
   ) { }
   title: string;
   id: number;
@@ -31,7 +31,7 @@ export class DashboardViewComponent implements OnInit {
       this.containers = []
       setTimeout(() => { this.containers = containers })
     });
-    this.definedChartService.getCharts().subscribe(
+    this.chartTemplateService.getCharts().subscribe(
       charts => this.charts = charts
     )
     this.route.paramMap.subscribe((params: ParamMap) => {

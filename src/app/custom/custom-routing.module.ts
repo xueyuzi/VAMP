@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomComponent } from './custom.component';
-import { UserComponent } from './system-manage/user/user.component';
-import { MenuComponent } from './system-manage/menu/menu.component';
-import { RoleComponent } from './system-manage/role/role.component';
-import { DefinedChartComponent } from './data-manage/defined-chart/defined-chart.component';
-
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DefinedChartComponent } from "./defined-chart/defined-chart.component";
-import { DefinedChartlistComponent } from "./defined-chart/defined-chartlist/defined-chartlist.component";
+import { DefinedChartComponent } from "./chart-template/chart-template.component";
+import { ChartTemplateListComponent } from "./chart-template/chart-template-list/chart-template-list.component";
 import { DataManageRoutingModule } from "./data-manage-routing.module";
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/charts/charts.module";
@@ -9,7 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     DefinedChartComponent,
-    DefinedChartlistComponent],
+    ChartTemplateListComponent],
   imports: [
     CommonModule,
     DataManageRoutingModule,
@@ -20,7 +20,7 @@ import { ConfirmationService } from 'primeng/api';
     ConfirmationService
   ],
   exports: [
-    DefinedChartlistComponent
+    ChartTemplateListComponent
   ]
 })
 export class DataManageModule { }

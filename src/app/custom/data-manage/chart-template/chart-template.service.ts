@@ -6,7 +6,7 @@ import { ApiService } from '../../../api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DefinedChartService {
+export class ChartTemplateService {
 
   constructor(private api: ApiService) { }
   getCharts(): Observable<any> {
@@ -28,6 +28,10 @@ export class DefinedChartService {
   }
   delChart(id): Observable<any> {
     return this.api.post("/elasticsearch/delChartTemplate/" + id);
+  }
+
+  getTemplateCateGoryList() {
+    return this.api.get("/elasticsearch/getDictValue/chart_template_category");
   }
 
 }

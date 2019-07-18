@@ -3,13 +3,25 @@ import { OnInit, Component } from '@angular/core';
 
 @Component({
     selector: 'ngx-text',
-    template: `<div>
-    <h1 *ngFor="let text of option.dataset">{{text}}</h1>
+    template: `<div
+    style="height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;"
+    >
+    <h1>{{options.dataset.source[0].value}}</h1>
     </div>`
 })
-class TextComponent extends BaseChartComponent implements OnInit {
+export class TextComponent extends BaseChartComponent implements OnInit {
     constructor() { super(); }
     ngOnInit() {
 
+    }
+    options = {
+        dataset:{
+            source:[
+                {value:"Text"}
+            ]
+        }
     }
 }

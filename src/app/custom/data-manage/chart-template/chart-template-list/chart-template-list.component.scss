@@ -53,11 +53,11 @@
                 right: 10px;
                 font-size: 40px;
             }
-
-
         }
 
-
+        .add-template {
+            display: none;
+        }
     }
 }
 
@@ -73,5 +73,9 @@
         .nb-trash:hover {
             color: red;
         }
+    }
+
+    .add-template {
+        display: block !important;
     }
 }

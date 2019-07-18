@@ -11,7 +11,7 @@
     filter: grayscale(100%);
 
     .img {
-        width: 150px;
+        width: 155px;
         height: 100px;
         background-size: cover;
     }
@@ -26,9 +26,8 @@
 .charts-container {
     padding: 10px 20px;
     display: flex;
-    max-width: 50vw;
+    max-width: 100%;
     max-height: 350px;
     flex-wrap: wrap;
     overflow: auto;
-    justify-content: space-between;
 }

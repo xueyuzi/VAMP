@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CATEGORY_A } from "../categorya.mock";
-import { DefinedChartService } from './defined-chart.service';
+import { ChartTemplateService } from './chart-template.service';
 import { ConfirmationService } from 'primeng/api';
 declare var ace: any;
 
 @Component({
-  selector: 'ngx-defined-chart',
-  templateUrl: './defined-chart.component.html',
-  styleUrls: ['./defined-chart.component.scss']
+  selector: 'ngx-chart-template',
+  templateUrl: './chart-template.component.html',
+  styleUrls: ['./chart-template.component.scss']
 })
 export class DefinedChartComponent implements OnInit {
   isEdit: boolean = false;
@@ -17,7 +17,7 @@ export class DefinedChartComponent implements OnInit {
   charts: Array<any> = [];
   type: string;
   constructor(
-    private definedChartService: DefinedChartService,
+    private chartTemplateService: ChartTemplateService,
     private confirmationService: ConfirmationService
   ) { }
 
@@ -26,7 +26,7 @@ export class DefinedChartComponent implements OnInit {
   }
 
   getTemplate() {
-    this.definedChartService.getCharts().subscribe(
+    this.chartTemplateService.getCharts().subscribe(
       charts => {
         this.charts = charts
       }
@@ -43,7 +43,7 @@ export class DefinedChartComponent implements OnInit {
 
   }
   editDefinedChart(event) {
-    this.definedChartService.getChart(event.id).subscribe(res => {
+    this.chartTemplateService.getChart(event.id).subscribe(res => {
       this.type = "edit";
       this.defaultChart = res;
       this.setEditor()
@@ -79,7 +79,7 @@ export class DefinedChartComponent implements OnInit {
     this.confirmationService.confirm({
       message: '你确定要删除此模板么？',
       accept: () => {
-        this.definedChartService.delChart(chart.id).subscribe(res => {
+        this.chartTemplateService.delChart(chart.id).subscribe(res => {
           this.getTemplate
         });
       }
@@ -88,14 +88,14 @@ export class DefinedChartComponent implements OnInit {
   }
 
   add() {
-    this.definedChartService.addCharts(this.defaultChart).subscribe(res => {
+    this.chartTemplateService.addCharts(this.defaultChart).subscribe(res => {
       this.isEdit = false
       this.getTemplate();
     })
   }
   save() {
     this.defaultChart.esjson = this.editor.getValue()
-    this.definedChartService.saveCharts(this.defaultChart.id, this.defaultChart).subscribe(res => {
+    this.chartTemplateService.saveCharts(this.defaultChart.id, this.defaultChart).subscribe(res => {
       this.isEdit = false
       this.getTemplate();
     })

@@ -13,6 +13,9 @@ import { GaugeComponent } from "./gauge.component";
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartListComponent } from './chart-list/chart-list.component';
 import { PieCustomComponent } from './pie-custom.component';
+import { MapComponent } from './map.component';
+import { TextComponent } from './text.component';
+import { NbSpinnerModule } from '@nebular/theme';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -26,7 +29,9 @@ import { PieCustomComponent } from './pie-custom.component';
     RadarComponent,
     FunnelComponent,
     GaugeComponent,
-    PieCustomComponent
+    PieCustomComponent,
+    MapComponent,
+    TextComponent
   ],
   entryComponents: [
     PieComponent,
@@ -39,11 +44,15 @@ import { PieCustomComponent } from './pie-custom.component';
     RadarComponent,
     FunnelComponent,
     GaugeComponent,
-    PieCustomComponent],
+    PieCustomComponent,
+    MapComponent,
+    TextComponent
+  ],
   exports: [ChartListComponent],
   imports: [
     CommonModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    NbSpinnerModule
   ],
   providers: []
 })

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as dat from 'dat.gui';
+import { ApiService } from '../../../api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,9 @@ import * as dat from 'dat.gui';
 export class ChartsService {
   config: any;
   options: any;
-  constructor() {
+  constructor(
+    private api:ApiService
+  ) {
     this._initConfig();
   }
   generateEmptyGUI(){
@@ -185,5 +188,10 @@ export class ChartsService {
       this.options.yAxis.axisLabel.fontSize = v;
       this.options = Object.assign({}, this.options);
     });
+  }
+
+
+  getMapData(){
+    return this.api.get("assets/map/world.json")
   }
 }
