@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CATEGORY_A } from "../categorya.mock";
 import { ChartTemplateService } from './chart-template.service';
 import { ConfirmationService } from 'primeng/api';
+import chartListData from "../../dashboard/charts/chartListData";
 declare var ace: any;
 
 @Component({
@@ -37,7 +38,7 @@ export class DefinedChartComponent implements OnInit {
       this.editor = ace.edit("editor");
       this.editor.setTheme("ace/theme/monokai");
       this.editor.session.setMode("ace/mode/json");
-      this.editor.setValue(JSON.stringify(this.defaultChart.esjson, null, 2))
+      this.editor.setValue(this.defaultChart.esjson)
     }, 50)
 
 
@@ -64,6 +65,7 @@ export class DefinedChartComponent implements OnInit {
   }
   changeChart(type) {
     this.defaultChart.default_chart_type = type;
+    this.defaultChart.chart_img = chartListData[type].img;
   }
   handleClick() {
     this.defaultChart.esjson = this.editor.getValue()
@@ -94,7 +96,6 @@ export class DefinedChartComponent implements OnInit {
     })
   }
   save() {
-    this.defaultChart.esjson = this.editor.getValue()
     this.chartTemplateService.saveCharts(this.defaultChart.id, this.defaultChart).subscribe(res => {
       this.isEdit = false
       this.getTemplate();

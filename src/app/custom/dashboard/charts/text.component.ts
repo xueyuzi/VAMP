@@ -9,7 +9,7 @@ import { OnInit, Component } from '@angular/core';
     justify-content: center;
     align-items: center;"
     >
-    <h1>{{options.dataset.source[0].value}}</h1>
+    <div style="font-size:79px">{{options.dataset.source[0][1]}}</div>
     </div>`
 })
 export class TextComponent extends BaseChartComponent implements OnInit {
@@ -20,7 +20,7 @@ export class TextComponent extends BaseChartComponent implements OnInit {
     options = {
         dataset:{
             source:[
-                {value:"Text"}
+                ["","Text"]
             ]
         }
     }

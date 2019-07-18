@@ -1,7 +1,7 @@
 <div class="charts-container" [ngClass]="{'isEdit':isEdit}">
   <ul class="my-menu">
     <li>
-      <h4>category_a</h4>
+      <h4>类别</h4>
     </li>
     <li class="my-menu-li" (click)="selectedA(item)" [ngClass]="{'active':category_a === item}"
       *ngFor="let item of category_a_items">{{item}}</li>

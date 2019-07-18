@@ -20,8 +20,9 @@ export class ChartTemplateListComponent implements OnInit {
 
   ngOnInit() {
     this.chartTemplateService.getTemplateCateGoryList().subscribe(res=>{
-      this.category_a_items = res;
-      this.category_a = res[0]
+      let keys=Object.keys(res)
+      this.category_a_items = keys;
+      this.category_a = keys[0]
     });
   }
   selectedA(category_a) {

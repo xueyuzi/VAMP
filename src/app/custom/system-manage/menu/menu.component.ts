@@ -31,7 +31,10 @@ export class MenuComponent implements OnInit {
     'nb-skip-backward-outline', 'nb-skip-forward', 'nb-skip-forward-outline', 'nb-snowy-circled',
     'nb-square', 'nb-square-outline', 'nb-star', 'nb-sunny', 'nb-sunny-circled', 'nb-tables', 'nb-title',
     'nb-trash', 'nb-volume-high', 'nb-volume-mute', 'nb-drop', 'nb-drops', 'nb-info', 'nb-expand', 'nb-collapse',
-    'nb-e-commerce', 'nb-danger', 'nb-checkmark-circle', 'nb-help']
+    'nb-e-commerce', 'nb-danger', 'nb-checkmark-circle', 'nb-help', "icon ion-md-heart", "icon ion-md-analytics",
+    "icon ion-md-barcode", "icon ion-md-battery-charging", "icon ion-md-bluetooth", "icon ion-md-clock", "icon ion-md-contact", "icon ion-md-contacts"
+    , "icon ion-md-folder", "icon ion-md-home", "icon ion-md-pricetags", "icon ion-md-laptop", "icon ion-md-people", "icon ion-md-pulse", "icon ion-md-trending-up"
+    , "icon ion-md-wallet", "icon ion-md-wifi", "icon ion-md-steam", "icon ion-md-windows", "icon ion-md-tux", "icon ion-md-playstation", "icon ion-md-google"]
   userCondition = new Subject<any>();
   isAdd: boolean;
   isEdit: boolean;
