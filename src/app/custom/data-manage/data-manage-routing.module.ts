@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {DefinedChartComponent} from "./chart-template/chart-template.component"
+import {ChartTemplateComponent} from "./chart-template/chart-template.component"
 const routes: Routes = [
-    {path:"defined-chart",component:DefinedChartComponent}
+    {path:"chart-template",component:ChartTemplateComponent}
 ];
 
 @NgModule({

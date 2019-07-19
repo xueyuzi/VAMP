@@ -10,8 +10,7 @@
         </div>
         <div class="setting-item">
             <label>所属分类:</label>
-            <nb-select [(selected)]="defaultChart.category_a" placeholder="请选择" style="min-width:200px"
-                size="small">
+            <nb-select [(ngModel)]="defaultChart.category_a" placeholder="请选择" style="min-width:200px" size="small">
                 <nb-option [value]="category" *ngFor="let category of category_a_items">{{category}}</nb-option>
             </nb-select>
         </div>
@@ -27,6 +26,20 @@
         <div class="setting-item">
             <label>排序号码:</label>
             <input type="text" nbInput [(ngModel)]="defaultChart.sortid">
+        </div>
+        <div class="setting-item">
+            <label>时间范围:</label>
+            <div style="display:flex;align-items:center">
+                <span style="font-size: 1.2rem;font-weight:bolder">前</span>
+                <input type="text" nbInput [(ngModel)]="defaultChart.default_period" style="width:50px;margin:0 20px">
+                <nb-select [(ngModel)]="defaultChart.default_period_category" placeholder="请选择"
+                    style="min-width: 100px;">
+                    <nb-option value="h">小时</nb-option>
+                    <nb-option value="d">天</nb-option>
+                    <nb-option value="m">月</nb-option>
+                    <nb-option value="y">年</nb-option>
+                </nb-select>
+            </div>
         </div>
         <div class="setting-item">
             <label>图片上传:</label>

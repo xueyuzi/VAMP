@@ -10,9 +10,9 @@ declare var ace: any;
   templateUrl: './chart-template.component.html',
   styleUrls: ['./chart-template.component.scss']
 })
-export class DefinedChartComponent implements OnInit {
+export class ChartTemplateComponent implements OnInit {
   isEdit: boolean = false;
-  defaultChart: any = {};
+  defaultChart: any;
   category_a_items: Array<String> = CATEGORY_A;
   editor: any;
   charts: Array<any> = [];
@@ -24,6 +24,10 @@ export class DefinedChartComponent implements OnInit {
 
   ngOnInit() {
     this.getTemplate();
+    this.defaultChart = {
+      default_period_category: 'h',
+      category_a: this.category_a_items[0]
+    }
   }
 
   getTemplate() {
@@ -54,7 +58,10 @@ export class DefinedChartComponent implements OnInit {
   }
   delDefinedChart(id) { }
   addDefinedChart() {
-    this.defaultChart = {}
+    this.defaultChart = {
+      default_period_category: 'h',
+      category_a: this.category_a_items[0]
+    }
     this.type = "add";
     this.setEditor()
     this.isEdit = true;

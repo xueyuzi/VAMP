@@ -27,6 +27,9 @@ export class ApiService {
 
   handleError(url: string, err: any = {}) {
     console.log(url + " : ", err);
+    if (err.code == "500") {
+      this.toastrService.danger(err.msg);
+    }
     if (err.code == "1") {
       this.toastrService.danger(err.msg);
       setTimeout(() => {

@@ -21,7 +21,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "预定义图表管理",
         icon: "nb-gear",
-        link: "/custom/data/defined-chart"
+        link: "/custom/data/chart-template"
       },
       {
         title: "数据源管理",

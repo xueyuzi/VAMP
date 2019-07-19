@@ -1,6 +1,8 @@
 .my-menu {
     list-style: none;
-
+    li{
+        margin:20px 0;
+    }
     .my-menu-li {
         padding: 10px;
         cursor: pointer;
