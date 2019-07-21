@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, OnChanges, AfterViewChecked, AfterContentInit, AfterContentChecked, AfterViewInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseChartComponent } from './base-charts.component';
-import { DashboardService } from '../dashboard.service';
-import { ChartsService } from './charts.service';
+import { DashboardService } from '../../dashboard.service';
+import { ChartsService } from '../dashboard-charts.service';
 @Component({
   selector: 'ngx-bar',
   templateUrl:"base-charts.component.html"

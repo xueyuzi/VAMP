@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CATEGORY_A } from "../categorya.mock";
 import { ChartTemplateService } from './chart-template.service';
 import { ConfirmationService } from 'primeng/api';
-import chartListData from "../../dashboard/charts/chartListData";
+import chartListData from "../../dashboard/dashboard-charts/chart-list/chart-list.data";
 declare var ace: any;
 
 @Component({

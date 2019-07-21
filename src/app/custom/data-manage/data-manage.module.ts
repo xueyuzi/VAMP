@@ -4,7 +4,7 @@ import { ChartTemplateComponent } from "./chart-template/chart-template.componen
 import { ChartTemplateListComponent } from "./chart-template/chart-template-list/chart-template-list.component";
 import { DataManageRoutingModule } from "./data-manage-routing.module";
 import { ThemeModule } from "../../@theme/theme.module";
-import { ChartsModule } from "../dashboard/charts/charts.module";
+import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
 import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [

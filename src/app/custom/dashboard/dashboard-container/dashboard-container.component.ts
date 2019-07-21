@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, ViewChild, ViewContainerRef, OnDestroy } from '@angular/core';
-import { PieComponent } from "../charts/pie.component";
-import { BarComponent } from "../charts/bar.component";
-import { LineComponent } from "../charts/line.component";
+import { PieComponent } from "../dashboard-charts/charts/pie.component";
+import { BarComponent } from "../dashboard-charts/charts/bar.component";
+import { LineComponent } from "../dashboard-charts/charts/line.component";
 import { NbPopoverDirective } from '@nebular/theme';
-import { RadarComponent } from '../charts/radar.component';
+import { RadarComponent } from '../dashboard-charts/charts/radar.component';
 import { DashboardService } from '../dashboard.service';
-import { BaseChartComponent } from '../charts/base-charts.component';
+import { BaseChartComponent } from '../dashboard-charts/charts/base-charts.component';
 import { BehaviorSubject } from 'rxjs';
-import chartListData from "../charts/chartListData";
+import chartListData from "../dashboard-charts/chart-list/chart-list.data";
 @Component({
   selector: 'ngx-dashboard-container',
   templateUrl: './dashboard-container.component.html',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseChartComponent } from './base-charts.component';
-import { ChartsService } from './charts.service';
+import { ChartsService } from '../dashboard-charts.service';
 import * as echarts from 'echarts';
 
 @Component({

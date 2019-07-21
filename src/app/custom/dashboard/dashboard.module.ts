@@ -10,19 +10,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbInputModule, NbActionsModule, NbPopoverModule } from '@nebular/theme';
 
 import { ThemeModule } from "../../@theme/theme.module";
-import { ChartsSettingComponent } from './dashboard-container/setting/charts-setting.component';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DialogModule } from 'primeng/dialog';
-import { DashboardEditorComponent } from "./dashboard-container/setting/dashboard-editor.component";
+import { DashboardEditorComponent } from "./dashboard-editor.component";
 import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DataManageModule } from "../data-manage/data-manage.module";
-import { ChartsModule } from "./charts/charts.module"
+import { ChartsModule } from "./dashboard-charts/dashboard-charts.module"
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardContainerComponent,
-    ChartsSettingComponent,
     DashboardViewComponent,
     DashboardEditorComponent],
   imports: [

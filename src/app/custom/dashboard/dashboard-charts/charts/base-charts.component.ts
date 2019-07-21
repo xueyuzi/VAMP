@@ -1,5 +1,5 @@
 import { Output, EventEmitter } from '@angular/core';
-import "./theme/walden.js";
+import "../echarts-theme/walden.js";
 export class BaseChartComponent {
     theme: string = "walden";
     mapLoaded: boolean = false;

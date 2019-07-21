@@ -1,16 +1,16 @@
-import { BarComponent } from "./bar.component";
-import { LineComponent } from "./line.component";
-import { PieComponent } from "./pie.component";
-import { RadarComponent } from "./radar.component";
-import { BarNegativeComponent } from './bar-negative.component';
-import { BarHorizontalstackComponent } from './bar-horizontalstack.component';
-import { GaugeComponent } from './gauge.component';
-import { FunnelComponent } from './funnel.component';
-import { LinestackComponent } from './line-stack.component';
-import { LineMultipleComponent } from './line-multiple.component';
-import { PieCustomComponent } from './pie-custom.component';
-import { MapComponent } from './map.component';
-import { TextComponent } from './text.component';
+import { BarComponent } from "../charts/bar.component";
+import { LineComponent } from "../charts/line.component";
+import { PieComponent } from "../charts/pie.component";
+import { RadarComponent } from "../charts/radar.component";
+import { BarNegativeComponent } from '../charts/bar-negative.component';
+import { BarHorizontalstackComponent } from '../charts/bar-horizontalstack.component';
+import { GaugeComponent } from '../charts/gauge.component';
+import { FunnelComponent } from '../charts/funnel.component';
+import { LinestackComponent } from '../charts/line-stack.component';
+import { LineMultipleComponent } from '../charts/line-multiple.component';
+import { PieCustomComponent } from '../charts/pie-custom.component';
+import { MapComponent } from '../charts/map.component';
+import { TextComponent } from '../charts/text.component';
 export default {
     "pie": { label: "饼图", key: "pie", component: PieComponent, img: "assets/images/charts/pie.png" },
     "pie-custom": { label: "圆环图", key: "pie-custom", component: PieCustomComponent, img: "assets/images/charts/pie-custom.png" },

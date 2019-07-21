@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import chartListData from "../chartListData";
+import chartListData from "./chart-list.data";
 @Component({
   selector: 'ngx-chart-list',
   templateUrl: './chart-list.component.html',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { DashboardService } from '../../dashboard.service';
+import { DashboardService } from './dashboard.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 declare var ace: any;
 @Component({
