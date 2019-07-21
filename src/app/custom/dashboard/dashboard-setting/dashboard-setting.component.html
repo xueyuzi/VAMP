@@ -1,3 +1,8 @@
-<p>
-  dashboard-setting works!
-</p>
+<p-dialog 
+(mousedown)="$event.stopPropagation();" 
+header="图表设置" 
+[(visible)]="isShow" 
+(onHide)="onHide()"
+>
+  setting
+</p-dialog>

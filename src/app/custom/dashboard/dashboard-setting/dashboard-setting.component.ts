@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardSettingService } from './dashboard-setting.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-dashboard-setting',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardSettingComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private dashboardSettingService: DashboardSettingService
+  ) { }
+  isShow: boolean;
   ngOnInit() {
+    this.dashboardSettingService.isShow().subscribe(
+      flag => this.isShow = flag
+    )
+  }
+  onHide() {
+    this.dashboardSettingService.toggle(false);
   }
 
 }

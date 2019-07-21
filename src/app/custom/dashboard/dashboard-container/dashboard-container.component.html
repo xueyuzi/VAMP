@@ -10,9 +10,7 @@
             <nb-action class="ion-pie-graph" style="cursor: pointer" title="选择可视化" [nbPopover]="chartList"
                 nbPopoverPlacement="bottom">
             </nb-action>
-            <nb-action class="ion-wand" style="cursor: pointer" title="设置"
-            (click)="isSetting=!isSetting"
-            >
+            <nb-action class="ion-wand" style="cursor: pointer" title="设置" (click)="toggleSetting()">
             </nb-action>
             <nb-action class="ion-trash-b" style="cursor: pointer" (click)="delContainer()" title="删除">
             </nb-action>
@@ -29,7 +27,3 @@
         <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
     </div>
 </ng-template>
-
-<p-dialog (mousedown)="$event.stopPropagation();" header="设置" [(visible)]="isSetting">
-    setting
-</p-dialog>

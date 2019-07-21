@@ -17,12 +17,14 @@ import { DashboardViewComponent } from './dashboard-view/dashboard-view.componen
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DataManageModule } from "../data-manage/data-manage.module";
 import { ChartsModule } from "./dashboard-charts/dashboard-charts.module"
+import { DashboardSettingComponent } from './dashboard-setting/dashboard-setting.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     DashboardContainerComponent,
     DashboardViewComponent,
-    DashboardEditorComponent],
+    DashboardEditorComponent,
+    DashboardSettingComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

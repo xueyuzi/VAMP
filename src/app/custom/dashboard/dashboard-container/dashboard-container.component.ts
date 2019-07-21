@@ -8,6 +8,7 @@ import { DashboardService } from '../dashboard.service';
 import { BaseChartComponent } from '../dashboard-charts/charts/base-charts.component';
 import { BehaviorSubject } from 'rxjs';
 import chartListData from "../dashboard-charts/chart-list/chart-list.data";
+import { DashboardSettingService } from '../dashboard-setting/dashboard-setting.service';
 @Component({
   selector: 'ngx-dashboard-container',
   templateUrl: './dashboard-container.component.html',
@@ -21,6 +22,7 @@ export class DashboardContainerComponent implements OnInit {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private dashboardService: DashboardService,
+    private dashboardSettingService: DashboardSettingService
   ) { }
 
   componentRef;
@@ -56,6 +58,12 @@ export class DashboardContainerComponent implements OnInit {
       (<BaseChartComponent>this.componentRef.instance).setData(res);
       this.title = res.title;
     });
+    this.dashboardSettingService.isShow().subscribe(
+      flag => this.isSetting = flag
+    );
+  }
+  toggleSetting() {
+    this.dashboardSettingService.toggle(!this.isSetting);
   }
 
   // 不用了
