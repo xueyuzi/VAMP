@@ -9,6 +9,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ButtonModule} from 'primeng/button';
+
 
 import {
   NbActionsModule,
@@ -119,7 +121,8 @@ const NB_MODULES = [
   FileUploadModule,
   SelectButtonModule,
   ColorPickerModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  ButtonModule
 ];
 
 const COMPONENTS = [
