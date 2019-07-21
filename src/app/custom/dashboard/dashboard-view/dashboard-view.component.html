@@ -20,7 +20,7 @@
 
 
 
-<p-dialog header="新建图表" [(visible)]="isNew">
+<p-dialog header="新建图表" [(visible)]="isNew"  [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'auto'}">
     <div style="max-width: 901px;max-height:500px;">
         <ngx-chart-template-list [charts]="charts" (onSelectChart)="addContainer($event.id)"></ngx-chart-template-list>
     </div>

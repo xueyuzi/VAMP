@@ -10,7 +10,7 @@ import { OnInit, Component } from '@angular/core';
     justify-content: center;
     align-items: center;"
     >
-        <div  style="font-size:79px;font-weight:bolder">{{options.dataset.source[0].doc_count}}</div>
+        <div  style="font-size:79px;font-weight:bolder">{{options.dataset.source[0]?.doc_count}}</div>
         <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="line-height: 0px;display: flex;align-items: center;flex-direction: column;">
             <i *ngIf="this.census >= 0" style="font-size: 50px;margin-top: -20px;" class="ion-arrow-graph-up-left"></i>
             <div style="font-size:20px">
@@ -27,6 +27,7 @@ export class TextComponent extends BaseChartComponent implements OnInit {
     ngOnInit() {
     }
     setData(data: any) {
+        console.log(data.title)
         this.options.dataset = data;
 
         if (data.source[1] !== undefined) {

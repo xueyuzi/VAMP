@@ -1,26 +1,24 @@
-
 <div style="height:100%;width:100%;display:flex;    flex-direction: column;">
 
     <div style="display:flex;flex-wrap:wrap">
-        <div style="display: flex;width: 100%;justify-content: center;"><h5>{{title}}</h5></div>
+        <div style="display: flex;width: 100%;justify-content: center;">
+            <h5>{{title}}</h5>
+        </div>
         <!-- <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title"> -->
-        <nb-actions size="medium" style="flex:1;" *ngIf="isEdit|async">
-          <nb-action icon="nb-grid-b" title="查看报表"></nb-action>
-          <nb-action icon="nb-grid-b-outline" title="选择可视化"
-          [nbPopover]="chartList"
-          nbPopoverPlacement="bottom"
-          ></nb-action>
-          <nb-action icon="nb-edit" title="设置" 
-          [nbPopover]="setting"
-          nbPopoverPlacement="bottom"
-          (click)="openSetting()"
-          >
-          </nb-action>
-          <nb-action icon="nb-close" (click)="delContainer()" title="删除">
-          </nb-action>
+        <nb-actions size="medium" style="flex:1;font-size:20px" *ngIf="isEdit|async">
+            <nb-action class="ion-clipboard" style="cursor: pointer" title="查看报表"></nb-action>
+            <nb-action class="ion-pie-graph" style="cursor: pointer" title="选择可视化" [nbPopover]="chartList"
+                nbPopoverPlacement="bottom">
+            </nb-action>
+            <nb-action class="ion-wand" style="cursor: pointer" title="设置"
+            (click)="isSetting=!isSetting"
+            >
+            </nb-action>
+            <nb-action class="ion-trash-b" style="cursor: pointer" (click)="delContainer()" title="删除">
+            </nb-action>
         </nb-actions>
     </div>
-    <div style="flex:1"  [nbSpinner]="isLoading">
+    <div style="flex:1" [nbSpinner]="isLoading">
         <ng-template #chart></ng-template>
     </div>
 </div>
@@ -28,11 +26,10 @@
 
 <ng-template #chartList>
     <div style="width:600px">
-    <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
+        <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
     </div>
 </ng-template>
 
-
-<ng-template #setting>
-<ngx-charts-setting></ngx-charts-setting>
-</ng-template>
+<p-dialog (mousedown)="$event.stopPropagation();" header="设置" [(visible)]="isSetting">
+    setting
+</p-dialog>

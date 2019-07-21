@@ -2,7 +2,7 @@
     (onSelectChart)="editDefinedChart($event)" (onAddChart)="addDefinedChart()">
 </ngx-chart-template-list>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-<p-dialog header="新建预设图表" [(visible)]="isEdit">
+<p-dialog header="新建预设图表" [(visible)]="isEdit" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'auto'}">
     <div class="setting-container" style="min-width: 600px">
         <div class="setting-item">
             <label>默认索引:</label>

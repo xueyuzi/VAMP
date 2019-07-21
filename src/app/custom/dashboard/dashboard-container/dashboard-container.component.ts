@@ -27,6 +27,7 @@ export class DashboardContainerComponent implements OnInit {
   isEdit: BehaviorSubject<boolean>;
   title: string;
   isLoading: boolean = true;
+  isSetting: boolean = false;
   ngOnInit() {
     this.loadChart(this.item.panelData.type);
     this.isEdit = this.dashboardService.isEdit;
@@ -57,6 +58,7 @@ export class DashboardContainerComponent implements OnInit {
     });
   }
 
+  // 不用了
   openSetting() {
     this.dashboardService.settingKey = this.item.customId;
   }

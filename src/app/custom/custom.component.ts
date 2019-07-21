@@ -16,6 +16,7 @@ export class CustomComponent implements OnInit {
   menus: NbMenuItem[] = MENU_ITEMS;
   ngOnInit() {
     console.log(this.menuService.menusSource);
+    this.menuService.initMenus().subscribe();
     this.menuService.menusSource.subscribe(
       menus => {
         

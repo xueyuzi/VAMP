@@ -4,11 +4,11 @@
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="float: right;margin:10px 0" (click)="showNew()">新建</button>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
     <ng2-smart-table [source]="roleList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="新建角色" [(visible)]="isEdit">
+<p-dialog header="新建角色" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>角色名称:</label>

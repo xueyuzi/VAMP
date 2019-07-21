@@ -15,24 +15,24 @@
   </nb-card-body>
 </nb-card>
 
-<p-dialog header="新建Dashboard" [(visible)]="isAdd">
+<p-dialog header="新建Dashboard" [(visible)]="isAdd" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>菜单名:</label>
       <input type="text" nbInput [(ngModel)]="menu.title" fullWidth>
     </div>
     <div class="setting-item">
-      <label style="    display: flex;
-      align-items: center;">icon:<i [class]="menu.icon" style="font-size: 70px"></i></label>
-      <div style="flex: 1;
+      <label style="display: flex;align-items: center;">icon:</label>
+      <i [class]="menu.icon" style="font-size: 60px"></i>
+    </div>
+    <div style="flex: 1;
       height: 280px;
       overflow: auto;
       display: flex;
       flex-wrap: wrap;
       font-size: 30px;">
 
-        <i [class]="icon" style="width:50px;height:50px" *ngFor="let icon of menuIcons" (click)="setIcon(icon)"></i>
-      </div>
+      <i [class]="icon" style="width:50px;height:50px" *ngFor="let icon of menuIcons" (click)="setIcon(icon)"></i>
     </div>
   </div>
 

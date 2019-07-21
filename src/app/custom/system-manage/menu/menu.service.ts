@@ -11,7 +11,6 @@ export class MenuService {
 
 
   constructor(private api: ApiService) {
-    this.initMenus().subscribe()
   }
 
   menus: Object;
