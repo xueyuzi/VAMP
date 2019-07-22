@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-bar-horizontalstack',
-    template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
+    templateUrl: "base-charts.component.html"
 })
 export class BarHorizontalstackComponent extends BaseChartComponent implements OnInit {
     constructor() {

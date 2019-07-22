@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-bar-negative',
-    template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
+    templateUrl: "base-charts.component.html"
 })
 export class BarNegativeComponent extends BaseChartComponent implements OnInit {
     constructor() {

@@ -17,6 +17,7 @@ import { MapComponent } from './charts/map.component';
 import { TextComponent } from './charts/text.component';
 import { NbSpinnerModule } from '@nebular/theme';
 import { BarHorizontalComponent } from './charts/bar-horizontal.component';
+import { LineAreaComponent } from './charts/line-area.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -28,6 +29,7 @@ import { BarHorizontalComponent } from './charts/bar-horizontal.component';
     LineComponent,
     LinestackComponent,
     LineMultipleComponent,
+    LineAreaComponent,
     RadarComponent,
     FunnelComponent,
     GaugeComponent,
@@ -44,6 +46,7 @@ import { BarHorizontalComponent } from './charts/bar-horizontal.component';
     LineComponent,
     LinestackComponent,
     LineMultipleComponent,
+    LineAreaComponent,
     RadarComponent,
     FunnelComponent,
     GaugeComponent,

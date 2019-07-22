@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-charts.component';
 
 @Component({
     selector: 'ngx-bar-negative',
-    template: `<div echarts [options]="options" style="height:100%;width:100%"></div>`
+    templateUrl: "base-charts.component.html"
 })
 export class BarHorizontalComponent extends BaseChartComponent implements OnInit {
     constructor() {
@@ -19,8 +19,19 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnInit
                 { name: '搜索引擎', value: 1548 }
             ]
         },
-        xAxis: { name: 'value' },
-        yAxis: { type: 'category' },
+        grid:{
+            left:100,
+            top:10,
+            bottom:10
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        xAxis: { type: 'value' },
+        yAxis: { type: 'category', inverse: true },
         series: [
             {
                 type: 'bar',
