@@ -51,9 +51,11 @@ export class DashboardContainerComponent implements OnInit {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     this.chart.clear();
     this.componentRef = this.chart.createComponent(componentFactory);
-    this.dashboardService.getChartData(this.item.customId).subscribe(res => {
+    this.dashboardService.getChartData(this.item.customId).subscribe((res: Array<any> | Object) => {
       this.isLoading = false;
       this.chartData = res;
+      if (res instanceof Array) return
+
       if (Object.keys(res).length == 0) return;
       (<BaseChartComponent>this.componentRef.instance).setData(res);
     });

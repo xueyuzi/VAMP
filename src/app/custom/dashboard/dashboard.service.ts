@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DashboardContainerModel } from '../../model/dashboard-container.model';
 import { of, Observable, BehaviorSubject, Subject } from 'rxjs';
 import { ApiService } from '../../api.service';
 import { tap, map } from 'rxjs/operators';

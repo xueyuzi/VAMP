@@ -37,22 +37,8 @@ export class TextComponent extends BaseChartComponent implements OnInit {
     options = {
         dataset: {
             source: [
-                {
-                    "key": "58.246.174.74",
-                    "doc_count": 4322
-                },
-                {
-                    "key": "114.114.114.114",
-                    "doc_count": 897
-                },
-                {
-                    "key": "216.58.200.238",
-                    "doc_count": 177
-                },
-                {
-                    "key": "18.179.9.154",
-                    "doc_count": 170
-                }]
+                { doc_count: "暂无数据" }
+            ]
         }
     }
 }
