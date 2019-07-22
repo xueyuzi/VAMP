@@ -1,5 +1,7 @@
 import { Output, EventEmitter } from '@angular/core';
 import "../echarts-theme/walden.js";
+import "../echarts-theme/purple-passion.js";
+
 export class BaseChartComponent {
     theme: string = "walden";
     mapLoaded: boolean = false;

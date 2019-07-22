@@ -11,6 +11,7 @@ import { LineMultipleComponent } from '../charts/line-multiple.component';
 import { PieCustomComponent } from '../charts/pie-custom.component';
 import { MapComponent } from '../charts/map.component';
 import { TextComponent } from '../charts/text.component';
+import { BarHorizontalComponent } from '../charts/bar-horizontal.component';
 export default {
     "pie": { label: "饼图", key: "pie", component: PieComponent, img: "assets/images/charts/pie.png" },
     "pie-custom": { label: "圆环图", key: "pie-custom", component: PieCustomComponent, img: "assets/images/charts/pie-custom.png" },
@@ -18,6 +19,7 @@ export default {
     "bar": { label: "条形图", key: "bar", component: BarComponent, img: "assets/images/charts/bar.png" },
     "bar-negative": { label: "正负条形图", key: "bar-negative", component: BarNegativeComponent, img: "assets/images/charts/bar-negative.png" },
     "bar-horizontalstack": { label: "水平堆叠条形图", key: "bar-horizontalstack", component: BarHorizontalstackComponent, img: "assets/images/charts/bar-horizontalstack.png" },
+    "bar-horizontal": { label: "水平条形图", key: "bar-horizontal", component: BarHorizontalComponent, img: "assets/images/charts/bar-horizontal.png" },
     "gauge": { label: "仪表盘", key: "gauge", component: GaugeComponent, img: "assets/images/charts/gauge.png" },
     "funnel": { label: "漏斗图", key: "funnel", component: FunnelComponent, img: "assets/images/charts/funnel.png" },
     "line": { label: "折线图", key: "line", component: LineComponent, img: "assets/images/charts/line.png" },

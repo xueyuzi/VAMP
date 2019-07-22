@@ -16,6 +16,7 @@ import { PieCustomComponent } from './charts/pie-custom.component';
 import { MapComponent } from './charts/map.component';
 import { TextComponent } from './charts/text.component';
 import { NbSpinnerModule } from '@nebular/theme';
+import { BarHorizontalComponent } from './charts/bar-horizontal.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -23,6 +24,7 @@ import { NbSpinnerModule } from '@nebular/theme';
     BarComponent,
     BarHorizontalstackComponent,
     BarNegativeComponent,
+    BarHorizontalComponent,
     LineComponent,
     LinestackComponent,
     LineMultipleComponent,
@@ -38,6 +40,7 @@ import { NbSpinnerModule } from '@nebular/theme';
     BarComponent,
     BarHorizontalstackComponent,
     BarNegativeComponent,
+    BarHorizontalComponent,
     LineComponent,
     LinestackComponent,
     LineMultipleComponent,

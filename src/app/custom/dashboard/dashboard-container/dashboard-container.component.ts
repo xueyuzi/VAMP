@@ -64,5 +64,6 @@ export class DashboardContainerComponent implements OnInit {
   toggleSetting() {
     this.dashboardSettingService.toggle(!this.isSetting);
     this.dashboardSettingService.setId(this.item.customId);
+    // TODO:监听设置是否完成
   }
 }
