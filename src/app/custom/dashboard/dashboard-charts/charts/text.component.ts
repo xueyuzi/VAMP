@@ -34,7 +34,7 @@ export class TextComponent extends BaseChartComponent implements OnInit {
         this.options.dataset = data;
 
         if (data.source[1] !== undefined) {
-            this.census = data.source[0].doc_count - data.source[1].doc_count;
+            this.census = 0 - (data.source[0].doc_count + data.source[1].doc_count);
         }
     }
     options = {
