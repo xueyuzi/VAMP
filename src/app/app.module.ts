@@ -22,6 +22,8 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+  NbButtonModule,
+  NbInputModule,
 } from '@nebular/theme';
 
 @NgModule({
@@ -44,6 +46,8 @@ import {
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
+    NbButtonModule,
+    NbInputModule,
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
