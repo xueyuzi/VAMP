@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import "./echarts-theme/walden.js";
 import "./echarts-theme/chalk.js"
 import "./echarts-theme/purple-passion.js"
+import "./echarts-theme/infographic.js"
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ChartsService {
   themeSource = new BehaviorSubject("walden");
   theme$: Observable<string> = this.themeSource.asObservable();
   setThemeDark() {
-    this.themeSource.next("purple-passion");
+    this.themeSource.next("infographic");
   }
   setThemeLight() {
     this.themeSource.next("walden");
