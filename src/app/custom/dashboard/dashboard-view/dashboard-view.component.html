@@ -2,12 +2,12 @@
     <div class="dashboard-title">
         <h1>{{title}}</h1>
     </div>
-    <div style="margin-top: -70px;">
-        <button nbButton size="small" (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
-        <button nbButton size="small" status="danger" (click)="cancel()" *ngIf="isEdit" style="margin:10px;">取消</button>
+    <div style="margin-top: -75px;">
+        <button nbButton size="medium" (click)="switchEdit()" *ngIf="!isEdit" style="margin:10px;">编辑</button>
+        <button nbButton size="medium" status="danger" (click)="cancel()" *ngIf="isEdit" style="margin:10px;">取消</button>
 
-        <button nbButton size="small" (click)="saveDashboard()" *ngIf="isEdit" style="margin:10px;">保存</button>
-        <button nbButton size="small" (click)="showNew()" *ngIf="isEdit" style="margin:10px;">新增</button>
+        <button nbButton size="medium" (click)="saveDashboard()" *ngIf="isEdit" style="margin:10px;">保存</button>
+        <button nbButton size="medium" (click)="showNew()" *ngIf="isEdit" style="margin:10px;">新增</button>
     </div>
 </div>
 <ngx-grid-stack class="grid-stack" [options]="options" *ngIf="containers.length > 0">

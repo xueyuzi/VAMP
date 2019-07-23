@@ -12,12 +12,12 @@ import { ChartsService } from '../dashboard-charts.service';
     align-items: center;"
     >
         <p  style="font-size:79px;font-weight:bolder">{{options.dataset.source[0]?.doc_count}}</p>
-        <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="line-height: 0px;display: flex;align-items: center;flex-direction: column;">
-            <i *ngIf="this.census >= 0" style="font-size: 50px;margin-top: -20px;" class="ion-arrow-graph-up-left"></i>
+        <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="line-height: 0px;height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
+            <img *ngIf="this.census >= 0" src="assets/images/red_up.png" style="width:40px"/>
             <div style="font-size:20px">
                 {{census}}
             </div>
-            <i *ngIf="this.census < 0" style="font-size: 50px;margin-top: -20px;" class="ion-arrow-graph-down-left"></i>
+            <img *ngIf="this.census < 0" src="assets/images/green_down.png" style="width:40px"/>
         </div>
     </div>
     `
