@@ -1,0 +1,21 @@
+[{
+        "name": "饼图",
+        "img": "https://echarts.baidu.com/examples/data/thumb/pie-simple.png",
+        "type": "pie"
+    },
+    {
+        "name": "直方图",
+        "img": "https://echarts.baidu.com/examples/data/thumb/bar-simple.png",
+        "type": "bar"
+    },
+    {
+        "name": "折线图",
+        "img": "https://echarts.baidu.com/examples/data/thumb/line-simple.png",
+        "type": "line"
+    },
+    {
+        "name": "雷达图",
+        "img": "https://echarts.baidu.com/examples/data/thumb/radar.png",
+        "type": "radar"
+    }
+]

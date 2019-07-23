@@ -1,0 +1,7 @@
+<div class="charts-container">
+  <div class="chart-item" [ngClass]="{'active':selected===chart.key}" (click)="onSelect(chart.key)"
+    *ngFor="let chart of list">
+    {{chart.label}}
+    <div class="img" [style.backgroundImage]="'url('+chart.img+')'"></div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<nb-card>
+  <nb-card-header>
+    Dashboard管理
+  </nb-card-header>
+  <nb-card-body>
+    <button nbButton (click)="showAddMenu()" style="margin:10px">新建</button>
+    <nb-select [(selected)]="key" style="float: right;width:200px">
+      <nb-option value="dashboard">Dashboard</nb-option>
+      <nb-option value="situation">安全态势</nb-option>
+      <nb-option value="devops">安全运维</nb-option>
+    </nb-select>
+    <ng2-smart-table [source]="(menus|async)[key]" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delMenu($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<p-dialog header="新建Dashboard" [(visible)]="isAdd" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 800px">
+    <div class="setting-item">
+      <label>菜单名:</label>
+      <input type="text" nbInput [(ngModel)]="menu.title" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label style="display: flex; align-items: center;">icon:</label>
+      <ng-template #icon></ng-template>
+    </div>
+    <div style="flex: 1;
+      height: 30vh;
+      padding:10px 0;
+      margin-bottom:20px;
+      overflow: auto;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 30px;">
+      <nb-icon *ngFor="let icon of menuIcons" [icon]="icon" (click)="setIcon(icon)" style="width:35px; height:35px;">
+      </nb-icon>
+
+    </div>
+  </div>
+
+  <button nbButton fullWidth (click)="isEdit?saveMenus():addMenus()">保存</button>
+</p-dialog>

@@ -1,0 +1,62 @@
+<ngx-chart-template-list [charts]="charts" [isEdit]="true" (onDelete)="del($event)"
+    (onSelectChart)="editDefinedChart($event)" (onAddChart)="addDefinedChart()">
+</ngx-chart-template-list>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-dialog header="新建预设图表" [(visible)]="isEdit" [draggable]="false" [resizable]="false" [contentStyle]="{'overflow': 'auto'}">
+    <div class="setting-container" style="min-width: 600px">
+        <div class="setting-item">
+            <label>默认索引:</label>
+            <input nbInput [(ngModel)]="defaultChart.default_index" name="default_index">
+        </div>
+        <div class="setting-item">
+            <label>所属分类:</label>
+            <nb-select [(selected)]="defaultChart.category_a" placeholder="请选择" style="min-width:200px" size="small">
+                <nb-option [value]="category" *ngFor="let category of category_a_items">{{category}}</nb-option>
+            </nb-select>
+        </div>
+
+        <!-- <div class="setting-item">
+            <label>所属子类:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.category_b">
+        </div> -->
+        <div class="setting-item">
+            <label>图表名称:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.chart_name">
+        </div>
+        <div class="setting-item">
+            <label>排序号码:</label>
+            <input type="text" nbInput [(ngModel)]="defaultChart.sortid">
+        </div>
+        <div class="setting-item">
+            <label>时间范围:</label>
+            <div style="display:flex;align-items:center">
+                <span style="font-size: 1.2rem;font-weight:bolder">前</span>
+                <input type="text" nbInput [(ngModel)]="defaultChart.default_period" style="width:50px;margin:0 20px">
+                <nb-select [(selected)]="defaultChart.default_period_category" placeholder="请选择"
+                    style="min-width: 100px;">
+                    <nb-option value="h">小时</nb-option>
+                    <nb-option value="d">天</nb-option>
+                    <nb-option value="m">月</nb-option>
+                    <nb-option value="y">年</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="setting-item">
+            <label>图片上传:</label>
+            <p-fileUpload name="chartimg" mode="basic" [auto]="true" (onUpload)="setChartImg($event)"
+                [chooseLabel]="defaultChart.chart_img ==undefined?'upload':defaultChart.chart_img"
+                url="/elasticsearch/updateChartImg"></p-fileUpload>
+            <!-- <input type="text" nbInput [(ngModel)]="defaultChart.chart_img"> -->
+        </div>
+        <div class="setting-item">
+            <label>默认图表类型:</label>
+        </div>
+        <ngx-chart-list [selected]="defaultChart.default_chart_type" (onSelectChart)="changeChart($event)">
+        </ngx-chart-list>
+        <div class="setting-item">
+            <label>预定义语句:</label>
+        </div>
+        <div id="editor" style="height:300px;flex:1;margin:10px 0"></div>
+    </div>
+    <button nbButton fullWidth (click)="handleClick()">保存</button>
+</p-dialog>

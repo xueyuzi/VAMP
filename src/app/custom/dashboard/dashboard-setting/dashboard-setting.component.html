@@ -1,0 +1,32 @@
+<p-dialog (mousedown)="$event.stopPropagation();" header="图表设置" [(visible)]="isShow" (onHide)="onHide()"
+  (onShow)="onShow()" [contentStyle]="{'padding':'0px'}">
+  <div class="setting-form">
+    <ul class="setting-form-menu">
+      <li>数据设置</li>
+    </ul>
+    <div class="setting-form-container" *ngIf="chartSetting !== undefined">
+      <div class="setting-form-item">
+        <label>索引</label>
+        <div><input type="text" [(ngModel)]="chartSetting.es_index"></div>
+      </div>
+      <div class="setting-form-item">
+        <label>图表名称</label>
+        <div><input type="text" [(ngModel)]="chartSetting.chartname"></div>
+      </div>
+      <div class="setting-form-item">
+        <label>时间范围</label>
+        <div>
+          前
+          <input type="text" style="width: 20px;" [(ngModel)]="chartSetting.period">
+          <select placeholder="请选择" [(ngModel)]="chartSetting.period_category">
+            <option value="h">小时</option>
+            <option value="d">天</option>
+            <option value="m">月</option>
+            <option value="y">年</option>
+          </select>
+        </div>
+      </div>
+      <p-button label="保存" (onClick)="save()"></p-button>
+    </div>
+  </div>
+</p-dialog>

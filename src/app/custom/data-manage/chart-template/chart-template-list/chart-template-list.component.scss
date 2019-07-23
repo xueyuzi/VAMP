@@ -1,0 +1,87 @@
+.my-menu {
+  list-style: none;
+
+  li {
+    margin: 20px 0;
+  }
+
+  .my-menu-li {
+    padding: 10px;
+    cursor: pointer;
+    border-left: 3px solid rgba(0, 0, 0, 0);
+  }
+
+  .my-menu-li:hover {
+    color: nb-theme(text-hint-color);
+    border-left: 3px solid #a5abb3;
+  }
+
+  .active {
+    color: nb-theme(text-hint-color);
+    border-left: 3px solid #a5abb3;
+  }
+}
+
+.charts-container {
+  min-width: 901px;
+  display: flex;
+
+  .charts-items {
+    margin: 10px 20px;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+
+    .charts-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      padding: 10px;
+      height: 200px;
+      width: 220px;
+      cursor: pointer;
+      filter: grayscale(100%);
+
+      img {
+        width: 220px;
+        height: 200px;
+        background-size: cover;
+      }
+
+      .nb-trash {
+        display: none;
+        position: absolute;
+        bottom: 40px;
+        right: 10px;
+        font-size: 40px;
+      }
+    }
+
+    .add-template {
+      display: none;
+    }
+  }
+}
+
+.isEdit {
+  color: black;
+
+  .charts-item:hover {
+    filter: grayscale(0%);
+    color: nb-theme(text-hint-color);
+
+    .nb-trash {
+      display: block !important;
+    }
+
+    .nb-trash:hover {
+      color: nb-theme(text-hint-color);
+    }
+  }
+
+  .add-template {
+    display: block !important;
+  }
+}

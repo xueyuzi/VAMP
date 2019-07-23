@@ -1,0 +1,39 @@
+<h1 id="title" class="title">Login</h1>
+
+
+<form (ngSubmit)="login()" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <input nbInput fullWidth fieldSize="large" [(ngModel)]="user.username" name="username" placeholder="用户名" id="input-username">
+  </div>
+
+  <div class="form-control-group">
+    <input type="password" nbInput fullWidth fieldSize="large" [(ngModel)]="user.password" name="password" placeholder="密码"
+      id="input-password">
+  </div>
+  <div class="form-control-group" style="display:flex">
+
+
+    <input nbInput fullWidth [(ngModel)]="user.validateCode" name="validateCode" placeholder="验证码"
+      id="input-validateCode">
+    <img [src]="codeSrc" (click)="changeCode()" alt="">
+
+  </div>
+  <p style="font-size:18px;color:red;">{{errors}}</p>
+
+  <button nbButton fullWidth status="success">
+    Log In
+  </button>
+</form>
+
+<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  or enter with:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link" [routerLink]="socialLink.link" [attr.target]="socialLink.target"
+        [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+      <a *ngIf="socialLink.url" [attr.href]="socialLink.url" [attr.target]="socialLink.target"
+        [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+    </ng-container>
+  </div>
+</section>
