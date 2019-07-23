@@ -32,7 +32,6 @@ export class DashboardSettingComponent implements OnInit {
   }
   save() {
     this.dashboardSettingService.save(this.chartSetting).subscribe(res => {
-      this.toastrService.danger("保存成功");
       this.dashboardSettingService.toggle(false);
     });
   }

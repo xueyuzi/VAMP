@@ -16,8 +16,8 @@ import { DashboardSettingService } from '../dashboard-setting/dashboard-setting.
 })
 export class DashboardContainerComponent implements OnInit {
   @Input() item: any;
-  @ViewChild('chart', { read: ViewContainerRef,static:true }) chart;
-  @ViewChild(NbPopoverDirective,{static:false}) popover: NbPopoverDirective;
+  @ViewChild('chart', { read: ViewContainerRef, static: true }) chart;
+  @ViewChild(NbPopoverDirective, { static: false }) popover: NbPopoverDirective;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -67,5 +67,10 @@ export class DashboardContainerComponent implements OnInit {
     this.dashboardSettingService.toggle(!this.isSetting);
     this.dashboardSettingService.setId(this.item.customId);
     // TODO:监听设置是否完成
+    this.dashboardSettingService.finished$.subscribe(
+      flag => {
+        flag && this.loadChart(this.item.panelData.type);
+      }
+    )
   }
 }

@@ -14,28 +14,31 @@ export class ApiService {
 
   post(url: string, body: any = {}): Observable<any> {
     return this.http.post(url, body).pipe(
-      tap(res => this.handleError(url, res))
+      tap(res => this.handleResponse(url, res))
     )
   }
 
   get(url: string, param: any = {}): Observable<any> {
     return this.http.get(url).pipe(
-      tap(res => this.handleError(url, res)),
-      catchError(err => this.handleError("", err)),
+      tap(res => this.handleResponse(url, res)),
+      catchError(err => this.handleResponse("", err)),
     )
   }
 
-  handleError(url: string, err: any = {}) {
-    console.log(url + " : ", err);
-    if (err.code == "500" || err.code == "504") {
-      this.toastrService.danger(err.msg);
+  handleResponse(url: string, res: any = {}) {
+    console.log(url + " : ", res);
+    if (res.code == "500" || res.code == "504") {
+      this.toastrService.danger("error",res.msg);
     }
-    if (err.code == "1") {
-      this.toastrService.danger(err.msg);
+    if (res.code == "1") {
+      this.toastrService.danger("error",res.msg);
       setTimeout(() => {
         this.router.navigateByUrl("/auth/login");
       }, 1000);
     }
-    return err;
+    if (res.code == "0") {
+      this.toastrService.success("success",res.msg);
+    }
+    return res;
   }
 }

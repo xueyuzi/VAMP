@@ -23,7 +23,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnInit
         grid:{
             left:100,
             top:10,
-            bottom:10
+            bottom:20
         },
         tooltip: {
             confine:true,
