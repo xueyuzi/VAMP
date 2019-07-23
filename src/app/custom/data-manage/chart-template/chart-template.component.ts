@@ -56,7 +56,6 @@ export class ChartTemplateComponent implements OnInit {
       console.log(res)
     })
   }
-  delDefinedChart(id) { }
   addDefinedChart() {
     this.defaultChart = {
       default_period_category: 'h',
@@ -89,7 +88,7 @@ export class ChartTemplateComponent implements OnInit {
       message: '你确定要删除此模板么？',
       accept: () => {
         this.chartTemplateService.delChart(chart.id).subscribe(res => {
-          this.getTemplate
+          this.getTemplate()
         });
       }
     });
