@@ -31,11 +31,15 @@
 
   @include nb-overrides();
 
+  html {
+    font-size: 14px;
+  }
 
 
 
-
-
+  label{
+    color:nb-theme(text-basic-color)
+  }
 
 
   .center {
@@ -49,12 +53,12 @@
 
   ng2-smart-table .ng2-smart-actions a.ng2-smart-action,
   .nb-theme-corporate ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
-    font-size: 14px !important;
+    font-size: 14px;
   }
 
 
   .grid-stack-item-content {
-    background: nb-theme(primary-color);
+    background: nb-theme(background-basic-color-4);
     padding: 10px;
     text-align: center;
     border-radius: 0.25rem;
@@ -63,39 +67,29 @@
   }
 
   .layout {
-    background: nb-theme(secondary-color) !important;
+    background: nb-theme(background-basic-color-2);
   }
 
   nb-layout-header nav {
-    background: nb-theme(primary-dark-color) !important;
-    color: nb-theme(primary-text-color) !important;
+    background: black;
+    color: white;
 
     .logo {
-      color: nb-theme(primary-light-text-color) !important;
+      color: white;
     }
   }
-  nb-sidebar{
-    background: nb-theme(primary-light-color) !important;
+
+  .ui-dialog {
+    .ui-dialog-titlebar {
+      background: black;
+      color: white;
+    }
+
+    .ui-dialog-content {
+      background: nb-theme(background-basic-color-3);
+    }
   }
 
-  .ui-dialog .ui-dialog-titlebar{
-    background:nb-theme(primary-dark-color) !important;
-    color:nb-theme(primary-light-text-color)!important;
-  }
-  .ui-dialog .ui-dialog-content{
-    background: nb-theme(primary-light-color) !important;
-  }
-  label,span,div,li{
-    color: nb-theme(primary-text-color)!important;
-  }
-
-  .nb-theme-default ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
-    font-size: 12px !important;
-  }
-
-  html {
-    font-size: 14px;
-  }
 
   .setting-container {
     max-width: 60vw;
@@ -149,8 +143,8 @@
 
 
   // loadding
-  .nb-theme-dark nb-spinner {
-    background-color: none;
+  nb-spinner {
+    background-color: rgba(0, 0, 0, 0);
   }
 
 

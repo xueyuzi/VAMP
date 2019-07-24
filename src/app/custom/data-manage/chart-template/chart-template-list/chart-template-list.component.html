@@ -11,7 +11,7 @@
       <div *ngIf="chart.category_a === category_a" class="charts-item">
         <i class="nb-trash" (click)="onDelete.emit(chart);$event.stopPropagation();"></i>
         <img [style.backgroundImage]="'url('+chart.chart_img+')'" alt="">
-        <div style="margin-top: 10px">{{chart.chart_name}}</div>
+        <p style="margin-top: 10px">{{chart.chart_name}}</p>
       </div>
     </div>
     <div (click)="onAddChart.emit()" class="add-template">

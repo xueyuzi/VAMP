@@ -1,36 +1,41 @@
-.setting-form {
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component {
+  .setting-form {
     height: 200px;
     width: 400px;
     display: flex;
     flex-direction: row;
 
     .setting-form-menu {
-        margin: 0px;
-        width: 100px;
-        background: #f6f8fa;
-        list-style: none;
+      margin: 0px;
+      padding: 0px;
+      width: 100px;
+      background: nb-theme(background-basic-color-4);
+      list-style: none;
 
-        li {
-            margin: 0px;
-            padding: 10px 16px;
-        }
+      li {
+        margin: 0px;
+        padding: 10px 16px;
+      }
     }
 
     .setting-form-container {
-        padding: 10px;
+      padding: 10px;
     }
 
     .setting-form-item {
-        display: flex;
-        flex-direction: row;
-        padding-bottom: 10px;
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 10px;
 
-        label {
-            width: 70px;
-        }
+      label {
+        width: 70px;
+      }
 
-        div {
-            flex: 1
-        }
+      div {
+        flex: 1
+      }
     }
+  }
 }

@@ -74,6 +74,16 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
   ), corporate, corporate);
 
+
+
+
+  /* Coolors Exported Palette - coolors.co/5e6469-4e555b-3d444b-31363d-212426 */
+  $dark-color1: #5e6469;
+  $dark-color2: #4e555b;
+  $dark-color3: #3d444b;
+  $dark-color4: #31363d;
+  $dark-color5: #212426;
+
 $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
 
     menu-item-icon-margin: 0 0.5rem 0 0,
@@ -95,12 +105,14 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
 
 
 
-
-
-    primary-color:#212426,
-    primary-light-color:#3d444b,
-    primary-dark-color:#000,
-    primary-text-color:white,
-    secondary-color:#31363d,
+    
+    background-basic-color-1:$dark-color2,
+    background-basic-color-2:$dark-color3,
+    background-basic-color-3:$dark-color4,
+    background-basic-color-4:$dark-color5,
+    text-primary-color:#ec5073,
+    color-primary-focus:#ec5073,
+    color-primary-hover:#ec5073
+    
 
   ), dark, dark);
