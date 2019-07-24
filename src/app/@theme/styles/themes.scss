@@ -28,7 +28,8 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     primary-color:#fff,
     primary-light-color:#e4e9ee,
     primary-dark-color:#000,
-    primary-text-color:white,
+    primary-text-color:#000,
+    primary-light-text-color:#fff,
 
     secondary-color:#f2f5f9,
   ), default, default);
@@ -100,7 +101,6 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     primary-light-color:#3d444b,
     primary-dark-color:#000,
     primary-text-color:white,
-
     secondary-color:#31363d,
 
   ), dark, dark);

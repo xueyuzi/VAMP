@@ -71,11 +71,22 @@
     color: nb-theme(primary-text-color) !important;
 
     .logo {
-      color: nb-theme(primary-text-color) !important;
+      color: nb-theme(primary-light-text-color) !important;
     }
   }
   nb-sidebar{
     background: nb-theme(primary-light-color) !important;
+  }
+
+  .ui-dialog .ui-dialog-titlebar{
+    background:nb-theme(primary-dark-color) !important;
+    color:nb-theme(primary-light-text-color)!important;
+  }
+  .ui-dialog .ui-dialog-content{
+    background: nb-theme(primary-light-color) !important;
+  }
+  label,span,div,li{
+    color: nb-theme(primary-text-color)!important;
   }
 
   .nb-theme-default ng2-smart-table .ng2-smart-actions a.ng2-smart-action {
