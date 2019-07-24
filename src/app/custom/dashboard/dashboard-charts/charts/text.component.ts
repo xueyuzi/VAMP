@@ -11,10 +11,10 @@ import { ChartsService } from '../dashboard-charts.service';
     justify-content: center;
     align-items: center;"
     >
-        <p  style="font-size:79px;font-weight:bolder">{{options.dataset.source[0]?.doc_count}}</p>
-        <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="line-height: 0px;height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
+        <p style="font-size:80px;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[0]?.doc_count}}</p>
+        <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
             <img *ngIf="this.census >= 0" src="assets/images/red_up.png" style="width:40px"/>
-            <div style="font-size:20px">
+            <div style="font-size:20px;font-weight:bolder">
                 {{census}}
             </div>
             <img *ngIf="this.census < 0" src="assets/images/green_down.png" style="width:40px"/>
@@ -34,7 +34,7 @@ export class TextComponent extends BaseChartComponent implements OnInit {
         this.options.dataset = data;
 
         if (data.source[1] !== undefined) {
-            this.census = 0 - (data.source[0].doc_count + data.source[1].doc_count);
+            this.census = data.source[1].doc_count - data.source[0].doc_count;
         }
     }
     options = {
