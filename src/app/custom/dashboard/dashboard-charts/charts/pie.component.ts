@@ -19,6 +19,9 @@ export class PieComponent extends BaseChartComponent implements OnInit {
                 { value: 135, name: '视频广告' },
                 { value: 1548, name: '搜索引擎' }]
         },
+        grid:{
+            top:10
+        },
         series: [
             {
                 type: 'pie',
