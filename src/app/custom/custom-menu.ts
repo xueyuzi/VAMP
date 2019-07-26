@@ -24,7 +24,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/custom/data/chart-template"
       },
       {
-        title: "数据源管理",
+        title: "采集器心跳",
+        icon: "settings-outline",
+        link: "/custom/data/agenthb"
       }
     ]
   },

@@ -4,17 +4,23 @@ import { CommonModule } from '@angular/common';
 import { ChartTemplateComponent } from "./chart-template/chart-template.component";
 import { ChartTemplateListComponent } from "./chart-template/chart-template-list/chart-template-list.component";
 import { DataManageRoutingModule } from "./data-manage-routing.module";
+
+import { AgenthbComponent } from './agenthb/agenthb.component';
+
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DialogModule } from 'primeng/dialog';
-import { NbSelectModule, NbInputModule, NbButtonModule } from '@nebular/theme';
+import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbRadioModule, NbIconModule, NbIconComponent } from '@nebular/theme';
 import { FileUploadModule } from "primeng/fileupload";
+import {Ng2SmartTableModule} from "ng2-smart-table";
+
 @NgModule({
   declarations: [
     ChartTemplateComponent,
-    ChartTemplateListComponent],
+    ChartTemplateListComponent,
+    AgenthbComponent],
   imports: [
     CommonModule,
     DataManageRoutingModule,
@@ -25,7 +31,10 @@ import { FileUploadModule } from "primeng/fileupload";
     FileUploadModule,
     NbInputModule,
     FormsModule,
-    NbButtonModule
+    NbButtonModule,
+    Ng2SmartTableModule,
+    NbCardModule,
+    NbRadioModule
   ],
   providers: [
     ConfirmationService
