@@ -19,9 +19,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: "settings-outline",
     children: [
       {
-        title: "预定义图表管理",
+        title: "预定义图表",
         icon: "settings-outline",
         link: "/custom/data/chart-template"
+      },
+      {
+        title: "采集器配置",
+        icon: "settings-outline",
+        link: "/custom/data/agent"
       },
       {
         title: "采集器心跳",

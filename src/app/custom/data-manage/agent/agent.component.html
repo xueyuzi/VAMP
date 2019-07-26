@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>
+    采集器配置
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="新建配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 600px">
+    <div class="setting-item">
+      <label>名称:</label>
+      <input type="text" nbInput [(ngModel)]="user.agentName" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>IP地址:</label>
+      <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>配置:</label>
+      <input type="text" nbInput [(ngModel)]="user.agentConfig" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>识别key:</label>
+      <input type="text" nbInput [(ngModel)]="user.agentKey" fullWidth>
+    </div>
+
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+

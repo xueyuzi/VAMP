@@ -5,6 +5,7 @@ import { ChartTemplateComponent } from "./chart-template/chart-template.componen
 import { ChartTemplateListComponent } from "./chart-template/chart-template-list/chart-template-list.component";
 import { DataManageRoutingModule } from "./data-manage-routing.module";
 
+import { AgentComponent } from './agent/agent.component';
 import { AgenthbComponent } from './agenthb/agenthb.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
@@ -20,6 +21,7 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
   declarations: [
     ChartTemplateComponent,
     ChartTemplateListComponent,
+    AgentComponent,
     AgenthbComponent],
   imports: [
     CommonModule,
