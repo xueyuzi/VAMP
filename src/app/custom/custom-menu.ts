@@ -29,6 +29,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/custom/data/agent"
       },
       {
+        title: "数据脱敏规则",
+        icon: "settings-outline",
+        link: "/custom/data/desenRule"
+      },
+      {
         title: "采集器心跳",
         icon: "settings-outline",
         link: "/custom/data/agenthb"

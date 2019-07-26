@@ -1,36 +1,40 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AgentService } from './agent.service';
+import { DesenRuleService } from './desenRule.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './agent.component.html'
+  templateUrl: './desenRule.component.html'
 })
-export class AgentComponent implements OnInit, AfterViewInit {
+export class DesenRuleComponent implements OnInit, AfterViewInit {
 
-  constructor(private agentService: AgentService) { }
+  constructor(private desenRuleService: DesenRuleService) { }
   settings = {
     columns: {
       id: {
         title: 'ID',
         type: 'number',
       },
-      agentName: {
-        title: '名称',
+      type: {
+        title: '类型',
         type: 'string',
       },
-      agentAddress: {
-        title: 'IP地址',
+      desenName: {
+        title: '规则名称',
         type: 'string',
       },
-      agentConfig: {
-        title: '配置',
+      patternRegex: {
+        title: '匹配规则',
         type: 'string',
         width: "200px",
       },
-      agentKey: {
-        title: '识别key',
+      desenConfig: {
+        title: '脱敏规则配置',
+        type: 'string',
+      },
+      description: {
+        title: '规则描述',
         type: 'string',
       }
     },
@@ -48,7 +52,7 @@ export class AgentComponent implements OnInit, AfterViewInit {
   userCondition = new Subject<any>();
   ngOnInit() {
     this.userList = this.userCondition.pipe(
-      switchMap(condition => this.agentService.getList(condition)),
+      switchMap(condition => this.desenRuleService.getList(condition)),
     )
   }
   ngAfterViewInit() {
@@ -68,15 +72,15 @@ export class AgentComponent implements OnInit, AfterViewInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.desenRuleService.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
 
     }
   }
 
   delUser(id: number) {
-    this.agentService.del(id).subscribe(res => { });
+    this.desenRuleService.del(id).subscribe(res => { });
   }
 }
