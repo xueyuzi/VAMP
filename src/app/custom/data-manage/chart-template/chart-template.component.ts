@@ -24,10 +24,15 @@ export class ChartTemplateComponent implements OnInit {
 
   ngOnInit() {
     this.getTemplate();
-    this.defaultChart = {
-      default_period_category: 'h',
-      category_a: this.category_a_items[0]
-    }
+    
+    this.chartTemplateService.getTemplateCateGoryList().subscribe(res=>{
+      let keys=Object.keys(res)
+      this.category_a_items = keys;
+      this.defaultChart = {
+        default_period_category: 'h',
+        category_a: this.category_a_items[0]
+      }
+    });
   }
 
   getTemplate() {

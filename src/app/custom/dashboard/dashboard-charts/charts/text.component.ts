@@ -13,7 +13,7 @@ import { ChartsService } from '../dashboard-charts.service';
     >
     <p *ngIf="this.census === undefined" style="font-size:80px;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[0]?.doc_count}}</p>
     <p *ngIf="this.census!==undefined" style="font-size:80px;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[1]?.doc_count}}</p>
-        <div [style.color]="this.census >= 0 ? 'red' : 'green'" style="height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
+        <div [style.color]="this.census >= 0 ? 'red' : '#00ec05'" style="height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
             <img *ngIf="this.census >= 0" src="assets/images/red_up.png" style="width:40px"/>
             <div style="font-size:20px;font-weight:bolder">
                 {{census}}
