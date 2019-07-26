@@ -24,6 +24,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: "/custom/data/chart-template"
       },
       {
+        title: "活动列表配置",
+        icon: "settings-outline",
+        link: "/custom/data/activeList"
+      },
+      {
         title: "采集器配置",
         icon: "settings-outline",
         link: "/custom/data/agent"
