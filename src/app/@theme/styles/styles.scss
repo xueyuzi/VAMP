@@ -37,8 +37,8 @@
 
 
 
-  label{
-    color:nb-theme(text-basic-color)
+  label {
+    color: nb-theme(text-basic-color)
   }
 
 
@@ -101,7 +101,7 @@
     .setting-item {
       margin: 10px;
       width: 100%;
-      height: 50px;
+      height: 30px;
       display: flex;
       align-items: center;
 
@@ -150,6 +150,21 @@
 
 
 
+
+  .ui-treetable .ui-treetable-thead>tr>th {
+    background-color: rgba(0, 0, 0, 0);
+    color: nb-theme(text-basic-color);
+  }
+
+  .ui-treetable .ui-treetable-tbody>tr>td,
+  .ui-treetable .ui-treetable-thead>tr>th {
+    border: 1px solid nb-theme(background-basic-color-4);
+  }
+
+  .ui-treetable .ui-treetable-tbody>tr {
+    background-color: rgba(0, 0, 0, 0);
+    color: nb-theme(text-basic-color);
+  }
 
 
 

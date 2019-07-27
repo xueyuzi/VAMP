@@ -19,12 +19,29 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: "settings-outline",
     children: [
       {
-        title: "预定义图表管理",
+        title: "预定义图表",
         icon: "settings-outline",
         link: "/custom/data/chart-template"
       },
       {
-        title: "数据源管理",
+        title: "活动列表配置",
+        icon: "settings-outline",
+        link: "/custom/data/activeList"
+      },
+      {
+        title: "采集器配置",
+        icon: "settings-outline",
+        link: "/custom/data/agent"
+      },
+      {
+        title: "数据脱敏规则",
+        icon: "settings-outline",
+        link: "/custom/data/desenRule"
+      },
+      {
+        title: "采集器心跳",
+        icon: "settings-outline",
+        link: "/custom/data/agenthb"
       }
     ]
   },

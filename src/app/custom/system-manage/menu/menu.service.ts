@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { TreeNode } from 'primeng/components/common/treenode';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { TreeNode } from 'primeng/api';
+import { Subject, BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from '../../../api.service';
 
 @Injectable({
@@ -13,40 +13,68 @@ export class MenuService {
   constructor(private api: ApiService) {
   }
 
-  menus: Object;
-  menusSource = new BehaviorSubject<Object>([]);
-  setMenus(menus: Object) {
-    this.menus = Object.assign({}, menus);
+  private menusSource = new BehaviorSubject<Array<any>>([]);
+  menus$: Observable<Array<any>> = this.menusSource.asObservable();
+  menus: Array<any> = [];
+
+
+  setMenus(menus: Array<any>) {
+    this.menus = menus;
     this.menusSource.next(menus);
   }
-  initMenus() {
-    return this.api.get("/elasticsearch/menu").pipe(
+
+  getMenus() {
+    return this.api.post("/menu").pipe(
+      // 删除menu中 空children
+      map(res => res.map(m => {
+        if (m.children.length > 0) {
+          m.children = m.children.map(c => { delete c.children; return c });
+        }
+        return m
+      })),
       tap(menus => this.setMenus(menus))
     )
   }
 
-
-  addMenu(id, menu, key) {
-    if (this.menus[key] == undefined) {
-      this.menus[key] = []
-    }
-    this.menus[key].push(menu);
-    this.setMenus(this.menus)
-    return this.api.post("/elasticsearch/dashboard", {
-      dashboard_id: id,
-      parent_menu:key
-    })
-  }
-  delMenu(v, key) {
-    this.menus[key] = this.menus[key].filter(menu => menu !== v);
-    this.setMenus(this.menus);
-    this.menusSource.next(this.menus);
-  }
-
-  saveMenus() {
-
-    return this.api.post("/elasticsearch/menu", this.menus).pipe(
-      tap(v => this.setMenus(this.menus))
+  getMenusWithTreeData() {
+    return this.api.post("/menu").pipe(
+      map(menus => {
+        let tree: TreeNode[] = [];
+        menus.map((m, i) => {
+          let treeData: TreeNode = {
+            data: m,
+            children: [],
+            expanded: true,
+          }
+          if (m.children.length > 0) {
+            m.children.map(c => {
+              let treeDataDeep: TreeNode = {
+                data: c,
+              }
+              delete treeDataDeep.data.children;
+              treeData.children.push(treeDataDeep);
+            })
+          }
+          delete treeData.data.children;
+          tree.push(treeData);
+        })
+        return tree;
+      }
+      )
     )
+  }
+
+  saveMenus(menu) {
+
+    let menuForm = this.api.transToFormData(menu);
+    let postUrl = ""
+    if (menu.menuId === undefined) {
+      postUrl = "/system/menu/add"
+    } else {
+      postUrl = "/system/menu/edit"
+    }
+    return this.api.post(postUrl, menuForm).pipe(
+      tap(v => this.getMenus().subscribe())
+    );
   }
 }

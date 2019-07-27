@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolve
 import { MenuService } from './menu.service';
 import { Subject, Observable } from 'rxjs';
 import { NbIconLibraries, NbIconComponent } from '@nebular/theme';
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'ngx-menu',
@@ -20,36 +21,46 @@ export class MenuComponent implements OnInit {
   @ViewChild('icon', { read: ViewContainerRef, static: false }) icon;
 
   menu: any;
-  menus: Observable<any>;
   menuIcons = [];
-  userCondition = new Subject<any>();
-  isAdd: boolean;
-  isEdit: boolean;
-  key: string = "dashboard";
-  settings = {
-    columns: {
-      title: {
-        title: '菜单名',
-        type: 'string',
-      },
-      link: {
-        title: '路径',
-        type: 'string',
-      },
-    },
-    actions: {
-      add: false,
-      edit: false,
-    },
-    delete: {
-      confirmDelete: true
-    }
-  }
+  showEdit: boolean;
+  customColumn = 'title';
+  defaultColumns = ['menuId', 'icon', 'link'];
+  allColumns = [this.customColumn, ...this.defaultColumns];
+
+  data: TreeNode[] = [];
   ngOnInit() {
     this.menu = {};
-    this.menus = this.menuService.menusSource;
-
+    this.menuService.getMenusWithTreeData().subscribe(
+      menus => this.data = menus
+    )
   }
+
+  onEdit(event) {
+    console.log(event);
+    this.menu = event.node.data;
+    this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.title;
+    this.menu.parentId = event.parent == null ? 0 : event.parent.data.menuId;
+    this.menu.menuType = "M";
+    this.menu.menuName = this.menu.title;
+    this.menu.url = this.menu.link;
+    this.menu.orderNum = 1;
+    this.menu.visible = 0;
+    this.setIcon(this.menu.icon);
+    this.showEdit = true;
+  }
+  onAdd(event) {
+    console.log(event)
+    this.menu = {};
+    this.menu.parentMenu = event !== undefined ? event.node.data.title : "无"
+    this.menu.parentId = event !== undefined ? event.node.data.menuId : 0;
+    this.menu.url = "/custom/dashboard/view/" + Math.ceil(Math.random() * 100000);
+    this.menu.menuType = "M";
+    this.menu.visible = 0;
+    this.menu.orderNum = 1;
+
+    this.showEdit = true;
+  }
+
   setIcon(icon: string) {
     console.log(icon);
     this.menu.icon = icon;
@@ -63,31 +74,14 @@ export class MenuComponent implements OnInit {
     componentRef.location.nativeElement.style = `height: 50px;width: 50px;`;
     (<NbIconComponent>componentRef.instance).icon = icon;
   }
-  showAddMenu() {
-    this.menu = {};
-    this.isAdd = true;
-  }
-  showEdit(event) {
-    this.isAdd = true;
-    this.isEdit = true;
-    this.menu = event.data;
-    this.setIconComponent(event.data.icon);
-  }
-  delMenu(event) {
-    this.menuService.delMenu(event.data, this.key)
-    this.saveMenus();
-  }
-  addMenus() {
-    let id = Math.ceil(Math.random() * 100000)
-    this.menu.link = "/custom/dashboard/view/" + id
-    this.menuService.addMenu(id, this.menu, this.key).subscribe()
-    this.saveMenus();
-  }
 
   saveMenus() {
 
-    this.menuService.saveMenus().subscribe(res => {
-      this.isAdd = false; this.isEdit = false;
+    this.menuService.saveMenus(this.menu).subscribe(res => {
+      this.showEdit = false;
+      this.menuService.getMenusWithTreeData().subscribe(
+        menus => this.data = menus
+      );
     })
   }
 

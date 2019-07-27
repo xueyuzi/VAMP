@@ -28,17 +28,27 @@ export class ApiService {
   handleResponse(url: string, res: any = {}) {
     console.log(url + " : ", res);
     if (res.code == "500" || res.code == "504") {
-      this.toastrService.danger("error",res.msg);
+      this.toastrService.danger("error", res.msg);
     }
     if (res.code == "1") {
-      this.toastrService.danger("error",res.msg);
+      this.toastrService.danger("error", res.msg);
       setTimeout(() => {
         this.router.navigateByUrl("/auth/login");
       }, 1000);
     }
     if (res.code == "0") {
-      this.toastrService.success("success",res.msg);
+      this.toastrService.success("success", res.msg);
     }
     return res;
+  }
+
+  transToFormData(data) {
+    let formData = new FormData();
+    Object.keys(data).forEach(
+      k => {
+        formData.set(k, data[k]);
+      }
+    )
+    return formData;
   }
 }

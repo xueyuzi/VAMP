@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header>
+    数据脱敏规则
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="数据脱敏规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 600px">
+    <div class="setting-item">
+      <label>类型:</label>
+      <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>规则名称:</label>
+      <input type="text" nbInput [(ngModel)]="user.desenName" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>匹配规则:</label>
+      <input type="text" nbInput [(ngModel)]="user.patternRegex" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>脱敏规则配置:</label>
+      <input type="text" nbInput [(ngModel)]="user.desenConfig" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>规则描述:</label>
+      <input type="text" nbInput [(ngModel)]="user.description" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+

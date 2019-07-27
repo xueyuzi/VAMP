@@ -1,43 +1,70 @@
 <nb-card>
   <nb-card-header>
-    Dashboard管理
+    菜单管理
   </nb-card-header>
   <nb-card-body>
-    <button nbButton (click)="showAddMenu()" style="margin:10px 0">新建</button>
-    <nb-select [(selected)]="key" style="float: right;width:200px">
-      <nb-option value="dashboard">Dashboard</nb-option>
-      <nb-option value="situation">安全态势</nb-option>
-      <nb-option value="devops">安全运维</nb-option>
-    </nb-select>
-    <ng2-smart-table [source]="(menus|async)[key]" [settings]="settings" (userRowSelect)="showEdit($event)"
-      (deleteConfirm)="delMenu($event)">
-    </ng2-smart-table>
+    <button nbButton style="margin:10px 0" (click)="onAdd()">新建</button>
+
+    <p-treeTable [value]="data">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>菜单名称</th>
+          <th>请求地址</th>
+          <th>icon</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{rowData.title}}
+          </td>
+          <td>{{rowData.link}}</td>
+          <td>{{rowData.icon}}</td>
+          <td>
+            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
+            <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
+              style="margin-right:5px">add</button>
+            <!-- <button nbButton size="small" status="danger" (click)='onEdit(rowNode)'>del</button> -->
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
   </nb-card-body>
 </nb-card>
 
-<p-dialog header="新建Dashboard" [(visible)]="isAdd" [draggable]="false" [resizable]="false">
+<p-dialog header="菜单编辑" [(visible)]="showEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 800px">
     <div class="setting-item">
+      <label>上级菜单:</label>
+      <input type="text" nbInput [value]="menu.parentMenu" fullWidth readonly>
+    </div>
+
+    <div class="setting-item">
       <label>菜单名:</label>
-      <input type="text" nbInput [(ngModel)]="menu.title" fullWidth>
+      <input type="text" nbInput [(ngModel)]="menu.menuName" fullWidth>
     </div>
     <div class="setting-item">
+      <label>请求地址:</label>
+      <input type="text" nbInput [(ngModel)]="menu.url" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>权限标识:</label>
+      <input type="text" nbInput [(ngModel)]="menu.perms" fullWidth>
+    </div>
+
+    <div class="setting-item icon">
       <label style="display: flex; align-items: center;">icon:</label>
       <ng-template #icon></ng-template>
     </div>
-    <div style="flex: 1;
-      height: 30vh;
-      padding:10px 0;
-      margin-bottom:20px;
-      overflow: auto;
-      display: flex;
-      flex-wrap: wrap;
-      font-size: 30px;">
+    <div class="menu-icons">
       <nb-icon *ngFor="let icon of menuIcons" [icon]="icon" (click)="setIcon(icon)" style="width:35px; height:35px;">
       </nb-icon>
-
     </div>
   </div>
+  <div class="setting-item">
+    <button nbButton fullWidth (click)="saveMenus()" style="margin-bottom:20px">保存</button>
 
-  <button nbButton fullWidth (click)="isEdit?saveMenus():addMenus()">保存</button>
+  </div>
 </p-dialog>
