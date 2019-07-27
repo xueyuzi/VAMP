@@ -38,8 +38,8 @@ export class DashboardViewComponent implements OnInit {
       this.id = Number(params.get("id"));
       this.dashboardService.getContainers(this.id).subscribe(
         () => {
-          console.log(this.menuService.menus)
-          this.title = this.menuService.menus[this.id - 1].title;
+          // console.log(this.menuService.menus)
+          // this.title = this.menuService.menus[this.id - 1].title;
         }
       );
     });

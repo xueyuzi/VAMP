@@ -1,33 +1,45 @@
 {
-    "/login":{
-        "target":"http://58.246.174.74:17080",
-        "changeOrigin":true,
-        "logLevel": "debug",
-        "secure":false
-    },
-    "/system":{
-        "target":"http://58.246.174.74:17080",
-        "changeOrigin":true,
-        "logLevel": "debug",
-        "secure":false
-    },
-    "/captcha":{
-        "target":"http://58.246.174.74:17080",
-        "changeOrigin":true,
-        "logLevel": "debug",
-        "secure":false
-    },
-    "/elasticsearch":{
-        "target":"http://58.246.174.74:17080",
-        "changeOrigin":true,
-        "logLevel": "debug",
-        "secure":false
-    },
-    "/signin":{
-        "target":"http://58.246.174.74:17080",
-        "changeOrigin":true,
-        "logLevel": "debug",
-        "secure":false
-    }
-    
+  "/login": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/system": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/captcha": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/elasticsearch": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/signin": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/menu": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/cep": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  }
+
 }
