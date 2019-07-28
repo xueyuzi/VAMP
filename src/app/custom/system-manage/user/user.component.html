@@ -5,7 +5,8 @@
 
   <nb-card-body>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)">
+    </ng2-smart-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="新建用户" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
@@ -29,7 +30,15 @@
       <label>password:</label>
       <input type="text" nbInput [(ngModel)]="user.password" fullWidth>
     </div>
-    
+    <div class="setting-item">
+      <label>角色:</label>
+      <nb-select placeholder="请选择角色" [(selected)]="user.roleIds" style="width: 200px">
+        <nb-option value="role.roleId" *ngFor="let role of roleList">{{role.roleName}}</nb-option>
+      </nb-select>
+    </div>
+
+
+
     <div class="setting-item">
       <label>性别:</label>
       <nb-radio-group [(ngModel)]="user.sex" style="display:flex">
@@ -37,7 +46,7 @@
         <nb-radio value="1">男</nb-radio>
       </nb-radio-group>
     </div>
-    
+
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>

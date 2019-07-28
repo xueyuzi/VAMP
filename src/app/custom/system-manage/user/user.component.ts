@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserService } from './user.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { RoleService } from '../role/role.service';
 
 @Component({
   selector: 'ngx-user',
@@ -9,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class UserComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private roleService: RoleService) { }
   settings = {
     columns: {
       userId: {
@@ -48,10 +49,14 @@ export class UserComponent implements OnInit, AfterViewInit {
   user: any = {};
   type: string;
   userList: Observable<any>;
+  roleList: Array<any>;
   userCondition = new Subject<any>();
   ngOnInit() {
     this.userList = this.userCondition.pipe(
       switchMap(condition => this.userService.getList(condition)),
+    );
+    this.roleService.getList().subscribe(
+      list => this.roleList = list
     )
   }
   ngAfterViewInit() {
@@ -71,10 +76,10 @@ export class UserComponent implements OnInit, AfterViewInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.userService.save(this.user).subscribe(res => { this.isEdit=false});
+      this.userService.save(this.user).subscribe(res => { this.isEdit = false });
     }
     if (this.type === "add") {
-      this.userService.add(this.user).subscribe(res => { this.isEdit=false});
+      this.userService.add(this.user).subscribe(res => { this.isEdit = false });
 
     }
   }

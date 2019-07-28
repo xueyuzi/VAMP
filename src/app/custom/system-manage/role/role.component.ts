@@ -69,7 +69,7 @@ export class RoleComponent implements OnInit {
   }
   delRole($event) {
     this.confirmationService.confirm({
-      message: '你确定要删除此用户么？',
+      message: '你确定要删除此角色么？',
       accept: () => {
         this.roleService.del($event.data.roleId).subscribe(
           res => {
