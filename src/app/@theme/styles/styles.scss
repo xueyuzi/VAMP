@@ -119,6 +119,8 @@
 
   .ui-tree {
     width: 100% !important;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid nb-theme(background-basic-color-4);
   }
 
 
@@ -129,9 +131,17 @@
 
 
 
-  body .ui-selectbutton .ui-button.ui-state-active {
+  .ui-selectbutton .ui-button.ui-state-active {
     background-color: #8783f7 !important;
     border-color: #8783f7 !important;
+  }
+
+  .ui-dialog .ui-dialog-content {
+    color: nb-theme(text-basic-color)
+  }
+
+  .ui-dialog .ui-dialog-footer {
+    background-color: nb-theme(background-basic-color-2);
   }
 
 

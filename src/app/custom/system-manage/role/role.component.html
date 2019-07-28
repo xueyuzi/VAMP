@@ -4,11 +4,14 @@
   </nb-card-header>
 
   <nb-card-body>
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="roleList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="roleList" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delRole($event)">
+    </ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="新建角色" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+<p-dialog header="编辑角色" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>角色名称:</label>
@@ -24,12 +27,21 @@
       <label>状态:</label>
       <nb-checkbox [(ngModel)]="role.status"></nb-checkbox>
     </div>
-    
+
     <div class="setting-item">
       <label>菜单权限:</label>
     </div>
+    <div style="height: 250px;overflow:auto;width:100%;">
+      <p-tree [value]="menus">
+        <ng-template let-node pTemplate="default">
+          <p-checkbox name="groupname" binary="true" [(ngModel)]="node.data.checked"
+            (onChange)="changeMenus($event,node)"></p-checkbox>
+          <label>{{node.label}}</label>
+        </ng-template>
+      </p-tree>
+    </div>
 
-    
+
   </div>
   <button nbButton fullWidth (click)="saveRole()">保存</button>
 </p-dialog>

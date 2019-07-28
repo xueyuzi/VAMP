@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
   data: TreeNode[] = [];
   ngOnInit() {
     this.menu = {};
-    this.menuService.getMenusWithTreeData().subscribe(
+    this.menuService.getMenusWithTreeTableData().subscribe(
       menus => this.data = menus
     )
   }
@@ -79,7 +79,7 @@ export class MenuComponent implements OnInit {
 
     this.menuService.saveMenus(this.menu).subscribe(res => {
       this.showEdit = false;
-      this.menuService.getMenusWithTreeData().subscribe(
+      this.menuService.getMenusWithTreeTableData().subscribe(
         menus => this.data = menus
       );
     })

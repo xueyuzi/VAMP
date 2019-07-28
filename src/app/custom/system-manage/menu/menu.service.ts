@@ -36,7 +36,8 @@ export class MenuService {
     )
   }
 
-  getMenusWithTreeData() {
+  getMenusWithTreeTableData() {
+    // 只支持两层
     return this.api.post("/menu").pipe(
       map(menus => {
         let tree: TreeNode[] = [];
@@ -61,6 +62,52 @@ export class MenuService {
         return tree;
       }
       )
+    )
+  }
+
+  getMenusWithTreeData(roleId = undefined) {
+    // 只支持两层
+    let reqUrl = ""
+    if (roleId !== undefined) {
+      reqUrl = "/system/menu/roleMenuTreeData?roleId=" + roleId;
+    } else {
+      reqUrl = "/system/menu/roleMenuTreeData";
+    }
+    return this.api.get(reqUrl).pipe(
+      map(res => {
+        let treeData: TreeNode[] = new Array();
+        let hash = {};
+        res = res.sort((a, b) => a.pId - b.pId);
+        console.log(res)
+        res.forEach(
+          role => {
+            try {
+              if (role.pId === 0) {
+                // 最外层
+
+                let node: TreeNode = {
+                  label: role.title,
+                  data: role,
+                  children: []
+                };
+                treeData.push(node);
+                hash[role.id] = treeData.length - 1
+              } else {
+                let node: TreeNode = {
+                  label: role.title,
+                  data: role,
+                }
+                treeData[hash[role.pId]].children.push(node);
+              }
+            } catch (e) {
+              return
+            }
+
+          }
+        )
+        console.log("treeData", treeData);
+        return treeData;
+      })
     )
   }
 
