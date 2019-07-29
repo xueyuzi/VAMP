@@ -1,0 +1,49 @@
+<nb-card>
+  <nb-card-header>
+    输入数据源配置
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="输入数据源配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 600px">
+    <div class="setting-item">
+      <label>名称:</label>
+      <input type="text" nbInput [(ngModel)]="user.name" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>类型:</label>
+      <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>JSON是的配置内容:</label>
+      <input type="text" nbInput [(ngModel)]="user.content" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>格式内容:</label>
+      <input type="text" nbInput [(ngModel)]="user.formatType" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>格式化配置:</label>
+      <input type="text" nbInput [(ngModel)]="user.formatContent" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>时间属性:</label>
+      <input type="text" nbInput [(ngModel)]="user.timeField" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>事件ID属性:</label>
+      <input type="text" nbInput [(ngModel)]="user.idField" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+

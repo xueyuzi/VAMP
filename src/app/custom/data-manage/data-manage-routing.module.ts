@@ -7,6 +7,8 @@ import {AgentComponent} from "./agent/agent.component";
 import {DesenRuleComponent} from "./desenRule/desenRule.component";
 import {ActiveListComponent} from "./activeList/activeList.component";
 import {RuleComponent} from "./rule/rule.component";
+import {SinkComponent} from "./sink/sink.component";
+import {SourceComponent} from "./source/source.component";
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},
@@ -14,6 +16,8 @@ const routes: Routes = [
     {path:"desenRule",component:DesenRuleComponent},
     {path:"activeList",component:ActiveListComponent},
     {path:"rule",component:RuleComponent},
+    {path:"sink",component:SinkComponent},
+    {path:"source",component:SourceComponent},
     {path:"agent",component:AgentComponent}
 ];
 
