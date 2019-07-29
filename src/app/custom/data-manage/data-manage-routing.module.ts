@@ -6,12 +6,14 @@ import {AgenthbComponent} from "./agenthb/agenthb.component";
 import {AgentComponent} from "./agent/agent.component";
 import {DesenRuleComponent} from "./desenRule/desenRule.component";
 import {ActiveListComponent} from "./activeList/activeList.component";
+import {RuleComponent} from "./rule/rule.component";
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},
     {path:"agenthb",component:AgenthbComponent},
     {path:"desenRule",component:DesenRuleComponent},
     {path:"activeList",component:ActiveListComponent},
+    {path:"rule",component:RuleComponent},
     {path:"agent",component:AgentComponent}
 ];
 
