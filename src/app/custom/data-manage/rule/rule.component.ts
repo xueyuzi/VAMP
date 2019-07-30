@@ -1,40 +1,52 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { UserService } from './user.service';
+import { RuleService } from './rule.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { RoleService } from '../role/role.service';
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './user.component.html'
+  templateUrl: './rule.component.html'
 })
-export class UserComponent implements OnInit, AfterViewInit {
+export class RuleComponent implements OnInit, AfterViewInit {
 
-  constructor(private userService: UserService, private roleService: RoleService) { }
+  constructor(private desenRuleService: RuleService) { }
   settings = {
     columns: {
-      userId: {
+      id: {
         title: 'ID',
         type: 'number',
       },
-      loginName: {
-        title: 'name',
+      categoryId: {
+        title: '分类ID',
         type: 'string',
       },
-      phonenumber: {
-        title: 'phonenumber',
+      type: {
+        title: '类型',
         type: 'string',
       },
-      userName: {
-        title: "userName",
-        type: "string",
+      ruleName: {
+        title: '规则名称',
+        type: 'string',
+        width: "200px",
+      },
+      ruleNo: {
+        title: '规则编号',
+        type: 'string',
       },
       status: {
-        title: 'status',
+        title: '状态',
         type: 'string',
       },
-      email: {
-        title: 'E-mail',
+      parallelism: {
+        title: '并发度',
+        type: 'string',
+      },
+      sourceId: {
+        title: '数据源',
+        type: 'string',
+      },
+      ruleContent: {
+        title: '规则明细',
         type: 'string',
       }
     },
@@ -49,18 +61,11 @@ export class UserComponent implements OnInit, AfterViewInit {
   user: any = {};
   type: string;
   userList: Observable<any>;
-  roleList: Array<any>;
   userCondition = new Subject<any>();
   ngOnInit() {
     this.userList = this.userCondition.pipe(
-      switchMap(condition => this.userService.getList(condition)),
-    );
-    this.roleService.getList().subscribe(
-      list => this.roleList = list
+      switchMap(condition => this.desenRuleService.getList(condition)),
     )
-  }
-  changeRoles(event) {
-    this.user.roleIds = event;
   }
   ngAfterViewInit() {
     this.userCondition.next({});
@@ -79,16 +84,15 @@ export class UserComponent implements OnInit, AfterViewInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.userService.save(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
+      this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }
     if (this.type === "add") {
-      this.userService.add(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
+      this.desenRuleService.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+
     }
   }
 
   delUser(id: number) {
-    this.userService.del(id).subscribe(res => { });
+    this.desenRuleService.del(id).subscribe(res => { });
   }
-
-
 }

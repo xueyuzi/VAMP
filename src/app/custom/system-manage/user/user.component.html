@@ -32,8 +32,8 @@
     </div>
     <div class="setting-item">
       <label>角色:</label>
-      <nb-select placeholder="请选择角色" [(selected)]="user.roleIds" style="width: 200px">
-        <nb-option value="role.roleId" *ngFor="let role of roleList">{{role.roleName}}</nb-option>
+      <nb-select multiple placeholder="请选择角色" (selectedChange)="changeRoles($event)" style="width: 200px">
+        <nb-option [value]="role.roleId" *ngFor="let role of roleList">{{role.roleName}}</nb-option>
       </nb-select>
     </div>
 

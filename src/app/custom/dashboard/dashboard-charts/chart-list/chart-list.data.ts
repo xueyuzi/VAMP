@@ -13,6 +13,7 @@ import { MapComponent } from '../charts/map.component';
 import { TextComponent } from '../charts/text.component';
 import { BarHorizontalComponent } from '../charts/bar-horizontal.component';
 import { LineAreaComponent } from '../charts/line-area.component';
+import { TableComponent } from '../charts/table.component';
 export default {
     "pie": { label: "饼图", key: "pie", component: PieComponent, img: "assets/images/charts/pie.png" },
     "pie-custom": { label: "圆环图", key: "pie-custom", component: PieCustomComponent, img: "assets/images/charts/pie-custom.png" },
@@ -28,5 +29,6 @@ export default {
     "line-stack": { label: "堆叠折线图", key: "line-stack", component: LinestackComponent, img: "assets/images/charts/line-stack.png" },
     "line-multiple": { label: "交叉折线图", key: "line-multiple", component: LineMultipleComponent, img: "assets/images/charts/line-multiple.png" },
     "map": { label: "世界地图", key: "map", component: MapComponent, img: "assets/images/charts/world.jpg" },
-    "text": { label: "文字", key: "text", component: TextComponent, img: "assets/images/charts/text.png" }
+    "text": { label: "文字", key: "text", component: TextComponent, img: "assets/images/charts/text.png" },
+    "table": { label: "表哥", key: "table", component: TableComponent, img: "assets/images/charts/table.png" }
 }
