@@ -3,14 +3,18 @@ import { UserService } from './user.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { RoleService } from '../role/role.service';
+import { TemperatureHumidityService } from '../../../@core/mock/temperature-humidity.service';
+import { DeptService } from '../dept/dept.service';
+import { ServerDataSource, LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'ngx-user',
   templateUrl: './user.component.html'
 })
-export class UserComponent implements OnInit, AfterViewInit {
+export class UserComponent implements OnInit {
 
-  constructor(private userService: UserService, private roleService: RoleService) { }
+  constructor(private userService: UserService, private roleService: RoleService,
+    private deptService: DeptService) { }
   settings = {
     columns: {
       userId: {
@@ -48,22 +52,26 @@ export class UserComponent implements OnInit, AfterViewInit {
   isEdit: boolean = false;
   user: any = {};
   type: string;
-  userList: Observable<any>;
+  userSource: LocalDataSource;
   roleList: Array<any>;
-  userCondition = new Subject<any>();
+  deptList: Array<any>;
   ngOnInit() {
-    this.userList = this.userCondition.pipe(
-      switchMap(condition => this.userService.getList(condition)),
+    this.userSource = new LocalDataSource();
+    this.userService.getList().subscribe(
+      list => this.userSource.load(list)
     );
     this.roleService.getList().subscribe(
       list => this.roleList = list
+    )
+    this.deptService.getList().subscribe(
+      list => this.deptList = list
     )
   }
   changeRoles(event) {
     this.user.roleIds = event;
   }
-  ngAfterViewInit() {
-    this.userCondition.next({});
+  changeDept(event) {
+    this.user.deptId = event;
   }
   showNew() {
     this.type = "add";
@@ -79,10 +87,10 @@ export class UserComponent implements OnInit, AfterViewInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.userService.save(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
+      this.userService.save(this.user).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.userService.add(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
+      this.userService.add(this.user).subscribe(res => { this.isEdit = false; });
     }
   }
 

@@ -55,7 +55,7 @@ export class DeptComponent implements OnInit {
   }
 
   getList() {
-    this.deptService.getList().subscribe(
+    this.deptService.getTreeList().subscribe(
       depts => this.deptList = depts
     );
   }
@@ -79,7 +79,7 @@ export class DeptComponent implements OnInit {
 
     this.deptService.save(this.dept).subscribe(res => {
       this.showEdit = false;
-      this.deptService.getList().subscribe(
+      this.deptService.getTreeList().subscribe(
         list => this.deptList = list
       );
     })

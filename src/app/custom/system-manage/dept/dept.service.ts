@@ -10,8 +10,8 @@ export class DeptService {
 
   constructor(private api: ApiService) { }
 
-  getList(condition: any = {}) {
-    return this.api.get("/system/dept/list", condition).pipe(
+  getTreeList() {
+    return this.api.get("/system/dept/list").pipe(
       map(res => {
         let treeData: TreeNode[] = new Array();
         let hash = {};
@@ -45,6 +45,9 @@ export class DeptService {
         return treeData;
       })
     );
+  }
+  getList() {
+    return this.api.get("/system/dept/list")
   }
 
 
