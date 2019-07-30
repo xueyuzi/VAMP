@@ -59,6 +59,9 @@ export class UserComponent implements OnInit, AfterViewInit {
       list => this.roleList = list
     )
   }
+  changeRoles(event) {
+    this.user.roleIds = event;
+  }
   ngAfterViewInit() {
     this.userCondition.next({});
   }
@@ -76,11 +79,10 @@ export class UserComponent implements OnInit, AfterViewInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.userService.save(this.user).subscribe(res => { this.isEdit = false });
+      this.userService.save(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
     }
     if (this.type === "add") {
-      this.userService.add(this.user).subscribe(res => { this.isEdit = false });
-
+      this.userService.add(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next({}); });
     }
   }
 
