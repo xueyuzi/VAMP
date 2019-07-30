@@ -18,6 +18,8 @@ import { TextComponent } from './charts/text.component';
 import { NbSpinnerModule } from '@nebular/theme';
 import { BarHorizontalComponent } from './charts/bar-horizontal.component';
 import { LineAreaComponent } from './charts/line-area.component';
+import { TableModule } from 'primeng/table';
+import { TableComponent } from './charts/table.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -35,7 +37,8 @@ import { LineAreaComponent } from './charts/line-area.component';
     GaugeComponent,
     PieCustomComponent,
     MapComponent,
-    TextComponent
+    TextComponent,
+    TableComponent
   ],
   entryComponents: [
     PieComponent,
@@ -52,13 +55,14 @@ import { LineAreaComponent } from './charts/line-area.component';
     GaugeComponent,
     PieCustomComponent,
     MapComponent,
-    TextComponent
+    TextComponent, TableComponent
   ],
   exports: [ChartListComponent],
   imports: [
     CommonModule,
     NgxEchartsModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    TableModule
   ],
   providers: []
 })
