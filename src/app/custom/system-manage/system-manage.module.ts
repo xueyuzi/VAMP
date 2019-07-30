@@ -15,12 +15,14 @@ import { TreeModule } from 'primeng/tree';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DeptComponent } from './dept/dept.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     RoleComponent,
     UserComponent,
+    DeptComponent
   ],
   entryComponents: [
     NbIconComponent
