@@ -1,0 +1,71 @@
+<nb-card>
+  <nb-card-header>
+    部门列表
+  </nb-card-header>
+
+  <nb-card-body>
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <p-treeTable [value]="deptList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>部门名称</th>
+          <th>排序</th>
+          <th>创建时间</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{rowData.deptName}}
+          </td>
+          <td>{{rowData.orderNum}}</td>
+          <td>{{rowData.createTime}}</td>
+          <td>
+            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
+            <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
+              style="margin-right:5px">add</button>
+            <!-- <button nbButton size="small" status="danger" (click)='onEdit(rowNode)'>del</button> -->
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="编辑部门" [(visible)]="showEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 600px">
+    <div class="setting-item">
+      <label>部门名称:</label>
+      <input type="text" nbInput [(ngModel)]="dept.deptName" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>排序:</label>
+      <input type="text" nbInput [(ngModel)]="dept.orderNum" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>负责人:</label>
+      <input type="text" nbInput [(ngModel)]="dept.leader" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>联系电话:</label>
+      <input type="text" nbInput [(ngModel)]="dept.phone" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>邮箱:</label>
+      <input type="text" nbInput [(ngModel)]="dept.email" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>状态:</label>
+      <nb-radio-group [(ngModel)]="dept.status" style="display:flex">
+        <nb-radio value="0">开</nb-radio>
+        <nb-radio value="1">关</nb-radio>
+      </nb-radio-group>
+    </div>
+
+
+  </div>
+  <button nbButton fullWidth (click)="savedept()">保存</button>
+</p-dialog>
