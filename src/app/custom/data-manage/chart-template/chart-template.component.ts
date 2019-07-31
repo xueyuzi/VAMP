@@ -3,6 +3,7 @@ import { CATEGORY_A } from "../categorya.mock";
 import { ChartTemplateService } from './chart-template.service';
 import { ConfirmationService } from 'primeng/api';
 import chartListData from "../../dashboard/dashboard-charts/chart-list/chart-list.data";
+import { JsonEditorService } from '../../../common/json-editor.service';
 declare var ace: any;
 
 @Component({
@@ -19,14 +20,15 @@ export class ChartTemplateComponent implements OnInit {
   type: string;
   constructor(
     private chartTemplateService: ChartTemplateService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private jsonEditorService: JsonEditorService
   ) { }
 
   ngOnInit() {
     this.getTemplate();
-    
-    this.chartTemplateService.getTemplateCateGoryList().subscribe(res=>{
-      let keys=Object.keys(res)
+
+    this.chartTemplateService.getTemplateCateGoryList().subscribe(res => {
+      let keys = Object.keys(res)
       this.category_a_items = keys;
       this.defaultChart = {
         default_period_category: 'h',
@@ -44,10 +46,8 @@ export class ChartTemplateComponent implements OnInit {
   }
   setEditor() {
     setTimeout(() => {
-      this.editor = ace.edit("editor");
-      this.editor.setTheme("ace/theme/monokai");
-      this.editor.session.setMode("ace/mode/json");
-      this.editor.setValue(this.defaultChart.esjson)
+      this.jsonEditorService.createEditor("chart-template-editor");
+      this.jsonEditorService.setValue(this.defaultChart.esjson)
     }, 50)
 
 
@@ -79,7 +79,7 @@ export class ChartTemplateComponent implements OnInit {
     this.defaultChart.chart_img = chartListData[type].img;
   }
   handleClick() {
-    this.defaultChart.esjson = this.editor.getValue()
+    this.defaultChart.esjson = this.jsonEditorService.getValue()
     if (this.type === "edit") {
       this.save();
     } else {

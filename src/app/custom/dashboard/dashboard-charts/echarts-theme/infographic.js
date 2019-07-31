@@ -22,17 +22,17 @@
     }
     echarts.registerTheme('infographic', {
         "color": [
-            "#c23531",
-            "#2f4554",
-            "#61a0a8",
-            "#d48265",
-            "#91c7ae",
-            "#749f83",
-            "#ca8622",
-            "#bda29a",
-            "#6e7074",
-            "#546570",
-            "#c4ccd3"
+            "#2b908f",
+            "#90ee7e",
+            "#f45b5b",
+            "#7798bf",
+            "#aaeeee",
+            "#ff3398",
+            "#ff197f",
+            "#ff0066",
+            "#eeaaee",
+            "#55bf3b",
+            "#df5353"
         ],
         "backgroundColor": "rgba(0, 0, 0, 0)",
         "textStyle": {},

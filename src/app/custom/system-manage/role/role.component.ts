@@ -35,9 +35,12 @@ export class RoleComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
+      columnTitle: "操作",
+      position: "right"
     },
     delete: {
       confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
     }
   }
   roleList: Array<any>;
@@ -91,12 +94,22 @@ export class RoleComponent implements OnInit {
 
 
   changeMenus(event, node) {
+    console.log(node);
     let i = this.menus.indexOf(node);
+    if (i === -1) {
+      return false;
+    }
     this.menus[i].children.forEach(
       (v, k) => {
         this.menus[i].children[k].data.checked = event;
       }
     )
+  }
+  checkParentIsChecked(node) {
+    if (node.children == undefined) {
+      return false;
+    }
+    return node.children.filter(cnode => cnode.data.checked).length > 0
   }
   getList() {
     this.roleService.getList().subscribe(

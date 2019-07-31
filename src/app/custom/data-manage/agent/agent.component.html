@@ -1,3 +1,4 @@
+<script src="agent.component.ts"></script>
 <nb-card>
   <nb-card-header>
     采集器配置
@@ -20,16 +21,22 @@
       <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
     </div>
 
-    <div class="setting-item">
+    <div class="setting-item" style="height:auto">
       <label>配置:</label>
-      <input type="text" nbInput [(ngModel)]="user.agentConfig" fullWidth>
+      <div id="agent-json-editor" style="height:150px;flex:1;margin:10px 0"></div>
+      <!-- <input type="text" nbInput [(ngModel)]="user.agentConfig" fullWidth> -->
     </div>
 
     <div class="setting-item">
       <label>识别key:</label>
       <input type="text" nbInput [(ngModel)]="user.agentKey" fullWidth>
     </div>
-
+    <div class="setting-item">
+      <label>脱敏规则配置:</label>
+      <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="user.desen_rule_id" (selectedChange)="changeDesen($event)" style="width: 200px">
+        <nb-option [value]="role.id" *ngFor="let role of dRuleList">{{role.desenName}}</nb-option>
+      </nb-select>
+    </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>

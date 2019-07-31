@@ -35,6 +35,7 @@
       <p-tree [value]="menus">
         <ng-template let-node pTemplate="default">
           <p-checkbox name="groupname" binary="true" [(ngModel)]="node.data.checked"
+          [ngClass]="{'half-checked':checkParentIsChecked(node)}"
             (onChange)="changeMenus($event,node)"></p-checkbox>
           <label>{{node.label}}</label>
         </ng-template>
