@@ -26,6 +26,7 @@ export class LoginComponent {
         this.router.navigateByUrl("/custom");
       } else {
         this.errors = res.msg;
+        this.changeCode();
       }
     })
   }
