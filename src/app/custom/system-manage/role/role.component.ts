@@ -35,9 +35,12 @@ export class RoleComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
+      columnTitle: "操作",
+      position: "right"
     },
     delete: {
       confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
     }
   }
   roleList: Array<any>;
