@@ -12,6 +12,9 @@ export class AgentService {
   getList() {
     return new ServerDataSource(this.http, { totalKey: "total", pagerPageKey: "offset", pagerLimitKey: "limit", dataKey: "rows", endPoint: "/cep/agent/list" })
   }
+  getAgent(agentId) {
+    return this.api.get("/cep/agent/edit/" + agentId);
+  }
   add(user: any) {
     return this.api.post("/cep/agent/save", user)
   }
