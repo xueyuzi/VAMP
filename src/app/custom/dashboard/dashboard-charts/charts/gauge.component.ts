@@ -13,7 +13,7 @@ export class GaugeComponent extends BaseChartComponent implements OnInit {
     options = {
         dataset: {
             source: [
-                { value: 50 }
+                { value: 0 }
             ]
         },
         series: [

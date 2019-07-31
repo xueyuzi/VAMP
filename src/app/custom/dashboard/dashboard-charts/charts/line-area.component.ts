@@ -13,11 +13,7 @@ export class LineAreaComponent extends BaseChartComponent implements OnInit {
     options = {
         dataset: {
             source: [
-                { name: '周一', value: 335 },
-                { name: '周二', value: 310 },
-                { name: '周三', value: 234 },
-                { name: '周四', value: 135 },
-                { name: '周五', value: 1548 }
+                { name: '无数据', value: 0 }
             ]
         },
         xAxis: {
