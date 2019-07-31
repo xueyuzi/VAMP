@@ -3,6 +3,7 @@ import { AgentService } from './agent.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
+import { DesenRuleService } from '../desenRule/desenRule.service';
 
 @Component({
   selector: 'ngx-user',
@@ -10,7 +11,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 })
 export class AgentComponent implements OnInit {
 
-  constructor(private agentService: AgentService) { }
+  constructor(private agentService: AgentService,private desenRuleService:DesenRuleService) { }
   settings = {
     columns: {
       id: {
@@ -42,15 +43,19 @@ export class AgentComponent implements OnInit {
 
     },
     pager:{
-      perPage:1
+      perPage:10
     }
   }
   isEdit: boolean = false;
   user: any = {};
   type: string;
   agentSource: ServerDataSource;
+  dRuleList: Array<any>;
   ngOnInit() {
     this.agentSource = this.agentService.getList();
+    this.desenRuleService.getList().subscribe(
+      list => this.dRuleList = list
+    )
   }
   showNew() {
     this.type = "add";
@@ -66,15 +71,19 @@ export class AgentComponent implements OnInit {
   saveUser() {
 
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit=false;});
+      this.agentService.save(this.user).subscribe(res => { this.isEdit=false;this.agentSource.refresh();});
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit=false;});
+      this.agentService.add(this.user).subscribe(res => { this.isEdit=false;this.agentSource.refresh()});
 
     }
   }
 
   delUser(id: number) {
     this.agentService.del(id).subscribe(res => { });
+  }
+
+  changeDesen(event) {
+    this.user.desen_rule_id = event;
   }
 }
