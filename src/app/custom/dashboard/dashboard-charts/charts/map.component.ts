@@ -337,7 +337,7 @@ export class MapComponent extends BaseChartComponent implements OnInit {
                     itemStyle: {
                         normal: {
                             show: 'true',
-                            color: "#253c4e", //地图背景色
+                            color: "red", //地图背景色
                             borderColor: "#5bc1c9" //省市边界线
                         },
                         emphasis: {
