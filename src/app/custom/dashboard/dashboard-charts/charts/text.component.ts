@@ -41,7 +41,7 @@ export class TextComponent extends BaseChartComponent implements OnInit {
     options = {
         dataset: {
             source: [
-                { doc_count: "暂无数据" }
+                { doc_count: "0" }
             ]
         }
     }
