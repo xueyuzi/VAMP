@@ -48,9 +48,13 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     actions: {
       add: false,
       edit: false,
-      delete: false,
-
-    }
+      columnTitle: "操作",
+      position: "right"
+    },
+    delete: {
+      confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
+    },
   }
   isEdit: boolean = false;
   user: any = {};
@@ -87,7 +91,10 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  delUser(id: number) {
-    this.activeList.del(id).subscribe(res => { });
+  delUser($event) {
+    this.activeList.del($event.data.id).subscribe(
+      res => {
+        this.userCondition.next();
+      });
   }
 }
