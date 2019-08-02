@@ -13,6 +13,7 @@ import { ActiveListDetailComponent } from './activeListDetail/activeListDetail.c
 import { RuleComponent } from './rule/rule.component';
 import { SinkComponent } from './sink/sink.component';
 import { SourceComponent } from './source/source.component';
+import { ModelComponent } from './model/model.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
@@ -34,6 +35,7 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
     RuleComponent,
     SinkComponent,
     SourceComponent,
+    ModelComponent,
     AgenthbComponent],
   imports: [
     CommonModule,
