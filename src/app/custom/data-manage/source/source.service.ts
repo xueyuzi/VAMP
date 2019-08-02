@@ -22,6 +22,6 @@ export class SourceService {
   }
 
   del(ids:number){
-    return this.api.post("/cep/source/remove",{ids:ids})
+    return this.api.post("/cep/source/remove",{id:ids})
   }
 }
