@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 import { DesenRuleService } from '../desenRule/desenRule.service';
 import { JsonEditorService } from '../../../common/json-editor.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'ngx-user',
@@ -14,7 +15,8 @@ export class AgentComponent implements OnInit {
 
   constructor(private agentService: AgentService,
     private desenRuleService: DesenRuleService,
-    private jsonEditorService: JsonEditorService) { }
+    private jsonEditorService: JsonEditorService,
+    private confirmationService: ConfirmationService) { }
   settings = {
     columns: {
       id: {
@@ -42,8 +44,12 @@ export class AgentComponent implements OnInit {
     actions: {
       add: false,
       edit: false,
-      delete: false,
-
+      columnTitle: "操作",
+      position: "right"
+    },
+    delete: {
+      confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
     },
     pager: {
       perPage: 10
@@ -65,7 +71,7 @@ export class AgentComponent implements OnInit {
   setEditor() {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.agentConfig);
+      this.jsonEditorService.setValue(this.user.desenConfig);
     }, 50)
   }
 
@@ -91,13 +97,16 @@ export class AgentComponent implements OnInit {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh() });
+      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
 
     }
   }
 
-  delUser(id: number) {
-    this.agentService.del(id).subscribe(res => { });
+  delUser($event) {
+        this.agentService.del($event.data.id).subscribe(
+          res => {
+            this.agentSource.refresh();
+    });
   }
 
   changeDesen(event) {

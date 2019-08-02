@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DesenRuleService } from './desenRule.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
@@ -9,7 +10,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class DesenRuleComponent implements OnInit, AfterViewInit {
 
-  constructor(private desenRuleService: DesenRuleService) { }
+  constructor(private desenRuleService: DesenRuleService,
+              private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
       id: {
@@ -58,15 +60,25 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userCondition.next({});
   }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.user.desenConfig);
+    }, 50)
+  }
+
   showNew() {
     this.type = "add";
     this.user = {};
     this.isEdit = true;
+    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
     this.user = $event.data;
     this.isEdit = true;
+    this.setEditor();
   }
 
   saveUser() {

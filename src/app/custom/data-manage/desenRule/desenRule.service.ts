@@ -9,7 +9,7 @@ export class DesenRuleService {
 
   constructor(private api:ApiService) { }
   getList(condition:any={}){
-    return this.api.get("/cep/desenRule/list?offset=0&limit=10").pipe(
+    return this.api.get("/cep/desenRule/list?offset=0&limit=100").pipe(
       map(v=>v.rows)
     );
   }
