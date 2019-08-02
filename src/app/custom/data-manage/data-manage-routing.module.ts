@@ -11,6 +11,7 @@ import {RuleComponent} from "./rule/rule.component";
 import {SinkComponent} from "./sink/sink.component";
 import {SourceComponent} from "./source/source.component";
 import { ModelComponent } from './model/model.component';
+import { EtltypeComponent } from './etltype/etltype.component';
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path:"sink",component:SinkComponent},
     {path:"source",component:SourceComponent},
     {path:"model",component:ModelComponent},
+    {path:"etltype",component:EtltypeComponent},
     {path:"agent",component:AgentComponent}
 ];
 
