@@ -10,6 +10,7 @@ import {ActiveListDetailComponent } from './activeListDetail/activeListDetail.co
 import {RuleComponent} from "./rule/rule.component";
 import {SinkComponent} from "./sink/sink.component";
 import {SourceComponent} from "./source/source.component";
+import { ModelComponent } from './model/model.component';
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path:"rule",component:RuleComponent},
     {path:"sink",component:SinkComponent},
     {path:"source",component:SourceComponent},
+    {path:"model",component:ModelComponent},
     {path:"agent",component:AgentComponent}
 ];
 
