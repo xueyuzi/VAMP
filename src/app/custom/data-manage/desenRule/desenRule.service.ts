@@ -22,6 +22,6 @@ export class DesenRuleService {
   }
 
   del(ids:number){
-    return this.api.post("/cep/desenRule/remove",{ids:ids})
+    return this.api.post("/cep/desenRule/remove",{id:ids})
   }
 }

@@ -2,12 +2,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AgenthbService } from './agenthb.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ServerDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'ngx-user',
   templateUrl: './agenthb.component.html'
 })
-export class AgenthbComponent implements OnInit, AfterViewInit {
+export class AgenthbComponent implements OnInit {
 
   constructor(private agenthbService: AgenthbService) { }
   settings = {
@@ -54,17 +55,19 @@ export class AgenthbComponent implements OnInit, AfterViewInit {
       edit: false,
       delete: false,
 
-    }
+    },pager: {
+      perPage: 10
+    },
+    hideSubHeader: true
   }
   isEdit: boolean = false;
   user: any = {};
   type: string;
+  agenthbSource: ServerDataSource;
   userList: Observable<any>;
   userCondition = new Subject<any>();
   ngOnInit() {
-    this.userList = this.userCondition.pipe(
-      switchMap(condition => this.agenthbService.getList(condition)),
-    )
+    this.agenthbSource = this.agenthbService.getList();
   }
   ngAfterViewInit() {
     this.userCondition.next({});

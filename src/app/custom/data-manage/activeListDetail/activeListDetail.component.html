@@ -1,0 +1,28 @@
+<script src="activeListDetail.component.ts"></script>
+<nb-card>
+  <nb-card-header>
+    活动列表明细
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="新建活动列表明细" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 800px">
+
+    <div class="setting-item">
+      <label>活动列表:</label>
+      <nb-select  placeholder="请选择活动列表" [(selected)]="user.listId" (selectedChange)="changeActive($event)" style="width: 200px">
+        <nb-option [value]="activelist.id" *ngFor="let activelist of activeList">{{activelist.listName}}</nb-option>
+      </nb-select>
+    </div>
+    <div class="setting-item">
+      <label>值:</label>
+      <input type="text" nbInput [(ngModel)]="user.value" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+
