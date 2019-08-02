@@ -14,12 +14,13 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartListComponent } from './chart-list/chart-list.component';
 import { PieCustomComponent } from './charts/pie-custom.component';
 import { MapComponent } from './charts/map.component';
-import { TextComponent } from './charts/text.component';
+import { NumberComponent } from './charts/number.component';
 import { NbSpinnerModule } from '@nebular/theme';
 import { BarHorizontalComponent } from './charts/bar-horizontal.component';
 import { LineAreaComponent } from './charts/line-area.component';
 import { TableModule } from 'primeng/table';
 import { TableComponent } from './charts/table.component';
+import { TextComponent } from './charts/text.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -37,8 +38,9 @@ import { TableComponent } from './charts/table.component';
     GaugeComponent,
     PieCustomComponent,
     MapComponent,
-    TextComponent,
-    TableComponent
+    NumberComponent,
+    TableComponent,
+    TextComponent
   ],
   entryComponents: [
     PieComponent,
@@ -55,7 +57,8 @@ import { TableComponent } from './charts/table.component';
     GaugeComponent,
     PieCustomComponent,
     MapComponent,
-    TextComponent, TableComponent
+    NumberComponent, TableComponent,
+    TextComponent
   ],
   exports: [ChartListComponent],
   imports: [
