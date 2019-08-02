@@ -86,7 +86,7 @@ export class SourceComponent implements OnInit, AfterViewInit {
   }
 
   saveUser() {
-
+    this.user.content = this.jsonEditorService.getValue();
     if (this.type === "edit") {
       this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }

@@ -93,7 +93,7 @@ export class AgentComponent implements OnInit {
   }
 
   saveUser() {
-
+    this.user.agentConfig = this.jsonEditorService.getValue();
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }

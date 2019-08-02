@@ -5,11 +5,11 @@
 
   <nb-card-body>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="输出数据源配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" style="width: 600px">
+  <div class="setting-container" style="width: 800px">
     <div class="setting-item">
       <label>名称:</label>
       <input type="text" nbInput [(ngModel)]="user.name" fullWidth>
@@ -20,9 +20,9 @@
       <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
     </div>
 
-    <div class="setting-item">
+    <div class="setting-item" style="height:auto">
       <label>JSON配置内容:</label>
-      <input type="text" nbInput [(ngModel)]="user.content" fullWidth>
+      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
     </div>
 
     <div class="setting-item">
