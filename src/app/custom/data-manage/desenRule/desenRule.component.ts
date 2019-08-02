@@ -43,9 +43,13 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
     actions: {
       add: false,
       edit: false,
-      delete: false,
-
-    }
+      columnTitle: "操作",
+      position: "right"
+    },
+    delete: {
+      confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
+    },
   }
   isEdit: boolean = false;
   user: any = {};
@@ -92,7 +96,7 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
     }
   }
 
-  delUser(id: number) {
-    this.desenRuleService.del(id).subscribe(res => { });
+  delUser($event) {
+    this.desenRuleService.del($event.data.id).subscribe(res => {this.userCondition.next() });
   }
 }
