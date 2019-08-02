@@ -5,23 +5,23 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class DesenRuleService {
+export class ModelService {
 
   constructor(private api:ApiService) { }
   getList(condition:any={}){
-    return this.api.get("/cep/desenRule/list?offset=0&limit=100").pipe(
+    return this.api.get("/cep/model/list?offset=0&limit=100").pipe(
       map(v=>v.rows)
     );
   }
   add(user:any){
-    return this.api.post("/cep/desenRule/save",user)
+    return this.api.post("/cep/model/save",user)
   }
 
   save(user:any){
-    return this.api.post("/cep/desenRule/update",user);
+    return this.api.post("/cep/model/update",user);
   }
 
   del(ids:number){
-    return this.api.post("/cep/desenRule/remove",{id:ids})
+    return this.api.post("/cep/model/remove",{ids:ids})
   }
 }

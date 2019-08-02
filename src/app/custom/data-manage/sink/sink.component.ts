@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SinkService } from './sink.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
@@ -9,7 +10,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class SinkComponent implements OnInit, AfterViewInit {
 
-  constructor(private desenRuleService: SinkService) { }
+  constructor(private desenRuleService: SinkService,
+              private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
       id: {
@@ -37,9 +39,13 @@ export class SinkComponent implements OnInit, AfterViewInit {
     actions: {
       add: false,
       edit: false,
-      delete: false,
-
-    }
+      columnTitle: "操作",
+      position: "right"
+    },
+    delete: {
+      confirmDelete: true,
+      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
+    },
   }
   isEdit: boolean = false;
   user: any = {};
@@ -58,15 +64,17 @@ export class SinkComponent implements OnInit, AfterViewInit {
     this.type = "add";
     this.user = {};
     this.isEdit = true;
+    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
     this.user = $event.data;
     this.isEdit = true;
+    this.setEditor();
   }
 
   saveUser() {
-
+    this.user.content = this.jsonEditorService.getValue()
     if (this.type === "edit") {
       this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }
@@ -76,7 +84,17 @@ export class SinkComponent implements OnInit, AfterViewInit {
     }
   }
 
-  delUser(id: number) {
-    this.desenRuleService.del(id).subscribe(res => { });
+  delUser($event) {
+    this.desenRuleService.del($event.data.id).subscribe(
+      res => {
+        this.userCondition.next();
+      });
+  }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.user.content);
+    }, 50)
   }
 }

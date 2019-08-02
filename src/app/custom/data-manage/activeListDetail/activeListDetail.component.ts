@@ -1,43 +1,31 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AgentService } from './agent.service';
+import { ActiveListDetailService } from './ActiveListDetail.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
-import { DesenRuleService } from '../desenRule/desenRule.service';
-import { JsonEditorService } from '../../../common/json-editor.service';
-import { ConfirmationService } from 'primeng/api';
+import { ActiveListService } from '../activeList/activeList.service';
+
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './agent.component.html'
+  templateUrl: './activeListDetail.component.html'
 })
-export class AgentComponent implements OnInit {
+export class ActiveListDetailComponent implements OnInit {
 
-  constructor(private agentService: AgentService,
-    private desenRuleService: DesenRuleService,
-    private jsonEditorService: JsonEditorService,
-    private confirmationService: ConfirmationService) { }
+  constructor(private agentService: ActiveListDetailService,
+    private activeListService: ActiveListService) { }
   settings = {
     columns: {
       id: {
         title: 'ID',
         type: 'number',
       },
-      agentName: {
-        title: '名称',
+      listId: {
+        title: '活动列表',
         type: 'string',
       },
-      agentAddress: {
-        title: 'IP地址',
-        type: 'string',
-      },
-      agentConfig: {
-        title: '配置',
-        type: 'string',
-        width: "20%",
-      },
-      agentKey: {
-        title: '识别key',
+      value: {
+        title: '值',
         type: 'string',
       }
     },
@@ -60,40 +48,30 @@ export class AgentComponent implements OnInit {
   user: any = {};
   type: string;
   agentSource: ServerDataSource;
-  dRuleList: Array<any>;
+  activeList: Array<any>;
   desen_rule_id: any = []
   ngOnInit() {
     this.agentSource = this.agentService.getList();
-    this.desenRuleService.getList().subscribe(
-      list => this.dRuleList = list
+    this.activeListService.getList().subscribe(
+      list => this.activeList = list
     )
-  }
-
-  setEditor() {
-    setTimeout(() => {
-      this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.agentConfig);
-    }, 50)
   }
 
   showNew() {
     this.type = "add";
     this.user = { desen_rule_id: [] };
     this.isEdit = true;
-    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
     this.agentService.getAgent($event.data.id).subscribe(
       data => this.user = data
     )
-
     this.isEdit = true;
-    this.setEditor();
   }
 
   saveUser() {
-    this.user.agentConfig = this.jsonEditorService.getValue();
+
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }
@@ -110,7 +88,7 @@ export class AgentComponent implements OnInit {
     });
   }
 
-  changeDesen(event) {
-    console.log(this.desen_rule_id)
+  changeActive(event) {
+    this.user.listId = event;
   }
 }

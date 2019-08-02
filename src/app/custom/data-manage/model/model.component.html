@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-header>
-    输出数据源配置
+    SQL规则数据模型配置
   </nb-card-header>
 
   <nb-card-body>
@@ -8,26 +8,26 @@
     <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="输出数据源配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+<p-dialog header="SQL规则数据模型配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 800px">
     <div class="setting-item">
-      <label>名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.name" fullWidth>
+      <label>表名:</label>
+      <input type="text" nbInput [(ngModel)]="user.tableName" fullWidth>
     </div>
 
     <div class="setting-item">
-      <label>类型:</label>
-      <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
+      <label>数据源:</label>
+      <input type="text" nbInput [(ngModel)]="user.sourceId" fullWidth>
     </div>
 
     <div class="setting-item" style="height:auto">
-      <label>JSON配置内容:</label>
+      <label>数据结构:</label>
       <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
     </div>
 
     <div class="setting-item">
-      <label>格式类型:</label>
-      <input type="text" nbInput [(ngModel)]="user.format_type" fullWidth>
+      <label>描述:</label>
+      <input type="text" nbInput [(ngModel)]="user.description" fullWidth>
     </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>

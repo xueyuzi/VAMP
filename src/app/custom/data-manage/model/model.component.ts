@@ -1,47 +1,38 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActiveListService } from './activeList.service';
+import { ModelService } from './model.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './activeList.component.html'
+  templateUrl: './model.component.html'
 })
-export class ActiveListComponent implements OnInit, AfterViewInit {
+export class ModelComponent implements OnInit, AfterViewInit {
 
-  constructor(private activeList: ActiveListService) { }
+  constructor(private desenRuleService: ModelService,
+              private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
       id: {
         title: 'ID',
         type: 'number',
       },
-      listName: {
-        title: '名称',
+      tableName: {
+        title: '表名',
         type: 'string',
       },
-      listNo: {
-        title: '编号',
+      sourceId: {
+        title: '数据源',
         type: 'string',
       },
-      type: {
-        title: '类型',
+      tableFields: {
+        title: '数据结构',
         type: 'string',
+        width: "35%",
       },
-      status: {
-        title: '状态',
-        type: 'string',
-      },
-      maxsize: {
-        title: '最大值',
-        type: 'string',
-      },
-      timeout: {
-        title: '超时时间',
-        type: 'string',
-      },
-      remark: {
-        title: '备注',
+      description: {
+        title: '描述',
         type: 'string',
       }
     },
@@ -63,7 +54,7 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
   userCondition = new Subject<any>();
   ngOnInit() {
     this.userList = this.userCondition.pipe(
-      switchMap(condition => this.activeList.getList(condition)),
+      switchMap(condition => this.desenRuleService.getList(condition)),
     )
   }
   ngAfterViewInit() {
@@ -73,28 +64,34 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     this.type = "add";
     this.user = {};
     this.isEdit = true;
+    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
     this.user = $event.data;
     this.isEdit = true;
+    this.setEditor();
   }
 
   saveUser() {
-
+    this.user.tableFields = this.jsonEditorService.getValue();
     if (this.type === "edit") {
-      this.activeList.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }
     if (this.type === "add") {
-      this.activeList.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.desenRuleService.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
 
     }
   }
 
   delUser($event) {
-    this.activeList.del($event.data.id).subscribe(
-      res => {
-        this.userCondition.next();
-      });
+    this.desenRuleService.del($event.data.id).subscribe(res => {this.userCondition.next()});
+  }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.user.tableFields);
+    }, 50)
   }
 }

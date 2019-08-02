@@ -9,9 +9,11 @@ import { AgentComponent } from './agent/agent.component';
 import { DesenRuleComponent } from './desenRule/desenRule.component';
 import { AgenthbComponent } from './agenthb/agenthb.component';
 import { ActiveListComponent } from './activeList/activeList.component';
+import { ActiveListDetailComponent } from './activeListDetail/activeListDetail.component';
 import { RuleComponent } from './rule/rule.component';
 import { SinkComponent } from './sink/sink.component';
 import { SourceComponent } from './source/source.component';
+import { ModelComponent } from './model/model.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
@@ -29,9 +31,11 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
     AgentComponent,
     DesenRuleComponent,
     ActiveListComponent,
+    ActiveListDetailComponent,
     RuleComponent,
     SinkComponent,
     SourceComponent,
+    ModelComponent,
     AgenthbComponent],
   imports: [
     CommonModule,

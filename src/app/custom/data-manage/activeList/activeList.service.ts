@@ -9,7 +9,7 @@ export class ActiveListService {
 
   constructor(private api:ApiService) { }
   getList(condition:any={}){
-    return this.api.get("/cep/activeList/list?offset=0&limit=10").pipe(
+    return this.api.get("/cep/activeList/list?offset=0&limit=100").pipe(
       map(v=>v.rows)
     );
   }
@@ -22,6 +22,6 @@ export class ActiveListService {
   }
 
   del(ids:number){
-    return this.api.post("/cep/activeList/remove",{ids:ids})
+    return this.api.post("/cep/activeList/remove",{id:ids})
   }
 }

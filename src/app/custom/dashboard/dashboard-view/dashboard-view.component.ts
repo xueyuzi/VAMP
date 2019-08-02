@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { GridStackOptions } from 'ngx-grid-stack';
+import { GridStackOptions, GridStackComponent } from 'ngx-grid-stack';
 import { MenuService } from '../../system-manage/menu/menu.service';
 import { ChartTemplateService } from '../../data-manage/chart-template/chart-template.service';
 
@@ -17,6 +17,7 @@ export class DashboardViewComponent implements OnInit {
     private route: ActivatedRoute,
     private chartTemplateService: ChartTemplateService
   ) { }
+  @ViewChild('gridstack', { static: false }) gridstack: GridStackComponent;
   title: string;
   id: number;
   options: GridStackOptions;
@@ -27,6 +28,7 @@ export class DashboardViewComponent implements OnInit {
   charts: Array<any> = [];
   ngOnInit() {
     this.options = new GridStackOptions();
+    this.isEdit = false;
     this.dashboardService.containersSource.subscribe(containers => {
       this.containers = []
       setTimeout(() => { this.containers = containers })
@@ -38,19 +40,21 @@ export class DashboardViewComponent implements OnInit {
       this.id = Number(params.get("id"));
       this.dashboardService.getContainers(this.id).subscribe(
         () => {
-          // console.log(this.menuService.menus)
-          // this.title = this.menuService.menus[this.id - 1].title;
+          this.switchGrid(false);
         }
       );
     });
-    this.dashboardService.isEdit.subscribe(
-      flag => this.isEdit = flag
-    )
   }
 
   switchEdit() {
     this.isEdit = !this.isEdit;
+    this.switchGrid(this.isEdit);
     this.dashboardService.switchEdit(this.isEdit);
+  }
+  switchGrid(flag: boolean) {
+    setTimeout(() => {
+      flag ? this.gridstack.grid.enable() : this.gridstack.grid.disable()
+    }, 300);
   }
   cancel() {
     this.switchEdit();

@@ -8,20 +8,25 @@ import { ChartsService } from '../dashboard-charts.service';
   templateUrl: "base-charts.component.html"
 })
 export class BarComponent extends BaseChartComponent implements OnInit, AfterViewInit {
-  @ViewChild("chartConfig",{static:false}) chartConfig: ElementRef;
+  @ViewChild("chartConfig", { static: false }) chartConfig: ElementRef;
 
   config: any = {
     barWidth: 20,
     barCategoryGap: 20,
   };
   options: any = {
+    grid: {
+      top: 30,
+      left: 40,
+      bottom: 30,
+    },
     dataset: {
       source: [
         { name: '无数据', value: 0 }
       ]
     },
     tooltip: {
-      confine:true,
+      confine: true,
       trigger: 'axis',
       axisPointer: {            // 坐标轴指示器，坐标轴触发有效
         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'

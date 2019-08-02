@@ -11,6 +11,11 @@ export class LineAreaComponent extends BaseChartComponent implements OnInit {
         super(chartsService);
     }
     options = {
+        grid:{
+            top:30,
+            left:40,
+            bottom:30,
+        },
         dataset: {
             source: [
                 { name: '无数据', value: 0 }

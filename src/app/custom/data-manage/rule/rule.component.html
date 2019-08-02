@@ -5,11 +5,11 @@
 
   <nb-card-body>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="实时分析规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" style="width: 600px">
+  <div class="setting-container" style="width: 800px">
     <div class="setting-item">
       <label>分类ID:</label>
       <input type="text" nbInput [(ngModel)]="user.categoryId" fullWidth>
@@ -43,9 +43,9 @@
       <label>数据源:</label>
       <input type="text" nbInput [(ngModel)]="user.sourceId" fullWidth>
     </div>
-    <div class="setting-item">
+    <div class="setting-item" style="height:auto">
       <label>规则明细:</label>
-      <input type="text" nbInput [(ngModel)]="user.ruleContent" fullWidth>
+      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
     </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
