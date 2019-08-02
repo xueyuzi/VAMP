@@ -10,7 +10,7 @@
   </nb-card-body>
 </nb-card>
 <p-dialog header="新建配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" style="width: 600px">
+  <div class="setting-container" style="width: 800px">
     <div class="setting-item">
       <label>名称:</label>
       <input type="text" nbInput [(ngModel)]="user.agentName" fullWidth>
@@ -23,7 +23,7 @@
 
     <div class="setting-item" style="height:auto">
       <label>配置:</label>
-      <div id="agent-json-editor" style="height:150px;flex:1;margin:10px 0"></div>
+      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
       <!-- <input type="text" nbInput [(ngModel)]="user.agentConfig" fullWidth> -->
     </div>
 

@@ -53,7 +53,8 @@ export class AgentComponent implements OnInit {
     },
     pager: {
       perPage: 10
-    }
+    },
+    hideSubHeader: true
   }
   isEdit: boolean = false;
   user: any = {};
@@ -71,7 +72,7 @@ export class AgentComponent implements OnInit {
   setEditor() {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.desenConfig);
+      this.jsonEditorService.setValue(this.user.agentConfig);
     }, 50)
   }
 
