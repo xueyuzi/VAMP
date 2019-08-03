@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
+  styleUrls:["login.component.scss"]
 })
 export class LoginComponent {
   user: any = {
@@ -22,7 +23,9 @@ export class LoginComponent {
   login() {
     console.log("submit")
     this.authService.login(this.user).subscribe(res => {
+      console.log(res);
       if (res.code == 0) {
+        console.log("login success")
         this.router.navigateByUrl("/custom");
       } else {
         this.errors = res.msg;

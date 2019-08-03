@@ -23,7 +23,10 @@ export class AuthService {
     formData.append("validateCode", user.validateCode);
     formData.append("rememberMe", user.rememberMe);
     return this.api.post("/login", formData).pipe(
-      tap((res) => res.code == 0 && localStorage.setItem("user", user.username))
+      tap((res) => {
+        console.log(res);
+        if(res.code == 0) localStorage.setItem("user", user.username)
+      })
     );
   }
 
