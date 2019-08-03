@@ -5,6 +5,7 @@ export class BaseChartComponent {
     theme: string;
     mapLoaded: boolean = false;
     options: any;
+    container:any;
     constructor(
         protected chartsService: ChartsService
     ) {
@@ -33,5 +34,9 @@ export class BaseChartComponent {
         this.options.dataset = data;
         this.options = Object.assign({}, this.options)
         console.log("echarts options", this.options)
+    }
+    setContainer(container){
+        this.container = container;
+        console.log(this.container);
     }
 }

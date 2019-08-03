@@ -2,31 +2,57 @@
   (onShow)="onShow()" [contentStyle]="{'padding':'0px'}">
   <div class="setting-form">
     <ul class="setting-form-menu">
-      <li>数据设置</li>
+      <li (click)="changeAction('data')">数据设置</li>
+      <li (click)="changeAction('other')">其他</li>
     </ul>
-    <div class="setting-form-container" *ngIf="chartSetting !== undefined">
-      <div class="setting-form-item">
-        <label>索引</label>
-        <div><input type="text" [(ngModel)]="chartSetting.es_index"></div>
-      </div>
-      <div class="setting-form-item">
-        <label>图表名称</label>
-        <div><input type="text" [(ngModel)]="chartSetting.chartname"></div>
-      </div>
-      <div class="setting-form-item">
-        <label>时间范围</label>
-        <div>
-          <label>前</label>
-          <input type="text" style="width: 20px;" [(ngModel)]="chartSetting.period">
-          <select placeholder="请选择" [(ngModel)]="chartSetting.period_category">
-            <option value="h">小时</option>
-            <option value="d">天</option>
-            <option value="m">月</option>
-            <option value="y">年</option>
-          </select>
+    <div *ngIf="chartSetting!==undefined">
+      <div class="setting-form-container" *ngIf="tag==='data' ">
+        <div class="setting-form-item">
+          <label>索引</label>
+          <div><input type="text" [(ngModel)]="chartSetting.es_index"></div>
+        </div>
+        <div class="setting-form-item">
+          <label>图表名称</label>
+          <div><input type="text" [(ngModel)]="chartSetting.chartname"></div>
+        </div>
+        <div class="setting-form-item">
+          <label>时间范围</label>
+          <div>
+            <label>前</label>
+            <input type="text" style="width: 20px;" [(ngModel)]="chartSetting.period">
+            <select placeholder="请选择" [(ngModel)]="chartSetting.period_category">
+              <option value="h">小时</option>
+              <option value="d">天</option>
+              <option value="m">月</option>
+              <option value="y">年</option>
+            </select>
+          </div>
         </div>
       </div>
-      <p-button label="保存" (onClick)="save()"></p-button>
+      <div *ngIf="tag==='other'">
+        <div class="setting-form-container" *ngIf="container.panelData.type=='image'">
+          <div class="setting-form-item">
+            <label>图片地址</label>
+            <div><input type="text" [(ngModel)]="chartSetting.img_src"></div>
+          </div>
+        </div>
+
+        <div class="setting-form-container" *ngIf="container.panelData.type=='iframe'">
+          <div class="setting-form-item">
+            <label>iframe地址</label>
+            <div><input type="text" [(ngModel)]="chartSetting.iframe"></div>
+          </div>
+        </div>
+
+        <div class="setting-form-container" *ngIf="container.panelData.type=='number'">
+            <div class="setting-form-item">
+              <label>后缀</label>
+              <div><input type="text" [(ngModel)]="chartSetting.suffix"></div>
+            </div>
+          </div>
+      </div>
+      
+      <p-button style="margin: 0 10px" label="保存" (onClick)="save()"></p-button>
     </div>
   </div>
 </p-dialog>

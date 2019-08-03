@@ -1,3 +1,4 @@
+import { DashboardService } from './../dashboard.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from '../../../api.service';
@@ -10,28 +11,28 @@ export class DashboardSettingService {
 
   private showSource = new BehaviorSubject<boolean>(false);
   private finishedSource = new BehaviorSubject<boolean>(false);
-  private chart_id: number;
-  
+  public container: any;
+
   public show$ = this.showSource.asObservable();
   public finished$ = this.finishedSource.asObservable();
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private dashboardService: DashboardService
   ) { }
   toggle(flag: boolean) {
     this.showSource.next(flag);
   }
-  setId(chart_id: number) {
-    console.log(chart_id);
-    this.chart_id = chart_id;
+  setContainer(container: any) {
+    this.container = container;
   }
   getData() {
-    return this.api.get("/elasticsearch/getChartInfo/" + this.chart_id);
+    return this.api.get("/elasticsearch/getChartInfo/" + this.container.customId);
   }
 
   save(setting: any) {
 
     this.finishedSource.next(false)
-    return this.api.post("/elasticsearch/updateChart/" + this.chart_id, setting).pipe(
+    return this.dashboardService.updateContainerSetting(this.container.customId, setting).pipe(
       tap(() => this.finishedSource.next(true))
     );
   }

@@ -7,13 +7,13 @@
   <div style="justify-content: center;align-items: center">
 
     <div>
-      <div>安全态势感知平台</div>
+      <div style="color:  white; font-size:18px">安全态势感知平台</div>
     </div>
     <div>
       <div class="form-group form-inline">
         <input style="width: 200px" class="form-control" [(ngModel)]="user.username" name="username" placeholder="用户名" id="input-username">
         <input style="width: 200px"  class="form-control" type="password" [(ngModel)]="user.password" name="password" placeholder="密码" id="input-password">
-        <div (click)="login()" style="padding:5px 30px;color:white;background:#5cc05c;">
+        <div (click)="login()" style="padding:5px 30px;color:white;background:#5cc05c;cursor: pointer;">
            登陆
           </div>
       </div>

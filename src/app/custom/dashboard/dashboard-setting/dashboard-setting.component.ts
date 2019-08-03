@@ -16,6 +16,8 @@ export class DashboardSettingComponent implements OnInit {
   ) { }
   isShow: boolean;
   chartSetting: any;
+  tag: string = 'data';
+  container: any;
   ngOnInit() {
     this.dashboardSettingService.show$.subscribe(
       flag => this.isShow = flag
@@ -23,8 +25,12 @@ export class DashboardSettingComponent implements OnInit {
 
   }
   onShow() {
+
     this.dashboardSettingService.getData().subscribe(
-      data => this.chartSetting = data
+      data => {
+        this.container = this.dashboardSettingService.container
+        this.chartSetting = Object.assign(this.container.panelData.chartStyle,data);
+      }
     )
   }
   onHide() {
@@ -34,5 +40,8 @@ export class DashboardSettingComponent implements OnInit {
     this.dashboardSettingService.save(this.chartSetting).subscribe(res => {
       this.dashboardSettingService.toggle(false);
     });
+  }
+  changeAction(action) {
+    this.tag = action;
   }
 }
