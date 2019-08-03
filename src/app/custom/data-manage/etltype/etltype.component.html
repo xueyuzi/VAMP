@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-header>
+    ETL规则类型
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="ETL规则类型" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 800px">
+    <div class="setting-item">
+      <label>日志类型:</label>
+      <input type="text" nbInput [(ngModel)]="user.etlType" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>消息格式:</label>
+      <input type="text" nbInput [(ngModel)]="user.bodyType" fullWidth>
+    </div>
+
+    <div class="setting-item" style="height:auto">
+      <label>日期格式:</label>
+      <input type="text" nbInput [(ngModel)]="user.timeFormat" fullWidth>
+    </div>
+
+    <div class="setting-item">
+      <label>日期地区:</label>
+      <input type="text" nbInput [(ngModel)]="user.timeLocale" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+
