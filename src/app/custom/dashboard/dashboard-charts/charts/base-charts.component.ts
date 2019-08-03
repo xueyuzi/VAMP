@@ -14,6 +14,9 @@ export class BaseChartComponent {
         )
     }
     setData(data: any) {
+        if(data.source === undefined){
+            return;
+        }
         console.log("setData", data)
         data.source = Object.assign([], data.source.map(val => {
             let array = []
