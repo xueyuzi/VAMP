@@ -3,6 +3,7 @@
   <div class="setting-form" style="width: 600px;height:400px">
     <ul class="setting-form-menu">
       <li (click)="changeAction('data')">数据设置</li>
+      <li (click)="changeAction('drillDown')">数据钻取</li>
       <li (click)="changeAction('json')">预定义语句</li>
       <li (click)="changeAction('other')">其他</li>
     </ul>
@@ -36,6 +37,19 @@
           <label>预定义语句:</label>
         </div>
         <div id="chart-setting-editor" style="height:300px;flex:1;margin:10px 0"></div>
+      </div>
+      <div class="setting-form-container" *ngIf="tag==='drillDown'">
+        <div class="setting-form-item">
+          <label>钻取类型</label>
+          <select placeholder="请选择" [(ngModel)]="chartSetting.link_type">
+            <option value="internal">内部资源</option>
+            <option value="extenal">外部资源</option>
+          </select>
+        </div>
+        <div class="setting-form-item">
+          <label>钻取url</label>
+          <input type="text" [(ngModel)]="chartSetting.link_url">
+        </div>
       </div>
       <div *ngIf="tag==='other'">
         <div class="setting-form-container" *ngIf="container.panelData.type=='image'">

@@ -3,5 +3,5 @@ echarts
 [options]="options" 
 [theme]="theme" 
 style="height:100%;width:100%"
+(chartClick)="onChartEvent($event, 'chartClick')"
 ></div>
-<div #chartConfig (mousedown)="$event.stopPropagation();" style="position: absolute;top: 80px;right: 0px;"></div>
