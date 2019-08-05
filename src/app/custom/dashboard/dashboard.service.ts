@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable, BehaviorSubject, Subject } from 'rxjs';
 import { ApiService } from '../../api.service';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ export class DashboardService {
   private containers: Array<any>;
   containersSource: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
   isEdit: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  settingKey: string;
   id: number;
   constructor(
     private api: ApiService
@@ -30,9 +29,14 @@ export class DashboardService {
     this.containersSource.next(this.containers);
   }
 
-  updateContainer(i: number, container: any) {
-    this.containers[i] = container;
-    this.containersSource.next(this.containers);
+  updateContainerSetting(customId: number, setting: any): Observable<any> {
+    let i = this.containers.findIndex(container => container.customId === customId);
+    this.containers[i].panelData.chartStyle = setting;
+    return this.api.post("/elasticsearch/dashboard/" + this.id, this.containers).pipe(
+
+      switchMap(res => this.api.post("/elasticsearch/updateChart/" + customId, setting)),
+      tap(() => this.containersSource.next(this.containers))
+    );
   }
 
   getContainers(id: number) {
@@ -46,7 +50,7 @@ export class DashboardService {
     )
   }
 
-  getChartData(chartId:string){
+  getChartData(chartId: string) {
     return this.api.get("/elasticsearch/getChart/" + chartId);
   }
 
@@ -55,11 +59,6 @@ export class DashboardService {
     return this.api.post("/elasticsearch/dashboard/" + id, containers)
   }
 
-  updateChartStyle(setting) {
-    let index = this.containers.findIndex(v => v.customId === this.settingKey);
-    this.containers[index].panelData.chartStyle = setting;
-    this.containersSource.next(this.containers);
-  }
 
   switchEdit(flag: boolean) {
     this.isEdit.next(flag)

@@ -21,6 +21,8 @@ import { LineAreaComponent } from './charts/line-area.component';
 import { TableModule } from 'primeng/table';
 import { TableComponent } from './charts/table.component';
 import { TextComponent } from './charts/text.component';
+import { ImageComponent } from './charts/image.component';
+import { IframeComponent } from './charts/iframe.component';
 @NgModule({
   declarations: [
     ChartListComponent,
@@ -40,7 +42,9 @@ import { TextComponent } from './charts/text.component';
     MapComponent,
     NumberComponent,
     TableComponent,
-    TextComponent
+    TextComponent,
+    ImageComponent,
+    IframeComponent
   ],
   entryComponents: [
     PieComponent,
@@ -58,7 +62,9 @@ import { TextComponent } from './charts/text.component';
     PieCustomComponent,
     MapComponent,
     NumberComponent, TableComponent,
-    TextComponent
+    TextComponent,
+    ImageComponent,
+    IframeComponent
   ],
   exports: [ChartListComponent],
   imports: [

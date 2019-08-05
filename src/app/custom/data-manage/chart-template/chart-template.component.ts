@@ -13,7 +13,7 @@ declare var ace: any;
 })
 export class ChartTemplateComponent implements OnInit {
   isEdit: boolean = false;
-  defaultChart: any;
+  defaultChart: any = {};
   category_a_items: Array<String> = CATEGORY_A;
   editor: any;
   charts: Array<any> = [];
