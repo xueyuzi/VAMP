@@ -12,7 +12,7 @@ import {SinkComponent} from "./sink/sink.component";
 import {SourceComponent} from "./source/source.component";
 import { ModelComponent } from './model/model.component';
 import { EtltypeComponent } from './etltype/etltype.component';
-import { EtlTypeConfigComponent } from './EtlTypeConfig/EtlTypeConfig.component';
+import { EtlTypeConfigComponent } from './etlTypeConfig/etlTypeConfig.component';
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},

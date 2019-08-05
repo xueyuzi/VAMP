@@ -8,9 +8,11 @@
 
         <button nbButton size="medium" (click)="saveDashboard()" *ngIf="isEdit" style="margin:10px;">保存</button>
         <button nbButton size="medium" (click)="showNew()" *ngIf="isEdit" style="margin:10px;">新增</button>
+        <button nbButton size="medium" (click)="launchIntoFullscreen()" style="margin:10px;">全屏</button>
+        
     </div>
 </div>
-<ngx-grid-stack #gridstack class="grid-stack" [options]="options" *ngIf="containers.length > 0">
+<ngx-grid-stack #gridstack class="grid-stack" id="grid-stack" [options]="options" *ngIf="containers.length > 0">
     <ngx-grid-stack-item [option]="item.option" class="grid-stack-item" *ngFor="let item of containers "
         id="widget-{{item.key}}">
         <ngx-dashboard-container [item]="item">
