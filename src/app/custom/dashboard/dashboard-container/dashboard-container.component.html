@@ -1,30 +1,35 @@
 <div style="height:100%; width:100%; display:flex; flex-direction: column;">
 
-    <div style="display:flex; flex-wrap: wrap">
-        <div style="display: flex;width: 100%;justify-content: left;height:30px;align-items: center">
-            <h5 style="margin:0px" *ngIf="item.panelData.type !== 'text'" >{{chartData?.title}}</h5>
-            <nb-actions size="small" style="flex:1;" *ngIf="isEdit|async" fullWidth>
-                <nb-action icon="clipboard-outline" title="查看报表"></nb-action>
-                <nb-action icon="pie-chart-outline" title="选择可视化" [nbPopover]="chartList"
-                    nbPopoverPlacement="bottom">
-                </nb-action>
-                <nb-action icon="settings-2-outline" title="设置" (click)="toggleSetting()">
-                </nb-action>
-                <nb-action icon="trash-2-outline" (click)="delContainer()" title="删除">
-                </nb-action>
-            </nb-actions>
-        </div>
-        <!-- <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title"> -->
-        
+  <div style="display:flex; flex-wrap: wrap">
+    <div style="display: flex;
+    width: 100%;
+    justify-content: left;
+    height: 60px;
+    align-items: baseline;
+    flex-direction: column;">
+      <h5 style="margin:0px" *ngIf="item.panelData.type !== 'text'">{{chartData?.title}}</h5>
+      <nb-actions size="medium" style="flex:1;width:100%;height:30px" *ngIf="isEdit|async" fullWidth>
+        <nb-action icon="clipboard-outline" title="查看报表"></nb-action>
+        <nb-action icon="pie-chart-outline" title="选择可视化" [nbPopover]="chartList" nbPopoverPlacement="bottom">
+        </nb-action>
+        <nb-action icon="settings-2-outline" title="设置" (click)="toggleSetting()">
+        </nb-action>
+        <nb-action icon="trash-2-outline" (click)="delContainer()" title="删除">
+        </nb-action>
+      </nb-actions>
+
     </div>
-    <div style="flex:1" [nbSpinner]="isLoading">
-        <ng-template #chart></ng-template>
-    </div>
+    <!-- <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title"> -->
+
+  </div>
+  <div style="flex:1" [nbSpinner]="isLoading">
+    <ng-template #chart></ng-template>
+  </div>
 </div>
 
 
 <ng-template #chartList>
-    <div style="width:600px">
-        <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
-    </div>
+  <div style="width:600px">
+    <ngx-chart-list (onSelectChart)="changeChart($event)"></ngx-chart-list>
+  </div>
 </ng-template>

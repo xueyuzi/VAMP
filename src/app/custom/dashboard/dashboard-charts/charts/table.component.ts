@@ -31,7 +31,10 @@ export class TableComponent extends BaseChartComponent implements OnInit {
     }
     setData(data: any) {
         this.options.dataset = data;
-        this.cols = ["key","doc_count"]
+        this.cols = this.getCols(data.source[0]);
+    }
+    getCols(obj){
+        return Object.keys(obj).filter(key=> typeof obj[key]!=='object');
     }
     cols: Array<any> = [];
     options = {
