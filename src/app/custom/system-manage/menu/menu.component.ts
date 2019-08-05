@@ -74,15 +74,23 @@ export class MenuComponent implements OnInit {
     componentRef.location.nativeElement.style = `height: 50px;width: 50px;`;
     (<NbIconComponent>componentRef.instance).icon = icon;
   }
+  getMenus() {
+    this.menuService.getMenusWithTreeTableData().subscribe(
+      menus => this.data = menus
+    );
+  }
 
   saveMenus() {
 
     this.menuService.saveMenus(this.menu).subscribe(res => {
       this.showEdit = false;
-      this.menuService.getMenusWithTreeTableData().subscribe(
-        menus => this.data = menus
-      );
+      this.getMenus();
     })
+  }
+  onDel(menuId) {
+    this.menuService.delMenu(menuId).subscribe(res => {
+      this.getMenus();
+    });
   }
 
 }
