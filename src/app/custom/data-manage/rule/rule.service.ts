@@ -23,4 +23,8 @@ export class RuleService {
   del(ids:number){
     return this.api.post("/cep/rule/remove",{ids:ids})
   }
+
+  getRule(ruleId) {
+    return this.api.get("/cep/rule/edit/" + ruleId);
+  }
 }
