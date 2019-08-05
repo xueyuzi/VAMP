@@ -1,31 +1,42 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActiveListDetailService } from './activeListDetail.service';
+import { EtlTypeConfigService } from './etlTypeConfig.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
-import { ActiveListService } from '../activeList/activeList.service';
-
+import { EtltypeService } from '../etltype/etltype.service';
+import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './activeListDetail.component.html'
+  templateUrl: './etlTypeConfig.component.html'
 })
-export class ActiveListDetailComponent implements OnInit {
+export class EtlTypeConfigComponent implements OnInit {
 
-  constructor(private agentService: ActiveListDetailService,
-    private activeListService: ActiveListService) { }
+  constructor(private agentService: EtlTypeConfigService,
+              private activeListService: EtltypeService,
+              private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
       id: {
         title: 'ID',
         type: 'number',
       },
-      listId: {
-        title: '活动列表',
+      etlTypeId: {
+        title: '日志类别',
         type: 'string',
       },
-      value: {
-        title: '值',
+      formatRegex: {
+        title: '匹配规则',
+        type: 'string',
+        width:'20%',
+      },
+      mappingFields: {
+        title: '属性映射',
+        type: 'string',
+        width:'30%',
+      },
+      order: {
+        title: '排序',
         type: 'string',
       }
     },
@@ -61,6 +72,7 @@ export class ActiveListDetailComponent implements OnInit {
     this.type = "add";
     this.user = { desen_rule_id: [] };
     this.isEdit = true;
+    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
@@ -68,10 +80,11 @@ export class ActiveListDetailComponent implements OnInit {
       data => this.user = data
     )
     this.isEdit = true;
+    this.setEditor();
   }
 
   saveUser() {
-
+    this.user.mappingFields = this.jsonEditorService.getValue();
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }
@@ -90,5 +103,12 @@ export class ActiveListDetailComponent implements OnInit {
 
   changeActive(event) {
     this.user.listId = event;
+  }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.user.mappingFields);
+    }, 50)
   }
 }

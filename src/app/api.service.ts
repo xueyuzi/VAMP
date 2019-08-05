@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, debounceTime } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,8 @@ export class ApiService {
 
   post(url: string, body: any = {}): Observable<any> {
     return this.http.post(url, body).pipe(
-      tap(res => this.handleResponse(url, res))
+      debounceTime(500),
+      tap(res => this.handleResponse(url, res)),
     )
   }
 

@@ -26,7 +26,7 @@
             <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
             <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
               style="margin-right:5px">add</button>
-            <!-- <button nbButton size="small" status="danger" (click)='onEdit(rowNode)'>del</button> -->
+            <button nbButton size="small" status="danger" (click)='onDel(rowNode.node.data.menuId)'>del</button>
           </td>
         </tr>
       </ng-template>

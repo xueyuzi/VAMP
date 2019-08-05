@@ -124,4 +124,8 @@ export class MenuService {
       tap(v => this.getMenus().subscribe())
     );
   }
+
+  delMenu(menuId: number) {
+    return this.api.post('/system/menu/remove/' + menuId);
+  }
 }

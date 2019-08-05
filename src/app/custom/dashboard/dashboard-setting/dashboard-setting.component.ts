@@ -14,7 +14,7 @@ export class DashboardSettingComponent implements OnInit {
   constructor(
     private dashboardSettingService: DashboardSettingService,
     private toastrService: NbToastrService,
-    private jsonEditorService:JsonEditorService
+    private jsonEditorService: JsonEditorService
   ) { }
   isShow: boolean;
   chartSetting: any;
@@ -44,16 +44,22 @@ export class DashboardSettingComponent implements OnInit {
   }
   onHide() {
     this.dashboardSettingService.toggle(false);
-    
+
   }
   save() {
-    this.chartSetting.es_json = this.jsonEditorService.getValue();
+    if(this.jsonEditorService.editor!==undefined){
+      this.chartSetting.es_json = this.jsonEditorService.getValue();
+    }
+    
     this.dashboardSettingService.save(this.chartSetting).subscribe(res => {
       this.dashboardSettingService.toggle(false);
     });
   }
   changeAction(action) {
-    this.setEditor();
+    if (action === "json") {
+      this.setEditor();
+    }
+
     this.tag = action;
   }
 }
