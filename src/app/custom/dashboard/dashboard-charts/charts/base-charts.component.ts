@@ -4,7 +4,7 @@ import { ChartsService } from '../dashboard-charts.service.js';
 export class BaseChartComponent {
     theme: string;
     mapLoaded: boolean = false;
-    options: any;
+    options: any = {};
     container: any;
     constructor(
         protected chartsService: ChartsService

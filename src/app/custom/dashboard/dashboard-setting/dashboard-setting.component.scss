@@ -10,13 +10,17 @@
     .setting-form-menu {
       margin: 0px;
       padding: 0px;
-      width: 100px;
+      width: 150px;
       background: nb-theme(background-basic-color-4);
       list-style: none;
 
       li {
         margin: 0px;
         padding: 10px 16px;
+        cursor: pointer;
+      }
+      li:hover,.active{
+        color: nb-theme(color-primary-focus)
       }
     }
 

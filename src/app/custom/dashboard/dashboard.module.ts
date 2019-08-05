@@ -7,7 +7,7 @@ import { DashboardContainerComponent } from './dashboard-container/dashboard-con
 
 import { GridStackModule } from "ngx-grid-stack";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbInputModule, NbActionsModule, NbPopoverModule, NbSpinnerModule, NbButtonModule, NbIconModule } from '@nebular/theme';
+import { NbInputModule, NbActionsModule, NbPopoverModule, NbSpinnerModule, NbButtonModule, NbIconModule, NbSelectModule } from '@nebular/theme';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ColorPickerModule } from 'primeng/colorpicker';
@@ -45,7 +45,8 @@ import {ButtonModule} from 'primeng/button';
     NbSpinnerModule,
     ButtonModule,
     NbButtonModule,
-    NbIconModule
+    NbIconModule,
+    NbSelectModule
   ],
   entryComponents: [DashboardContainerComponent],
   providers: [],
