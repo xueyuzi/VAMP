@@ -75,4 +75,20 @@ export class DashboardViewComponent implements OnInit {
     this.dashboardService.saveDashboard(this.id).subscribe(res => this.switchEdit())
   }
 
+
+  launchIntoFullscreen() {
+    let element:any = document.getElementById("grid-stack");
+    if(element.requestFullscreen){
+        element.requestFullscreen();
+    }
+    else if(element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    }
+    else if(element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    }
+    else if(element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
 }

@@ -1,14 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { EtlTypeConfigService } from './EtlTypeConfig.service';
+import { EtlTypeConfigService } from './etlTypeConfig.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
-import { EtltypeService } from '../etlType/etlType.service';
+import { EtltypeService } from '../etltype/etltype.service';
 import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './EtlTypeConfig.component.html'
+  templateUrl: './etlTypeConfig.component.html'
 })
 export class EtlTypeConfigComponent implements OnInit {
 

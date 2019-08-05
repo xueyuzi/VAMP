@@ -15,7 +15,7 @@ import { SinkComponent } from './sink/sink.component';
 import { SourceComponent } from './source/source.component';
 import { ModelComponent } from './model/model.component';
 import { EtltypeComponent } from './etltype/etltype.component';
-import { EtlTypeConfigComponent } from './EtlTypeConfig/EtlTypeConfig.component';
+import { EtlTypeConfigComponent } from './etlTypeConfig/etlTypeConfig.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
