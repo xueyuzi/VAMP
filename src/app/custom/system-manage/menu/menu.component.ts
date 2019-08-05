@@ -48,7 +48,7 @@ export class MenuComponent implements OnInit {
     this.setIcon(this.menu.icon);
     this.showEdit = true;
   }
-  onAdd(event) {
+  onAdd(event=undefined) {
     console.log(event)
     this.menu = {};
     this.menu.parentMenu = event !== undefined ? event.node.data.title : "无"

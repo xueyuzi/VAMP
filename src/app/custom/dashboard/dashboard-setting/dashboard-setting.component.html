@@ -2,33 +2,33 @@
   (onShow)="onShow()" [contentStyle]="{'padding':'0px'}">
   <div class="setting-form" style="width: 600px;height:400px">
     <ul class="setting-form-menu">
-      <li (click)="changeAction('data')">数据设置</li>
-      <li (click)="changeAction('drillDown')">数据钻取</li>
-      <li (click)="changeAction('json')">预定义语句</li>
-      <li (click)="changeAction('other')">其他</li>
+      <li [ngClass]="{'active':tag==='data'}"  (click)="changeAction('data')">数据设置</li>
+      <li [ngClass]="{'active':tag==='drillDown'}" (click)="changeAction('drillDown')">数据钻取</li>
+      <li [ngClass]="{'active':tag==='json'}" (click)="changeAction('json')">预定义语句</li>
+      <li [ngClass]="{'active':tag==='other'}" (click)="changeAction('other')">其他</li>
     </ul>
     <div *ngIf="chartSetting!==undefined" style="overflow: auto;
     width: 100%;">
       <div class="setting-form-container" *ngIf="tag==='data' ">
         <div class="setting-form-item">
           <label>索引</label>
-          <div><input type="text" [(ngModel)]="chartSetting.es_index"></div>
+          <div><input nbInput type="text" [(ngModel)]="chartSetting.es_index"></div>
         </div>
         <div class="setting-form-item">
           <label>图表名称</label>
-          <div><input type="text" [(ngModel)]="chartSetting.chartname"></div>
+          <div><input nbInput type="text" [(ngModel)]="chartSetting.chartname"></div>
         </div>
         <div class="setting-form-item">
           <label>时间范围</label>
           <div>
-            <label>前</label>
-            <input type="text" style="width: 20px;" [(ngModel)]="chartSetting.period">
-            <select placeholder="请选择" [(ngModel)]="chartSetting.period_category">
-              <option value="h">小时</option>
-              <option value="d">天</option>
-              <option value="m">月</option>
-              <option value="y">年</option>
-            </select>
+            前
+            <input nbInput type="text" style="width: 50px;" [(ngModel)]="chartSetting.period">
+            <nb-select [selected]="chartSetting.period" placeholder="请选择">
+              <nb-option value="h">小时</nb-option>
+              <nb-option value="d">天</nb-option>
+              <nb-option value="m">月</nb-option>
+              <nb-option value="y">年</nb-option>
+            </nb-select>
           </div>
         </div>
       </div>
@@ -48,28 +48,28 @@
         </div>
         <div class="setting-form-item">
           <label>钻取url</label>
-          <input type="text" [(ngModel)]="chartSetting.link_url">
+          <input nbInput type="text" [(ngModel)]="chartSetting.link_url">
         </div>
       </div>
       <div *ngIf="tag==='other'">
         <div class="setting-form-container" *ngIf="container.panelData.type=='image'">
           <div class="setting-form-item">
             <label>图片地址</label>
-            <div><input type="text" [(ngModel)]="chartSetting.img_src"></div>
+            <div><input nbInput type="text" [(ngModel)]="chartSetting.img_src"></div>
           </div>
         </div>
 
         <div class="setting-form-container" *ngIf="container.panelData.type=='iframe'">
           <div class="setting-form-item">
             <label>iframe地址</label>
-            <div><input type="text" [(ngModel)]="chartSetting.iframe"></div>
+            <div><input nbInput type="text" [(ngModel)]="chartSetting.iframe"></div>
           </div>
         </div>
 
         <div class="setting-form-container" *ngIf="container.panelData.type=='number'">
           <div class="setting-form-item">
             <label>后缀</label>
-            <div><input type="text" [(ngModel)]="chartSetting.suffix"></div>
+            <div><input nbInput type="text" [(ngModel)]="chartSetting.suffix"></div>
           </div>
         </div>
       </div>
