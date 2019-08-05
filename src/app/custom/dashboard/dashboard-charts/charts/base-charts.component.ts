@@ -5,6 +5,7 @@ export class BaseChartComponent {
     theme: string;
     mapLoaded: boolean = false;
     options: any;
+    container: any;
     constructor(
         protected chartsService: ChartsService
     ) {
@@ -12,7 +13,18 @@ export class BaseChartComponent {
             theme => { this.theme = theme; console.log('echarts-theme', theme); }
         )
     }
+    onChartEvent(event: any, type: string) {
+        console.log('chart event:',this.options);
+        switch(type){
+            case "chartClick":
+                window.location = this.options.dataset.link_url
+                return 
+        }
+    }
     setData(data: any) {
+        if (data.source === undefined) {
+            return;
+        }
         console.log("setData", data)
         data.source = Object.assign([], data.source.map(val => {
             let array = []
@@ -33,5 +45,9 @@ export class BaseChartComponent {
         this.options.dataset = data;
         this.options = Object.assign({}, this.options)
         console.log("echarts options", this.options)
+    }
+    setContainer(container) {
+        this.container = container;
+        console.log(this.container);
     }
 }

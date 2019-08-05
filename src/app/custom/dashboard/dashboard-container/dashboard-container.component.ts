@@ -51,6 +51,7 @@ export class DashboardContainerComponent implements OnInit {
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
     this.chart.clear();
     this.componentRef = this.chart.createComponent(componentFactory);
+    (<BaseChartComponent>this.componentRef.instance).setContainer(this.item);
     this.dashboardService.getChartData(this.item.customId).subscribe((res: Array<any> | Object) => {
       this.isLoading = false;
       this.chartData = res;
@@ -65,12 +66,12 @@ export class DashboardContainerComponent implements OnInit {
   }
   toggleSetting() {
     this.dashboardSettingService.toggle(!this.isSetting);
-    this.dashboardSettingService.setId(this.item.customId);
+    this.dashboardSettingService.setContainer(this.item);
     // TODO:监听设置是否完成
-    this.dashboardSettingService.finished$.subscribe(
-      flag => {
-        flag && this.loadChart(this.item.panelData.type);
-      }
-    )
+    // this.dashboardSettingService.finished$.subscribe(
+    //   flag => {
+    //     flag && this.loadChart(this.item.panelData.type);
+    //   }
+    // )
   }
 }

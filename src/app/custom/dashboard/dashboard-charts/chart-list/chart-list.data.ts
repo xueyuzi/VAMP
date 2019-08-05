@@ -15,6 +15,8 @@ import { BarHorizontalComponent } from '../charts/bar-horizontal.component';
 import { LineAreaComponent } from '../charts/line-area.component';
 import { TableComponent } from '../charts/table.component';
 import { TextComponent } from '../charts/text.component';
+import { IframeComponent } from '../charts/iframe.component';
+import { ImageComponent } from '../charts/image.component';
 export default {
     "pie": { label: "饼图", key: "pie", component: PieComponent, img: "assets/images/charts/pie.png" },
     "pie-custom": { label: "圆环图", key: "pie-custom", component: PieCustomComponent, img: "assets/images/charts/pie-custom.png" },
@@ -33,4 +35,6 @@ export default {
     "number": { label: "数值", key: "number", component: NumberComponent, img: "assets/images/charts/number.jpg" },
     "table": { label: "表格", key: "table", component: TableComponent, img: "assets/images/charts/table.png" },
     "text": { label: "文字", key: "text", component: TextComponent, img: "assets/images/charts/text.png" },    
+    "iframe": { label: "iframe", key: "iframe", component: IframeComponent, img: "assets/images/charts/iframe.png" },    
+    "image": { label: "图片", key: "image", component: ImageComponent, img: "assets/images/charts/image.png" },    
 }

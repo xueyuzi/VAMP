@@ -26,19 +26,21 @@ export class ApiService {
   }
 
   handleResponse(url: string, res: any = {}) {
-    console.log(url + " : ", res);
-    if (res.code == "500" || res.code == "504") {
-      this.toastrService.danger("error", res.msg);
-    }
-    if (res.code == "1") {
-      this.toastrService.danger("error", res.msg);
-      setTimeout(() => {
-        this.router.navigateByUrl("/auth/login");
-      }, 1000);
-    }
-    if (res.code == "0") {
-      this.toastrService.success("success", res.msg);
-    }
+    try {
+      console.log(url + " : ", res);
+      if (res.code == "500" || res.code == "504") {
+        this.toastrService.danger("error", res.msg);
+      }
+      if (res.code == "1") {
+        this.toastrService.danger("error", res.msg);
+        setTimeout(() => {
+          this.router.navigateByUrl("/auth/login");
+        }, 1000);
+      }
+      if (res.code == "0") {
+        this.toastrService.success("success", res.msg);
+      }
+    } catch (e) { }
     return res;
   }
 

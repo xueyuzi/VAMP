@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "auth", component: NbAuthComponent, children: [
+    path: "auth", children: [
       { path: "login", component: LoginComponent },
       { path: "logout", component: LogoutComponent }
     ]
