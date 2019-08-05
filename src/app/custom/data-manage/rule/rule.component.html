@@ -45,7 +45,7 @@
     </div>
     <div class="setting-item">
       <label>规则结果输出配置:</label>
-      <nb-select multiple placeholder="请选规则结果输出配置" [(selected)]="user.rule_sink_id" (selectedChange)="changeDesen($event)" style="width: 200px">
+      <nb-select multiple placeholder="请选规则结果输出配置" [(selected)]="user.rule_sink_id" style="width: 200px">
         <nb-option [value]="role.id" *ngFor="let role of sinkList">{{role.name}}</nb-option>
       </nb-select>
     </div>
