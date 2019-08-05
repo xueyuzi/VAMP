@@ -1,0 +1,36 @@
+<script src="activeListDetail.component.ts"></script>
+<nb-card>
+  <nb-card-header>
+    ETL规则明细
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="新建ETL规则明细" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container" style="width: 800px">
+
+    <div class="setting-item">
+      <label>日志类别:</label>
+      <nb-select  placeholder="请选择日志类别" [(selected)]="user.etlTypeId" (selectedChange)="changeActive($event)" style="width: 200px">
+        <nb-option [value]="activelist.id" *ngFor="let activelist of activeList">{{activelist.etlType}}</nb-option>
+      </nb-select>
+    </div>
+    <div class="setting-item">
+      <label>匹配规则:</label>
+      <input type="text" nbInput [(ngModel)]="user.formatRegex" fullWidth>
+    </div>
+    <div class="setting-item" style="height:auto">
+      <label>属性映射:</label>
+      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
+    </div>
+    <div class="setting-item">
+      <label>排序:</label>
+      <input type="text" nbInput [(ngModel)]="user.order" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+

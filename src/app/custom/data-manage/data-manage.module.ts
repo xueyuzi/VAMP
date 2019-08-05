@@ -15,6 +15,7 @@ import { SinkComponent } from './sink/sink.component';
 import { SourceComponent } from './source/source.component';
 import { ModelComponent } from './model/model.component';
 import { EtltypeComponent } from './etltype/etltype.component';
+import { EtlTypeConfigComponent } from './EtlTypeConfig/EtlTypeConfig.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
@@ -38,6 +39,7 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
     SourceComponent,
     ModelComponent,
     EtltypeComponent,
+    EtlTypeConfigComponent,
     AgenthbComponent],
   imports: [
     CommonModule,
