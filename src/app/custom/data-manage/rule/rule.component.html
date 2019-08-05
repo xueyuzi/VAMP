@@ -43,9 +43,15 @@
       <label>数据源:</label>
       <input type="text" nbInput [(ngModel)]="user.sourceId" fullWidth>
     </div>
+    <div class="setting-item">
+      <label>规则结果输出配置:</label>
+      <nb-select multiple placeholder="请选规则结果输出配置" [(selected)]="user.rule_sink_id" (selectedChange)="changeDesen($event)" style="width: 200px">
+        <nb-option [value]="role.id" *ngFor="let role of sinkList">{{role.name}}</nb-option>
+      </nb-select>
+    </div>
     <div class="setting-item" style="height:auto">
       <label>规则明细:</label>
-      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
+      <div id="agent-json-editor" style="height:200px;flex:1;margin:10px 0"></div>
     </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>

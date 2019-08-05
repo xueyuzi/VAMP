@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 import { JsonEditorService } from '../../../common/json-editor.service';
+import {SinkService} from "../sink/sink.service";
 
 @Component({
   selector: 'ngx-user',
@@ -12,6 +13,7 @@ import { JsonEditorService } from '../../../common/json-editor.service';
 export class RuleComponent implements OnInit {
 
   constructor(private desenRuleService: RuleService,
+              private sinkService: SinkService,
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
@@ -75,21 +77,28 @@ export class RuleComponent implements OnInit {
   userList: Observable<any>;
   userCondition = new Subject<any>();
   agentSource: ServerDataSource;
+  sinkList: Array<any>;
+  rule_sink_id: any = [];
   ngOnInit() {
     this.agentSource = this.desenRuleService.getList();
+    this.sinkService.getList().subscribe(
+      list => this.sinkList = list
+    )
   }
   ngAfterViewInit() {
     this.userCondition.next({});
   }
   showNew() {
     this.type = "add";
-    this.user = {};
+    this.user = {rule_sink_id:[]};
     this.isEdit = true;
     this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
-    this.user = $event.data;
+    this.desenRuleService.getRule($event.data.id).subscribe(
+      data => this.user = data
+    )
     this.isEdit = true;
     this.setEditor();
   }
