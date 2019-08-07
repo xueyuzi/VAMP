@@ -10,6 +10,7 @@ import { ChartsService } from '../dashboard-charts.service';
     display: flex;
     justify-content: center;
     align-items: center;"
+    (click)="jump()"
     >
     <p *ngIf="this.census === undefined" style="font-size:4vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[0]?.doc_count}}{{container.panelData.chartStyle?.suffix}}</p>
     <p *ngIf="this.census!==undefined" style="font-size:4vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[1]?.doc_count}}</p>
@@ -30,6 +31,10 @@ export class NumberComponent extends BaseChartComponent implements OnInit {
     census: number;
     ngOnInit() {
     }
+    jump(){
+        window.location = this.options.dataset.link_url;
+
+    }
     setData(data: any) {
         console.log(data.title)
         this.options.dataset = data;
@@ -38,7 +43,7 @@ export class NumberComponent extends BaseChartComponent implements OnInit {
             this.census = data.source[1].doc_count - data.source[0].doc_count;
         }
     }
-    options = {
+    options:any = {
         dataset: {
             source: [
                 { doc_count: "0" }
