@@ -17,15 +17,7 @@ export class RuleComponent implements OnInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      categoryId: {
-        title: '分类ID',
-        type: 'string',
-      },
-      type: {
+      type_name: {
         title: '类型',
         type: 'string',
       },
@@ -46,7 +38,7 @@ export class RuleComponent implements OnInit {
         title: '并发度',
         type: 'string',
       },
-      sourceId: {
+      source_name: {
         title: '数据源',
         type: 'string',
       },
@@ -125,6 +117,6 @@ export class RuleComponent implements OnInit {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
       this.jsonEditorService.setValue(this.user.ruleContent);
-    }, 50)
+    }, 500)
   }
 }
