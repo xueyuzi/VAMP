@@ -22,22 +22,10 @@ export class SourceComponent implements OnInit, AfterViewInit {
         title: '名称',
         type: 'string',
       },
-      type: {
-        title: '类型',
-        type: 'string',
-      },
       content: {
         title: 'JSON配置内容',
         type: 'string',
         width: "200px",
-      },
-      formatType: {
-        title: '格式内容',
-        type: 'string',
-      },
-      formatContent: {
-        title: '格式化配置',
-        type: 'string',
       },
       timeField: {
         title: '时间属性',
