@@ -28,7 +28,13 @@ export class MenuService {
       // 删除menu中 空children
       map(res => res.map(m => {
         if (m.children.length > 0) {
-          m.children = m.children.map(c => { delete c.children; return c });
+          m.children = m.children.map(c => {
+            if (c.children.length == 0) {
+              delete c.children;
+            } else {
+              c.children.forEach(d => delete d.children)
+            } return c
+          });
         }
         return m
       })),
