@@ -57,6 +57,7 @@ export class AgentComponent implements OnInit {
     hideSubHeader: true
   }
   isEdit: boolean = false;
+  isShowCharts: boolean = false;
   user: any = {};
   type: string;
   agentSource: ServerDataSource;
@@ -69,27 +70,59 @@ export class AgentComponent implements OnInit {
     )
   }
 
-  setEditor() {
-    setTimeout(() => {
-      this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.agentConfig);
-    }, 50)
-  }
 
   showNew() {
     this.type = "add";
     this.user = { desen_rule_id: [] };
     this.isEdit = true;
-    this.setEditor();
   }
-  showEdit($event) {
-    this.type = "edit";
-    this.agentService.getAgent($event.data.id).subscribe(
-      data => this.user = data
-    )
+  sourcesChild = {};
+  channelChild = {};
 
+  showEdit($event) {
+
+    this.type = "edit";
+    this.sourcesChild = {};
+    this.agentService.getAgent($event.data.id).subscribe(
+      data => {
+        this.user = data
+        let agentConfig = JSON.parse(data.agentConfig);
+        let sources;
+        let channels;
+
+        Object.keys(agentConfig).map(key => {
+          let sourcesKey = key.match(/^agent\d.sources$/);
+          let channelsKey = key.match(/^agent\d.channels$/);
+          if (sourcesKey !== null)
+            sources = agentConfig[sourcesKey[0]].split(" ");
+          if (channelsKey !== null)
+            channels = agentConfig[channelsKey[0]].split(" ");
+        })
+
+        Object.keys(agentConfig).map(key => {
+          sources.forEach(skey => {
+            if (key.match(new RegExp("agent\\d*\\.sources\\." + skey + "\\.\\w+")) !== null) {
+              this.sourcesChild[key] = agentConfig[key]
+            }
+          })
+          channels.forEach(ckey => {
+            if (key.match(new RegExp("agent\\d*\\.channels\\." + ckey + "\\.\\w+")) !== null) {
+              this.channelChild[key] = agentConfig[key]
+            }
+          })
+        })
+        console.log(this.sourcesChild)
+      }
+    )
     this.isEdit = true;
-    this.setEditor();
+  }
+
+  showCharts() {
+    this.isShowCharts = true;
+  }
+
+  objectKeys(obj) {
+    return Object.keys(obj)
   }
 
   saveUser() {
@@ -104,13 +137,36 @@ export class AgentComponent implements OnInit {
   }
 
   delUser($event) {
-        this.agentService.del($event.data.id).subscribe(
-          res => {
-            this.agentSource.refresh();
-    });
+    this.agentService.del($event.data.id).subscribe(
+      res => {
+        this.agentSource.refresh();
+      });
   }
 
   changeDesen(event) {
     console.log(this.desen_rule_id)
   }
+
+
+  chartOptions1 = {
+    dataset:{
+      source:[
+        {key:1,value:123},
+        {key:2,value:103},
+        {key:3,value:13},
+        {key:4,value:53},
+        {key:5,value:83},
+      ]
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      smooth: true
+    }]
+  };
 }

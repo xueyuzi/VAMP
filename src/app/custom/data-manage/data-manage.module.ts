@@ -22,9 +22,10 @@ import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.mod
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { DialogModule } from 'primeng/dialog';
-import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbRadioModule, NbIconModule, NbIconComponent } from '@nebular/theme';
+import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbRadioModule, NbIconModule, NbIconComponent, NbAccordionModule } from '@nebular/theme';
 import { FileUploadModule } from "primeng/fileupload";
 import {Ng2SmartTableModule} from "ng2-smart-table";
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
     NbButtonModule,
     Ng2SmartTableModule,
     NbCardModule,
-    NbRadioModule
+    NbRadioModule,
+    NbAccordionModule,
+    NgxEchartsModule
   ],
   providers: [
     ConfirmationService

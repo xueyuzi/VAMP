@@ -6,11 +6,37 @@
 
   <nb-card-body>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="新建配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" style="width: 800px">
+<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <nb-accordion class="expaned">
+    <nb-accordion-item>
+      <nb-accordion-item-header>Sources</nb-accordion-item-header>
+      <nb-accordion-item-body>
+        <div *ngFor="let ssKey of objectKeys(sourcesChild)">
+          <div class="setting-item">
+            <label>{{ssKey}}</label>
+            <span>{{sourcesChild[ssKey]}}</span>
+          </div>
+        </div>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+
+    <nb-accordion-item>
+      <nb-accordion-item-header>Channels</nb-accordion-item-header>
+      <nb-accordion-item-body>
+        <div *ngFor="let ssKey of objectKeys(channelChild)">
+          <div class="setting-item">
+            <label>{{ssKey}}</label>
+            <span>{{channelChild[ssKey]}}</span>
+          </div>
+        </div>
+      </nb-accordion-item-body>
+    </nb-accordion-item>
+  </nb-accordion>
+  <div class="setting-container" *ngIf="user!==undefined">
     <div class="setting-item">
       <label>名称:</label>
       <input type="text" nbInput [(ngModel)]="user.agentName" fullWidth>
@@ -21,11 +47,14 @@
       <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
     </div>
 
-    <div class="setting-item" style="height:auto">
-      <label>配置:</label>
-      <div id="agent-json-editor" style="height:300px;flex:1;margin:10px 0"></div>
-      <!-- <input type="text" nbInput [(ngModel)]="user.agentConfig" fullWidth> -->
-    </div>
+
+    <!-- <div class="setting-item" *ngFor="let ssKey of objectKeys(sourcesChild)">
+      <label>{{ssKey}}</label>
+      <div>{{sourcesChild[ssKey]}}</div>
+    </div> -->
+
+
+
 
     <div class="setting-item">
       <label>识别key:</label>
@@ -33,11 +62,26 @@
     </div>
     <div class="setting-item">
       <label>脱敏规则配置:</label>
-      <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="user.desen_rule_id" (selectedChange)="changeDesen($event)" style="width: 200px">
+      <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="user.desen_rule_id"
+        (selectedChange)="changeDesen($event)" style="width: 200px">
         <nb-option [value]="role.id" *ngFor="let role of dRuleList">{{role.desenName}}</nb-option>
       </nb-select>
     </div>
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
+  <button nbButton (click)="saveUser()" style="margin: 10px;">保存</button>
+  <button nbButton status="info" (click)="showCharts()" style="margin: 10px;">查看图表</button>
 </p-dialog>
 
+
+<p-dialog header="图表" [(visible)]="isShowCharts" [draggable]="false" [resizable]="false">
+  <div style="width:800px;height:500px;display:flex">
+    <div style="width:400px;height:300px;">
+      <div echarts [options]="chartOptions1" style="height:100%;width:100%">
+      </div>
+    </div>
+    <div style="width:400px;height:300px;">
+      <div echarts [options]="chartOptions1" style="height:100%;width:100%">
+      </div>
+    </div>
+  </div>
+</p-dialog>
