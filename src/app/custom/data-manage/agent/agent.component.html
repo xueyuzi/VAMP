@@ -10,7 +10,7 @@
       (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false" >
   <nb-accordion class="expaned">
     <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
       <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
@@ -52,7 +52,7 @@
 </p-dialog>
 
 
-<p-dialog header="图表" [(visible)]="isShowCharts" [draggable]="false" [resizable]="false">
+<p-dialog header="图表" [(visible)]="isShowCharts" [draggable]="true" [resizable]="false">
   <div style="width:800px;height:500px;display:flex">
     <div style="width:400px;height:300px;">
       <div echarts [options]="chartOptions1" style="height:100%;width:100%">

@@ -27,8 +27,32 @@ export class AgentComponent implements OnInit {
         title: 'IP地址',
         type: 'string',
       },
-      agentKey: {
-        title: '识别key',
+      status: {
+        title: '状态',
+        type: 'string',
+      },
+      eps: {
+        title: 'EPS',
+        type: 'string',
+      },
+      cpu: {
+        title: '进程占用CPU',
+        type: 'string',
+      },
+      mem: {
+        title: '进程内存利用率',
+        type: 'string',
+      },
+      sys_cpu: {
+        title: '系统cpu',
+        type: 'string',
+      },
+      fh: {
+        title: '文件句柄',
+        type: 'string',
+      },
+      create_at: {
+        title: '注册时间',
         type: 'string',
       }
     },
@@ -127,7 +151,6 @@ export class AgentComponent implements OnInit {
   }
 
   saveUser() {
-    this.user.agentConfig = this.jsonEditorService.getValue();
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }
