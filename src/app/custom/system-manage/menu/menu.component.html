@@ -18,13 +18,13 @@
         <tr>
           <td>
             <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-            {{rowData.title}}
+            {{rowData.menuName}}
           </td>
-          <td>{{rowData.link}}</td>
+          <td>{{rowData.url}}</td>
           <td>{{rowData.icon}}</td>
           <td>
             <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
-            <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
+            <button nbButton size="small" status="success" (click)='onAdd(rowNode)'
               style="margin-right:5px">add</button>
             <button nbButton size="small" status="danger" (click)='onDel(rowNode.node.data.menuId)'>del</button>
           </td>

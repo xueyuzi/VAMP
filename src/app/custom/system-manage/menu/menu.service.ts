@@ -28,7 +28,13 @@ export class MenuService {
       // 删除menu中 空children
       map(res => res.map(m => {
         if (m.children.length > 0) {
-          m.children = m.children.map(c => { delete c.children; return c });
+          m.children = m.children.map(c => {
+            if (c.children.length == 0) {
+              delete c.children;
+            } else {
+              c.children.forEach(d => delete d.children)
+            } return c
+          });
         }
         return m
       })),
@@ -37,29 +43,64 @@ export class MenuService {
   }
 
   getMenusWithTreeTableData() {
-    // 只支持两层
-    return this.api.post("/menu").pipe(
+    return this.api.get("/system/menu/list").pipe(
       map(menus => {
         let tree: TreeNode[] = [];
-        menus.map((m, i) => {
-          let treeData: TreeNode = {
-            data: m,
-            children: [],
-            expanded: true,
-          }
-          if (m.children.length > 0) {
-            m.children.map(c => {
-              let treeDataDeep: TreeNode = {
-                data: c,
+        let tmpIds: number[] = [0];
+        let hashIds: any = { 0: [{ menuId: 0 }] };
+        let level = 0;
+        while (level < 4) {
+          if (level == 0) {
+            menus.map(
+              menu => {
+                if (menu.parentId == 0) {
+                  tree.push({
+                    data: menu,
+                    children: []
+                  })
+                }
               }
-              delete treeDataDeep.data.children;
-              treeData.children.push(treeDataDeep);
-            })
+            )
           }
-          delete treeData.data.children;
-          tree.push(treeData);
-        })
-        return tree;
+          if (level == 1) {
+            menus.forEach(
+              menu => {
+                tree.forEach(
+                  (tre, i) => {
+                    if (tre.data.menuId == menu.parentId) {
+                      tree[i].children.push({
+                        data: menu,
+                        children: []
+                      })
+                    }
+                  }
+                )
+              }
+            )
+          }
+          if (level == 2) {
+            menus.forEach(
+              menu => {
+                tree.forEach(
+                  (tre, i) => {
+                    tre.children.forEach(
+                      (tr, l) => {
+                        if (tr.data.menuId == menu.parentId) {
+                          tree[i].children[l].children.push({
+                            data: menu
+                          })
+                        }
+                      }
+                    )
+                  }
+                )
+              }
+            )
+          }
+          level++;
+        }
+        console.log(tree)
+        return tree
       }
       )
     )

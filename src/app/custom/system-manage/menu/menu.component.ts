@@ -36,22 +36,23 @@ export class MenuComponent implements OnInit {
   }
 
   onEdit(event) {
-    console.log(event);
-    this.menu = event.node.data;
-    this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.title;
+    this.menu = Object.assign({},this.menu,event.node.data);
+    this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.menuName;
     this.menu.parentId = event.parent == null ? 0 : event.parent.data.menuId;
     this.menu.menuType = "M";
-    this.menu.menuName = this.menu.title;
-    this.menu.url = this.menu.link;
-    this.menu.orderNum = 1;
+    //this.menu.orderNum = 1;
     this.menu.visible = 0;
+
+    delete this.menu['updateTime'];
+    delete this.menu['params'];
+    delete this.menu['children'];
     this.setIcon(this.menu.icon);
     this.showEdit = true;
   }
-  onAdd(event) {
+  onAdd(event=undefined) {
     console.log(event)
     this.menu = {};
-    this.menu.parentMenu = event !== undefined ? event.node.data.title : "无"
+    this.menu.parentMenu = event !== undefined ? event.node.data.menuName : "无"
     this.menu.parentId = event !== undefined ? event.node.data.menuId : 0;
     this.menu.url = "/custom/dashboard/view/" + Math.ceil(Math.random() * 100000);
     this.menu.menuType = "M";
