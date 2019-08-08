@@ -11,13 +11,16 @@
 <p-dialog header="数据脱敏规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
-      <label>类型:</label>
-      <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
+      <label>规则名称:</label>
+      <input type="text" nbInput [(ngModel)]="user.desenName" fullWidth>
     </div>
 
     <div class="setting-item">
-      <label>规则名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.desenName" fullWidth>
+      <label>类型:</label>
+      <nb-select  placeholder="请选择类型" [(selected)]="user.type" style="width: 200px">
+        <nb-option [value]="0" >替换</nb-option>
+        <nb-option [value]="1" >加密</nb-option>
+      </nb-select>
     </div>
 
     <div class="setting-item">
@@ -25,9 +28,29 @@
       <input type="text" nbInput [(ngModel)]="user.patternRegex" fullWidth>
     </div>
 
-    <div class="setting-item" style="height:auto">
-      <label>脱敏规则配置:</label>
-      <div id="agent-json-editor" style="height:150px;flex:1;margin:10px 0"></div>
+    <div class="setting-item">
+      <label>方法:</label>
+      <input type="text" nbInput [(ngModel)]="rule_json.method" fullWidth>
+    </div>
+
+    <div class="setting-item" *ngIf="rule_json.flag !==undefined">
+      <label>flag:</label>
+      <input type="text" nbInput  [(ngModel)]="rule_json.flag" fullWidth>
+    </div>
+
+    <div class="setting-item" *ngIf="rule_json.begin !==undefined">
+      <label>begin:</label>
+      <input type="text" nbInput [(ngModel)]="rule_json.begin" fullWidth>
+    </div>
+
+    <div class="setting-item" *ngIf="rule_json.left !==undefined">
+      <label>left:</label>
+      <input type="text" nbInput [(ngModel)]="rule_json.left" fullWidth>
+    </div>
+
+    <div class="setting-item" *ngIf="rule_json.right !==undefined">
+      <label>right:</label>
+      <input type="text" nbInput [(ngModel)]="rule_json.right" fullWidth>
     </div>
 
     <div class="setting-item">

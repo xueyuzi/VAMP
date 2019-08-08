@@ -19,10 +19,6 @@ export class AgentComponent implements OnInit {
     private confirmationService: ConfirmationService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
       agentName: {
         title: '名称',
         type: 'string',
@@ -30,11 +26,6 @@ export class AgentComponent implements OnInit {
       agentAddress: {
         title: 'IP地址',
         type: 'string',
-      },
-      agentConfig: {
-        title: '配置',
-        type: 'string',
-        width: "20%",
       },
       agentKey: {
         title: '识别key',

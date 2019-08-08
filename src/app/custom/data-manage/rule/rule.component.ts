@@ -98,10 +98,14 @@ export class RuleComponent implements OnInit {
   saveUser() {
     this.user.ruleContent = this.jsonEditorService.getValue();
     if (this.type === "edit") {
-      this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.agentSource.refresh();});
+      this.desenRuleService.save(this.user).subscribe(res => {
+        if(res.code==0){this.isEdit=false;this.agentSource.refresh();}
+      });
     }
     if (this.type === "add") {
-      this.desenRuleService.add(this.user).subscribe(res => { this.isEdit=false;this.agentSource.refresh();});
+      this.desenRuleService.add(this.user).subscribe(res => {
+        if(res.code==0){this.isEdit=false;this.agentSource.refresh();}
+      });
 
     }
   }

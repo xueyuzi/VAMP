@@ -14,15 +14,11 @@ export class SinkComponent implements OnInit, AfterViewInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
       name: {
         title: '名称',
         type: 'string',
       },
-      type: {
+      type_name: {
         title: '类型',
         type: 'string',
       },

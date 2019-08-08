@@ -36,13 +36,16 @@ export class MenuComponent implements OnInit {
   }
 
   onEdit(event) {
-    console.log(event);
     this.menu = Object.assign({},this.menu,event.node.data);
     this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.menuName;
     this.menu.parentId = event.parent == null ? 0 : event.parent.data.menuId;
     this.menu.menuType = "M";
-    this.menu.orderNum = 1;
+    //this.menu.orderNum = 1;
     this.menu.visible = 0;
+
+    delete this.menu['updateTime'];
+    delete this.menu['params'];
+    delete this.menu['children'];
     this.setIcon(this.menu.icon);
     this.showEdit = true;
   }

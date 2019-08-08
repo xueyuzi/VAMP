@@ -14,10 +14,6 @@ export class EtltypeComponent implements OnInit, AfterViewInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
       etlType: {
         title: '日志类型',
         type: 'string',
