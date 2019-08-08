@@ -12,25 +12,13 @@
 </nb-card>
 <p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <nb-accordion class="expaned">
-    <nb-accordion-item>
-      <nb-accordion-item-header>Sources</nb-accordion-item-header>
+    <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
+      <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
       <nb-accordion-item-body>
-        <div *ngFor="let ssKey of objectKeys(sourcesChild)">
+        <div *ngFor="let okey of objectKeys(agentConfig[ikey])">
           <div class="setting-item">
-            <label>{{ssKey}}</label>
-            <span>{{sourcesChild[ssKey]}}</span>
-          </div>
-        </div>
-      </nb-accordion-item-body>
-    </nb-accordion-item>
-
-    <nb-accordion-item>
-      <nb-accordion-item-header>Channels</nb-accordion-item-header>
-      <nb-accordion-item-body>
-        <div *ngFor="let ssKey of objectKeys(channelChild)">
-          <div class="setting-item">
-            <label>{{ssKey}}</label>
-            <span>{{channelChild[ssKey]}}</span>
+            <label>{{okey}}</label>
+            <span>{{agentConfig[ikey][okey]}}</span>
           </div>
         </div>
       </nb-accordion-item-body>
@@ -46,15 +34,6 @@
       <label>IP地址:</label>
       <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
     </div>
-
-
-    <!-- <div class="setting-item" *ngFor="let ssKey of objectKeys(sourcesChild)">
-      <label>{{ssKey}}</label>
-      <div>{{sourcesChild[ssKey]}}</div>
-    </div> -->
-
-
-
 
     <div class="setting-item">
       <label>识别key:</label>

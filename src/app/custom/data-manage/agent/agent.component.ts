@@ -76,13 +76,18 @@ export class AgentComponent implements OnInit {
     this.user = { desen_rule_id: [] };
     this.isEdit = true;
   }
-  sourcesChild = {};
-  channelChild = {};
+
+  agentConfig = {};
 
   showEdit($event) {
 
     this.type = "edit";
-    this.sourcesChild = {};
+    this.agentConfig = {
+      "sources": {},
+      "channels": {},
+      "other": {}
+    }
+
     this.agentService.getAgent($event.data.id).subscribe(
       data => {
         this.user = data
@@ -90,28 +95,33 @@ export class AgentComponent implements OnInit {
         let sources;
         let channels;
 
-        Object.keys(agentConfig).map(key => {
+        Object.keys(agentConfig).forEach(key => {
           let sourcesKey = key.match(/^agent\d.sources$/);
           let channelsKey = key.match(/^agent\d.channels$/);
+          let otherKey = key.search("channels") + key.search("sources")
+
           if (sourcesKey !== null)
             sources = agentConfig[sourcesKey[0]].split(" ");
           if (channelsKey !== null)
             channels = agentConfig[channelsKey[0]].split(" ");
+          if (otherKey == -2) {
+            this.agentConfig["other"][key] = agentConfig[key]
+          }
         })
 
-        Object.keys(agentConfig).map(key => {
+        Object.keys(agentConfig).forEach(key => {
           sources.forEach(skey => {
             if (key.match(new RegExp("agent\\d*\\.sources\\." + skey + "\\.\\w+")) !== null) {
-              this.sourcesChild[key] = agentConfig[key]
+              this.agentConfig["sources"][key] = agentConfig[key]
             }
           })
           channels.forEach(ckey => {
             if (key.match(new RegExp("agent\\d*\\.channels\\." + ckey + "\\.\\w+")) !== null) {
-              this.channelChild[key] = agentConfig[key]
+              this.agentConfig["channels"][key] = agentConfig[key]
             }
           })
         })
-        console.log(this.sourcesChild)
+        console.log(this.agentConfig)
       }
     )
     this.isEdit = true;
@@ -149,13 +159,13 @@ export class AgentComponent implements OnInit {
 
 
   chartOptions1 = {
-    dataset:{
-      source:[
-        {key:1,value:123},
-        {key:2,value:103},
-        {key:3,value:13},
-        {key:4,value:53},
-        {key:5,value:83},
+    dataset: {
+      source: [
+        { key: 1, value: 123 },
+        { key: 2, value: 103 },
+        { key: 3, value: 13 },
+        { key: 4, value: 53 },
+        { key: 5, value: 83 },
       ]
     },
     xAxis: {
