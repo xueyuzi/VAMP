@@ -10,6 +10,10 @@
 </nb-card>
 <p-dialog header="实时分析规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 800px">
+    <div class="setting-item">
+      <label>规则名称:</label>
+      <input type="text" nbInput [(ngModel)]="user.ruleName" fullWidth>
+    </div>
 
     <div class="setting-item">
       <label>类型:</label>
@@ -20,10 +24,6 @@
       </nb-select>
     </div>
 
-    <div class="setting-item">
-      <label>规则名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.ruleName" fullWidth>
-    </div>
 
     <div class="setting-item">
       <label>规则编号:</label>
