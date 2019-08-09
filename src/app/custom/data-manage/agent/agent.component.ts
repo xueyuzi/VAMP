@@ -147,6 +147,8 @@ export class AgentComponent implements OnInit {
     this.agentService.getAgentChart(this.user.id).subscribe(
       list => {
         this.chartList = list
+        //eps
+        this.cpuList = [];
         this.chartList.forEach(
           child1 =>{
             let a = {};
@@ -155,9 +157,20 @@ export class AgentComponent implements OnInit {
             this.cpuList.push(a);
           });
         this.chartOptions1.dataset.source = this.cpuList;
-        console.log(this.cpuList);
-        console.log(this.chartOptions1.dataset.source);
+        this.chartOptions1=Object.assign({},this.chartOptions1);
+        //cpu
+        this.cpuList = [];
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.cpu;
+            this.cpuList.push(a);
+          });
+        this.chartOptions2.dataset.source = this.cpuList;
+        this.chartOptions2=Object.assign({},this.chartOptions2);
       });
+
     this.isShowCharts = true;
   }
 
@@ -190,11 +203,6 @@ export class AgentComponent implements OnInit {
   chartOptions1 = {
     dataset: {
       source: [
-        { key: 1, value: 123 },
-        { key: 2, value: 103 },
-        { key: 3, value: 13 },
-        { key: 4, value: 53 },
-        { key: 5, value: 83 },
       ]
     },
     xAxis: {
@@ -206,6 +214,28 @@ export class AgentComponent implements OnInit {
     series: [{
       type: 'line',
       smooth: true
-    }]
+    }],
+    title:{
+      text: "EPS趋势"
+    }
+  };
+  chartOptions2 = {
+    dataset: {
+      source: [
+      ]
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      smooth: true
+    }],
+    title:{
+      text: "进程CPU趋势"
+    }
   };
 }

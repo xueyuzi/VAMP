@@ -53,13 +53,21 @@
 
 
 <p-dialog header="图表" [(visible)]="isShowCharts" [draggable]="true" [resizable]="false">
-  <div style="width:800px;height:500px;display:flex">
-    <div style="width:400px;height:300px;">
+  <div style="width:800px;height:700px;">
+    <div style="width:400px;height:300px;float: left;">
       <div echarts [options]="chartOptions1" style="height:100%;width:100%">
       </div>
     </div>
-    <div style="width:400px;height:300px;">
+    <div style="width:400px;height:300px;float: left;">
+      <div echarts [options]="chartOptions2" style="height:100%;width:100%">
+      </div>
+    </div>
+    <div style="width:400px;height:300px;float: left;">
       <div echarts [options]="chartOptions1" style="height:100%;width:100%">
+      </div>
+    </div>
+    <div style="width:400px;height:300px;float: left;">
+      <div echarts [options]="chartOptions2" style="height:100%;width:100%">
       </div>
     </div>
   </div>
