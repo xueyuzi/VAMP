@@ -85,18 +85,6 @@ export class AgentComponent implements OnInit {
     this.desenRuleService.getList().subscribe(
       list => this.dRuleList = list
     )
-    this.agentService.getAgentChart(this.user.id).subscribe(
-      list => {
-        this.chartList = list
-        this.chartList.forEach(
-          child1 =>{
-            let a = {};
-            a['key'] = child1.create_at;
-            a['value'] = child1.eps;
-            this.cpuList.push(a);
-          });
-        this.chartOptions1.dataset.source = this.cpuList;
-      });
   }
 
 
@@ -150,13 +138,26 @@ export class AgentComponent implements OnInit {
             }
           })
         })
-        console.log(this.agentConfig)
       }
     )
     this.isEdit = true;
   }
 
   showCharts() {
+    this.agentService.getAgentChart(this.user.id).subscribe(
+      list => {
+        this.chartList = list
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.eps;
+            this.cpuList.push(a);
+          });
+        this.chartOptions1.dataset.source = this.cpuList;
+        console.log(this.cpuList);
+        console.log(this.chartOptions1.dataset.source);
+      });
     this.isShowCharts = true;
   }
 
