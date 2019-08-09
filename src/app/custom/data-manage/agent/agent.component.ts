@@ -78,11 +78,25 @@ export class AgentComponent implements OnInit {
   agentSource: ServerDataSource;
   dRuleList: Array<any>;
   desen_rule_id: any = []
+  chartList: Array<any>;
+  cpuList: Array<any> = [];
   ngOnInit() {
     this.agentSource = this.agentService.getList();
     this.desenRuleService.getList().subscribe(
       list => this.dRuleList = list
     )
+    this.agentService.getAgentChart(this.user.id).subscribe(
+      list => {
+        this.chartList = list
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.eps;
+            this.cpuList.push(a);
+          });
+        this.chartOptions1.dataset.source = this.cpuList;
+      });
   }
 
 

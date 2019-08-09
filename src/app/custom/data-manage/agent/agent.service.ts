@@ -26,4 +26,8 @@ export class AgentService {
   del(ids: number) {
     return this.api.post("/cep/agent/remove", { ids: ids })
   }
+
+  getAgentChart(ids: number) {
+    return this.api.post("/cep/agent/getChart", { id: ids })
+  }
 }
