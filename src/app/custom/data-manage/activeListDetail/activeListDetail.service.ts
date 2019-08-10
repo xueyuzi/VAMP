@@ -9,8 +9,8 @@ import { ServerDataSource } from 'ng2-smart-table';
 export class ActiveListDetailService {
 
   constructor(private api: ApiService, private http: HttpClient) { }
-  getList() {
-    return new ServerDataSource(this.http, { totalKey: "total", pagerPageKey: "offset", pagerLimitKey: "limit", dataKey: "rows", endPoint: "/cep/activeListDetails/list" })
+  getList(listId) {
+    return new ServerDataSource(this.http, { totalKey: "total", pagerPageKey: "offset", pagerLimitKey: "limit", dataKey: "rows", endPoint: "/cep/activeListDetails/list?listId="+listId })
   }
   getAgent(agentId) {
     return this.api.get("/cep/activeListDetails/edit/" + agentId);

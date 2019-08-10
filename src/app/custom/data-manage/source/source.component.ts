@@ -14,10 +14,6 @@ export class SourceComponent implements OnInit, AfterViewInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
       name: {
         title: '名称',
         type: 'string',

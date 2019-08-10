@@ -17,11 +17,7 @@ export class EtlTypeConfigComponent implements OnInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      etlTypeId: {
+      etlType: {
         title: '日志类别',
         type: 'string',
       },
@@ -109,6 +105,6 @@ export class EtlTypeConfigComponent implements OnInit {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
       this.jsonEditorService.setValue(this.user.mappingFields);
-    }, 50)
+    }, 500)
   }
 }

@@ -14,16 +14,12 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
               private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      type: {
-        title: '类型',
-        type: 'string',
-      },
       desenName: {
         title: '规则名称',
+        type: 'string',
+      },
+      type_name: {
+        title: '类型',
         type: 'string',
       },
       patternRegex: {
@@ -56,6 +52,7 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
   type: string;
   userList: Observable<any>;
   userCondition = new Subject<any>();
+  rule_json: any = {};
   ngOnInit() {
     this.userList = this.userCondition.pipe(
       switchMap(condition => this.desenRuleService.getList(condition)),
@@ -65,28 +62,25 @@ export class DesenRuleComponent implements OnInit, AfterViewInit {
     this.userCondition.next({});
   }
 
-  setEditor() {
-    setTimeout(() => {
-      this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.desenConfig);
-    }, 50)
-  }
-
   showNew() {
     this.type = "add";
     this.user = {};
     this.isEdit = true;
-    this.setEditor();
+    this. rule_json.method = "";
+    this. rule_json.flag = "";
+    this. rule_json.begin = "";
+    this. rule_json.left = "";
+    this. rule_json.right = "";
   }
   showEdit($event) {
     this.type = "edit";
     this.user = $event.data;
     this.isEdit = true;
-    this.setEditor();
+    this. rule_json = JSON.parse(this.user.desenConfig);
   }
 
   saveUser() {
-    this.user.desenConfig = this.jsonEditorService.getValue();
+    this.user.desenConfig=JSON.stringify(this. rule_json);
     if (this.type === "edit") {
       this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
     }

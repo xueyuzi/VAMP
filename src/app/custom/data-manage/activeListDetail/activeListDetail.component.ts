@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 import { ActiveListService } from '../activeList/activeList.service';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,9 @@ import { ActiveListService } from '../activeList/activeList.service';
 export class ActiveListDetailComponent implements OnInit {
 
   constructor(private agentService: ActiveListDetailService,
-    private activeListService: ActiveListService) { }
+    private activeListService: ActiveListService,
+    private router:Router,
+    private route: ActivatedRoute) { }
   settings = {
     columns: {
       id: {
@@ -49,17 +52,23 @@ export class ActiveListDetailComponent implements OnInit {
   type: string;
   agentSource: ServerDataSource;
   activeList: Array<any>;
-  desen_rule_id: any = []
+  listId:number;
+  isInport;
   ngOnInit() {
-    this.agentSource = this.agentService.getList();
     this.activeListService.getList().subscribe(
       list => this.activeList = list
     )
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.listId = Number(params.get("id"));
+      this.user.listId = this.listId;
+      this.agentSource = this.agentService.getList(this.user.listId);
+
+    });
   }
 
   showNew() {
     this.type = "add";
-    this.user = { desen_rule_id: [] };
+    this.user = { listId: this.listId };
     this.isEdit = true;
   }
   showEdit($event) {
@@ -69,6 +78,8 @@ export class ActiveListDetailComponent implements OnInit {
     )
     this.isEdit = true;
   }
+
+
 
   saveUser() {
 
@@ -82,13 +93,16 @@ export class ActiveListDetailComponent implements OnInit {
   }
 
   delUser($event) {
-        this.agentService.del($event.data.id).subscribe(
-          res => {
-            this.agentSource.refresh();
-    });
+    this.agentService.del($event.data.id).subscribe(
+      res => {
+        this.agentSource.refresh();
+      });
   }
 
   changeActive(event) {
     this.user.listId = event;
+  }
+  back(){
+    history.go(-1);
   }
 }

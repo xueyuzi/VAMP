@@ -65,7 +65,8 @@
     box-shadow: nb-theme(slide-out-shadow-color);
     color: #1a2138;
   }
-  .grid-stack-item{
+
+  .grid-stack-item {
     margin-top: 10px;
   }
 
@@ -92,6 +93,8 @@
 
     .ui-dialog-content {
       background: nb-theme(background-basic-color-3);
+      height: 500px !important;
+      overflow: auto;
     }
   }
 
@@ -107,19 +110,51 @@
       margin: 10px;
       width: 100%;
       height: 30px;
+
       display: flex;
       align-items: center;
+
+      label {
+        margin: 0px;
+      }
 
       input {
         flex: 1;
       }
+
+
+
     }
+
 
     label {
       width: 30%;
       padding-right: 10px;
       margin: 0;
     }
+  }
+
+  .expaned {
+    margin:10px;
+    .setting-item{
+      height: 20px;
+      display:flex;
+      justify-content: space-between
+    }
+    label {
+      margin: 0px;
+    }
+
+    span {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 30px;
+    }
+  }
+
+  nb-accordion nb-accordion-item {
+    background: rgba(0, 0, 0, 0);
   }
 
   .ui-tree {
@@ -195,4 +230,10 @@
 
 .ng-star-inserted {
   word-break: break-all;
+}
+nb-accordion{
+  box-shadow: none!important;
+}
+.btn{
+  margin:10px 10px 10px 0px;
 }
