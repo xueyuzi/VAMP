@@ -79,6 +79,7 @@ export class AgentComponent implements OnInit {
   dRuleList: Array<any>;
   desen_rule_id: any = []
   chartList: Array<any>;
+  cpuList:Array<any>;
   ngOnInit() {
     this.agentSource = this.agentService.getList();
     this.desenRuleService.getList().subscribe(
@@ -154,7 +155,7 @@ export class AgentComponent implements OnInit {
             let a = {};
             a['key'] = child1.create_at;
             a['value'] = child1.eps;
-            cpuList.push(a);
+            this.cpuList.push(a);
           });
         this.chartOptions1.dataset.source = this.cpuList;
         this.chartOptions1=Object.assign({},this.chartOptions1);
