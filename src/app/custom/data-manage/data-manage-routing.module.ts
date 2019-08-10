@@ -19,7 +19,7 @@ const routes: Routes = [
     {path:"agenthb",component:AgenthbComponent},
     {path:"desenRule",component:DesenRuleComponent},
     {path:"activeList",component:ActiveListComponent},
-    {path:"activeListDetail",component:ActiveListDetailComponent},
+    {path:"activeListDetail/:id",component:ActiveListDetailComponent},
     {path:"rule",component:RuleComponent},
     {path:"sink",component:SinkComponent},
     {path:"source",component:SourceComponent},

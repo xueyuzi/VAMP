@@ -57,7 +57,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NbCardModule,
     NbRadioModule,
     NbAccordionModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    FileUploadModule
   ],
   providers: [
     ConfirmationService

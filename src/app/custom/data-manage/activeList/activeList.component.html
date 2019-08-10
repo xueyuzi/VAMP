@@ -4,8 +4,11 @@
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <button (click)="showNew()" class="btn btn-primary">新建</button>
+
+    <button (click)="showInport()" class="btn btn-primary">导入</button>
+    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="jumpDetail($event)"
+      (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="活动列表配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
@@ -48,3 +51,16 @@
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>
 
+
+
+
+<p-dialog header="导入数据" [(visible)]="isInport" [draggable]="false" [resizable]="false">
+  <div class="setting-container">
+
+    <div class="setting-item">
+      <label>csv文件:</label>
+      <p-fileUpload name="csvfile" mode="basic" [auto]="true" (onUpload)="uploadFile($event)"
+        [chooseLabel]="csvFile ==undefined?'upload':csvFile" url="/elasticsearch/updateChartImg"></p-fileUpload>
+    </div>
+  </div>
+</p-dialog>

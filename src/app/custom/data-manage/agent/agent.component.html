@@ -10,7 +10,7 @@
       (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false" >
+<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false">
   <nb-accordion class="expaned">
     <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
       <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>

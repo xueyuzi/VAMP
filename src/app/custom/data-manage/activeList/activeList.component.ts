@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActiveListService } from './activeList.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-user',
@@ -9,7 +10,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ActiveListComponent implements OnInit, AfterViewInit {
 
-  constructor(private activeList: ActiveListService) { }
+  constructor(private activeList: ActiveListService,
+    private router:Router) { }
   settings = {
     columns: {
       id: {
@@ -57,6 +59,7 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     },
   }
   isEdit: boolean = false;
+  isInport:boolean = false;
   user: any = {};
   type: string;
   userList: Observable<any>;
@@ -79,6 +82,10 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     this.user = $event.data;
     this.isEdit = true;
   }
+  jumpDetail($event){
+    let id = $event.data.id
+    this.router.navigate(["/custom/data/activeListDetail",id])
+  }
 
   saveUser() {
 
@@ -96,5 +103,13 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
       res => {
         this.userCondition.next();
       });
+  }
+  showInport(){
+    this.isInport = true;
+  }
+
+  uploadFile($event){
+    console.log($event)
+    this.isInport = false;
   }
 }
