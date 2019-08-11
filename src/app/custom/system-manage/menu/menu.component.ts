@@ -43,7 +43,6 @@ export class MenuComponent implements OnInit {
     this.menu = Object.assign({},this.menu,event.node.data);
     this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.menuName;
     this.menu.parentId = event.parent == null ? 0 : event.parent.data.menuId;
-    this.menu.menuType = "M";
     //this.menu.orderNum = 1;
     this.menu.visible = 0;
 
@@ -59,7 +58,6 @@ export class MenuComponent implements OnInit {
     this.menu.parentMenu = event !== undefined ? event.node.data.menuName : "无"
     this.menu.parentId = event !== undefined ? event.node.data.menuId : 0;
     this.menu.url = "/custom/dashboard/view/" + Math.ceil(Math.random() * 100000);
-    this.menu.menuType = "M";
     this.menu.visible = 0;
     this.menu.orderNum = 1;
 

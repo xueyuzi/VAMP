@@ -33,8 +33,13 @@ export class NumberComponent extends BaseChartComponent implements OnInit {
     ngOnInit() {
     }
     jump() {
-        if (this.options.dataset.link_url !== null) {
-            window.location = this.options.dataset.link_url;
+        let link_url = this.options.dataset.link_url
+        if (link_url !== null) {
+            if (link_url.match("http") == null) {
+                window.location = link_url;
+            } else {
+                window.open(link_url);
+            }
 
         }
 
