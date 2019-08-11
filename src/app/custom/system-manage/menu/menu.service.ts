@@ -42,6 +42,9 @@ export class MenuService {
     )
   }
 
+  getMenuList(){
+    return this.api.get("/system/menu/list");
+  }
   getMenusWithTreeTableData() {
     return this.api.get("/system/menu/list").pipe(
       map(menus => {
