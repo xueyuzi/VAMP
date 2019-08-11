@@ -35,15 +35,25 @@
 </nb-card>
 
 <p-dialog header="菜单编辑" [(visible)]="showEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" >
+  <div class="setting-container">
     <div class="setting-item">
       <label>上级菜单:</label>
-      <input type="text" nbInput [value]="menu.parentMenu" fullWidth readonly>
+      <select class="form-control" [(ngModel)]="menu.parentId" style="width:auto">
+        <option *ngFor="let menu of menuList" [value]="menu.menuId">{{menu.menuName}}</option>
+      </select>
     </div>
 
     <div class="setting-item">
       <label>菜单名:</label>
       <input type="text" nbInput [(ngModel)]="menu.menuName" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>是否为菜单:</label>
+
+      <nb-radio-group [(ngModel)]="menu.menuType" style="display:flex">
+        <nb-radio value="B">否</nb-radio>
+        <nb-radio value="M">是</nb-radio>
+      </nb-radio-group>
     </div>
     <div class="setting-item">
       <label>请求地址:</label>

@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit {
 
   menu: any;
   menuIcons = [];
+  menuList:Array<any>;
   showEdit: boolean;
   customColumn = 'title';
   defaultColumns = ['menuId', 'icon', 'link'];
@@ -33,6 +34,9 @@ export class MenuComponent implements OnInit {
     this.menuService.getMenusWithTreeTableData().subscribe(
       menus => this.data = menus
     )
+    this.menuService.getMenuList().subscribe(menuList=>{
+      this.menuList = menuList;
+    })
   }
 
   onEdit(event) {
