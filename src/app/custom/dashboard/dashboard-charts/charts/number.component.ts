@@ -11,9 +11,10 @@ import { ChartsService } from '../dashboard-charts.service';
     justify-content: center;
     align-items: center;"
     (click)="jump()"
+    [style.cursor]="this.options.dataset.link_url !== null?'pointer':'auto'"
     >
-    <p *ngIf="this.census === undefined" style="font-size:4vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[0]?.doc_count}}{{container.panelData.chartStyle?.suffix}}</p>
-    <p *ngIf="this.census!==undefined" style="font-size:4vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[1]?.doc_count}}</p>
+    <p *ngIf="this.census === undefined" style="font-size:3.5vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[0]?.doc_count}}{{container.panelData.chartStyle?.suffix}}</p>
+    <p *ngIf="this.census!==undefined" style="font-size:3.5vw;font-weight:bolder;padding: 0px;margin: 0px;">{{options.dataset.source[1]?.doc_count}}</p>
         <div [style.color]="this.census >= 0 ? 'red' : '#00ec05'" style="height:60px;display:flex;display: flex;align-items: center;flex-direction: column;justify-content:space-around;">
             <img *ngIf="this.census >= 0" src="assets/images/red_up.png" style="width:40px"/>
             <div style="font-size:2vw;font-weight:bolder">
@@ -25,14 +26,17 @@ import { ChartsService } from '../dashboard-charts.service';
     `
 })
 export class NumberComponent extends BaseChartComponent implements OnInit {
-    constructor(protected chartsService:ChartsService) {
+    constructor(protected chartsService: ChartsService) {
         super(chartsService);
     }
     census: number;
     ngOnInit() {
     }
-    jump(){
-        window.location = this.options.dataset.link_url;
+    jump() {
+        if (this.options.dataset.link_url !== null) {
+            window.location = this.options.dataset.link_url;
+
+        }
 
     }
     setData(data: any) {
@@ -43,7 +47,7 @@ export class NumberComponent extends BaseChartComponent implements OnInit {
             this.census = data.source[1].doc_count - data.source[0].doc_count;
         }
     }
-    options:any = {
+    options: any = {
         dataset: {
             source: [
                 { doc_count: "0" }

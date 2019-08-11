@@ -4,11 +4,12 @@
     <div style="display: flex;
     width: 100%;
     justify-content: left;
-    height: 60px;
     align-items: baseline;
-    flex-direction: column;">
-      <h5 style="margin:0px" *ngIf="item.panelData.type !== 'text'">{{chartData?.title}}</h5>
-      <nb-actions size="medium" style="flex:1;width:100%;height:30px" *ngIf="isEdit|async" fullWidth>
+    flex-direction: column;"
+    [style.height]="(isEdit|async) ?'60px':'30px'"
+    >
+      <h5 style="margin:0px;font-size:20px" *ngIf="item.panelData.type !== 'text'">{{chartData?.title}}</h5>
+      <nb-actions size="medium" style="flex:1;width:100%;height:30px"  *ngIf="isEdit|async" fullWidth>
         <nb-action icon="clipboard-outline" title="查看报表"></nb-action>
         <nb-action icon="pie-chart-outline" title="选择可视化" [nbPopover]="chartList" nbPopoverPlacement="bottom">
         </nb-action>
