@@ -170,6 +170,39 @@ export class AgentComponent implements OnInit {
           });
         this.chartOptions2.dataset.source = this.cpuList;
         this.chartOptions2=Object.assign({},this.chartOptions2);
+        //sys_cpu
+        this.cpuList = [];
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.sys_cpu;
+            this.cpuList.push(a);
+          });
+        this.chartOptions3.dataset.source = this.cpuList;
+        this.chartOptions3=Object.assign({},this.chartOptions3);
+        //mem
+        this.cpuList = [];
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.mem;
+            this.cpuList.push(a);
+          });
+        this.chartOptions4.dataset.source = this.cpuList;
+        this.chartOptions4=Object.assign({},this.chartOptions4);
+        //fh
+        this.cpuList = [];
+        this.chartList.forEach(
+          child1 =>{
+            let a = {};
+            a['key'] = child1.create_at;
+            a['value'] = child1.fh;
+            this.cpuList.push(a);
+          });
+        this.chartOptions5.dataset.source = this.cpuList;
+        this.chartOptions5=Object.assign({},this.chartOptions5);
       });
 
     this.isShowCharts = true;
@@ -236,6 +269,63 @@ export class AgentComponent implements OnInit {
     }],
     title:{
       text: "进程CPU趋势"
+    }
+  };
+  chartOptions3 = {
+    dataset: {
+      source: [
+      ]
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      smooth: true
+    }],
+    title:{
+      text: "系统CPU趋势"
+    }
+  };
+  chartOptions4 = {
+    dataset: {
+      source: [
+      ]
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      smooth: true
+    }],
+    title:{
+      text: "进程MEM趋势"
+    }
+  };
+  chartOptions5 = {
+    dataset: {
+      source: [
+      ]
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [{
+      type: 'line',
+      smooth: true
+    }],
+    title:{
+      text: "文件句柄趋势"
     }
   };
 }
