@@ -3,7 +3,7 @@ import { ActiveListService } from './activeList.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { ActionComponent } from "./action/action.component";
 @Component({
   selector: 'ngx-user',
   templateUrl: './activeList.component.html'
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class ActiveListComponent implements OnInit, AfterViewInit {
 
   constructor(private activeList: ActiveListService,
-    private router:Router) { }
+    private router: Router) { }
   settings = {
     columns: {
       id: {
@@ -45,21 +45,24 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
       remark: {
         title: '备注',
         type: 'string',
+      },
+      action: {
+        title: "操作",
+        type: "custom",
+        renderComponent: ActionComponent,
+        width: "200px"
       }
     },
     actions: {
       add: false,
       edit: false,
+      delete: false,
       columnTitle: "操作",
       position: "right"
     },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
   }
   isEdit: boolean = false;
-  isInport:boolean = false;
+  isInport: boolean = false;
   user: any = {};
   type: string;
   userList: Observable<any>;
@@ -82,18 +85,18 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
     this.user = $event.data;
     this.isEdit = true;
   }
-  jumpDetail($event){
+  jumpDetail($event) {
     let id = $event.data.id
-    this.router.navigate(["/custom/data/activeListDetail",id])
+    this.router.navigate(["/custom/data/activeListDetail", id])
   }
 
   saveUser() {
 
     if (this.type === "edit") {
-      this.activeList.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.activeList.save(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next() });
     }
     if (this.type === "add") {
-      this.activeList.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.activeList.add(this.user).subscribe(res => { this.isEdit = false; this.userCondition.next() });
 
     }
   }
@@ -104,11 +107,12 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
         this.userCondition.next();
       });
   }
-  showInport(){
+  showInport() {
     this.isInport = true;
   }
 
-  uploadFile($event){
+
+  uploadFile($event) {
     console.log($event)
     this.isInport = false;
   }

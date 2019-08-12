@@ -26,6 +26,7 @@ import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckbox
 import { FileUploadModule } from "primeng/fileupload";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ActionComponent } from './activeList/action/action.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     ModelComponent,
     EtltypeComponent,
     EtlTypeConfigComponent,
-    AgenthbComponent],
+    AgenthbComponent,
+    ActionComponent],
   imports: [
     CommonModule,
     DataManageRoutingModule,
@@ -63,8 +65,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
   providers: [
     ConfirmationService
   ],
+  entryComponents:[ActionComponent],
   exports: [
     ChartTemplateListComponent
-  ]
+  ],
 })
 export class DataManageModule { }

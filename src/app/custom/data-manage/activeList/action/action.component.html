@@ -1,0 +1,19 @@
+<button type="button" class="btn btn-primary" style="color:white">查看详情</button>
+
+<button type="button" class="btn btn-info" style="color:white"
+  (click)="showInport($event);$event.stopPropagation()">数据导入</button>
+
+
+<p-dialog header="导入数据"
+ [(visible)]="isInport" 
+ [draggable]="false" 
+ [resizable]="false"
+ >
+  <div class="setting-container">
+    <div class="setting-item">
+      <label>csv文件:</label>
+      <p-fileUpload (onBeforeUpload)="onBeforeUpload($event)" (click)="$event.stopPropagation()" name="csvfile" mode="basic" [auto]="true" (onUpload)="uploadFile($event)"
+        [chooseLabel]="csvfile ==undefined?'upload':csvfile" url="/cep/activeList/updateCsv"></p-fileUpload>
+    </div>
+  </div>
+</p-dialog>
