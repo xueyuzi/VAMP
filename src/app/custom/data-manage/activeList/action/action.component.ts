@@ -23,6 +23,7 @@ export class ActionComponent implements OnInit {
   uploadFile(event) {
 
     console.log(event)
+    this.isInport = false;
   }
   onBeforeUpload(event) {
     let id = this.rowData.id;
