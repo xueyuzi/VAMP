@@ -11,19 +11,7 @@
   </nb-card-body>
 </nb-card>
 <p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false">
-  <nb-accordion class="expaned">
-    <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
-      <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
-      <nb-accordion-item-body>
-        <div *ngFor="let okey of objectKeys(agentConfig[ikey])">
-          <div class="setting-item">
-            <label>{{okey}}</label>
-            <span>{{agentConfig[ikey][okey]}}</span>
-          </div>
-        </div>
-      </nb-accordion-item-body>
-    </nb-accordion-item>
-  </nb-accordion>
+
   <div class="setting-container" *ngIf="user!==undefined">
     <div class="setting-item">
       <label>名称:</label>
@@ -45,6 +33,22 @@
         (selectedChange)="changeDesen($event)" style="width: 200px">
         <nb-option [value]="role.id" *ngFor="let role of dRuleList">{{role.desenName}}</nb-option>
       </nb-select>
+    </div>
+    <div class="setting-item" style="height:auto">
+      <label>参数查看:</label>
+      <nb-accordion class="expaned" style="width:100%">
+        <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
+          <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div *ngFor="let okey of objectKeys(agentConfig[ikey])">
+              <div class="setting-item">
+                <label style="width:250px">{{okey}}</label>
+                <span>{{agentConfig[ikey][okey]}}</span>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
     </div>
   </div>
   <button nbButton (click)="saveUser()" style="margin: 10px;">保存</button>
