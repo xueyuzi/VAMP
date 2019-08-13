@@ -185,6 +185,16 @@
   .ui-dialog .ui-dialog-content {
     color: nb-theme(text-basic-color)
   }
+  ng2-smart-table table tr th{
+    border-top: 0px;
+    border-bottom: 1px solid #dfdfdf;
+  }
+  ng2-smart-table table tr th,
+  ng2-smart-table table tr td {
+    border-right: 0px;
+    border-left: 0px;
+    
+  }
 
   .ui-dialog .ui-dialog-footer {
     background-color: nb-theme(background-basic-color-2);
@@ -205,7 +215,7 @@
 
 
   .ui-table {
-    border: 1px solid black;
+    border: 1px solid nb-theme(background-basic-color-4);
 
     .ui-table-thead {
       th {
