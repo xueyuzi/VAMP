@@ -204,6 +204,34 @@
   }
 
 
+  .ui-table {
+    border: 1px solid black;
+
+    .ui-table-thead {
+      th {
+        background-color: rgba(0, 0, 0, 0);
+        color: nb-theme(text-basic-color);
+        border: 0px;
+      }
+    }
+
+    .ui-table-tbody {
+      tr {
+        background-color: nb-theme(background-basic-color-3);
+        color: nb-theme(text-basic-color);
+
+        td {
+          border: 0px;
+        }
+      }
+
+      tr:nth-child(even) {
+        background-color: nb-theme(background-basic-color-2);
+        color: nb-theme(text-basic-color);
+      }
+    }
+  }
+
 
 
 

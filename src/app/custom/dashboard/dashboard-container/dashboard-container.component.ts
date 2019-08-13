@@ -44,6 +44,7 @@ export class DashboardContainerComponent implements OnInit {
     this.popover.hide();
   }
   loadChart(name: string) {
+    if (name === 'null') name = "pie";
     this.loadComponent(chartListData[name].component);
   }
 
