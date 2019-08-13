@@ -50,7 +50,7 @@ export class ActiveListComponent implements OnInit {
         title: "操作",
         type: "custom",
         renderComponent: ActionComponent,
-        width: "200px"
+        width: "250px"
       }
     },
     actions: {
@@ -60,6 +60,7 @@ export class ActiveListComponent implements OnInit {
       columnTitle: "操作",
       position: "right"
     },
+    hideSubHeader: true
   }
   isEdit: boolean = false;
   isInport: boolean = false;

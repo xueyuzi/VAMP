@@ -1,7 +1,10 @@
-<button type="button" class="btn btn-primary" style="color:white" (click)="jumpDetail($event);$event.stopPropagation();">详情</button>
+<button type="button" class="btn btn-primary" style="color:white" (click)="jumpDetail($event);$event.stopPropagation();">
+    <i class="icon ion-ios-search-strong"></i> 详情</button>
 
-<button type="button" class="btn btn-info" style="color:white" (click)="showInport($event);$event.stopPropagation();">导入</button>
-<button type="button" class="btn btn-danger" style="color:white" (click)="del();$event.stopPropagation();">删除</button>
+<button type="button" class="btn btn-info" style="color:white" (click)="showInport($event);$event.stopPropagation();">
+    <i class="icon ion-ios-upload-outline"></i> 导入</button>
+<button type="button" class="btn btn-danger" style="color:white" (click)="del();$event.stopPropagation();">
+    <i class="icon ion-ios-trash-outline"></i> 删除</button>
 
 
 <p-dialog header="导入数据" (click)="$event.stopPropagation();" [(visible)]="isInport" [draggable]="false" [resizable]="false">
