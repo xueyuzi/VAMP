@@ -38,31 +38,28 @@
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>部门名称:</label>
-      <input type="text" nbInput [(ngModel)]="dept.deptName" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.deptName" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>排序:</label>
-      <input type="text" nbInput [(ngModel)]="dept.orderNum" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.orderNum" fullWidth>
     </div>
     <div class="setting-item">
       <label>负责人:</label>
-      <input type="text" nbInput [(ngModel)]="dept.leader" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.leader" fullWidth>
     </div>
     <div class="setting-item">
       <label>联系电话:</label>
-      <input type="text" nbInput [(ngModel)]="dept.phone" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.phone" fullWidth>
     </div>
     <div class="setting-item">
       <label>邮箱:</label>
-      <input type="text" nbInput [(ngModel)]="dept.email" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.email" fullWidth>
     </div>
     <div class="setting-item">
       <label>状态:</label>
-      <nb-radio-group [(ngModel)]="dept.status" style="display:flex">
-        <nb-radio value="0">开</nb-radio>
-        <nb-radio value="1">关</nb-radio>
-      </nb-radio-group>
+      <p-inputSwitch [ngModel]="dept.status == 0" (onChange)="handleChange($event)"></p-inputSwitch>
     </div>
 
 

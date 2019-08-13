@@ -25,7 +25,7 @@
 
     <div class="setting-item">
       <label>状态:</label>
-      <nb-checkbox [(ngModel)]="role.status"></nb-checkbox>
+      <p-inputSwitch [ngModel]="role.status == 0" (onChange)="handleChange($event)"></p-inputSwitch>
     </div>
 
     <div class="setting-item">
