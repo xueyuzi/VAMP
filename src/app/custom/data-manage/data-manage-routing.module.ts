@@ -13,6 +13,7 @@ import {SourceComponent} from "./source/source.component";
 import { ModelComponent } from './model/model.component';
 import { EtltypeComponent } from './etltype/etltype.component';
 import { EtlTypeConfigComponent } from './etlTypeConfig/etlTypeConfig.component';
+import { AlertComponent } from './alert/alert.component';
 
 const routes: Routes = [
     {path:"chart-template",component:ChartTemplateComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path:"model",component:ModelComponent},
     {path:"etltype",component:EtltypeComponent},
     {path:"etlTypeConfig",component:EtlTypeConfigComponent},
+    {path:"alert",component:AlertComponent},
     {path:"agent",component:AgentComponent}
 ];
 

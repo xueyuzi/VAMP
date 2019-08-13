@@ -5,6 +5,7 @@ import { ChartsService } from '../dashboard-charts.service';
 @Component({
     selector: 'ngx-table',
     template: `
+    <div style="height:100%;display:flex;align-items:center">
     <p-table [value]="options.dataset.source">
     <ng-template pTemplate="header">
         <tr>
@@ -21,6 +22,7 @@ import { ChartsService } from '../dashboard-charts.service';
         </tr>
     </ng-template>
 </p-table>
+    </div>
     `
 })
 export class TableComponent extends BaseChartComponent implements OnInit {
@@ -33,8 +35,8 @@ export class TableComponent extends BaseChartComponent implements OnInit {
         this.options.dataset = data;
         this.cols = this.getCols(data.source[0]);
     }
-    getCols(obj){
-        return Object.keys(obj).filter(key=> typeof obj[key]!=='object');
+    getCols(obj) {
+        return Object.keys(obj).filter(key => typeof obj[key] !== 'object');
     }
     cols: Array<any> = [];
     options = {

@@ -10,6 +10,7 @@ import { TreeModule } from 'primeng/tree';
 import { OrderListModule } from 'primeng/orderlist';
 import { DataManageModule } from "./data-manage/data-manage.module";
 
+
 @NgModule({
   declarations: [CustomComponent],
   imports: [

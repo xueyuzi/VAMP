@@ -1,6 +1,11 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component {
+  label{
+    margin: 0px;
+    display: flex;
+    align-items: center;
+  }
   .setting-form {
     height: 200px;
     width: 400px;

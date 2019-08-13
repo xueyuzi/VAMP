@@ -1,0 +1,26 @@
+<script src="alert.component.ts"></script>
+<nb-card>
+  <nb-card-header>
+    告警
+  </nb-card-header>
+
+  <nb-card-body>
+    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container">
+
+    <div class="setting-item">
+      <label>标题:</label>
+      <input type="text" nbInput [(ngModel)]="user.title" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>所有者:</label>
+      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+    </div>
+  </div>
+  <button nbButton fullWidth (click)="saveUser()">保存</button>
+</p-dialog>
+

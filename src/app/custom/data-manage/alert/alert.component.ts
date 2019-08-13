@@ -1,35 +1,29 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActiveListDetailService } from './activeListDetail.service';
+import { AlertService } from './alert.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
-import { ActiveListService } from '../activeList/activeList.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-
+import {JsonEditorService} from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
-  templateUrl: './activeListDetail.component.html'
+  templateUrl: './alert.component.html'
 })
-export class ActiveListDetailComponent implements OnInit {
+export class AlertComponent implements OnInit {
 
-  constructor(private agentService: ActiveListDetailService,
-    private activeListService: ActiveListService,
-    private router:Router,
-    private route: ActivatedRoute) { }
+  constructor(private agentService: AlertService,
+              private jsonEditorService: JsonEditorService) { }
   settings = {
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      listId: {
-        title: '活动列表',
+      title: {
+        title: '标题',
         type: 'string',
+        width:'60%',
       },
-      value: {
-        title: '值',
+      owner: {
+        title: '所有者',
         type: 'string',
+        width:'20%',
       }
     },
     actions: {
@@ -52,23 +46,14 @@ export class ActiveListDetailComponent implements OnInit {
   type: string;
   agentSource: ServerDataSource;
   activeList: Array<any>;
-  listId:number;
-  isInport;
+  desen_rule_id: any = []
   ngOnInit() {
-    this.activeListService.getList().subscribe(
-      list => this.activeList = list
-    )
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.listId = Number(params.get("id"));
-      this.user.listId = this.listId;
-      this.agentSource = this.agentService.getList(this.user.listId);
-
-    });
+    this.agentSource = this.agentService.getList();
   }
 
   showNew() {
+    this.user = {};
     this.type = "add";
-    this.user = { listId: this.listId };
     this.isEdit = true;
   }
   showEdit($event) {
@@ -79,10 +64,7 @@ export class ActiveListDetailComponent implements OnInit {
     this.isEdit = true;
   }
 
-
-
-  save() {
-
+  saveUser() {
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
     }
@@ -93,16 +75,9 @@ export class ActiveListDetailComponent implements OnInit {
   }
 
   delUser($event) {
-    this.agentService.del($event.data.id).subscribe(
-      res => {
-        this.agentSource.refresh();
-      });
-  }
-
-  changeActive(event) {
-    this.user.listId = event;
-  }
-  back(){
-    history.go(-1);
+        this.agentService.del($event.data.id).subscribe(
+          res => {
+            this.agentSource.refresh();
+    });
   }
 }

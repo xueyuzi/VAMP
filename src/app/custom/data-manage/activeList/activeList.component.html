@@ -5,61 +5,46 @@
 
   <nb-card-body>
     <button (click)="showNew()" class="btn btn-primary">新建</button>
-
-    <button (click)="showInport()" class="btn btn-primary">导入</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="jumpDetail($event)"
-      (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <ng2-smart-table [source]="activeList | async" [settings]="settings" (userRowSelect)="showEdit($event)">
+    </ng2-smart-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="活动列表配置" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.listName" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.listName">
     </div>
 
     <div class="setting-item">
       <label>编号:</label>
-      <input type="text" nbInput [(ngModel)]="user.listNo" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.listNo">
     </div>
 
     <div class="setting-item">
       <label>类型:</label>
-      <input type="text" nbInput [(ngModel)]="user.type" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.type">
     </div>
 
     <div class="setting-item">
       <label>状态:</label>
-      <input type="text" nbInput [(ngModel)]="user.status" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.status">
     </div>
 
     <div class="setting-item">
       <label>最大值:</label>
-      <input type="text" nbInput [(ngModel)]="user.maxsize" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.maxsize">
     </div>
 
     <div class="setting-item">
       <label>超时时间:</label>
-      <input type="text" nbInput [(ngModel)]="user.timeout" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.timeout">
     </div>
 
     <div class="setting-item">
       <label>备注:</label>
-      <input type="text" nbInput [(ngModel)]="user.remark" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="active.remark">
     </div>
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
-</p-dialog>
-
-
-
-
-<p-dialog header="导入数据" [(visible)]="isInport" [draggable]="false" [resizable]="false">
-  <div class="setting-container">
-    <div class="setting-item">
-      <label>csv文件:</label>
-      <p-fileUpload name="csvfile" mode="basic" [auto]="true" (onUpload)="uploadFile($event)"
-        [chooseLabel]="csvFile ==undefined?'upload':csvFile" url="/elasticsearch/updateChartImg"></p-fileUpload>
-    </div>
-  </div>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>

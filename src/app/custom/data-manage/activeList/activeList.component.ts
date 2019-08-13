@@ -3,15 +3,15 @@ import { ActiveListService } from './activeList.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { ActionComponent } from "./activeListAction/activeListAction.component";
 @Component({
   selector: 'ngx-user',
   templateUrl: './activeList.component.html'
 })
-export class ActiveListComponent implements OnInit, AfterViewInit {
+export class ActiveListComponent implements OnInit {
 
-  constructor(private activeList: ActiveListService,
-    private router:Router) { }
+  constructor(private activeListService: ActiveListService,
+    private router: Router) { }
   settings = {
     columns: {
       id: {
@@ -45,71 +45,50 @@ export class ActiveListComponent implements OnInit, AfterViewInit {
       remark: {
         title: '备注',
         type: 'string',
+      },
+      action: {
+        title: "操作",
+        type: "custom",
+        renderComponent: ActionComponent,
+        width: "200px"
       }
     },
     actions: {
       add: false,
       edit: false,
+      delete: false,
       columnTitle: "操作",
       position: "right"
     },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
   }
   isEdit: boolean = false;
-  isInport:boolean = false;
-  user: any = {};
+  isInport: boolean = false;
+  active: any = {};
   type: string;
-  userList: Observable<any>;
-  userCondition = new Subject<any>();
+  activeList: Observable<any>;
   ngOnInit() {
-    this.userList = this.userCondition.pipe(
-      switchMap(condition => this.activeList.getList(condition)),
-    )
-  }
-  ngAfterViewInit() {
-    this.userCondition.next({});
+    this.activeListService.getList().subscribe();
+    this.activeList = this.activeListService.activeList;
   }
   showNew() {
     this.type = "add";
-    this.user = {};
+    this.active = {};
     this.isEdit = true;
   }
   showEdit($event) {
     this.type = "edit";
-    this.user = $event.data;
+    this.active = $event.data;
     this.isEdit = true;
   }
-  jumpDetail($event){
-    let id = $event.data.id
-    this.router.navigate(["/custom/data/activeListDetail",id])
-  }
 
-  saveUser() {
 
+  save() {
     if (this.type === "edit") {
-      this.activeList.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.activeListService.save(this.active).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.activeList.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.activeListService.add(this.active).subscribe(res => { this.isEdit = false; });
 
     }
-  }
-
-  delUser($event) {
-    this.activeList.del($event.data.id).subscribe(
-      res => {
-        this.userCondition.next();
-      });
-  }
-  showInport(){
-    this.isInport = true;
-  }
-
-  uploadFile($event){
-    console.log($event)
-    this.isInport = false;
   }
 }
