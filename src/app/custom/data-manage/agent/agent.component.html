@@ -14,12 +14,12 @@
 
   <div class="setting-container" *ngIf="user!==undefined">
     <div class="setting-item">
-      <label>名称:</label>
+      <label>采集器名称:</label>
       <input type="text" nbInput [(ngModel)]="user.agentName" fullWidth>
     </div>
 
     <div class="setting-item">
-      <label>IP地址:</label>
+      <label>采集器IP:</label>
       <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
     </div>
 
@@ -28,7 +28,7 @@
       <input type="text" nbInput [(ngModel)]="user.agentKey" fullWidth>
     </div>
     <div class="setting-item">
-      <label>脱敏规则配置:</label>
+      <label>脱敏规则:</label>
       <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="user.desen_rule_id"
         (selectedChange)="changeDesen($event)" style="width: 200px">
         <nb-option [value]="role.id" *ngFor="let role of dRuleList">{{role.desenName}}</nb-option>

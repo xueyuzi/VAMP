@@ -55,6 +55,7 @@ export class AlertComponent implements OnInit {
     this.user = {};
     this.type = "add";
     this.isEdit = true;
+    this.setEditor();
   }
   showEdit($event) {
     this.type = "edit";
@@ -62,6 +63,7 @@ export class AlertComponent implements OnInit {
       data => this.user = data
     )
     this.isEdit = true;
+    this.setEditor();
   }
 
   saveUser() {
@@ -79,5 +81,12 @@ export class AlertComponent implements OnInit {
           res => {
             this.agentSource.refresh();
     });
+  }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.user.trigger_es_json);
+    }, 500)
   }
 }

@@ -28,13 +28,34 @@
       <label>Cron 表达式:</label>
       <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
     </div>
+    <div class="setting-item" style="height:auto">
+      <label>查询语句:</label>
+      <div id="agent-json-editor" style="height:200px;flex:1;margin:10px 0"></div>
+    </div>
     <div class="setting-item">
-      <label>类型:</label>
+      <label>运算符:</label>
       <nb-select  placeholder="请选择类型" [(selected)]="user.type" style="width: 200px">
-        <nb-option [value]="0" >替换</nb-option>
-        <nb-option [value]="1" >加密</nb-option>
+        <nb-option [value]="2" >大于</nb-option>
+        <nb-option [value]="1" >小于</nb-option>
+        <nb-option [value]="0" >等于</nb-option>
       </nb-select>
     </div>
+    <div class="setting-item">
+      <label>值:</label>
+      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+    </div>
+    <nb-accordion class="expaned">
+      <nb-accordion-item >
+        <nb-accordion-item-header>邮件提醒</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <nb-select  placeholder="发送邮件" [(selected)]="user.type" style="width: 200px">
+            <nb-option [value]="2" >大于</nb-option>
+            <nb-option [value]="1" >小于</nb-option>
+            <nb-option [value]="0" >等于</nb-option>
+          </nb-select>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>
