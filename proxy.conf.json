@@ -1,44 +1,47 @@
+
+
 {
-  "/login":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
+  "/login": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
     "logLevel": "debug",
-    "secure":false
+    "secure": false
   },
-  "/system":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
+  "/system": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
     "logLevel": "debug",
-    "secure":false
+    "secure": false
   },
-  "/captcha":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
+  "/captcha": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
     "logLevel": "debug",
-    "secure":false
+    "secure": false
   },
-  "/elasticsearch":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
+  "/elasticsearch": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
     "logLevel": "debug",
-    "secure":false
+    "secure": false
   },
-  "/cep":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
+  "/signin": {
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
     "logLevel": "debug",
-    "secure":false
-  },
-  "/signin":{
-    "target":"http://127.0.0.1:80",
-    "changeOrigin":true,
-    "logLevel": "debug",
-    "secure":false
+    "secure": false
   },
   "/menu": {
-    "target": "http://127.0.0.1:80",
+    "target": "http://58.246.174.74:17080",
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  },
+  "/cep": {
+    "target": "http://58.246.174.74:17080",
     "changeOrigin": true,
     "logLevel": "debug",
     "secure": false
   }
+
 }
