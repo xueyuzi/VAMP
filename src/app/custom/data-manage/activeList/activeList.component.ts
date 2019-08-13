@@ -50,6 +50,9 @@ export class ActiveListComponent implements OnInit {
         title: "操作",
         type: "custom",
         renderComponent: ActionComponent,
+        onComponentInitFunction:(renderComponent)=>{
+          renderComponent.service = this.activeListService
+        },
         width: "250px"
       }
     },

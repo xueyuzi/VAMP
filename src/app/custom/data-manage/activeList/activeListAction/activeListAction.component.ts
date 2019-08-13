@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 export class ActionComponent implements OnInit {
 
   constructor(
-    private activeListService: ActiveListService,
     private router: Router
   ) { }
+  service: (ActiveListService|any);
   isInport: boolean = false;
   rowData: any;
   ngOnInit() {
@@ -33,7 +33,7 @@ export class ActionComponent implements OnInit {
   }
   del() {
     let id = this.rowData.id;
-    this.activeListService.del(id).subscribe();
+    this.service.del(id).subscribe();
   }
 
 }

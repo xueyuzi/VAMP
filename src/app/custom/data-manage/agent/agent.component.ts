@@ -59,7 +59,7 @@ export class AgentComponent implements OnInit {
       action: {
         title: "操作",
         type: "custom",
-        tableLineComponent(agentService): ActionComponent,
+        // tableLineComponent(agentService): ActionComponent,
         width: "250px"
       }
     },
