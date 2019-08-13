@@ -232,37 +232,6 @@
   }
 
 
-  .ui-table {
-    border: 1px solid nb-theme(background-basic-color-4);
-
-    .ui-table-thead {
-      th {
-        background-color: rgba(0, 0, 0, 0);
-        color: nb-theme(text-basic-color);
-        border: 0px;
-      }
-    }
-
-    .ui-table-tbody {
-      tr {
-        background-color: nb-theme(background-basic-color-3);
-        color: nb-theme(text-basic-color);
-
-        td {
-          border: 0px;
-        }
-      }
-
-      tr:nth-child(even) {
-        background-color: nb-theme(background-basic-color-2);
-        color: nb-theme(text-basic-color);
-      }
-    }
-  }
-
-
-
-
   .ui-treetable .ui-treetable-thead>tr>th {
     background-color: rgba(0, 0, 0, 0);
     color: nb-theme(text-basic-color);
@@ -277,6 +246,48 @@
     background-color: rgba(0, 0, 0, 0);
     color: nb-theme(text-basic-color);
   }
+
+  .ui-table {
+    margin-top:10px;
+    
+    .ui-paginator{
+      background:rgba(0, 0, 0, 0);
+      border:0px;
+    }
+    .ui-table-thead {
+      th {
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        border:0px;
+        border-bottom: 1px solid nb-theme(background-basic-color-4) ;
+        background-color: rgba(0, 0, 0, 0);
+        color: nb-theme(text-basic-color);
+      }
+    }
+
+    .ui-table-tbody {
+      tr {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0);
+        color: nb-theme(text-basic-color);
+
+        td {
+          font-size: 12px;
+          font-weight: normal;
+          border: 0px;
+        }
+      }
+
+      tr:nth-child(even) {
+        background-color: nb-theme(background-basic-color-2);
+        color: nb-theme(text-basic-color);
+      }
+    }
+  }
+
+
+
 
 
   .half-checked {

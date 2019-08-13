@@ -13,68 +13,43 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class ActiveListDetailComponent implements OnInit {
 
-  constructor(private agentService: ActiveListDetailService,
+  constructor(private activeListDetailService: ActiveListDetailService,
     private activeListService: ActiveListService,
-    private router:Router,
+    private router: Router,
     private route: ActivatedRoute) { }
-  settings = {
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      listId: {
-        title: '活动列表',
-        type: 'string',
-      },
-      value: {
-        title: '值',
-        type: 'string',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-    pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
   isEdit: boolean = false;
-  user: any = {};
+  activeDetail: any = {};
   type: string;
-  agentSource: ServerDataSource;
-  activeList: Array<any>;
-  listId:number;
+  activeList: Observable<any>;
+  activeDetailList: Observable<any>;
+  listId: number;
+  cols: any[];
   isInport;
   ngOnInit() {
-    this.activeListService.getList().subscribe(
-      list => this.activeList = list
-    )
+    this.activeList = this.activeListService.activeList;
+    this.activeDetailList = this.activeListDetailService.activeList;
+    this.activeListService.getList().subscribe();
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.listId = Number(params.get("id"));
-      this.user.listId = this.listId;
-      this.agentSource = this.agentService.getList(this.user.listId);
-
+      this.activeDetail.listId = this.listId;
+      this.activeListDetailService.getList(this.activeDetail.listId).subscribe();
     });
+    this.cols = [
+      { field: 'id', header: 'ID' },
+      { field: 'listId', header: '活动列表' },
+      { field: 'value', header: '值' },
+    ];
   }
 
   showNew() {
     this.type = "add";
-    this.user = { listId: this.listId };
+    this.activeDetail = { listId: this.listId };
     this.isEdit = true;
   }
-  showEdit($event) {
+  showEdit(activeDetail) {
     this.type = "edit";
-    this.agentService.getAgent($event.data.id).subscribe(
-      data => this.user = data
+    this.activeListDetailService.getAgent(activeDetail.id).subscribe(
+      data => this.activeDetail = data
     )
     this.isEdit = true;
   }
@@ -84,25 +59,18 @@ export class ActiveListDetailComponent implements OnInit {
   save() {
 
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.activeListDetailService.save(this.activeDetail).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.activeListDetailService.add(this.activeDetail).subscribe(res => { this.isEdit = false; });
 
     }
   }
 
-  delUser($event) {
-    this.agentService.del($event.data.id).subscribe(
-      res => {
-        this.agentSource.refresh();
-      });
+  del(activeDetail) {
+    this.activeListDetailService.del(activeDetail.id).subscribe()
   }
-
-  changeActive(event) {
-    this.user.listId = event;
-  }
-  back(){
+  back() {
     history.go(-1);
   }
 }
