@@ -37,8 +37,8 @@
     </div>
     <div class="setting-item">
       <label>数据源:</label>
-      <nb-select  placeholder="请选择数据源" [(selected)]="user.sourceId" (selectedChange)="changeActive($event)" style="width: 200px">
-        <nb-option [value]="1" >kafka_events</nb-option>
+      <nb-select placeholder="请选数据源配置" [(selected)]="user.sourceId" style="width: 200px">
+        <nb-option [value]="role.id" *ngFor="let role of sourceList">{{role.name}}</nb-option>
       </nb-select>
     </div>
     <div class="setting-item">

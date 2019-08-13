@@ -20,6 +20,21 @@
       <label>所有者:</label>
       <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
     </div>
+    <div class="setting-item">
+      <label>描述:</label>
+      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>Cron 表达式:</label>
+      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>类型:</label>
+      <nb-select  placeholder="请选择类型" [(selected)]="user.type" style="width: 200px">
+        <nb-option [value]="0" >替换</nb-option>
+        <nb-option [value]="1" >加密</nb-option>
+      </nb-select>
+    </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>
