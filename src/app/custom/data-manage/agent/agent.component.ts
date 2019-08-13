@@ -6,6 +6,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { DesenRuleService } from '../desenRule/desenRule.service';
 import { JsonEditorService } from '../../../common/json-editor.service';
 import { ConfirmationService } from 'primeng/api';
+import {ActionComponent} from "../activeList/activeListAction/activeListAction.component";
 
 @Component({
   selector: 'ngx-user',
@@ -54,6 +55,12 @@ export class AgentComponent implements OnInit {
       create_at: {
         title: '注册时间',
         type: 'string',
+      },
+      action: {
+        title: "操作",
+        type: "custom",
+        tableLineComponent(agentService): ActionComponent,
+        width: "250px"
       }
     },
     actions: {
