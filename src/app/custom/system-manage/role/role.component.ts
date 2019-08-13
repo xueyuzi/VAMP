@@ -70,6 +70,9 @@ export class RoleComponent implements OnInit {
 
     );
   }
+  handleChange(e) {
+    this.role.status = e.checked ? 0 : 1;
+  }
   delRole($event) {
     this.confirmationService.confirm({
       message: '你确定要删除此角色么？',

@@ -23,7 +23,8 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     slide-out-shadow-color-rtl: 0 4px 14px 0 #8f9bb3,
 
 
-
+    menu-background:white,
+    menu-header-background:#f7f7f7,
 
     primary-color:#fff,
     primary-light-color:#e4e9ee,
@@ -110,6 +111,8 @@ $nb-themes: nb-register-theme((layout-padding-top: 2.25rem,
     background-basic-color-2:$dark-color3,
     background-basic-color-3:$dark-color4,
     background-basic-color-4:$dark-color5,
+    menu-background:$dark-color3,
+    menu-header-background:black,
     text-primary-color:#ec5073,
     color-primary-focus:#ec5073,
     color-primary-hover:#ec5073
