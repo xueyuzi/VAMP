@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../api.service';
-import { map } from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,9 @@ export class AgentService {
   }
 
   del(ids: number) {
-    return this.api.post("/cep/agent/remove", { ids: ids })
+    return this.api.post("/cep/agent/remove", { ids: ids }).pipe(
+      tap(res => this.getList().subscribe())
+    )
   }
 
   getAgentChart(ids: number) {

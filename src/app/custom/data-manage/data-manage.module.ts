@@ -69,7 +69,7 @@ import { tableLineComponent } from "./agent/tableLineAction/tableLineAction.comp
   providers: [
     ConfirmationService
   ],
-  entryComponents:[ActionComponent],
+  entryComponents:[ActionComponent,tableLineComponent],
   exports: [
     ChartTemplateListComponent
   ],
