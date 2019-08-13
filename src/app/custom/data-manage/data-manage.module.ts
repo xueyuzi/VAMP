@@ -27,8 +27,7 @@ import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckbox
 import { FileUploadModule } from "primeng/fileupload";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ActionComponent } from './activeList/action/action.component';
-
+import { ActionComponent } from "./activeList/activeListAction/activeListAction.component";
 @NgModule({
   declarations: [
     ChartTemplateComponent,

@@ -81,7 +81,7 @@ export class ActiveListDetailComponent implements OnInit {
 
 
 
-  saveUser() {
+  save() {
 
     if (this.type === "edit") {
       this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });

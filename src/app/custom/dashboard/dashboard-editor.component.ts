@@ -7,7 +7,7 @@ declare var ace: any;
   selector: 'ngx-dashboard-editor',
   template: `
   <div id="chart-editor" style="height:70vh;max-width:80vw; margin:10px 0"></div>
-  <button nbButton (click)="save()"> 保存 </button>
+  <button class="btn btn-success"  (click)="handleClick()">保存</button>
 `
 })
 export class DashboardEditorComponent implements OnInit, AfterViewInit {
