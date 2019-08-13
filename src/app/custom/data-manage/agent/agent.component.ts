@@ -6,7 +6,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { DesenRuleService } from '../desenRule/desenRule.service';
 import { JsonEditorService } from '../../../common/json-editor.service';
 import { ConfirmationService } from 'primeng/api';
-import {ActionComponent} from "../activeList/activeListAction/activeListAction.component";
+import { tableLineComponent } from "./tableLineAction/tableLineAction.component";
 
 @Component({
   selector: 'ngx-user',
@@ -59,13 +59,17 @@ export class AgentComponent implements OnInit {
       action: {
         title: "操作",
         type: "custom",
-        // tableLineComponent(agentService): ActionComponent,
+        renderComponent: tableLineComponent,
+        onComponentInitFunction:(renderComponent)=>{
+          renderComponent.service = this.agentService
+        },
         width: "250px"
       }
     },
     actions: {
       add: false,
       edit: false,
+      delete:false,
       columnTitle: "操作",
       position: "right"
     },
