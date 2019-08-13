@@ -16,6 +16,7 @@ import { SourceComponent } from './source/source.component';
 import { ModelComponent } from './model/model.component';
 import { EtltypeComponent } from './etltype/etltype.component';
 import { EtlTypeConfigComponent } from './etlTypeConfig/etlTypeConfig.component';
+import { AlertComponent } from './alert/alert.component';
 
 import { ThemeModule } from "../../@theme/theme.module";
 import { ChartsModule } from "../dashboard/dashboard-charts/dashboard-charts.module";
@@ -43,6 +44,7 @@ import { ActionComponent } from './activeList/action/action.component';
     EtltypeComponent,
     EtlTypeConfigComponent,
     AgenthbComponent,
+    AlertComponent,
     ActionComponent],
   imports: [
     CommonModule,
