@@ -6,9 +6,34 @@
   <nb-card-body>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="roleList" [settings]="settings" (userRowSelect)="showEdit($event)"
+    <!-- <ng2-smart-table [source]="roleList" [settings]="settings" (userRowSelect)="showEdit($event)"
       (deleteConfirm)="delRole($event)">
-    </ng2-smart-table>
+    </ng2-smart-table> -->
+    <p-table [value]="roleList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-role>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{role[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(role);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(role);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="编辑角色" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
@@ -35,8 +60,7 @@
       <p-tree [value]="menus">
         <ng-template let-node pTemplate="default">
           <p-checkbox name="groupname" binary="true" [(ngModel)]="node.data.checked"
-          [ngClass]="{'half-checked':checkParentIsChecked(node)}"
-            (onChange)="changeMenus($event,node)"></p-checkbox>
+            [ngClass]="{'half-checked':checkParentIsChecked(node)}" (onChange)="changeMenus($event,node)"></p-checkbox>
           <label>{{node.label}}</label>
         </ng-template>
       </p-tree>
@@ -44,5 +68,5 @@
 
 
   </div>
-  <button nbButton fullWidth (click)="saveRole()">保存</button>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>

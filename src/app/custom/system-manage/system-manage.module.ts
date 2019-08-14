@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DeptComponent } from './dept/dept.component';
 
 import {InputSwitchModule} from 'primeng/inputswitch';
+import {TableModule} from 'primeng/table';
 @NgModule({
   declarations: [
     MenuComponent,
@@ -49,7 +50,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
     TreeTableModule,
     TreeModule,
     ConfirmDialogModule,
-    InputSwitchModule
+    InputSwitchModule,
+    TableModule
   ]
 })
 export class SystemManageModule { }

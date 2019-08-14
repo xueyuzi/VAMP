@@ -34,9 +34,9 @@ export class ApiService {
       }
       if (res.code == "1") {
         this.toastrService.danger("error", res.msg);
-        setTimeout(() => {
-          this.router.navigateByUrl("/auth/login");
-        }, 1000);
+        // setTimeout(() => {
+        //   this.router.navigateByUrl("/auth/login");
+        // }, 1000);
       }
       if (res.code == "0") {
         this.toastrService.success("success", res.msg);

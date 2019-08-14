@@ -12,7 +12,7 @@
           <th>部门名称</th>
           <th>排序</th>
           <th>创建时间</th>
-          <th>Action</th>
+          <th>操作</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -24,9 +24,13 @@
           <td>{{rowData.orderNum}}</td>
           <td>{{rowData.createTime}}</td>
           <td>
-            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">编辑</button>
+            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">
+                <i class="icon ion-edit"></i>
+              编辑</button>
             <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
-              style="margin-right:5px">添加</button>
+              style="margin-right:5px">
+              <i class="icon ion-ios-upload-outline"></i>
+              添加</button>
             <!-- <button nbButton size="small" status="danger" (click)='onEdit(rowNode)'>del</button> -->
           </td>
         </tr>
