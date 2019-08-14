@@ -9,8 +9,8 @@
     <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container">
+<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false" height="800">
+  <div class="setting-container" style="height: 800px">
 
     <div class="setting-item">
       <label>标题:</label>
@@ -44,18 +44,55 @@
       <label>值:</label>
       <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
     </div>
-    <nb-accordion class="expaned">
-      <nb-accordion-item >
-        <nb-accordion-item-header>邮件提醒</nb-accordion-item-header>
-        <nb-accordion-item-body>
-          <nb-select  placeholder="发送邮件" [(selected)]="user.type" style="width: 200px">
-            <nb-option [value]="2" >大于</nb-option>
-            <nb-option [value]="1" >小于</nb-option>
-            <nb-option [value]="0" >等于</nb-option>
-          </nb-select>
-        </nb-accordion-item-body>
-      </nb-accordion-item>
-    </nb-accordion>
+    <div class="setting-item" style="height:auto">
+      <label>告警方式:</label>
+      <nb-accordion class="expaned" style="width:100%">
+        <nb-accordion-item >
+          <nb-accordion-item-header>邮件提醒</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="user.use_email" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item">
+                <label>收件人:</label>
+                <input type="text" nbInput [(ngModel)]="user.email_receiver" fullWidth>
+              </div>
+              <div class="setting-item">
+                <label>邮件主题:</label>
+                <input type="text" nbInput [(ngModel)]="user.email_subject" fullWidth>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>邮件内容:</label>
+                <input type="text" nbInput [(ngModel)]="user.email_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+        <nb-accordion-item >
+          <nb-accordion-item-header>ITSM</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="user.use_itms" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>邮件内容:</label>
+                <input type="text" nbInput [(ngModel)]="user.itms_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </div>
   </div>
   <button nbButton fullWidth (click)="saveUser()">保存</button>
 </p-dialog>
