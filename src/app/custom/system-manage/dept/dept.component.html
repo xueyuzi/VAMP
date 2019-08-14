@@ -5,7 +5,7 @@
 
   <nb-card-body>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <button nbButton style="margin:10px 0">新建</button>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
     <p-treeTable [value]="deptList">
       <ng-template pTemplate="header">
         <tr>

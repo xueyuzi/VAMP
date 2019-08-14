@@ -36,7 +36,7 @@
     </p-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false">
+<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false" *ngIf="isEdit">
 
   <div class="setting-container" *ngIf="agent!==undefined">
     <div class="setting-item">

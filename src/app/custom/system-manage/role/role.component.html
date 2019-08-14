@@ -1,11 +1,11 @@
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     角色列表
   </nb-card-header>
 
   <nb-card-body>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
     <!-- <ng2-smart-table [source]="roleList" [settings]="settings" (userRowSelect)="showEdit($event)"
       (deleteConfirm)="delRole($event)">
     </ng2-smart-table> -->

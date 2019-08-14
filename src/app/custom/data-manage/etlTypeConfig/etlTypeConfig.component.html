@@ -1,11 +1,11 @@
 <script src="activeListDetail.component.ts"></script>
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     ETL规则明细
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
     <!-- <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
     <p-table [value]="etlTypeConfigList |async">
       <ng-template pTemplate="header">

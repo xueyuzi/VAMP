@@ -46,6 +46,7 @@ export class AlertComponent implements OnInit {
   }
 
   save() {
+    this.alert.trigger_es_json = this.jsonEditorService.getValue();
     if (this.type === "edit") {
       this.alertService.save(this.alert).subscribe(res => { this.isEdit = false; });
     }
