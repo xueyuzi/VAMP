@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 import { EtltypeService } from '../etltype/etltype.service';
-import {JsonEditorService} from "../../../common/json-editor.service";
+import { JsonEditorService } from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
@@ -12,99 +12,67 @@ import {JsonEditorService} from "../../../common/json-editor.service";
 })
 export class EtlTypeConfigComponent implements OnInit {
 
-  constructor(private agentService: EtlTypeConfigService,
-              private activeListService: EtltypeService,
-              private jsonEditorService: JsonEditorService) { }
-  settings = {
-    columns: {
-      etlType: {
-        title: '日志类别',
-        type: 'string',
-      },
-      formatRegex: {
-        title: '匹配规则',
-        type: 'string',
-        width:'20%',
-      },
-      mappingFields: {
-        title: '属性映射',
-        type: 'string',
-        width:'30%',
-      },
-      order: {
-        title: '排序',
-        type: 'string',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-    pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
+  constructor(private etlTypeConfigService: EtlTypeConfigService,
+    private etlTypeService: EtltypeService,
+    private jsonEditorService: JsonEditorService) { }
   isEdit: boolean = false;
-  user: any = {};
+  etlTypeConfig: any = {};
+  etlTypeList: Observable<any>;
+  etlTypeConfigList:Observable<any>;
+  cols: any[];
   type: string;
-  agentSource: ServerDataSource;
-  activeList: Array<any>;
   desen_rule_id: any = []
   ngOnInit() {
-    this.agentSource = this.agentService.getList();
-    this.activeListService.getList().subscribe(
-      list => this.activeList = list
-    )
+    this.cols = [
+      { field: 'etlType', header: '日志类型' },
+      { field: 'formatRegex', header: '匹配规则' },
+      { field: 'mappingFields', header: '属性映射' },
+      { field: 'order', header: '排序' }
+    ]
+    this.etlTypeConfigService.getList().subscribe();
+    this.etlTypeService.getList().subscribe();
+    this.etlTypeConfigList = this.etlTypeConfigService.etlConfigList;
+    this.etlTypeList = this.etlTypeService.etlTypeList;
   }
 
   showNew() {
     this.type = "add";
-    this.user = { desen_rule_id: [] };
+    this.etlTypeConfig = { desen_rule_id: [] };
     this.isEdit = true;
     this.setEditor();
   }
-  showEdit($event) {
+  showEdit(etlTypeConfig) {
     this.type = "edit";
-    this.agentService.getAgent($event.data.id).subscribe(
-      data => this.user = data
+    this.etlTypeConfigService.getAgent(etlTypeConfig.id).subscribe(
+      data => this.etlTypeConfig = data
     )
     this.isEdit = true;
     this.setEditor();
   }
 
-  saveUser() {
-    this.user.mappingFields = this.jsonEditorService.getValue();
+  save() {
+    this.etlTypeConfig.mappingFields = this.jsonEditorService.getValue();
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.etlTypeConfigService.save(this.etlTypeConfig).subscribe(res => { this.isEdit = false;  });
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.etlTypeConfigService.add(this.etlTypeConfig).subscribe(res => { this.isEdit = false; });
 
     }
   }
 
-  delUser($event) {
-        this.agentService.del($event.data.id).subscribe(
-          res => {
-            this.agentSource.refresh();
-    });
+  del(etlTypeConfig) {
+    this.etlTypeConfigService.del(etlTypeConfig.id).subscribe();
   }
 
   changeActive(event) {
-    this.user.listId = event;
+    this.etlTypeConfig.listId = event;
   }
 
   setEditor() {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.mappingFields);
+      this.jsonEditorService.setValue(this.etlTypeConfig.mappingFields);
     }, 500)
   }
 }

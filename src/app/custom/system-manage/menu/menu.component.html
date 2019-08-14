@@ -1,17 +1,17 @@
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     菜单管理
   </nb-card-header>
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="onAdd()">新建</button>
-
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <br/>    <br/>
     <p-treeTable [value]="data">
       <ng-template pTemplate="header">
         <tr>
           <th>菜单名称</th>
           <th>请求地址</th>
           <th>icon</th>
-          <th>Action</th>
+          <th>操作</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -23,10 +23,19 @@
           <td>{{rowData.url}}</td>
           <td>{{rowData.icon}}</td>
           <td>
-            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
+            <!-- <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">edit</button>
             <button nbButton size="small" status="success" (click)='onAdd(rowNode)'
               style="margin-right:5px">add</button>
-            <button nbButton size="small" status="danger" (click)='onDel(rowNode.node.data.menuId)'>del</button>
+            <button nbButton size="small" status="danger" (click)='onDel(rowNode.node.data.menuId)'>del</button> -->
+
+
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(rowNode);">
+              <i class="icon ion-edit"></i> 编辑</button>
+
+            <button type="button" class="btn btn-info" style="color:white" (click)="showAdd(rowNode);">
+              <i class="icon ion-ios-upload-outline"></i> 添加</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(rowNode.node.data.menuId);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
           </td>
         </tr>
       </ng-template>
@@ -34,7 +43,7 @@
   </nb-card-body>
 </nb-card>
 
-<p-dialog header="菜单编辑" [(visible)]="showEdit" [draggable]="false" [resizable]="false">
+<p-dialog header="菜单编辑" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container">
     <div class="setting-item">
       <label>上级菜单:</label>

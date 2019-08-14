@@ -1,18 +1,18 @@
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     部门列表
   </nb-card-header>
 
   <nb-card-body>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <button nbButton style="margin:10px 0">新建</button>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
     <p-treeTable [value]="deptList">
       <ng-template pTemplate="header">
         <tr>
           <th>部门名称</th>
           <th>排序</th>
           <th>创建时间</th>
-          <th>Action</th>
+          <th>操作</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -24,9 +24,13 @@
           <td>{{rowData.orderNum}}</td>
           <td>{{rowData.createTime}}</td>
           <td>
-            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">编辑</button>
+            <button nbButton size="small" (click)='onEdit(rowNode)' style="margin-right:5px">
+                <i class="icon ion-edit"></i>
+              编辑</button>
             <button nbButton size="small" status="success" (click)='onAdd(rowNode)' *ngIf="rowNode.parent == null"
-              style="margin-right:5px">添加</button>
+              style="margin-right:5px">
+              <i class="icon ion-ios-upload-outline"></i>
+              添加</button>
             <!-- <button nbButton size="small" status="danger" (click)='onEdit(rowNode)'>del</button> -->
           </td>
         </tr>
@@ -38,31 +42,28 @@
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>部门名称:</label>
-      <input type="text" nbInput [(ngModel)]="dept.deptName" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.deptName" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>排序:</label>
-      <input type="text" nbInput [(ngModel)]="dept.orderNum" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.orderNum" fullWidth>
     </div>
     <div class="setting-item">
       <label>负责人:</label>
-      <input type="text" nbInput [(ngModel)]="dept.leader" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.leader" fullWidth>
     </div>
     <div class="setting-item">
       <label>联系电话:</label>
-      <input type="text" nbInput [(ngModel)]="dept.phone" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.phone" fullWidth>
     </div>
     <div class="setting-item">
       <label>邮箱:</label>
-      <input type="text" nbInput [(ngModel)]="dept.email" fullWidth>
+      <input type="text" class="form-control" [(ngModel)]="dept.email" fullWidth>
     </div>
     <div class="setting-item">
       <label>状态:</label>
-      <nb-radio-group [(ngModel)]="dept.status" style="display:flex">
-        <nb-radio value="0">开</nb-radio>
-        <nb-radio value="1">关</nb-radio>
-      </nb-radio-group>
+      <p-inputSwitch [ngModel]="dept.status == 0" (onChange)="handleChange($event)"></p-inputSwitch>
     </div>
 
 

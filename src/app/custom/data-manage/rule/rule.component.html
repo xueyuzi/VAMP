@@ -1,50 +1,76 @@
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     实时分析规则
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <!-- <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
+    <p-table [value]="ruleList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rule>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{rule[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(rule);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(rule);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="实时分析规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
-  <div class="setting-container" >
+  <div class="setting-container">
 
     <div class="setting-item">
       <label>类型:</label>
-      <nb-select  placeholder="请选择类型" [(selected)]="user.type" (selectedChange)="changeActive($event)" style="width: 200px">
-        <nb-option [value]="0" >sql</nb-option>
-        <nb-option [value]="1" >cep</nb-option>
-        <nb-option [value]="2" >etl</nb-option>
+      <nb-select placeholder="请选择类型" [(selected)]="rule.type" (selectedChange)="changeActive($event)"
+        style="width: 200px">
+        <nb-option [value]="0">sql</nb-option>
+        <nb-option [value]="1">cep</nb-option>
+        <nb-option [value]="2">etl</nb-option>
       </nb-select>
     </div>
 
 
     <div class="setting-item">
       <label>规则编号:</label>
-      <input type="text" nbInput [(ngModel)]="user.ruleNo" fullWidth>
+      <input type="text" nbInput [(ngModel)]="rule.ruleNo" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>状态:</label>
-      <input type="text" nbInput [(ngModel)]="user.status" fullWidth>
+      <input type="text" nbInput [(ngModel)]="rule.status" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>并发度:</label>
-      <input type="text" nbInput [(ngModel)]="user.parallelism" fullWidth>
+      <input type="text" nbInput [(ngModel)]="rule.parallelism" fullWidth>
     </div>
     <div class="setting-item">
       <label>数据源:</label>
-      <nb-select  placeholder="请选择数据源" [(selected)]="user.sourceId" (selectedChange)="changeActive($event)" style="width: 200px">
-        <nb-option [value]="1" >kafka_events</nb-option>
+      <nb-select placeholder="请选数据源配置" [(selected)]="rule.sourceId" style="width: 200px">
+        <nb-option [value]="role.id" *ngFor="let role of sourceList | async">{{role.name}}</nb-option>
       </nb-select>
     </div>
     <div class="setting-item">
       <label>规则结果输出配置:</label>
-      <nb-select multiple placeholder="请选规则结果输出配置" [(selected)]="user.rule_sink_id" style="width: 200px">
-        <nb-option [value]="role.id" *ngFor="let role of sinkList">{{role.name}}</nb-option>
+      <nb-select multiple placeholder="请选规则结果输出配置" [(selected)]="rule.rule_sink_id" style="width: 200px">
+        <nb-option [value]="role.id" *ngFor="let role of sinkList |async">{{role.name}}</nb-option>
       </nb-select>
     </div>
     <div class="setting-item" style="height:auto">
@@ -52,6 +78,5 @@
       <div id="agent-json-editor" style="height:200px;flex:1;margin:10px 0"></div>
     </div>
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>
-

@@ -1,4 +1,4 @@
-<div style="height:100%; width:100%; display:flex; flex-direction: column;">
+<div style="height:100%; width:100%; display:flex; flex-direction: column; overflow:auto">
 
   <div style="display:flex; flex-wrap: wrap">
     <div style="display: flex;
@@ -8,7 +8,7 @@
     flex-direction: column;"
     [style.height]="(isEdit|async) ?'60px':'30px'"
     >
-      <h5 style="margin:0px;font-size:20px" *ngIf="item.panelData.type !== 'text'">{{chartData?.title}}</h5>
+      <h5 style="margin:0px;font-size:18px" *ngIf="item.panelData.type !== 'text'">{{chartData?.title}}</h5>
       <nb-actions size="medium" style="flex:1;width:100%;height:30px"  *ngIf="isEdit|async" fullWidth>
         <nb-action icon="clipboard-outline" title="查看报表"></nb-action>
         <nb-action icon="pie-chart-outline" title="选择可视化" [nbPopover]="chartList" nbPopoverPlacement="bottom">
@@ -18,7 +18,6 @@
         <nb-action icon="trash-2-outline" (click)="delContainer()" title="删除">
         </nb-action>
       </nb-actions>
-
     </div>
     <!-- <input *ngIf="(isEdit|async)" nbInput fullWidth type="text" [(ngModel)]="item.panelData.title"> -->
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../../api.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class RoleService {
 
   constructor(private api: ApiService) { }
-
+  roleList:BehaviorSubject<any> = new BehaviorSubject([]);
   transListDataToSubmit(role) {
     let data: any = {}
     role.roleId !== undefined ? data.roleId = role.roleId : 0;
@@ -22,7 +23,8 @@ export class RoleService {
   }
   getList(condition: any = {}) {
     return this.api.post("/system/role/list", condition).pipe(
-      map(v => v.rows)
+      map(v => v.rows),
+      tap(list=>this.roleList.next(list))
     );
   }
 
@@ -36,11 +38,15 @@ export class RoleService {
     }
     role = this.transListDataToSubmit(role);
     role = this.api.transToFormData(role);
-    return this.api.post(reqUrl, role);
+    return this.api.post(reqUrl, role).pipe(
+      tap(res=>this.getList().subscribe())
+    );
   }
 
   del(ids: number) {
     let data = this.api.transToFormData({ ids: ids });
-    return this.api.post("/system/role/remove", data)
+    return this.api.post("/system/role/remove", data).pipe(
+      tap(res=>this.getList().subscribe())
+    );
   }
 }

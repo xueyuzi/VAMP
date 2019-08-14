@@ -3,7 +3,7 @@ import { AlertService } from './alert.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
-import {JsonEditorService} from "../../../common/json-editor.service";
+import { JsonEditorService } from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
@@ -11,73 +11,58 @@ import {JsonEditorService} from "../../../common/json-editor.service";
 })
 export class AlertComponent implements OnInit {
 
-  constructor(private agentService: AlertService,
-              private jsonEditorService: JsonEditorService) { }
-  settings = {
-    columns: {
-      title: {
-        title: '标题',
-        type: 'string',
-        width:'60%',
-      },
-      owner: {
-        title: '所有者',
-        type: 'string',
-        width:'20%',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-    pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
+  constructor(private alertService: AlertService,
+    private jsonEditorService: JsonEditorService) { }
+
+  cols: any[];
   isEdit: boolean = false;
-  user: any = {};
+  alert: any = {};
   type: string;
-  agentSource: ServerDataSource;
+  alertList: Observable<any>;
   activeList: Array<any>;
   desen_rule_id: any = []
   ngOnInit() {
-    this.agentSource = this.agentService.getList();
+    this.alertService.getList().subscribe();
+    this.alertList = this.alertService.alertList;
+    this.cols = [
+      { field: 'title', header: '标题' },
+      { field: 'owner', header: '所有者' },
+    ]
   }
 
   showNew() {
-    this.user = {};
+    this.alert = {};
     this.type = "add";
     this.isEdit = true;
+    this.setEditor();
   }
-  showEdit($event) {
+  showEdit(alert) {
     this.type = "edit";
-    this.agentService.getAgent($event.data.id).subscribe(
-      data => this.user = data
+    this.alertService.getAgent(alert.id).subscribe(
+      data => this.alert = data
     )
     this.isEdit = true;
+    this.setEditor();
   }
 
-  saveUser() {
+  save() {
+    this.alert.trigger_es_json = this.jsonEditorService.getValue();
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.alertService.save(this.alert).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
-
+      this.alertService.add(this.alert).subscribe(res => { this.isEdit = false; });
     }
   }
 
-  delUser($event) {
-        this.agentService.del($event.data.id).subscribe(
-          res => {
-            this.agentSource.refresh();
-    });
+  del(alert) {
+    this.alertService.del(alert.id).subscribe();
+  }
+
+  setEditor() {
+    setTimeout(() => {
+      this.jsonEditorService.createEditor("agent-json-editor");
+      this.jsonEditorService.setValue(this.alert.trigger_es_json);
+    }, 500)
   }
 }

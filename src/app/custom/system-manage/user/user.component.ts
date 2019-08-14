@@ -15,57 +15,29 @@ export class UserComponent implements OnInit {
 
   constructor(private userService: UserService, private roleService: RoleService,
     private deptService: DeptService) { }
-  settings = {
-    columns: {
-      userId: {
-        title: 'ID',
-        type: 'number',
-      },
-      loginName: {
-        title: 'name',
-        type: 'string',
-      },
-      phonenumber: {
-        title: 'phonenumber',
-        type: 'string',
-      },
-      userName: {
-        title: "userName",
-        type: "string",
-      },
-      status: {
-        title: 'status',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-
-    }
-  }
   isEdit: boolean = false;
   user: any = {};
   type: string;
-  userSource: LocalDataSource;
-  roleList: Array<any>;
+  userList: Observable<any>;
+  roleList: Observable<any>;
   deptList: Array<any>;
+  cols: any[];
   ngOnInit() {
-    this.userSource = new LocalDataSource();
-    this.userService.getList().subscribe(
-      list => this.userSource.load(list)
-    );
-    this.roleService.getList().subscribe(
-      list => this.roleList = list
-    )
+    this.cols = [
+      { field: 'userId', header: 'ID' },
+      { field: 'loginName', header: 'name' },
+      { field: 'phonenumber', header: 'phonenumber' },
+      { field: 'userName', header: 'userName' },
+      { field: 'status', header: 'status' },
+      { field: 'email', header: 'email' }
+    ]
+    this.userService.getList().subscribe();
+    this.roleService.getList().subscribe();
     this.deptService.getList().subscribe(
       list => this.deptList = list
     )
+    this.userList = this.userService.userList;
+    this.roleList = this.roleService.roleList;
   }
   changeRoles(event) {
     this.user.roleIds = event;
@@ -78,13 +50,13 @@ export class UserComponent implements OnInit {
     this.user = {};
     this.isEdit = true;
   }
-  showEdit($event) {
+  showEdit(user) {
     this.type = "edit";
-    this.user = $event.data;
+    this.user = user;
     this.isEdit = true;
   }
 
-  saveUser() {
+  save() {
 
     if (this.type === "edit") {
       this.userService.save(this.user).subscribe(res => { this.isEdit = false; });
@@ -94,8 +66,8 @@ export class UserComponent implements OnInit {
     }
   }
 
-  delUser(id: number) {
-    this.userService.del(id).subscribe(res => { });
+  del(id: number) {
+    this.userService.del(id).subscribe();
   }
 
 

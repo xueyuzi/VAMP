@@ -1,26 +1,140 @@
 <script src="alert.component.ts"></script>
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     告警
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <!-- <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
+    <p-table [value]="alertList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-alert>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{alert[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(alert);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(alert);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false" *ngIf="isEdit">
   <div class="setting-container">
-
     <div class="setting-item">
       <label>标题:</label>
-      <input type="text" nbInput [(ngModel)]="user.title" fullWidth>
+      <input type="text" nbInput [(ngModel)]="alert.title" fullWidth>
     </div>
     <div class="setting-item">
       <label>所有者:</label>
-      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+      <input type="text" nbInput [(ngModel)]="alert.owner" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>描述:</label>
+      <input type="text" nbInput [(ngModel)]="alert.description" fullWidth>
+    </div>
+    <div class="setting-item">
+      <label>Cron 表达式:</label>
+      <input type="text" nbInput [(ngModel)]="alert.cron" fullWidth>
+    </div>
+    <div class="setting-item" style="height:auto">
+      <label>查询语句:</label>
+      <div id="agent-json-editor" style="height:200px;flex:1;margin:10px 0"></div>
+    </div>
+    <div class="setting-item">
+      <label>运算符:</label>
+      <nb-select  placeholder="请选择类型" [(selected)]="alert.operator" style="width: 200px">
+        <nb-option [value]="2" >大于</nb-option>
+        <nb-option [value]="1" >小于</nb-option>
+        <nb-option [value]="0" >等于</nb-option>
+      </nb-select>
+    </div>
+    <div class="setting-item">
+      <label>值:</label>
+      <input type="text" nbInput [(ngModel)]="alert.value" fullWidth>
+    </div>
+    <div class="setting-item" style="height:auto">
+      <label>告警方式:</label>
+      <nb-accordion class="expaned" style="width:100%">
+        <nb-accordion-item >
+          <nb-accordion-item-header>邮件提醒</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="alert.use_email" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item">
+                <label>收件人:</label>
+                <input type="text" nbInput [(ngModel)]="alert.email_receiver" fullWidth>
+              </div>
+              <div class="setting-item">
+                <label>邮件主题:</label>
+                <input type="text" nbInput [(ngModel)]="alert.email_subject" fullWidth>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>邮件内容:</label>
+                <input type="text" nbInput [(ngModel)]="alert.email_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+        <nb-accordion-item >
+          <nb-accordion-item-header>ITSM</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="alert.use_itms" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>通知内容:</label>
+                <input type="text" nbInput [(ngModel)]="alert.itms_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+        <nb-accordion-item>
+          <nb-accordion-item-header>SysLog</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="alert.use_syslog" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>通知内容:</label>
+                <input type="text" nbInput [(ngModel)]="alert.syslog_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
     </div>
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>
-

@@ -74,6 +74,9 @@ export class DeptComponent implements OnInit {
 
     this.showEdit = true;
   }
+  handleChange(e) {
+    this.dept.status = e.checked ? 0 : 1;
+  }
 
   savedept() {
 

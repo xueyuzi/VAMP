@@ -1,31 +1,56 @@
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     数据脱敏规则
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <!-- <ng2-smart-table [source]="userList | async" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
+    <p-table [value]="desenRuleList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-desen>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{desen[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(desen);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(desen);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="数据脱敏规则" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
   <div class="setting-container" style="width: 600px">
     <div class="setting-item">
       <label>规则名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.desenName" fullWidth>
+      <input type="text" nbInput [(ngModel)]="desenRule.desenName" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>类型:</label>
-      <nb-select  placeholder="请选择类型" [(selected)]="user.type" style="width: 200px">
-        <nb-option [value]="0" >替换</nb-option>
-        <nb-option [value]="1" >加密</nb-option>
+      <nb-select placeholder="请选择类型" [(selected)]="desenRule.type" style="width: 200px">
+        <nb-option [value]="0">替换</nb-option>
+        <nb-option [value]="1">加密</nb-option>
       </nb-select>
     </div>
 
     <div class="setting-item">
       <label>匹配规则:</label>
-      <input type="text" nbInput [(ngModel)]="user.patternRegex" fullWidth>
+      <input type="text" nbInput [(ngModel)]="desenRule.patternRegex" fullWidth>
     </div>
 
     <div class="setting-item">
@@ -35,7 +60,7 @@
 
     <div class="setting-item" *ngIf="rule_json.flag !==undefined">
       <label>flag:</label>
-      <input type="text" nbInput  [(ngModel)]="rule_json.flag" fullWidth>
+      <input type="text" nbInput [(ngModel)]="rule_json.flag" fullWidth>
     </div>
 
     <div class="setting-item" *ngIf="rule_json.begin !==undefined">
@@ -55,9 +80,9 @@
 
     <div class="setting-item">
       <label>规则描述:</label>
-      <input type="text" nbInput [(ngModel)]="user.description" fullWidth>
+      <input type="text" nbInput [(ngModel)]="desenRule.description" fullWidth>
     </div>
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
-</p-dialog>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 
+</p-dialog>

@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card style="min-height: 600px">
   <nb-card-header>
     活动列表明细
   </nb-card-header>
@@ -9,8 +9,33 @@
     <button (click)="showNew()" class="btn btn-primary">新建</button>
 
 
-    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)"
-      (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <!-- <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
+    <p-table [value]="activeDetailList |async" [paginator]="true" [rows]="10">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-activedetail>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{activedetail[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(activedetail);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(activedetail);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="新建活动列表明细" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
@@ -18,16 +43,14 @@
 
     <div class="setting-item">
       <label>活动列表:</label>
-      <select class="form-control" [(ngModel)]="user.listId" style="width: auto">
-        <option [value]="activelist.id" *ngFor="let activelist of activeList">{{activelist.listName}}</option>
+      <select class="form-control" [(ngModel)]="activeDetail.listId" style="width: auto">
+        <option [value]="active.id" *ngFor="let active of activeList | async">{{active.listName}}</option>
       </select>
     </div>
     <div class="setting-item">
       <label>值:</label>
-      <input type="text" class="form-control" [(ngModel)]="user.value">
+      <input type="text" class="form-control" [(ngModel)]="activeDetail.value">
     </div>
   </div>
   <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>
-
-

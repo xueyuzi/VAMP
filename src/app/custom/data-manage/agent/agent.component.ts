@@ -6,6 +6,7 @@ import { ServerDataSource } from 'ng2-smart-table';
 import { DesenRuleService } from '../desenRule/desenRule.service';
 import { JsonEditorService } from '../../../common/json-editor.service';
 import { ConfirmationService } from 'primeng/api';
+import { tableLineComponent } from "./tableLineAction/tableLineAction.component";
 
 @Component({
   selector: 'ngx-user',
@@ -17,71 +18,30 @@ export class AgentComponent implements OnInit {
     private desenRuleService: DesenRuleService,
     private jsonEditorService: JsonEditorService,
     private confirmationService: ConfirmationService) { }
-  settings = {
-    columns: {
-      agentName: {
-        title: '名称',
-        type: 'string',
-      },
-      agentAddress: {
-        title: 'IP地址',
-        type: 'string',
-      },
-      status: {
-        title: '状态',
-        type: 'string',
-      },
-      eps: {
-        title: 'EPS',
-        type: 'string',
-      },
-      cpu: {
-        title: '进程占用CPU',
-        type: 'string',
-      },
-      mem: {
-        title: '进程内存利用率',
-        type: 'string',
-      },
-      sys_cpu: {
-        title: '系统cpu',
-        type: 'string',
-      },
-      fh: {
-        title: '文件句柄',
-        type: 'string',
-      },
-      create_at: {
-        title: '注册时间',
-        type: 'string',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-    pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
   isEdit: boolean = false;
   isShowCharts: boolean = false;
-  user: any = {};
+  agent: any = {};
   type: string;
-  agentSource: ServerDataSource;
+  agentList: Observable<any>;
   dRuleList: Array<any>;
+  cols: any[];
   desen_rule_id: any = []
   chartList: Array<any>;
-  cpuList:Array<any>;
+  cpuList: Array<any>;
   ngOnInit() {
-    this.agentSource = this.agentService.getList();
+    this.cols = [
+      { field: 'agentName', header: '名称' },
+      { field: 'agentAddress', header: 'IP地址' },
+      { field: 'status', header: '状态' },
+      { field: 'eps', header: 'EPS' },
+      { field: 'cpu', header: '进程占用CPU' },
+      { field: 'mem', header: '进程内存利用率' },
+      { field: 'sys_cpu', header: '系统cpu' },
+      { field: 'fh', header: '文件句柄' },
+      { field: 'create_at', header: '注册时间' }
+    ];
+    this.agentList = this.agentService.agentList.asObservable();
+    this.agentService.getList().subscribe();
     this.desenRuleService.getList().subscribe(
       list => this.dRuleList = list
     )
@@ -90,13 +50,13 @@ export class AgentComponent implements OnInit {
 
   showNew() {
     this.type = "add";
-    this.user = { desen_rule_id: [] };
+    this.agent = { desen_rule_id: [] };
     this.isEdit = true;
   }
 
   agentConfig = {};
 
-  showEdit($event) {
+  showEdit(agent) {
 
     this.type = "edit";
     this.agentConfig = {
@@ -105,9 +65,9 @@ export class AgentComponent implements OnInit {
       "other": {}
     }
 
-    this.agentService.getAgent($event.data.id).subscribe(
+    this.agentService.getAgent(agent.id).subscribe(
       data => {
-        this.user = data
+        this.agent = data
         let agentConfig = JSON.parse(data.agentConfig);
         let sources;
         let channels;
@@ -145,7 +105,7 @@ export class AgentComponent implements OnInit {
 
   showCharts() {
     console.log(this.chartOptions1.dataset)
-    this.agentService.getAgentChart(this.user.id).subscribe(
+    this.agentService.getAgentChart(this.agent.id).subscribe(
       list => {
         this.chartList = list
         //eps
@@ -158,51 +118,51 @@ export class AgentComponent implements OnInit {
             this.cpuList.push(a);
           });
         this.chartOptions1.dataset.source = this.cpuList;
-        this.chartOptions1=Object.assign({},this.chartOptions1);
+        this.chartOptions1 = Object.assign({}, this.chartOptions1);
         //cpu
         this.cpuList = [];
         this.chartList.forEach(
-          child1 =>{
+          child1 => {
             let a = {};
             a['key'] = child1.create_at;
             a['value'] = child1.cpu;
             this.cpuList.push(a);
           });
         this.chartOptions2.dataset.source = this.cpuList;
-        this.chartOptions2=Object.assign({},this.chartOptions2);
+        this.chartOptions2 = Object.assign({}, this.chartOptions2);
         //sys_cpu
         this.cpuList = [];
         this.chartList.forEach(
-          child1 =>{
+          child1 => {
             let a = {};
             a['key'] = child1.create_at;
             a['value'] = child1.sys_cpu;
             this.cpuList.push(a);
           });
         this.chartOptions3.dataset.source = this.cpuList;
-        this.chartOptions3=Object.assign({},this.chartOptions3);
+        this.chartOptions3 = Object.assign({}, this.chartOptions3);
         //mem
         this.cpuList = [];
         this.chartList.forEach(
-          child1 =>{
+          child1 => {
             let a = {};
             a['key'] = child1.create_at;
             a['value'] = child1.mem;
             this.cpuList.push(a);
           });
         this.chartOptions4.dataset.source = this.cpuList;
-        this.chartOptions4=Object.assign({},this.chartOptions4);
+        this.chartOptions4 = Object.assign({}, this.chartOptions4);
         //fh
         this.cpuList = [];
         this.chartList.forEach(
-          child1 =>{
+          child1 => {
             let a = {};
             a['key'] = child1.create_at;
             a['value'] = child1.fh;
             this.cpuList.push(a);
           });
         this.chartOptions5.dataset.source = this.cpuList;
-        this.chartOptions5=Object.assign({},this.chartOptions5);
+        this.chartOptions5 = Object.assign({}, this.chartOptions5);
       });
 
     this.isShowCharts = true;
@@ -212,20 +172,17 @@ export class AgentComponent implements OnInit {
     return Object.keys(obj)
   }
 
-  saveUser() {
+  save() {
     if (this.type === "edit") {
-      this.agentService.save(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.agentService.save(this.agent).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.agentService.add(this.user).subscribe(res => { this.isEdit = false; this.agentSource.refresh(); });
+      this.agentService.add(this.agent).subscribe(res => { this.isEdit = false; });
     }
   }
 
-  delUser($event) {
-    this.agentService.del($event.data.id).subscribe(
-      res => {
-        this.agentSource.refresh();
-      });
+  del(agent) {
+    this.agentService.del(agent.id).subscribe();
   }
 
   changeDesen(event) {
@@ -248,7 +205,7 @@ export class AgentComponent implements OnInit {
       type: 'line',
       smooth: true
     }],
-    title:{
+    title: {
       text: "EPS趋势"
     }
   };
@@ -267,7 +224,7 @@ export class AgentComponent implements OnInit {
       type: 'line',
       smooth: true
     }],
-    title:{
+    title: {
       text: "进程CPU趋势"
     }
   };
@@ -286,7 +243,7 @@ export class AgentComponent implements OnInit {
       type: 'line',
       smooth: true
     }],
-    title:{
+    title: {
       text: "系统CPU趋势"
     }
   };
@@ -305,7 +262,7 @@ export class AgentComponent implements OnInit {
       type: 'line',
       smooth: true
     }],
-    title:{
+    title: {
       text: "进程MEM趋势"
     }
   };
@@ -324,7 +281,7 @@ export class AgentComponent implements OnInit {
       type: 'line',
       smooth: true
     }],
-    title:{
+    title: {
       text: "文件句柄趋势"
     }
   };

@@ -3,7 +3,6 @@ import { ActiveListService } from './activeList.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { ActionComponent } from "./activeListAction/activeListAction.component";
 @Component({
   selector: 'ngx-user',
   templateUrl: './activeList.component.html'
@@ -12,61 +11,24 @@ export class ActiveListComponent implements OnInit {
 
   constructor(private activeListService: ActiveListService,
     private router: Router) { }
-  settings = {
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      listName: {
-        title: '名称',
-        type: 'string',
-      },
-      listNo: {
-        title: '编号',
-        type: 'string',
-      },
-      type: {
-        title: '类型',
-        type: 'string',
-      },
-      status: {
-        title: '状态',
-        type: 'string',
-      },
-      maxsize: {
-        title: '最大值',
-        type: 'string',
-      },
-      timeout: {
-        title: '超时时间',
-        type: 'string',
-      },
-      remark: {
-        title: '备注',
-        type: 'string',
-      },
-      action: {
-        title: "操作",
-        type: "custom",
-        renderComponent: ActionComponent,
-        width: "200px"
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-  }
+
+  cols: any[];
   isEdit: boolean = false;
   isInport: boolean = false;
   active: any = {};
   type: string;
   activeList: Observable<any>;
   ngOnInit() {
+    this.cols = [
+      { field: 'id', header: 'ID' },
+      { field: 'listName', header: '名称' },
+      { field: 'listNo', header: '编号' },
+      { field: 'type', header: '类型' },
+      { field: 'status', header: '状态' },
+      { field: 'maxsize', header: '最大值' },
+      { field: 'timeout', header: '超时时间' },
+      { field: 'remark', header: '备注' },
+    ];
     this.activeListService.getList().subscribe();
     this.activeList = this.activeListService.activeList;
   }
@@ -75,10 +37,32 @@ export class ActiveListComponent implements OnInit {
     this.active = {};
     this.isEdit = true;
   }
-  showEdit($event) {
+  showEdit(active) {
     this.type = "edit";
-    this.active = $event.data;
+    this.active = active;
     this.isEdit = true;
+  }
+
+  
+  showInport(active) {
+    this.isInport = true;
+    this.active = active;
+  }
+  uploadFile(event) {
+    this.isInport = false;
+  }
+  onBeforeUpload(event) {
+    let id = this.active.id;
+    event.formData.append("list_id", id);
+  }
+
+  jumpDetail(active) {
+    let id = active.id;
+    this.router.navigate(["/custom/data/activeListDetail", id])
+  }
+  del(active) {
+    let id = active.id;
+    this.activeListService.del(id).subscribe();
   }
 
 

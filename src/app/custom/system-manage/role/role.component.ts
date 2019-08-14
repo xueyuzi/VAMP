@@ -9,42 +9,9 @@ import { MenuService } from '../menu/menu.service';
   templateUrl: './role.component.html',
 })
 export class RoleComponent implements OnInit {
-  settings = {
-    columns: {
-      roleId: {
-        title: 'ID',
-        type: 'number',
-      },
-      roleName: {
-        title: '角色名称',
-        type: 'string',
-      },
-      roleSort: {
-        title: '排序',
-        type: 'number',
-      },
-      status: {
-        title: "状态",
-        type: "number",
-      },
-      createTime: {
-        title: '创建时间',
-        type: 'string',
-      },
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    }
-  }
-  roleList: Array<any>;
+  roleList: Observable<any>;
   role: any;
+  cols: any[];
   isEdit: boolean = false;
   menus: TreeNode[];
 
@@ -54,7 +21,15 @@ export class RoleComponent implements OnInit {
 
   ngOnInit() {
     this.role = {};
-    this.getList();
+    this.cols = [
+      { field: 'roleId', header: 'ID' },
+      { field: 'roleName', header: '角色名称' },
+      { field: 'roleSort', header: '排序' },
+      { field: 'status', header: '状态' },
+      { field: 'createTime', header: '创建时间' }
+    ]
+    this.roleService.getList().subscribe();
+    this.roleList = this.roleService.roleList;
 
   }
   showNew() {
@@ -70,20 +45,19 @@ export class RoleComponent implements OnInit {
 
     );
   }
-  delRole($event) {
+  handleChange(e) {
+    this.role.status = e.checked ? 0 : 1;
+  }
+  del(role) {
     this.confirmationService.confirm({
       message: '你确定要删除此角色么？',
       accept: () => {
-        this.roleService.del($event.data.roleId).subscribe(
-          res => {
-            this.getList();
-          }
-        )
+        this.roleService.del(role.roleId).subscribe()
       }
     });
   }
-  showEdit($event) {
-    this.role = $event.data;
+  showEdit(role) {
+    this.role = role;
     this.menuService.getMenusWithTreeData(this.role.roleId).subscribe(
       menus => {
         this.menus = menus;
@@ -111,12 +85,7 @@ export class RoleComponent implements OnInit {
     }
     return node.children.filter(cnode => cnode.data.checked).length > 0
   }
-  getList() {
-    this.roleService.getList().subscribe(
-      roles => this.roleList = roles
-    );
-  }
-  saveRole() {
+  save() {
     let menuIds = [];
     this.menus.forEach(menu1 => {
       menu1.data.checked && menuIds.push(menu1.data.id);
@@ -126,7 +95,6 @@ export class RoleComponent implements OnInit {
     })
     this.role.menuIds = menuIds.join(',');
     this.roleService.save(this.role).subscribe(res => {
-      this.getList();
       this.isEdit = false;
     });
 

@@ -1,12 +1,37 @@
-<nb-card>
-  <nb-card-header>
+<nb-card style="min-height: 83vh">
+<nb-card-header>
     用户列表
   </nb-card-header>
 
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="userSource" [settings]="settings" (userRowSelect)="showEdit($event)">
-    </ng2-smart-table>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <!-- <ng2-smart-table [source]="userSource" [settings]="settings" (userRowSelect)="showEdit($event)">
+    </ng2-smart-table> -->
+    <p-table [value]="userList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{user[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(user);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(user.userId);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
 <p-dialog header="新建用户" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
@@ -33,13 +58,13 @@
     <div class="setting-item">
       <label>角色:</label>
       <nb-select multiple placeholder="请选择角色" (selectedChange)="changeRoles($event)" style="width: 200px">
-        <nb-option [value]="role.roleId" *ngFor="let role of roleList">{{role.roleName}}</nb-option>
+        <nb-option [value]="role.roleId" *ngFor="let role of roleList |async">{{role.roleName}}</nb-option>
       </nb-select>
     </div>
 
     <div class="setting-item">
       <label>部门:</label>
-      <nb-select  placeholder="请选择部门" (selectedChange)="changeDept($event)" style="width: 200px">
+      <nb-select placeholder="请选择部门" (selectedChange)="changeDept($event)" style="width: 200px">
         <nb-option [value]="dept.deptId" *ngFor="let dept of deptList">{{dept.deptName}}</nb-option>
       </nb-select>
     </div>
@@ -54,5 +79,5 @@
     </div>
 
   </div>
-  <button nbButton fullWidth (click)="saveUser()">保存</button>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
 </p-dialog>

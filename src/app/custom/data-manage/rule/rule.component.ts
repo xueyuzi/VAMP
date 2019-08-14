@@ -4,7 +4,8 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
 import { JsonEditorService } from '../../../common/json-editor.service';
-import {SinkService} from "../sink/sink.service";
+import { SinkService } from "../sink/sink.service";
+import { SourceService } from '../source/source.service';
 
 @Component({
   selector: 'ngx-user',
@@ -12,115 +13,73 @@ import {SinkService} from "../sink/sink.service";
 })
 export class RuleComponent implements OnInit {
 
-  constructor(private desenRuleService: RuleService,
-              private sinkService: SinkService,
-              private jsonEditorService: JsonEditorService) { }
-  settings = {
-    columns: {
-      type_name: {
-        title: '类型',
-        type: 'string',
-      },
-      ruleName: {
-        title: '规则名称',
-        type: 'string',
-        width: "200px",
-      },
-      ruleNo: {
-        title: '规则编号',
-        type: 'string',
-      },
-      status: {
-        title: '状态',
-        type: 'string',
-      },
-      parallelism: {
-        title: '并发度',
-        type: 'string',
-      },
-      source_name: {
-        title: '数据源',
-        type: 'string',
-      },
-      ruleContent: {
-        title: '规则明细',
-        type: 'string',
-        width: "30%",
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-    pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
+  constructor(private ruleService: RuleService,
+    private sinkService: SinkService,
+    private sourceService: SourceService,
+    private jsonEditorService: JsonEditorService) { }
+  cols: any[];
   isEdit: boolean = false;
-  user: any = {};
+  rule: any = {};
   type: string;
-  userList: Observable<any>;
-  userCondition = new Subject<any>();
-  agentSource: ServerDataSource;
-  sinkList: Array<any>;
+  ruleList: Observable<any>;
+  sinkList: Observable<any>;
+  sourceList: Observable<any>;
   rule_sink_id: any = [];
   ngOnInit() {
-    this.agentSource = this.desenRuleService.getList();
-    this.sinkService.getList().subscribe(
-      list => this.sinkList = list
-    )
-  }
-  ngAfterViewInit() {
-    this.userCondition.next({});
+    this.cols = [
+      { field: 'type_name', header: '类型' },
+      { field: 'ruleName', header: '规则名称' },
+      { field: 'ruleNo', header: '规则编号' },
+      { field: 'status', header: '状态' },
+      { field: 'parallelism', header: '并发度' },
+      { field: 'source_name', header: '数据源' },
+      { field: 'ruleContent', header: '规则明细' }
+    ]
+    this.sinkService.getList().subscribe();
+    this.ruleService.getList().subscribe();
+    this.sourceService.getList().subscribe();
+    this.sinkList = this.sinkService.sinkList
+    this.ruleList = this.ruleService.ruleList
+    this.sourceList = this.sourceService.sourceList;
   }
   showNew() {
     this.type = "add";
-    this.user = {rule_sink_id:[]};
+    this.rule = { rule_sink_id: [] };
     this.isEdit = true;
     this.setEditor();
   }
-  showEdit($event) {
+  showEdit(rule) {
     this.type = "edit";
-    this.desenRuleService.getRule($event.data.id).subscribe(
-      data => this.user = data
+    this.ruleService.getRule(rule.id).subscribe(
+      data => this.rule = data
     )
     this.isEdit = true;
     this.setEditor();
   }
 
-  saveUser() {
-    this.user.ruleContent = this.jsonEditorService.getValue();
+  save() {
+    this.rule.ruleContent = this.jsonEditorService.getValue();
     if (this.type === "edit") {
-      this.desenRuleService.save(this.user).subscribe(res => {
-        if(res.code==0){this.isEdit=false;this.agentSource.refresh();}
+      this.ruleService.save(this.rule).subscribe(res => {
+        if (res.code == 0) { this.isEdit = false; }
       });
     }
     if (this.type === "add") {
-      this.desenRuleService.add(this.user).subscribe(res => {
-        if(res.code==0){this.isEdit=false;this.agentSource.refresh();}
+      this.ruleService.add(this.rule).subscribe(res => {
+        if (res.code == 0) { this.isEdit = false; }
       });
 
     }
   }
 
-  delUser($event) {
-    this.desenRuleService.del($event.data.id).subscribe(
-      res => {
-        this.agentSource.refresh();
-      });
+  del($event) {
+    this.ruleService.del($event.data.id).subscribe();
   }
 
   setEditor() {
     setTimeout(() => {
       this.jsonEditorService.createEditor("agent-json-editor");
-      this.jsonEditorService.setValue(this.user.ruleContent);
+      this.jsonEditorService.setValue(this.rule.ruleContent);
     }, 500)
   }
 }

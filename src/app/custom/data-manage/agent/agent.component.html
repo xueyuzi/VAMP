@@ -1,59 +1,89 @@
 <script src="agent.component.ts"></script>
-<nb-card>
+<nb-card style="min-height: 83vh">
   <nb-card-header>
     采集器配置
   </nb-card-header>
 
+
   <nb-card-body>
-    <button nbButton style="margin:10px 0" (click)="showNew()">新建</button>
-    <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)"
-      (deleteConfirm)="delUser($event)"></ng2-smart-table>
+    <button (click)="showNew()" class="custom-button-left"> <i class="ion ion-plus"></i> 新建</button>
+    <!-- <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)"
+      (deleteConfirm)="delUser($event)"></ng2-smart-table> -->
+    <p-table [value]="agentList |async">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols">
+            {{col.header}}
+          </th>
+          <th style="width: 250px">
+            操作
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-agent>
+        <tr>
+          <td *ngFor="let col of cols">
+            {{agent[col.field]}}
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" style="color:white" (click)="showEdit(agent);">
+              <i class="icon ion-edit"></i> 编辑</button>
+            <button type="button" class="btn btn-danger" style="color:white" (click)="del(agent);">
+              <i class="icon ion-ios-trash-outline"></i> 删除</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false">
-  <nb-accordion class="expaned">
-    <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
-      <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
-      <nb-accordion-item-body>
-        <div *ngFor="let okey of objectKeys(agentConfig[ikey])">
-          <div class="setting-item">
-            <label>{{okey}}</label>
-            <span>{{agentConfig[ikey][okey]}}</span>
-          </div>
-        </div>
-      </nb-accordion-item-body>
-    </nb-accordion-item>
-  </nb-accordion>
-  <div class="setting-container" *ngIf="user!==undefined">
+<p-dialog header="采集器配置" [(visible)]="isEdit" [draggable]="true" [resizable]="false" *ngIf="isEdit">
+
+  <div class="setting-container" *ngIf="agent!==undefined">
     <div class="setting-item">
-      <label>名称:</label>
-      <input type="text" nbInput [(ngModel)]="user.agentName" fullWidth>
+      <label>采集器名称:</label>
+      <input type="text" nbInput [(ngModel)]="agent.agentName" fullWidth>
     </div>
 
     <div class="setting-item">
-      <label>IP地址:</label>
-      <input type="text" nbInput [(ngModel)]="user.agentAddress" fullWidth>
+      <label>采集器IP:</label>
+      <input type="text" nbInput [(ngModel)]="agent.agentAddress" fullWidth>
     </div>
 
     <div class="setting-item">
       <label>识别key:</label>
-      <input type="text" nbInput [(ngModel)]="user.agentKey" fullWidth>
+      <input type="text" nbInput [(ngModel)]="agent.agentKey" fullWidth>
     </div>
     <div class="setting-item">
-      <label>脱敏规则配置:</label>
-      <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="user.desen_rule_id"
+      <label>脱敏规则:</label>
+      <nb-select multiple placeholder="请选脱敏规则配置" [(selected)]="agent.desen_rule_id"
         (selectedChange)="changeDesen($event)" style="width: 200px">
         <nb-option [value]="role.id" *ngFor="let role of dRuleList">{{role.desenName}}</nb-option>
       </nb-select>
     </div>
+    <div class="setting-item" style="height:auto">
+      <label>参数查看:</label>
+      <nb-accordion class="expaned" style="width:100%">
+        <nb-accordion-item *ngFor="let ikey of objectKeys(agentConfig)">
+          <nb-accordion-item-header>{{ikey}}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div *ngFor="let okey of objectKeys(agentConfig[ikey])">
+              <div class="setting-item">
+                <label style="width:250px">{{okey}}</label>
+                <span>{{agentConfig[ikey][okey]}}</span>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+      </nb-accordion>
+    </div>
   </div>
-  <button nbButton (click)="saveUser()" style="margin: 10px;">保存</button>
-  <button nbButton status="info" (click)="showCharts()" style="margin: 10px;">查看图表</button>
+  <button class="btn btn-success" style="float: right;margin-right: 20px;" (click)="save()">保存</button>
+  <button class="btn btn-info" style="float: right;margin-right: 20px;" (click)="showCharts()">查看图表</button>
 </p-dialog>
 
 
 <p-dialog header="图表" [(visible)]="isShowCharts" [draggable]="true" [resizable]="false">
-  <div style="width:1200px;height:800px;">
+  <div style="width:1200px;height:600px;">
     <div style="width:400px;height:300px;float: left;">
       <div echarts [options]="chartOptions1" style="height:100%;width:100%">
       </div>

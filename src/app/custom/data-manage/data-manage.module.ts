@@ -27,7 +27,10 @@ import { NbSelectModule, NbInputModule, NbCardModule, NbButtonModule, NbCheckbox
 import { FileUploadModule } from "primeng/fileupload";
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ActionComponent } from "./activeList/activeListAction/activeListAction.component";
+import { tableLineComponent } from "./agent/tableLineAction/tableLineAction.component";
+
+import {TableModule} from 'primeng/table';
+
 @NgModule({
   declarations: [
     ChartTemplateComponent,
@@ -44,7 +47,7 @@ import { ActionComponent } from "./activeList/activeListAction/activeListAction.
     EtlTypeConfigComponent,
     AgenthbComponent,
     AlertComponent,
-    ActionComponent],
+    tableLineComponent],
   imports: [
     CommonModule,
     DataManageRoutingModule,
@@ -61,12 +64,13 @@ import { ActionComponent } from "./activeList/activeListAction/activeListAction.
     NbRadioModule,
     NbAccordionModule,
     NgxEchartsModule,
-    FileUploadModule
+    FileUploadModule,
+    TableModule
   ],
   providers: [
     ConfirmationService
   ],
-  entryComponents:[ActionComponent],
+  entryComponents:[tableLineComponent],
   exports: [
     ChartTemplateListComponent
   ],

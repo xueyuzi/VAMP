@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
   menu: any;
   menuIcons = [];
   menuList:Array<any>;
-  showEdit: boolean;
+  isEdit: boolean;
   customColumn = 'title';
   defaultColumns = ['menuId', 'icon', 'link'];
   allColumns = [this.customColumn, ...this.defaultColumns];
@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  onEdit(event) {
+  showEdit(event) {
     this.menu = Object.assign({},this.menu,event.node.data);
     this.menu.parentMenu = event.parent == null ? "无" : event.parent.data.menuName;
     this.menu.parentId = event.parent == null ? 0 : event.parent.data.menuId;
@@ -50,9 +50,9 @@ export class MenuComponent implements OnInit {
     delete this.menu['params'];
     delete this.menu['children'];
     this.setIcon(this.menu.icon);
-    this.showEdit = true;
+    this.isEdit = true;
   }
-  onAdd(event=undefined) {
+  showAdd(event=undefined) {
     console.log(event)
     this.menu = {};
     this.menu.parentMenu = event !== undefined ? event.node.data.menuName : "无"
@@ -61,7 +61,7 @@ export class MenuComponent implements OnInit {
     this.menu.visible = 0;
     this.menu.orderNum = 1;
 
-    this.showEdit = true;
+    this.isEdit = true;
   }
 
   setIcon(icon: string) {
@@ -86,11 +86,11 @@ export class MenuComponent implements OnInit {
   saveMenus() {
 
     this.menuService.saveMenus(this.menu).subscribe(res => {
-      this.showEdit = false;
+      this.isEdit = false;
       this.getMenus();
     })
   }
-  onDel(menuId) {
+  del(menuId) {
     this.menuService.delMenu(menuId).subscribe(res => {
       this.getMenus();
     });

@@ -91,14 +91,14 @@
 
   .ui-dialog {
     .ui-dialog-titlebar {
-      background: black;
-      color: white;
+      background: nb-theme(menu-header-background);
+      color: nb-theme(text-basic-color);
     }
 
     .ui-dialog-content {
-      background: nb-theme(background-basic-color-3);
-      // height: 500px !important;
-      overflow: auto;
+      background: nb-theme(menu-background);
+      max-height: 500px;
+      overflow:scroll;
     }
   }
 
@@ -132,8 +132,9 @@
 
 
     label {
-      width: 30%;
-      padding-right: 10px;
+      width: 150px;
+      padding-right: 20px;
+      text-align: right;
       margin: 0;
     }
   }
@@ -186,6 +187,33 @@
     color: nb-theme(text-basic-color)
   }
 
+  .custom-button-left {
+    padding: 7px 10px;
+    border: 1px solid #4384bb;
+    color: #4384bb;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+
+    &:hover {
+      background-color: #4384bb;
+      color: white;
+    }
+  }
+  
+  ng2-smart-table table tr th {
+    border-top: 0px;
+    border-bottom: 1px solid #dfdfdf;
+    text-align: center;
+  }
+
+  ng2-smart-table table tr th,
+  ng2-smart-table table tr td {
+    border-right: 0px;
+    border-left: 0px;
+    text-align: center;
+
+  }
+
   .ui-dialog .ui-dialog-footer {
     background-color: nb-theme(background-basic-color-2);
   }
@@ -204,37 +232,6 @@
   }
 
 
-  .ui-table {
-    border: 1px solid black;
-
-    .ui-table-thead {
-      th {
-        background-color: rgba(0, 0, 0, 0);
-        color: nb-theme(text-basic-color);
-        border: 0px;
-      }
-    }
-
-    .ui-table-tbody {
-      tr {
-        background-color: nb-theme(background-basic-color-3);
-        color: nb-theme(text-basic-color);
-
-        td {
-          border: 0px;
-        }
-      }
-
-      tr:nth-child(even) {
-        background-color: nb-theme(background-basic-color-2);
-        color: nb-theme(text-basic-color);
-      }
-    }
-  }
-
-
-
-
   .ui-treetable .ui-treetable-thead>tr>th {
     background-color: rgba(0, 0, 0, 0);
     color: nb-theme(text-basic-color);
@@ -249,6 +246,48 @@
     background-color: rgba(0, 0, 0, 0);
     color: nb-theme(text-basic-color);
   }
+
+  .ui-table {
+    margin-top:10px;
+    
+    .ui-paginator{
+      background:rgba(0, 0, 0, 0);
+      border:0px;
+    }
+    .ui-table-thead {
+      th {
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        border:0px;
+        border-bottom: 1px solid nb-theme(background-basic-color-4) ;
+        background-color: rgba(0, 0, 0, 0);
+        color: nb-theme(text-basic-color);
+      }
+    }
+
+    .ui-table-tbody {
+      tr {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0);
+        color: nb-theme(text-basic-color);
+
+        td {
+          font-size: 12px;
+          font-weight: normal;
+          border: 0px;
+        }
+      }
+
+      tr:nth-child(even) {
+        background-color: nb-theme(background-basic-color-2);
+        color: nb-theme(text-basic-color);
+      }
+    }
+  }
+
+
+
 
 
   .half-checked {
@@ -266,7 +305,7 @@
   }
 
   .btn {
-    margin: 10px 10px 10px 0px;
+    margin: 5px 5px 5px 0px;
   }
 
   .menu-item {

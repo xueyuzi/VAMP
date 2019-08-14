@@ -2,84 +2,52 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { EtltypeService } from './etltype.service';
 import { Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import {JsonEditorService} from "../../../common/json-editor.service";
+import { JsonEditorService } from "../../../common/json-editor.service";
 
 @Component({
   selector: 'ngx-user',
   templateUrl: './etltype.component.html'
 })
-export class EtltypeComponent implements OnInit, AfterViewInit {
+export class EtltypeComponent implements OnInit {
 
-  constructor(private desenRuleService: EtltypeService,
-              private jsonEditorService: JsonEditorService) { }
-  settings = {
-    columns: {
-      etlType: {
-        title: '日志类型',
-        type: 'string',
-      },
-      bodyType: {
-        title: '消息格式',
-        type: 'string',
-      },
-      timeFormat: {
-        title: '日期格式',
-        type: 'string',
-        width: "35%",
-      },
-      timeLocale: {
-        title: '日期地区',
-        type: 'string',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      columnTitle: "操作",
-      position: "right"
-    },
-    delete: {
-      confirmDelete: true,
-      deleteButtonContent: `<i class="icon ion-trash-a"></i>`
-    },
-  }
+  constructor(private etlTypeService: EtltypeService,
+    private jsonEditorService: JsonEditorService) { }
+  cols: any[];
   isEdit: boolean = false;
-  user: any = {};
+  etltype: any = {};
   type: string;
-  userList: Observable<any>;
-  userCondition = new Subject<any>();
+  etlTypeList: Observable<any>;
   ngOnInit() {
-    this.userList = this.userCondition.pipe(
-      switchMap(condition => this.desenRuleService.getList(condition)),
-    )
-  }
-  ngAfterViewInit() {
-    this.userCondition.next({});
+    this.cols = [
+      { field: 'etlType', header: '日志类型' },
+      { field: 'bodyType', header: '消息格式' },
+      { field: 'timeFormat', header: '日期格式' },
+      { field: 'timeLocale', header: '日期地区' }
+    ]
+    this.etlTypeService.getList().subscribe();
+    this.etlTypeList = this.etlTypeService.etlTypeList;
   }
   showNew() {
     this.type = "add";
-    this.user = {};
+    this.etltype = {};
     this.isEdit = true;
   }
-  showEdit($event) {
+  showEdit(etltype) {
     this.type = "edit";
-    this.user = $event.data;
+    this.etltype = etltype;
     this.isEdit = true;
   }
 
-  saveUser() {
+  save() {
     if (this.type === "edit") {
-      this.desenRuleService.save(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
+      this.etlTypeService.save(this.etltype).subscribe(res => { this.isEdit = false; });
     }
     if (this.type === "add") {
-      this.desenRuleService.add(this.user).subscribe(res => { this.isEdit=false;this.userCondition.next()});
-
+      this.etlTypeService.add(this.etltype).subscribe(res => { this.isEdit = false; });
     }
   }
 
-  delUser($event) {
-    this.desenRuleService.del($event.data.id).subscribe(res => {this.userCondition.next()});
+  del(etltype) {
+    this.etlTypeService.del(etltype.id).subscribe();
   }
-
-
 }
