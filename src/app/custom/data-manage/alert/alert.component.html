@@ -9,8 +9,8 @@
     <ng2-smart-table [source]="agentSource" [settings]="settings" (userRowSelect)="showEdit($event)" (deleteConfirm)="delUser($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
-<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false" height="800">
-  <div class="setting-container" style="height: 800px">
+<p-dialog header="配置告警" [(visible)]="isEdit" [draggable]="false" [resizable]="false">
+  <div class="setting-container">
 
     <div class="setting-item">
       <label>标题:</label>
@@ -22,11 +22,11 @@
     </div>
     <div class="setting-item">
       <label>描述:</label>
-      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+      <input type="text" nbInput [(ngModel)]="user.description" fullWidth>
     </div>
     <div class="setting-item">
       <label>Cron 表达式:</label>
-      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+      <input type="text" nbInput [(ngModel)]="user.cron" fullWidth>
     </div>
     <div class="setting-item" style="height:auto">
       <label>查询语句:</label>
@@ -34,7 +34,7 @@
     </div>
     <div class="setting-item">
       <label>运算符:</label>
-      <nb-select  placeholder="请选择类型" [(selected)]="user.type" style="width: 200px">
+      <nb-select  placeholder="请选择类型" [(selected)]="user.operator" style="width: 200px">
         <nb-option [value]="2" >大于</nb-option>
         <nb-option [value]="1" >小于</nb-option>
         <nb-option [value]="0" >等于</nb-option>
@@ -42,7 +42,7 @@
     </div>
     <div class="setting-item">
       <label>值:</label>
-      <input type="text" nbInput [(ngModel)]="user.owner" fullWidth>
+      <input type="text" nbInput [(ngModel)]="user.value" fullWidth>
     </div>
     <div class="setting-item" style="height:auto">
       <label>告警方式:</label>
@@ -85,8 +85,26 @@
                 </nb-select>
               </div>
               <div class="setting-item" style="height:auto">
-                <label>邮件内容:</label>
+                <label>通知内容:</label>
                 <input type="text" nbInput [(ngModel)]="user.itms_content" fullWidth>
+              </div>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+        <nb-accordion-item >
+          <nb-accordion-item-header>SysLog</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div class="setting-container">
+              <div class="setting-item">
+                <label>是否启用:</label>
+                <nb-select  placeholder="是否启用" [(selected)]="user.use_syslog" style="width: 200px;float: left;">
+                  <nb-option [value]="1" >是</nb-option>
+                  <nb-option [value]="0" >否</nb-option>
+                </nb-select>
+              </div>
+              <div class="setting-item" style="height:auto">
+                <label>通知内容:</label>
+                <input type="text" nbInput [(ngModel)]="user.syslog_content" fullWidth>
               </div>
             </div>
           </nb-accordion-item-body>
