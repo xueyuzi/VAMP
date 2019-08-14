@@ -11,75 +11,34 @@ import { ServerDataSource } from 'ng2-smart-table';
 export class AgenthbComponent implements OnInit {
 
   constructor(private agenthbService: AgenthbService) { }
-  settings = {
-    columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-      },
-      agentId: {
-        title: 'agentId',
-        type: 'string',
-      },
-      sysCpu: {
-        title: 'sysCpu',
-        type: 'string',
-      },
-      pid: {
-        title: "pid",
-        type: "string",
-      },
-      eps: {
-        title: 'Eps',
-        type: 'string',
-      },
-      cpu: {
-        title: 'cpu',
-        type: 'string',
-      },
-      mem: {
-        title: 'mem',
-        type: 'string',
-      },
-      fh: {
-        title: 'fh',
-        type: 'string',
-      },
-      createAt: {
-        title: 'createAt',
-        type: 'text',
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-
-    },pager: {
-      perPage: 10
-    },
-    hideSubHeader: true
-  }
   isEdit: boolean = false;
-  user: any = {};
+  agenthb: any = {};
+  cols:any[];
   type: string;
-  agenthbSource: ServerDataSource;
-  userList: Observable<any>;
-  userCondition = new Subject<any>();
+  agenthbList: Observable<any>;
   ngOnInit() {
-    this.agenthbSource = this.agenthbService.getList();
-  }
-  ngAfterViewInit() {
-    this.userCondition.next({});
+    this.agenthbService.getList().subscribe();
+    this.agenthbList = this.agenthbService.agenthbList;
+    this.cols =[
+      { field: 'id', header: 'ID' },
+      { field: 'agentId', header: 'agentId' },
+      { field: 'sysCpu', header: 'sysCpu' },
+      { field: 'pid', header: 'pid' },
+      { field: 'eps', header: 'eps' },
+      { field: 'mem', header: 'mem' },
+      { field: 'cpu', header: 'cpu' },
+      { field: 'fh', header: 'fh' },
+      { field: 'createAt', header: 'createAt' }
+    ]
   }
   showNew() {
     this.type = "add";
-    this.user = {};
+    this.agenthb = {};
     this.isEdit = true;
   }
-  showEdit($event) {
+  showEdit(agenthb) {
     this.type = "edit";
-    this.user = $event.data;
+    this.agenthb = agenthb.data;
     this.isEdit = true;
   }
 

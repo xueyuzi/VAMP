@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../api.service';
-import { map } from 'rxjs/operators';
+import { map,tap } from 'rxjs/operators';
 import { ServerDataSource } from 'ng2-smart-table';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AgenthbService {
 
   constructor(private api:ApiService, private http: HttpClient) { }
+  agenthbList:BehaviorSubject<any> = new BehaviorSubject([]);
   getList() {
-    return new ServerDataSource(this.http, { totalKey: "total", pagerPageKey: "offset", pagerLimitKey: "limit", dataKey: "rows", endPoint: "/cep/agentHeartbeat/list" })
+    return this.api.get("/cep/agentHeartbeat/list?offset=1&limit=100").pipe(
+      map(v => v.rows),
+      tap(list => this.agenthbList.next(list))
+    );
   }
   add(user:any){
     return this.api.post("/system/user/add",user)

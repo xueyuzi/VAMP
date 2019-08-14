@@ -172,7 +172,7 @@ export class AgentComponent implements OnInit {
     return Object.keys(obj)
   }
 
-  saveUser() {
+  save() {
     if (this.type === "edit") {
       this.agentService.save(this.agent).subscribe(res => { this.isEdit = false; });
     }
